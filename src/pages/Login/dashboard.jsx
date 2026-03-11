@@ -204,7 +204,7 @@ export default function AdminCoreDashboard() {
       {/* ── Sidebar ── */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <div className="logo-icon">A</div>
+          <img src="/butterfly-logo.png" alt="Butterfly Logo" className="logo-icon" />
           AdminCore
         </div>
 

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import AdminCoreDashboard from "./AdminCoreDashboard";
+import AdminCoreDashboard from "../pages/Login/dashboard";
 
 describe("AdminCoreDashboard", () => {
   beforeEach(() => {
