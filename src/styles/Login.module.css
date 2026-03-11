@@ -1,0 +1,284 @@
+.page {
+  min-height: 100vh;
+  max-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}
+
+.loginContainer {
+  display: flex;
+  max-width: 1000px;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow: hidden;
+}
+
+/* ── LEFT SIDE ── */
+.leftSide {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  color: white;
+  text-align: center;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 👇 BIG logo */
+.logo {
+  width: 320px;
+  height: 320px;
+  border-radius: 20px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.25));
+}
+
+.brandName {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.trademark {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.75);
+  vertical-align: super;
+}
+
+.slogan {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── RIGHT SIDE ── */
+.rightSide {
+  flex: 1;
+  padding: 120px 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.welcomeSection {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.welcomeTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+
+.welcomeSubtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ── FORM ── */
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inputLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.input {
+  padding: 13px 16px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.formOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.checkbox {
+  accent-color: #667eea;
+  width: 15px;
+  height: 15px;
+}
+
+.forgotLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #667eea;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.errorMessage {
+  color: #ef4444;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 10px;
+  background: #fef2f2;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+}
+
+.loginButton {
+  background: linear-gradient(135deg, #ff6b6b 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.loginButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 107, 107, 0.35);
+}
+
+.loginButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.quickAccessButton {
+  background: rgba(102, 126, 234, 0.08);
+  color: #667eea;
+  border: 1.5px solid #667eea;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.quickAccessButton:hover {
+  background: rgba(102, 126, 234, 0.16);
+}
+
+.loginFooter {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.signupLink {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #667eea;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+    max-width: 420px;
+  }
+
+  .leftSide {
+    padding: 30px 20px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Still big on mobile, just a touch smaller */
+  .logo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .brandName {
+    font-size: 2.5rem;
+  }
+
+  .rightSide {
+    padding: 30px 20px;
+    border-radius: 0 0 20px 20px;
+  }
+}

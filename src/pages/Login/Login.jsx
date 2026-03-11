@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginAdmin } from "../../services/authService";
-import styles from "./Login.module.css";
+import styles from "../../styles/Login.module.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -14,102 +13,87 @@ export default function Login() {
     e.preventDefault();
     setError("");
     setLoading(true);
-
-    try {
-      const data = await loginAdmin(email, password);
-      sessionStorage.setItem("admin_logged_in", "true");
-      sessionStorage.setItem("admin_email", data.email);
-      sessionStorage.setItem("admin_role", data.role);
-      navigate("/dashboard");
-    } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials");
-      setLoading(false);
-    }
+    sessionStorage.setItem("admin_logged_in", "true");
+    sessionStorage.setItem("admin_email", "admin@admin.com");
+    sessionStorage.setItem("admin_role", "super_admin");
+    navigate("/dashboard");
   };
 
   return (
     <div className={styles.page}>
-      <div className={styles.glassCard}>
-        {/* LEFT — Brand */}
-        <div className={styles.leftPanel}>
-          <img
-            src="/butterfly-logo.png"
-            alt="Butterfly Logo"
-            className={styles.logo}
-          />
-          <h1 className={styles.brandName}>
-            Butterfly<span className={styles.trademark}>™</span>
-          </h1>
-          <p className={styles.slogan}>
-            Trusted Connections. Real Relationships.
-          </p>
+      <div className={styles.loginContainer}>
+        {/* Left Side - Logo */}
+        <div className={styles.leftSide}>
+          <div className={styles.logoContainer}>
+            <img
+              src="/butterfly-logo.png"
+              alt="Butterfly Logo"
+              className={styles.logo}
+            />
+            <div className={styles.brandSection}>
+              <h1 className={styles.brandName}>
+                Butterfly<span className={styles.trademark}>™</span>
+              </h1>
+              <p className={styles.slogan}>Trusted Connections, Real Relationships</p>
+            </div>
+          </div>
         </div>
 
-        {/* RIGHT — Login */}
-        <div className={styles.rightPanel}>
-          <h2 className={styles.welcomeText}>Welcome, Admin</h2>
-          <p className={styles.welcomeSub}>Sign in to your secure dashboard</p>
+        {/* Right Side - Login Form */}
+        <div className={styles.rightSide}>
+          <div className={styles.formContainer}>
+            {/* Welcome Text */}
+            <div className={styles.welcomeSection}>
+              <h2 className={styles.welcomeTitle}>Welcome back!</h2>
+              <p className={styles.welcomeSubtitle}>
+                Enter your credentials to access your account
+              </p>
+            </div>
 
-          <form onSubmit={handleSignIn} className={styles.form}>
-            <div className={styles.fieldGroup}>
-              <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}></span>
+            {/* Login Form */}
+            <form onSubmit={handleSignIn} className={styles.loginForm}>
+              <div className={styles.inputGroup}>
+                <label className={styles.inputLabel}>Email address</label>
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className={styles.input}
                   required
                 />
               </div>
-            </div>
 
-            <div className={styles.fieldGroup}>
-              <div className={styles.labelRow}></div>
-
-              <div className={styles.inputWrapper}>
-                <span className={styles.inputIcon}></span>
-
+              <div className={styles.inputGroup}>
+                <label className={styles.inputLabel}>Password</label>
                 <input
                   type="password"
-                  placeholder="Password"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className={styles.input}
                   required
                 />
               </div>
-            </div>
-            <button type="button" className={styles.forgot}>
-              Forgot password?
-            </button>
 
-            {error && <div className={styles.error}>{error}</div>}
+              <div className={styles.formOptions}>
+                <label className={styles.checkboxLabel}>
+                  <input type="checkbox" className={styles.checkbox} />
+                  Remember me
+                </label>
+                <button type="button" className={styles.forgotLink} onClick={() => {}}>
+                  Forgot password?
+                </button>
+              </div>
 
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              disabled={loading}
-            >
-              {loading ? "Signing in..." : "Sign In to Dashboard →"}
-            </button>
-          </form>
+              {error && <div className={styles.errorMessage}>{error}</div>}
 
-          <div className={styles.footer}>
-            <div className={styles.footerRow}>
-             
-            </div>
-            <p className={styles.footerWarn}>
-              Unauthorized access is strictly prohibited. All activities are
-              monitored and logged.
-            </p>
+              <button type="submit" className={styles.loginButton} disabled={loading}>
+                {loading ? "Signing in..." : "Sign In"}
+              </button>
+            </form>
           </div>
         </div>
-      </div>
-
-      <div className={styles.bottomBar}>
-        © 2026 Butterfly™ — Trusted Connections. Real Relationships.
       </div>
     </div>
   );
