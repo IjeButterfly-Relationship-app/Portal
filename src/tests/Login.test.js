@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Login from "../pages/Login/Login";
+import Login from "../pages/Login";
 
 // Wrap component with router
 const renderLogin = () =>

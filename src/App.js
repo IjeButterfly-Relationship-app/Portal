@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login/Login";
-import Dashboard from "./pages/Login/dashboard";
+import Login from "./pages/Login";
+import Dashboard from "./pages/AdminDashbord";
+import Onboard from "./pages/Onboard";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/onboard" element={<Onboard />} />
       </Routes>
     </BrowserRouter>
   );

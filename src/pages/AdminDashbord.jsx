@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "../../styles/AdminCoreDashboard.css";
-
+import { useNavigate } from "react-router-dom";
+import "../styles/AdminCoreDashboard.css";
 
 const TEAM = [
   {
@@ -75,11 +75,61 @@ const ALERTS = [
 ];
 
 const MODULES = [
-  { icon: <img src="/billing.jpeg" alt="Billing & Revenue" style={{width: '24px', height: '24px', borderRadius: '4px'}} />, label: "Billing & Revenue", bg: "#FEF3C7" },
-  { icon: <img src="/security.jpeg" alt="Security & APIs" style={{width: '24px', height: '24px', borderRadius: '4px'}} />, label: "Security & APIs", bg: "#EDE9FE" },
-  { icon: <img src="/policies.jpeg" alt="Policies & Terms" style={{width: '24px', height: '24px', borderRadius: '4px'}} />, label: "Policies & Terms", bg: "#DBEAFE" },
-  { icon: <img src="/analytics.jpeg" alt="Analytics Engine" style={{width: '24px', height: '24px', borderRadius: '4px'}} />, label: "Analytics Engine", bg: "#D1FAE5" },
-  { icon: <img src="/admin.jpeg" alt="Admin Management" style={{width: '24px', height: '24px', borderRadius: '4px'}} />, label: "Admin Management", bg: "#FCE7F3" },
+  {
+    icon: (
+      <img
+        src="/billing.jpeg"
+        alt="Billing & Revenue"
+        style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+      />
+    ),
+    label: "Billing & Revenue",
+    bg: "#FEF3C7",
+  },
+  {
+    icon: (
+      <img
+        src="/security.jpeg"
+        alt="Security & APIs"
+        style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+      />
+    ),
+    label: "Security & APIs",
+    bg: "#EDE9FE",
+  },
+  {
+    icon: (
+      <img
+        src="/policies.jpeg"
+        alt="Policies & Terms"
+        style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+      />
+    ),
+    label: "Policies & Terms",
+    bg: "#DBEAFE",
+  },
+  {
+    icon: (
+      <img
+        src="/analytics.jpeg"
+        alt="Analytics Engine"
+        style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+      />
+    ),
+    label: "Analytics Engine",
+    bg: "#D1FAE5",
+  },
+  {
+    icon: (
+      <img
+        src="/admin.jpeg"
+        alt="Admin Management"
+        style={{ width: "24px", height: "24px", borderRadius: "4px" }}
+      />
+    ),
+    label: "Admin Management",
+    bg: "#FCE7F3",
+  },
 ];
 
 const NAV_ITEMS = [
@@ -98,7 +148,6 @@ const ROLE_CLASS = {
   Tech: "role-tech",
   Analytics: "role-analytics",
 };
-
 
 function MiniChart() {
   const W = 560,
@@ -195,16 +244,20 @@ function MiniChart() {
   );
 }
 
-
 export default function AdminCoreDashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard");
+  const navigate = useNavigate();
 
   return (
     <div className="app">
       {/* ── Sidebar ── */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <img src="/butterfly-logo.png" alt="Butterfly Logo" className="logo-icon" />
+          <img
+            src="/butterfly-logo.png"
+            alt="Butterfly Logo"
+            className="logo-icon"
+          />
           AdminCore
         </div>
 
@@ -278,7 +331,11 @@ export default function AdminCoreDashboard() {
           <div className="stats-row">
             <div className="stat-card">
               <div className="stat-icon">
-                <img src="/members.jpeg" alt="Total Members" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+                <img
+                  src="/members.jpeg"
+                  alt="Total Members"
+                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                />
               </div>
               <div className="stat-label">Total Members</div>
               <div className="stat-value">1,284,502</div>
@@ -287,7 +344,11 @@ export default function AdminCoreDashboard() {
 
             <div className="stat-card">
               <div className="stat-icon">
-                <img src="/image.png" alt="Premium Users" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+                <img
+                  src="/image.png"
+                  alt="Premium Users"
+                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                />
               </div>
               <div className="stat-label">Premium Users</div>
               <div className="stat-value">87,430</div>
@@ -296,7 +357,11 @@ export default function AdminCoreDashboard() {
 
             <div className="stat-card">
               <div className="stat-icon">
-                <img src="/revenue.jpeg" alt="Revenue (USD)" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+                <img
+                  src="/revenue.jpeg"
+                  alt="Revenue (USD)"
+                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                />
               </div>
               <div className="stat-label">Revenue (USD)</div>
               <div className="stat-value">$142,890</div>
@@ -305,7 +370,11 @@ export default function AdminCoreDashboard() {
 
             <div className="stat-card">
               <div className="stat-icon">
-                <img src="/online.jpeg" alt="Admins Online" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+                <img
+                  src="/online.jpeg"
+                  alt="Admins Online"
+                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                />
               </div>
               <div className="stat-label">Admins Online</div>
               <div className="stat-value">42 / 50</div>
@@ -314,7 +383,11 @@ export default function AdminCoreDashboard() {
 
             <div className="stat-card alert-card">
               <div className="stat-icon">
-                <img src="/escalations.jpeg" alt="Active Escalations" style={{width: '40px', height: '40px', borderRadius: '8px'}} />
+                <img
+                  src="/escalations.jpeg"
+                  alt="Active Escalations"
+                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                />
               </div>
               <div className="stat-label">Active Escalations</div>
               <div className="stat-value">18</div>
@@ -338,7 +411,7 @@ export default function AdminCoreDashboard() {
               <div className="card-title">Quick Actions</div>
               <div className="card-subtitle">Instant executive commands</div>
               <div className="qa-grid">
-                <button className="qa-btn primary">
+                <button className="qa-btn primary" onClick={() => navigate('/onboard')}>
                   <span className="qa-icon">➕</span>Onboard New Admin
                 </button>
                 <button className="qa-btn danger">
@@ -468,15 +541,20 @@ export default function AdminCoreDashboard() {
             </div>
           </div>
         </main>
-        
+
         {/* Footer */}
         <footer className="dashboard-footer">
           <div className="footer-content">
             <div className="footer-left">
-              <p>© 2026 Butterfly™ — Trusted Connections. Real Relationships.</p>
+              <p>
+                © 2026 Butterfly™ — Trusted Connections. Real Relationships.
+              </p>
             </div>
             <div className="footer-right">
-              <p>System Version: v2.4.1 | Last Updated: {new Date().toLocaleDateString()}</p>
+              <p>
+                System Version: v2.4.1 | Last Updated:{" "}
+                {new Date().toLocaleDateString()}
+              </p>
             </div>
           </div>
         </footer>
