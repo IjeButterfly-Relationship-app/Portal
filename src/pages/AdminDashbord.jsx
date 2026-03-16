@@ -266,7 +266,15 @@ export default function AdminCoreDashboard() {
             <div
               key={item.label}
               className={`nav-item${activeNav === item.label ? " active" : ""}`}
-              onClick={() => setActiveNav(item.label)}
+              onClick={() => {
+                if (item.label === "Admins") {
+                  navigate("/moderatordashboard");
+                } else if (item.label === "Onboard") {
+                  navigate("/onboard");
+                } else {
+                  setActiveNav(item.label);
+                }
+              }}
             >
               <span className="nav-icon">{item.icon}</span>
               {item.label}
@@ -411,7 +419,10 @@ export default function AdminCoreDashboard() {
               <div className="card-title">Quick Actions</div>
               <div className="card-subtitle">Instant executive commands</div>
               <div className="qa-grid">
-                <button className="qa-btn primary" onClick={() => navigate('/onboard')}>
+                <button
+                  className="qa-btn primary"
+                  onClick={() => navigate("/onboard")}
+                >
                   <span className="qa-icon">➕</span>Onboard New Admin
                 </button>
                 <button className="qa-btn danger">
