@@ -398,13 +398,14 @@ const appealItems = [
 ];
 
 const navItems = [
-  { label: "Dashboard", icon: Icon.dashboard, active: true },
-  { label: "Flagged Content", icon: Icon.flags, badge: 14 },
-  { label: "User Reports", icon: Icon.reports, badge: 7 },
-  { label: "Member Review", icon: Icon.members },
-  { label: "Message Queue", icon: Icon.messages, badge: 3 },
-  { label: "Appeals", icon: Icon.appeals, badge: 3 },
-  { label: "Activity Log", icon: Icon.activity },
+  { label: "Activity Logs", icon: Icon.dashboard, active: true },
+  { label: "Concerns", icon: Icon.warn },
+  { label: "Moderations", icon: Icon.ban },
+  { label: "Tech Panel", icon: Icon.settings },
+  { label: "Billing", icon: Icon.download },
+  { label: "Security & APIs", icon: Icon.lock },
+  { label: "Policies", icon: Icon.file },
+  { label: "Flagged", icon: Icon.flag },
 ];
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────
@@ -746,10 +747,10 @@ const ModeratorDashboard = () => {
 
             {/* Right column */}
             <div className="mid-right">
-              {/* Quick Actions */}
-              <section className="card" aria-labelledby="qa-heading">
+              {/* Sidebar Actions */}
+              <section className="card" aria-labelledby="sidebar-actions-heading">
                 <div className="card__header">
-                  <h2 className="card__title" id="qa-heading">
+                  <h2 className="card__title" id="sidebar-actions-heading">
                     Quick Actions
                   </h2>
                   <p className="card__sub">Instant executive commands</p>
@@ -757,44 +758,49 @@ const ModeratorDashboard = () => {
                 <div className="qa-grid">
                   {[
                     {
-                      label: "Onboard New Admin",
-                      icon: Icon.members,
+                      label: "Dashboard",
+                      icon: Icon.dashboard,
                       color: "purple",
                     },
                     {
-                      label: "Emergency Suspend",
-                      icon: Icon.ban,
+                      label: "Flagged Content",
+                      icon: Icon.flags,
                       color: "red",
                     },
                     {
-                      label: "Override Decision",
-                      icon: Icon.warn,
+                      label: "User Reports",
+                      icon: Icon.reports,
                       color: "orange",
                     },
                     {
-                      label: "System Config",
-                      icon: Icon.settings,
+                      label: "Member Review",
+                      icon: Icon.members,
+                      color: "blue",
+                    },
+                    {
+                      label: "Message Queue",
+                      icon: Icon.messages,
+                      color: "green",
+                    },
+                    {
+                      label: "Appeals",
+                      icon: Icon.appeals,
                       color: "purple",
                     },
                     {
-                      label: "Export Report",
-                      icon: Icon.download,
-                      color: "green",
+                      label: "Activity Log",
+                      icon: Icon.activity,
+                      color: "blue",
                     },
-                    { label: "Broadcast Alert", icon: Icon.bell, color: "red" },
-                  ].map((qa) => (
+                  ].map((action) => (
                     <button
-                      key={qa.label}
-                      className={`qa-btn qa-btn--${qa.color}`}
+                      key={action.label}
+                      className={`qa-btn qa-btn--${action.color}`}
                     >
-                      <span className="qa-btn__icon">{qa.icon}</span>
-                      <span className="qa-btn__label">{qa.label}</span>
+                      <span className="qa-btn__icon">{action.icon}</span>
+                      <span className="qa-btn__label">{action.label}</span>
                     </button>
                   ))}
-                </div>
-                <div className="danger-zone">
-                  <span className="danger-zone__label">⚡ DANGER ZONE</span>
-                  <button className="danger-btn">🔒 Emergency Lockdown</button>
                 </div>
               </section>
 
