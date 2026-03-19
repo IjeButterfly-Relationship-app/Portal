@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/AdminDashbord";
 import Onboard from "./pages/Onboard";
 import ModeratorDashboard from "./pages/ModeratorDashboard";
+import FlaggedAccount from "./pages/FlaggedAccount";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/onboard" element={<Onboard />} />
         <Route path="/moderatordashboard" element={<ModeratorDashboard />} />
+        <Route path="/flaggedAccount" element={<FlaggedAccount />} />
       </Routes>
     </BrowserRouter>
   );

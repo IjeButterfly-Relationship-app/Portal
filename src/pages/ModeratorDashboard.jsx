@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/ModeratorDashboard.css";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -408,8 +409,11 @@ const navItems = [
 ];
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────
-const StatCard = ({ label, value, sub, trend, trendDir, color, icon }) => (
-  <div className={`stat-card stat-card--${color}`}>
+const StatCard = ({ label, value, sub, trend, trendDir, color, icon, onClick }) => (
+  <div 
+    className={`stat-card stat-card--${color}${onClick ? ' stat-card--clickable' : ''}`}
+    onClick={onClick}
+  >
     <div className="stat-card__top">
       <div className="stat-card__icon">{icon}</div>
       {trend && (
@@ -493,6 +497,7 @@ const BarChart = ({ data }) => {
 
 // ── Main Component ────────────────────────────────────────────────────────────
 const ModeratorDashboard = () => {
+  const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState("Dashboard");
   const [actions, setActions] = useState(
     flaggedItems.reduce((acc, f) => ({ ...acc, [f.id]: null }), {}),
@@ -623,6 +628,7 @@ const ModeratorDashboard = () => {
                   style={{ width: "24px", height: "24px" }}
                 />
               }
+              onClick={() => navigate("/flaggedAccount")}
             />
             <StatCard
               label="Reports Today"

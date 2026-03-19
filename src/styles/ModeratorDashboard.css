@@ -448,6 +448,16 @@ body {
 }
 .stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(80,30,140,.12); }
 
+.stat-card--clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card--clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(80,30,140,.12);
+}
+
 .stat-card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
 .stat-card__icon {
   width: 36px; height: 36px;
