@@ -346,20 +346,20 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Total Members</div>
-              <div className="stat-value">1,284,502</div>
+              <div className="stat-value">284</div>
               <div className="stat-sub">Free + Premium globally</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-icon">
                 <img
-                  src="/image.png"
+                  src="/premium.png"
                   alt="Premium Users"
                   style={{ width: "40px", height: "40px", borderRadius: "8px" }}
                 />
               </div>
               <div className="stat-label">Premium Users</div>
-              <div className="stat-value">87,430</div>
+              <div className="stat-value">87</div>
               <div className="stat-sub">6.8% conversion rate</div>
             </div>
 
@@ -372,27 +372,27 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Revenue (USD)</div>
-              <div className="stat-value">$142,890</div>
+              <div className="stat-value">$142</div>
               <div className="stat-sub">Subscriptions + events</div>
             </div>
 
             <div className="stat-card">
               <div className="stat-icon">
                 <img
-                  src="/online.jpeg"
+                  src="/adminonline.png"
                   alt="Admins Online"
                   style={{ width: "40px", height: "40px", borderRadius: "8px" }}
                 />
               </div>
               <div className="stat-label">Admins Online</div>
-              <div className="stat-value">42 / 50</div>
+              <div className="stat-value">2/5</div>
               <div className="stat-sub">Across all departments</div>
             </div>
 
             <div className="stat-card alert-card">
               <div className="stat-icon">
                 <img
-                  src="/escalations.jpeg"
+                  src="/escalations.png"
                   alt="Active Escalations"
                   style={{ width: "40px", height: "40px", borderRadius: "8px" }}
                 />
@@ -423,22 +423,22 @@ export default function AdminCoreDashboard() {
                   className="qa-btn primary"
                   onClick={() => navigate("/onboard")}
                 >
-                  <span className="qa-icon">➕</span>Onboard New Admin
+                  <span className="qa-icon"></span>Onboard New Admin
                 </button>
                 <button className="qa-btn danger">
-                  <span className="qa-icon">⏻</span>Emergency Suspend
+                  <span className="qa-icon"></span>Emergency Suspend
                 </button>
                 <button className="qa-btn">
-                  <span className="qa-icon">🔄</span>Override Decision
+                  <span className="qa-icon"></span>Override Decision
                 </button>
                 <button className="qa-btn">
-                  <span className="qa-icon">⚙️</span>System Config
+                  <span className="qa-icon"></span>System Config
                 </button>
                 <button className="qa-btn">
-                  <span className="qa-icon">📤</span>Export Report
+                  <span className="qa-icon"></span>Export Report
                 </button>
                 <button className="qa-btn">
-                  <span className="qa-icon">📢</span>Broadcast Alert
+                  <span className="qa-icon"></span>Broadcast Alert
                 </button>
               </div>
             </div>

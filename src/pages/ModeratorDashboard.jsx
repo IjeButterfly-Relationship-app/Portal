@@ -517,7 +517,7 @@ const ModeratorDashboard = () => {
       {/* ── Sidebar ── */}
       <aside className="sidebar">
         <div className="sidebar__brand">
-          <div className="sidebar__logo" aria-hidden="true" />
+          <img src="/butterfly-logo.png" alt="Butterfly Logo" className="sidebar__logo" />
           <span className="sidebar__brand-name">Butterfly Admin</span>
         </div>
 
@@ -618,7 +618,13 @@ const ModeratorDashboard = () => {
               trend="8.3%"
               trendDir="up"
               color="red"
-              icon={Icon.warn}
+              icon={
+                <img
+                  src="/flaggedAccount.png"
+                  alt="Flagged Accounts"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
             <StatCard
               label="Reports Today"
@@ -627,7 +633,13 @@ const ModeratorDashboard = () => {
               trend="12.1%"
               trendDir="up"
               color="orange"
-              icon={Icon.reports}
+              icon={
+                <img
+                  src="/reports.png"
+                  alt="Reports Today"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
             <StatCard
               label="Resolved Today"
@@ -636,7 +648,13 @@ const ModeratorDashboard = () => {
               trend="6.7%"
               trendDir="up"
               color="green"
-              icon={Icon.approve}
+              icon={
+                <img
+                  src="/resolved.png"
+                  alt="Resolved Today"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
             <StatCard
               label="Active Appeals"
@@ -645,7 +663,13 @@ const ModeratorDashboard = () => {
               trend="2"
               trendDir="down"
               color="purple"
-              icon={Icon.appeals}
+              icon={
+                <img
+                  src="/appeal.png"
+                  alt="Active Appeals"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
             <StatCard
               label="Fraud Alerts"
@@ -654,7 +678,13 @@ const ModeratorDashboard = () => {
               trend="4.6%"
               trendDir="up"
               color="red"
-              icon={Icon.ban}
+              icon={
+                <img
+                  src="/fraudalerts.png"
+                  alt="Fraud Alerts"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
             <StatCard
               label="Members Reviewed"
@@ -663,7 +693,13 @@ const ModeratorDashboard = () => {
               trend="22.5%"
               trendDir="up"
               color="purple"
-              icon={Icon.members}
+              icon={
+                <img
+                  src="/reviewedmembers.png"
+                  alt="Members Reviewed"
+                  style={{ width: "24px", height: "24px" }}
+                />
+              }
             />
           </div>
 
@@ -747,59 +783,53 @@ const ModeratorDashboard = () => {
 
             {/* Right column */}
             <div className="mid-right">
-              {/* Sidebar Actions */}
-              <section className="card" aria-labelledby="sidebar-actions-heading">
+              {/* Revenue Breakdown */}
+              <section className="card" aria-labelledby="revenue-heading">
                 <div className="card__header">
-                  <h2 className="card__title" id="sidebar-actions-heading">
-                    Quick Actions
+                  <h2 className="card__title" id="revenue-heading">
+                    Revenue Breakdown
                   </h2>
-                  <p className="card__sub">Instant executive commands</p>
+                  <p className="card__sub">Monthly subscription analysis</p>
                 </div>
-                <div className="qa-grid">
+                <div className="revenue-list">
                   {[
                     {
-                      label: "Dashboard",
-                      icon: Icon.dashboard,
-                      color: "purple",
+                      label: "Premium Subscriptions",
+                      value: "$12,450",
+                      percentage: 68,
+                      color: "green"
                     },
                     {
-                      label: "Flagged Content",
-                      icon: Icon.flags,
-                      color: "red",
+                      label: "Event Tickets",
+                      value: "$3,280",
+                      percentage: 18,
+                      color: "blue"
                     },
                     {
-                      label: "User Reports",
-                      icon: Icon.reports,
-                      color: "orange",
+                      label: "Virtual Gifts",
+                      value: "$2,150",
+                      percentage: 12,
+                      color: "purple"
                     },
                     {
-                      label: "Member Review",
-                      icon: Icon.members,
-                      color: "blue",
-                    },
-                    {
-                      label: "Message Queue",
-                      icon: Icon.messages,
-                      color: "green",
-                    },
-                    {
-                      label: "Appeals",
-                      icon: Icon.appeals,
-                      color: "purple",
-                    },
-                    {
-                      label: "Activity Log",
-                      icon: Icon.activity,
-                      color: "blue",
-                    },
-                  ].map((action) => (
-                    <button
-                      key={action.label}
-                      className={`qa-btn qa-btn--${action.color}`}
-                    >
-                      <span className="qa-btn__icon">{action.icon}</span>
-                      <span className="qa-btn__label">{action.label}</span>
-                    </button>
+                      label: "Other Revenue",
+                      value: "$870",
+                      percentage: 2,
+                      color: "orange"
+                    }
+                  ].map((item) => (
+                    <div key={item.label} className="revenue-row">
+                      <div className="revenue-info">
+                        <div className="revenue-label">{item.label}</div>
+                        <div className="revenue-value">{item.value}</div>
+                      </div>
+                      <div className="revenue-progress">
+                        <div 
+                          className={`revenue-bar revenue-bar--${item.color}`}
+                          style={{ width: `${item.percentage}%` }}
+                        />
+                      </div>
+                    </div>
                   ))}
                 </div>
               </section>
