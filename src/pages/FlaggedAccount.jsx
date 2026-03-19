@@ -68,7 +68,11 @@ export default function ButterflyAdmin() {
       {/* Top Nav */}
       <header className="ba-header">
         <div className="ba-header-left">
-          <img src="/butterfly-logo.png" alt="Butterfly Logo" className="ba-logo-img" />
+          <img
+            src="/butterfly-logo.png"
+            alt="Butterfly Logo"
+            className="ba-logo-img"
+          />
           <div className="ba-logo">Butterfly Admin</div>
         </div>
         <div className="ba-search">

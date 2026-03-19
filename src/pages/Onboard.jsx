@@ -316,7 +316,9 @@ const OnboardAdmin = () => {
       {/* ── Top Nav ── */}
       <nav className="navbar">
         <div className="navbar__left">
-          <img src="/butterfly-logo.png" alt="Butterfly Logo" style={{ width: "48px", height: "48px", borderRadius: "50%" }} />
+          <div className="navbar__logo">
+            <div className="logo-mark" aria-label="AdminCore logo" />
+          </div>
         </div>
         <div className="navbar__center">
           <div className="navbar__search">

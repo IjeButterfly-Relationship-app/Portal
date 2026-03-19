@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/AdminCoreDashboard.css";
+import "../styles/ModeratorDashboard.css";
 
 const TEAM = [
   {
@@ -89,7 +90,7 @@ const MODULES = [
   {
     icon: (
       <img
-        src="/security.jpeg"
+        src="/security.png"
         alt="Security & APIs"
         style={{ width: "24px", height: "24px", borderRadius: "4px" }}
       />
@@ -100,7 +101,7 @@ const MODULES = [
   {
     icon: (
       <img
-        src="/policies.jpeg"
+        src="/policies.png"
         alt="Policies & Terms"
         style={{ width: "24px", height: "24px", borderRadius: "4px" }}
       />
@@ -148,6 +149,54 @@ const ROLE_CLASS = {
   Tech: "role-tech",
   Analytics: "role-analytics",
 };
+
+// Moderator-specific data
+const FLAGGED_ITEMS = [
+  {
+    id: 1,
+    user: "Brian K.",
+    type: "Inappropriate Message",
+    severity: "high",
+    time: "2m ago",
+    status: "pending",
+    avatar: "BK",
+  },
+  {
+    id: 2,
+    user: "Amara S.",
+    type: "Fake Profile",
+    severity: "critical",
+    time: "8m ago",
+    status: "pending",
+    avatar: "AS",
+  },
+  {
+    id: 3,
+    user: "Tom O.",
+    type: "Spam Content",
+    severity: "medium",
+    time: "14m ago",
+    status: "reviewing",
+    avatar: "TO",
+  },
+];
+
+const APPEAL_ITEMS = [
+  {
+    id: "APL-241",
+    user: "Marcus T.",
+    reason: "Wrongful ban appeal",
+    days: 2,
+    priority: "high",
+  },
+  {
+    id: "APL-238",
+    user: "Keisha R.",
+    reason: "Content removal dispute",
+    days: 3,
+    priority: "medium",
+  },
+];
 
 function MiniChart() {
   const W = 560,
@@ -246,7 +295,29 @@ function MiniChart() {
 
 export default function AdminCoreDashboard() {
   const [activeNav, setActiveNav] = useState("Dashboard");
+  const [userRole, setUserRole] = useState("admin"); // Can be "admin", "moderator", "tech", "analytics"
   const navigate = useNavigate();
+
+  // Role-based navigation items
+  const getNavItemsByRole = () => {
+    const adminItems = NAV_ITEMS;
+    const moderatorItems = [
+      { icon: "", label: "Dashboard" },
+      { icon: "", label: "Flagged Content", badge: "12" },
+      { icon: "", label: "Reports" },
+      { icon: "", label: "Appeals", badge: "3" },
+      { icon: "", label: "User Reviews" },
+      { icon: "", label: "Activity Log" },
+    ];
+    
+    switch(userRole) {
+      case "moderator":
+        return moderatorItems;
+      case "admin":
+      default:
+        return adminItems;
+    }
+  };
 
   return (
     <div className="app">
@@ -262,13 +333,14 @@ export default function AdminCoreDashboard() {
         </div>
 
         <nav className="sidebar-nav">
-          {NAV_ITEMS.map((item) => (
+          {getNavItemsByRole().map((item) => (
             <div
               key={item.label}
               className={`nav-item${activeNav === item.label ? " active" : ""}`}
               onClick={() => {
                 if (item.label === "Admins") {
-                  navigate("/moderatordashboard");
+                  setUserRole("moderator");
+                  setActiveNav("Dashboard");
                 } else if (item.label === "Onboard") {
                   navigate("/onboard");
                 } else {
@@ -277,6 +349,9 @@ export default function AdminCoreDashboard() {
               }}
             >
               {item.label}
+              {item.badge && (
+                <span className="nav-badge">{item.badge}</span>
+              )}
             </div>
           ))}
         </nav>
@@ -303,6 +378,17 @@ export default function AdminCoreDashboard() {
             <input placeholder="Search dashboard..." />
           </div>
           <div className="topbar-actions">
+            <select 
+              value={userRole} 
+              onChange={(e) => setUserRole(e.target.value)}
+              className="role-selector"
+              style={{ marginRight: "12px", padding: "6px 12px", borderRadius: "6px", border: "1px solid #e2e8f0", background: "white" }}
+            >
+              <option value="admin">Admin</option>
+              <option value="moderator">Moderator</option>
+              <option value="tech">Tech</option>
+              <option value="analytics">Analytics</option>
+            </select>
             <div className="icon-btn">
               🔔
               <div className="badge">3</div>
@@ -334,75 +420,175 @@ export default function AdminCoreDashboard() {
             </div>
           </div>
 
-          {/* Stats Row */}
+          {/* Stats Row - Role Based */}
           <div className="stats-row">
-            <div className="stat-card">
-              <div className="stat-icon">
-                <img
-                  src="/members.jpeg"
-                  alt="Total Members"
-                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="stat-label">Total Members</div>
-              <div className="stat-value">0</div>
-              <div className="stat-sub">Free + Premium globally</div>
-            </div>
+            {userRole === "admin" ? (
+              <>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/members.jpeg"
+                      alt="Total Members"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Total Members</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Free + Premium globally</div>
+                </div>
 
-            <div className="stat-card">
-              <div className="stat-icon">
-                <img
-                  src="/premium.png"
-                  alt="Premium Users"
-                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="stat-label">Premium Users</div>
-              <div className="stat-value">0</div>
-              <div className="stat-sub">0% conversion rate</div>
-            </div>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/premium.png"
+                      alt="Premium Users"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Premium Users</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">0% conversion rate</div>
+                </div>
 
-            <div className="stat-card">
-              <div className="stat-icon">
-                <img
-                  src="/revenue.jpeg"
-                  alt="Revenue (USD)"
-                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="stat-label">Revenue (USD)</div>
-              <div className="stat-value">$0</div>
-              <div className="stat-sub">Subscriptions + events</div>
-            </div>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/revenue.jpeg"
+                      alt="Revenue (USD)"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Revenue (USD)</div>
+                  <div className="stat-value">$0</div>
+                  <div className="stat-sub">Subscriptions + events</div>
+                </div>
 
-            <div className="stat-card">
-              <div className="stat-icon">
-                <img
-                  src="/adminonline.png"
-                  alt="Admins Online"
-                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="stat-label">Admins Online</div>
-              <div className="stat-value">0/0</div>
-              <div className="stat-sub">Across all departments</div>
-            </div>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/adminonline.png"
+                      alt="Admins Online"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Admins Online</div>
+                  <div className="stat-value">0/0</div>
+                  <div className="stat-sub">Across all departments</div>
+                </div>
 
-            <div className="stat-card alert-card">
-              <div className="stat-icon">
-                <img
-                  src="/escalations.png"
-                  alt="Active Escalations"
-                  style={{ width: "40px", height: "40px", borderRadius: "8px" }}
-                />
-              </div>
-              <div className="stat-label">Active Escalations</div>
-              <div className="stat-value">0</div>
-              <div className="stat-sub">Require SU intervention</div>
-            </div>
+                <div className="stat-card alert-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/escalations.png"
+                      alt="Active Escalations"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Active Escalations</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Require SU intervention</div>
+                </div>
+              </>
+            ) : userRole === "moderator" ? (
+              <>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/flaggedAccount.png"
+                      alt="Flagged Accounts"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Flagged Accounts</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Pending moderator review</div>
+                </div>
+
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/reports.png"
+                      alt="Reports Today"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Reports Today</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Avg. 5.4/hr resolution</div>
+                </div>
+
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/resolved.png"
+                      alt="Resolved Today"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Resolved Today</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">84% resolution rate</div>
+                </div>
+
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/appeals.png"
+                      alt="Active Appeals"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Active Appeals</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Pending review</div>
+                </div>
+
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/fraudalerts.png"
+                      alt="Fraud Alerts"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Fraud Alerts</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Critical security incidents</div>
+                </div>
+              </>
+            ) : (
+              // Default/Other roles
+              <>
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/members.jpeg"
+                      alt="Total Members"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Total Members</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Platform overview</div>
+                </div>
+
+                <div className="stat-card">
+                  <div className="stat-icon">
+                    <img
+                      src="/adminonline.png"
+                      alt="Team Online"
+                      style={{ width: "40px", height: "40px", borderRadius: "8px" }}
+                    />
+                  </div>
+                  <div className="stat-label">Team Online</div>
+                  <div className="stat-value">0</div>
+                  <div className="stat-sub">Active team members</div>
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Middle Row */}
+          {/* Middle Row: Chart left, Quick Actions + Alerts stacked right */}
           <div className="middle-row">
             <div className="chart-card">
               <div className="card-title">Platform Engagement</div>
@@ -414,37 +600,39 @@ export default function AdminCoreDashboard() {
               </div>
             </div>
 
-            <div className="quick-actions-card">
-              <div className="card-title">Quick Actions</div>
-              <div className="card-subtitle">Instant executive commands</div>
-              <div className="qa-grid">
-                <button
-                  className="qa-btn primary"
-                  onClick={() => navigate("/onboard")}
-                >
-                  <span className="qa-icon"></span>Onboard New Admin
-                </button>
-                <button className="qa-btn danger">
-                  <span className="qa-icon"></span>Emergency Suspend
-                </button>
-                <button className="qa-btn">
-                  <span className="qa-icon"></span>Override Decision
-                </button>
-                <button className="qa-btn">
-                  <span className="qa-icon"></span>System Config
-                </button>
-                <button className="qa-btn">
-                  <span className="qa-icon"></span>Export Report
-                </button>
-                <button className="qa-btn">
-                  <span className="qa-icon"></span>Broadcast Alert
-                </button>
+            <div className="middle-right-col">
+              <div className="quick-actions-card">
+                <div className="card-title">Quick Actions</div>
+                <div className="card-subtitle">Instant executive commands</div>
+                <div className="qa-grid">
+                  <button
+                    className="qa-btn primary"
+                    onClick={() => navigate("/onboard")}
+                  >
+                    <span className="qa-icon"></span>Onboard New Admin
+                  </button>
+                  <button className="qa-btn danger">
+                    <span className="qa-icon"></span>Emergency Suspend
+                  </button>
+                  <button className="qa-btn">
+                    <span className="qa-icon"></span>Override Decision
+                  </button>
+                  <button className="qa-btn">
+                    <span className="qa-icon"></span>System Config
+                  </button>
+                  <button className="qa-btn">
+                    <span className="qa-icon"></span>Export Report
+                  </button>
+                  <button className="qa-btn">
+                    <span className="qa-icon"></span>Broadcast Alert
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Row */}
-          <div className="bottom-row">
+          {/* Middle Row Second Part: Team Overview and Critical Alerts side by side */}
+          <div className="middle-row-second">
             <div className="team-card">
               <div className="card-header">
                 <div>
@@ -477,23 +665,17 @@ export default function AdminCoreDashboard() {
                           >
                             {member.initials}
                           </div>
-                          <span className="member-name">{member.name}</span>
+                          <div className="member-name">{member.name}</div>
                         </div>
                       </td>
                       <td>
-                        <span
-                          className={`role-chip ${ROLE_CLASS[member.role]}`}
-                        >
+                        <span className={`role-badge role-${member.role.toLowerCase()}`}>
                           {member.role}
                         </span>
                       </td>
                       <td>
-                        <span className="status-dot">
-                          <span
-                            className={`dot ${member.status === "Busy" ? "busy" : "online"}`}
-                          />
-                          {member.status}
-                        </span>
+                        <span className={`status-dot dot-${member.status.toLowerCase()}`} />
+                        {member.status}
                       </td>
                       <td>
                         <span className="tasks-badge">{member.tasks}</span>
@@ -533,23 +715,126 @@ export default function AdminCoreDashboard() {
             </div>
           </div>
 
-          {/* Administrative Modules */}
-          <div className="modules-row">
-            <div className="card-title">Administrative Modules</div>
-            <div className="modules-grid">
-              {MODULES.map((mod) => (
-                <div className="module-item" key={mod.label}>
-                  <div
-                    className="module-icon-wrap"
-                    style={{ background: mod.bg }}
-                  >
-                    {mod.icon}
+          
+          {/* Role-based Content Sections */}
+          {userRole === "moderator" && (
+            <>
+              {/* Flagged Content Queue */}
+              <div className="middle-row">
+                <div className="chart-card">
+                  <div className="card-title">Flagged Content Queue</div>
+                  <div className="card-subtitle">Pending review items</div>
+                  <div className="flagged-list">
+                    {FLAGGED_ITEMS.map((item) => (
+                      <div key={item.id} className="flagged-item">
+                        <div className="flagged-avatar">{item.avatar}</div>
+                        <div className="flagged-info">
+                          <div className="flagged-user">{item.user}</div>
+                          <div className="flagged-type">{item.type}</div>
+                        </div>
+                        <div className="flagged-meta">
+                          <span className={`severity-badge severity-${item.severity}`}>
+                            {item.severity}
+                          </span>
+                          <span className="flagged-time">{item.time}</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="module-label">{mod.label}</div>
                 </div>
-              ))}
+
+                <div className="middle-right-col">
+                  <div className="quick-actions-card">
+                    <div className="card-title">Quick Actions</div>
+                    <div className="card-subtitle">Moderator tools</div>
+                    <div className="qa-grid">
+                      <button className="qa-btn primary">Review All</button>
+                      <button className="qa-btn danger">Emergency Block</button>
+                      <button className="qa-btn">Bulk Resolve</button>
+                      <button className="qa-btn">Export Report</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Appeals Section */}
+              <div className="middle-row-second">
+                <div className="team-card">
+                  <div className="card-header">
+                    <div>
+                      <div className="card-title">Active Appeals</div>
+                      <div className="card-subtitle">
+                        Pending appeal reviews
+                      </div>
+                    </div>
+                    <div className="manage-link">View All →</div>
+                  </div>
+                  <div className="appeals-list">
+                    {APPEAL_ITEMS.map((appeal) => (
+                      <div key={appeal.id} className="appeal-item">
+                        <div className="appeal-id">{appeal.id}</div>
+                        <div className="appeal-info">
+                          <div className="appeal-user">{appeal.user}</div>
+                          <div className="appeal-reason">{appeal.reason}</div>
+                        </div>
+                        <div className="appeal-meta">
+                          <span className={`priority-badge priority-${appeal.priority}`}>
+                            {appeal.priority}
+                          </span>
+                          <span className="appeal-days">{appeal.days} days</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="alerts-card">
+                  <div className="card-header">
+                    <div>
+                      <div className="card-title">Moderation Stats</div>
+                      <div className="card-subtitle">
+                        Today's performance
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mod-stats">
+                    <div className="mod-stat-item">
+                      <div className="mod-stat-value">0</div>
+                      <div className="mod-stat-label">Items Reviewed</div>
+                    </div>
+                    <div className="mod-stat-item">
+                      <div className="mod-stat-value">0%</div>
+                      <div className="mod-stat-label">Accuracy Rate</div>
+                    </div>
+                    <div className="mod-stat-item">
+                      <div className="mod-stat-value">0min</div>
+                      <div className="mod-stat-label">Avg Response Time</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Admin-only content */}
+          {userRole === "admin" && (
+            <div className="modules-row">
+              <div className="card-title">Administrative Modules</div>
+              <div className="modules-grid">
+                {MODULES.map((mod) => (
+                  <div className="module-item" key={mod.label}>
+                    <div
+                      className="module-icon-wrap"
+                      style={{ background: mod.bg }}
+                    >
+                      {mod.icon}
+                    </div>
+                    <div className="module-label">{mod.label}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </main>
 
         {/* Footer */}

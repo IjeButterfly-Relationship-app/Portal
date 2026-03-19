@@ -352,9 +352,25 @@ body {
   grid-template-columns: 2fr 1fr;
   gap: 24px;
   margin-bottom: 24px;
+  align-items: start;
 }
 
-.chart-card, .quick-actions-card {
+/* Right column stacks Quick Actions above Critical Alerts */
+.middle-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chart-card {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+}
+
+.quick-actions-card {
   background: white;
   padding: 24px;
   border-radius: 12px;
@@ -427,15 +443,25 @@ body {
   font-size: 16px;
 }
 
-/* ── Bottom Row ── */
-.bottom-row {
+/* ── Middle Row Second: Team Overview and Critical Alerts side by side ── */
+.middle-row-second {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 24px;
   margin-bottom: 24px;
+  align-items: start;
 }
 
-.team-card, .alerts-card {
+.team-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+/* ── Alerts card — now inside middle-right-col ── */
+.alerts-card {
   background: white;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -449,6 +475,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* card-header inside alerts-card: no extra bottom margin on subtitle */
+.alerts-card .card-header .card-subtitle {
+  margin-bottom: 0;
 }
 
 .manage-link {
@@ -479,6 +510,10 @@ body {
   font-size: 13px;
 }
 
+.team-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .member-cell {
   display: flex;
   align-items: center;
@@ -495,6 +530,7 @@ body {
   color: white;
   font-weight: 600;
   font-size: 12px;
+  flex-shrink: 0;
 }
 
 .member-name {
@@ -509,9 +545,9 @@ body {
   font-weight: 500;
 }
 
-.role-geolingo { background: #ddd6fe; color: #7c3aed; }
+.role-geolingo  { background: #ddd6fe; color: #7c3aed; }
 .role-moderator { background: #fed7aa; color: #ea580c; }
-.role-tech { background: #dbeafe; color: #2563eb; }
+.role-tech      { background: #dbeafe; color: #2563eb; }
 .role-analytics { background: #fce7f3; color: #db2777; }
 
 .status-dot {
@@ -527,7 +563,7 @@ body {
 }
 
 .dot.online { background: #10b981; }
-.dot.busy { background: #f59e0b; }
+.dot.busy   { background: #f59e0b; }
 
 .tasks-badge {
   padding: 4px 8px;
@@ -544,14 +580,14 @@ body {
 }
 
 .alert-list {
-  padding: 16px 24px;
+  padding: 8px 24px;
 }
 
 .alert-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #f1f5f9;
 }
 
@@ -585,10 +621,11 @@ body {
 .alert-time {
   font-size: 11px;
   color: #94a3b8;
+  white-space: nowrap;
 }
 
 .view-log-link {
-  padding: 16px 24px;
+  padding: 12px 24px;
   color: #667eea;
   font-size: 12px;
   font-weight: 500;
@@ -673,24 +710,223 @@ body {
   text-align: right;
 }
 
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
-  
-  .footer-right p {
-    text-align: center;
-  }
+/* ── Moderator-specific styles ── */
+.flagged-list {
+  padding: 16px 24px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.flagged-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.flagged-item:last-child {
+  border-bottom: none;
+}
+
+.flagged-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.flagged-info {
+  flex: 1;
+}
+
+.flagged-user {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.flagged-type {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.flagged-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.severity-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.severity-high {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.severity-critical {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.severity-medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.flagged-time {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* Appeals styles */
+.appeals-list {
+  padding: 16px 24px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.appeal-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.appeal-item:last-child {
+  border-bottom: none;
+}
+
+.appeal-id {
+  font-size: 12px;
+  color: #64748b;
+  min-width: 60px;
+}
+
+.appeal-info {
+  flex: 1;
+}
+
+.appeal-user {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.appeal-reason {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.appeal-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.priority-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-high {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.priority-medium {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.appeal-days {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* Moderator stats */
+.mod-stats {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mod-stat-item {
+  text-align: center;
+}
+
+.mod-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.mod-stat-label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Navigation badge */
+.nav-badge {
+  background: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: auto;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Role selector */
+.role-selector {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-selector:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.role-selector:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .middle-row, .bottom-row {
+  .middle-row {
     grid-template-columns: 1fr;
   }
-  
+
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
   .stats-row {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
@@ -700,26 +936,36 @@ body {
   .sidebar {
     display: none;
   }
-  
+
   .topbar {
     padding: 0 16px;
   }
-  
+
   .content {
     padding: 16px;
   }
-  
+
   .page-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
-  
+
   .qa-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .modules-grid {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+
+  .footer-right p {
+    text-align: center;
   }
 }
