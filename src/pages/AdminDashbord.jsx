@@ -133,10 +133,10 @@ const MODULES = [
 ];
 
 const NAV_ITEMS = [
-  { icon: "⊞", label: "Dashboard" },
-  { icon: "👤", label: "Admins" },
-  { icon: "🗄️", label: "Onboard" },
-  { icon: "📝", label: "Activity Log" },
+  { icon: "", label: "Dashboard" },
+  { icon: "", label: "Admins" },
+  { icon: "", label: "Onboard" },
+  { icon: "", label: "Activity Log" },
 ];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
@@ -276,7 +276,6 @@ export default function AdminCoreDashboard() {
                 }
               }}
             >
-              <span className="nav-icon">{item.icon}</span>
               {item.label}
             </div>
           ))}
@@ -346,7 +345,7 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Total Members</div>
-              <div className="stat-value">284</div>
+              <div className="stat-value">0</div>
               <div className="stat-sub">Free + Premium globally</div>
             </div>
 
@@ -359,8 +358,8 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Premium Users</div>
-              <div className="stat-value">87</div>
-              <div className="stat-sub">6.8% conversion rate</div>
+              <div className="stat-value">0</div>
+              <div className="stat-sub">0% conversion rate</div>
             </div>
 
             <div className="stat-card">
@@ -372,7 +371,7 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Revenue (USD)</div>
-              <div className="stat-value">$142</div>
+              <div className="stat-value">$0</div>
               <div className="stat-sub">Subscriptions + events</div>
             </div>
 
@@ -385,7 +384,7 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Admins Online</div>
-              <div className="stat-value">2/5</div>
+              <div className="stat-value">0/0</div>
               <div className="stat-sub">Across all departments</div>
             </div>
 
@@ -398,7 +397,7 @@ export default function AdminCoreDashboard() {
                 />
               </div>
               <div className="stat-label">Active Escalations</div>
-              <div className="stat-value">18</div>
+              <div className="stat-value">0</div>
               <div className="stat-sub">Require SU intervention</div>
             </div>
           </div>

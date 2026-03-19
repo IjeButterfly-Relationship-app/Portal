@@ -398,14 +398,13 @@ const appealItems = [
 ];
 
 const navItems = [
-  { label: "Activity Logs", icon: Icon.dashboard, active: true },
-  { label: "Concerns", icon: Icon.warn },
-  { label: "Moderations", icon: Icon.ban },
-  { label: "Tech Panel", icon: Icon.settings },
-  { label: "Billing", icon: Icon.download },
-  { label: "Security & APIs", icon: Icon.lock },
-  { label: "Policies", icon: Icon.file },
-  { label: "Flagged", icon: Icon.flag },
+  { label: "Activity Logs", icon: <img src="/activitylog.png" alt="Activity Logs" style={{ width: "16px", height: "16px" }} />, active: true },
+  { label: "Concierge", icon: <img src="/concierge.png" alt="Concierge" style={{ width: "16px", height: "16px" }} /> },
+  { label: "Tech Panel", icon: <img src="/techpanel.png" alt="Tech Panel" style={{ width: "16px", height: "16px" }} /> },
+  { label: "Analytics", icon: <img src="/anlytics.png" alt="Analytics" style={{ width: "16px", height: "16px" }} /> },
+  { label: "Billing & Revenue", icon: <img src="/bill.png" alt="Billing & Revenue" style={{ width: "16px", height: "16px" }} /> },
+  { label: "Security & API", icon: <img src="/api.png" alt="Security & API" style={{ width: "16px", height: "16px" }} /> },
+  { label: "Policies", icon: <img src="/policies.png" alt="Policies" style={{ width: "16px", height: "16px" }} /> },
 ];
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────
@@ -528,7 +527,6 @@ const ModeratorDashboard = () => {
               className={`nav-item ${activeNav === item.label ? "nav-item--active" : ""}`}
               onClick={() => setActiveNav(item.label)}
             >
-              <span className="nav-item__icon">{item.icon}</span>
               <span className="nav-item__label">{item.label}</span>
               {item.badge && (
                 <span className="nav-item__badge">{item.badge}</span>
@@ -613,7 +611,7 @@ const ModeratorDashboard = () => {
           <div className="stats-grid">
             <StatCard
               label="Flagged Accounts"
-              value="142"
+              value="0"
               sub="Pending moderator review"
               trend="8.3%"
               trendDir="up"
@@ -628,7 +626,7 @@ const ModeratorDashboard = () => {
             />
             <StatCard
               label="Reports Today"
-              value="38"
+              value="0"
               sub="Avg. 5.4/hr resolution"
               trend="12.1%"
               trendDir="up"
@@ -643,7 +641,7 @@ const ModeratorDashboard = () => {
             />
             <StatCard
               label="Resolved Today"
-              value="91"
+              value="0"
               sub="84% resolution rate"
               trend="6.7%"
               trendDir="up"
@@ -658,7 +656,7 @@ const ModeratorDashboard = () => {
             />
             <StatCard
               label="Active Appeals"
-              value="3"
+              value="0"
               sub="Avg. 3.2 days open"
               trend="2"
               trendDir="down"
@@ -673,7 +671,7 @@ const ModeratorDashboard = () => {
             />
             <StatCard
               label="Fraud Alerts"
-              value="12"
+              value="0"
               sub="Critical security incidents"
               trend="4.6%"
               trendDir="up"
@@ -688,7 +686,7 @@ const ModeratorDashboard = () => {
             />
             <StatCard
               label="Members Reviewed"
-              value="2,109"
+              value="0"
               sub="Ongoing real-time checks"
               trend="22.5%"
               trendDir="up"
@@ -795,26 +793,26 @@ const ModeratorDashboard = () => {
                   {[
                     {
                       label: "Premium Subscriptions",
-                      value: "$12,450",
-                      percentage: 68,
+                      value: "$0",
+                      percentage: 0,
                       color: "green"
                     },
                     {
                       label: "Event Tickets",
-                      value: "$3,280",
-                      percentage: 18,
+                      value: "$0",
+                      percentage: 0,
                       color: "blue"
                     },
                     {
                       label: "Virtual Gifts",
-                      value: "$2,150",
-                      percentage: 12,
+                      value: "$0",
+                      percentage: 0,
                       color: "purple"
                     },
                     {
                       label: "Other Revenue",
-                      value: "$870",
-                      percentage: 2,
+                      value: "$0",
+                      percentage: 0,
                       color: "orange"
                     }
                   ].map((item) => (
