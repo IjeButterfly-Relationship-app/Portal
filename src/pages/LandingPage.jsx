@@ -65,23 +65,42 @@ const Navbar = () => (
       </svg>
       Butterfly
     </div>
-    <ul className="navbar__links">
-      <li>
-        <a href="#features">Features</a>
-      </li>
-      <li>
-        <a href="#how-it-works">How it Works</a>
-      </li>
-      <li>
-        <a href="#pricing">Pricing</a>
-      </li>
-      <li>
-        <a href="#contact">Contact</a>
-      </li>
-    </ul>
-    <div className="navbar__actions">
-      <button className="btn btn--ghost">Login</button>
-      <button className="btn btn--primary">Download</button>
+    <div className="navbar__nav-container">
+      <ul className="navbar__links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#event">Event</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div className="navbar__right">
+      <div className="navbar__social">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+          </svg>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </a>
+      </div>
+      <a href="#register" className="navbar__cta">
+        Register Now
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </a>
     </div>
   </nav>
 );
@@ -91,9 +110,6 @@ const Hero = () => (
   <section className="hero">
     <div className="hero__inner">
       <div className="hero__content">
-        <div className="hero__eyebrow">
-          <span>✨</span> Join 40,000+ couples learning together
-        </div>
         <h1 className="hero__title">
           Find deeper,
           <br />
@@ -136,8 +152,6 @@ const Hero = () => (
   </section>
 );
 
-
-
 /* ─── Features ─── */
 const features = [
   {
@@ -163,7 +177,11 @@ const Features = () => (
       <div className="features__visual">
         <div className="features__phone-mockup">
           <div className="phone-screen">
-            <img src="/phone.jpeg" alt="Butterfly App" className="phone-image" />
+            <img
+              src="/phone.jpeg"
+              alt="Butterfly App"
+              className="phone-image"
+            />
           </div>
         </div>
       </div>
@@ -175,9 +193,9 @@ const Features = () => (
             together.
           </h2>
           <p className="section__subtitle">
-            We believe relationships aren't just found — they're built. Butterfly
-            gives you the scientific tools to maintain the spark through every
-            season of life.
+            We believe relationships aren't just found — they're built.
+            Butterfly gives you the scientific tools to maintain the spark
+            through every season of life.
           </p>
           <a href="#how-it-works" className="section__link">
             Explore all features →
@@ -592,7 +610,7 @@ const Footer = () => (
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
-          build deeper connection through science-backed habits.
+          build deeper coannection through science-backed habits.
         </p>
         <div className="footer__social">
           {["𝕏", "in", "f", "▶"].map((s) => (
@@ -622,7 +640,7 @@ const Footer = () => (
           <ul>
             {col.links.map((l) => (
               <li key={l}>
-                <a href="#">{l}</a>
+                <button className="footer-link-btn">{l}</button>
               </li>
             ))}
           </ul>
