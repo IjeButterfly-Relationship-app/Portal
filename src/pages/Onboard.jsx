@@ -19,20 +19,6 @@ const Toggle = ({ checked, onChange, id }) => (
   </label>
 );
 
-const RadioButton = ({ name, value, checked, onChange, label }) => (
-  <label className={`radio-btn ${checked ? "radio-btn--active" : ""}`}>
-    <input
-      type="radio"
-      name={name}
-      value={value}
-      checked={checked}
-      onChange={() => onChange(value)}
-    />
-    <span className="radio-btn__circle" />
-    <span className="radio-btn__label">{label}</span>
-  </label>
-);
-
 const ModulePermission = ({
   icon,
   title,
@@ -619,27 +605,39 @@ const OnboardAdmin = () => {
                     role="radiogroup"
                     aria-label="Access Level"
                   >
-                    <RadioButton
-                      name="accessLevel"
-                      value="standard"
-                      checked={accessLevel === "standard"}
-                      onChange={setAccessLevel}
-                      label="standard Access"
-                    />
-                    <RadioButton
-                      name="accessLevel"
-                      value="elevated"
-                      checked={accessLevel === "elevated"}
-                      onChange={setAccessLevel}
-                      label="elevated Access"
-                    />
-                    <RadioButton
-                      name="accessLevel"
-                      value="full"
-                      checked={accessLevel === "full"}
-                      onChange={setAccessLevel}
-                      label="full Access"
-                    />
+                    <label className={`radio-btn ${accessLevel === "standard" ? "radio-btn--active" : ""}`}>
+                      <input
+                        type="radio"
+                        name="accessLevel"
+                        value="standard"
+                        checked={accessLevel === "standard"}
+                        onChange={() => setAccessLevel("standard")}
+                      />
+                      <span className="radio-btn__circle" />
+                      <span className="radio-btn__label">standard Access</span>
+                    </label>
+                    <label className={`radio-btn ${accessLevel === "elevated" ? "radio-btn--active" : ""}`}>
+                      <input
+                        type="radio"
+                        name="accessLevel"
+                        value="elevated"
+                        checked={accessLevel === "elevated"}
+                        onChange={() => setAccessLevel("elevated")}
+                      />
+                      <span className="radio-btn__circle" />
+                      <span className="radio-btn__label">elevated Access</span>
+                    </label>
+                    <label className={`radio-btn ${accessLevel === "full" ? "radio-btn--active" : ""}`}>
+                      <input
+                        type="radio"
+                        name="accessLevel"
+                        value="full"
+                        checked={accessLevel === "full"}
+                        onChange={() => setAccessLevel("full")}
+                      />
+                      <span className="radio-btn__circle" />
+                      <span className="radio-btn__label">full Access</span>
+                    </label>
                   </div>
                 </div>
               </section>

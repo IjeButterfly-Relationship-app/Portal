@@ -51,59 +51,46 @@ const QRCode = () => {
   );
 };
 
-/* ─── Navbar ─── */
-const Navbar = () => (
-  <nav className="navbar">
-    <div className="navbar__logo">
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-      >
-        <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
-      </svg>
-      Butterfly
-    </div>
-    <div className="navbar__nav-container">
-      <ul className="navbar__links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#event">Event</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#contact">Contact Us</a></li>
-      </ul>
-    </div>
-    <div className="navbar__right">
-      <div className="navbar__social">
-        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-        </a>
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-          </svg>
-        </a>
-        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="YouTube">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-          </svg>
-        </a>
-      </div>
-      <a href="#register" className="navbar__cta">
-        Register Now
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
-        </svg>
-      </a>
-    </div>
-  </nav>
-);
+// /* ─── Navbar ─── */
+// const Navbar = () => (
+//   <nav className="navbar">
+//     <div className="navbar__logo">
+//       <img
+//         src="/butterfly-logo.png"
+//         alt="Butterfly"
+//         className="navbar__logo-img"
+//       />
+//       <span className="navbar__logo-text">Butterfly</span>
+//     </div>
+//     <div className="navbar__right">
+//       <div className="navbar__social">
+//         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Instagram">
+//           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+//             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+//             <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+//             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+//           </svg>
+//         </a>
+//         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Facebook">
+//           <svg viewBox="0 0 24 24" fill="currentColor">
+//             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+//           </svg>
+//         </a>
+//         <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="YouTube">
+//           <svg viewBox="0 0 24 24" fill="currentColor">
+//             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+//           </svg>
+//         </a>
+//       </div>
+//       <a href="#register" className="navbar__cta">
+//         Register Now
+//         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+//           <path d="M7 17L17 7M17 7H7M17 7V17"/>
+//         </svg>
+//       </a>
+//     </div>
+//   </nav>
+// );
 
 /* ─── Hero ─── */
 const Hero = () => (
@@ -130,16 +117,16 @@ const Hero = () => (
         </div>
         <div className="hero__stores">
           <div className="store-badge">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-            </svg>
-            App Store
+            <img
+              src="/appstore.png"
+              alt="App Store"
+            />
           </div>
           <div className="store-badge">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.112a.99.99 0 010 1.61L15.149 14.5l-2.557-2.557L15.15 9.39l2.549 1.205zM5.864 2.658L16.8 9l-2.302 2.302-8.635-8.635z" />
-            </svg>
-            Google Play
+            <img
+              src="/google.png"
+              alt="Google Play"
+            />
           </div>
         </div>
         <div className="hero__stats">
@@ -154,11 +141,6 @@ const Hero = () => (
 
 /* ─── Features ─── */
 const features = [
-  {
-    icon: "✨",
-    title: "Daily Spark Prompts",
-    desc: "Over 1,500 therapist-approved conversation starters, giving you something new and meaningful to discuss every single day.",
-  },
   {
     icon: "🔒",
     title: "Private Secure Vault",
@@ -178,7 +160,7 @@ const Features = () => (
         <div className="features__phone-mockup">
           <div className="phone-screen">
             <img
-              src="/phone.jpeg"
+              src="/chat.jpeg"
               alt="Butterfly App"
               className="phone-image"
             />
@@ -197,9 +179,6 @@ const Features = () => (
             Butterfly gives you the scientific tools to maintain the spark
             through every season of life.
           </p>
-          <a href="#how-it-works" className="section__link">
-            Explore all features →
-          </a>
         </div>
         <div className="features-grid">
           {features.map((f) => (
@@ -219,21 +198,18 @@ const Features = () => (
 const steps = [
   {
     num: "01",
-    icon: "🎨",
-    title: "Build Your Style",
-    desc: "Set up your couples profile and personalise your relationship journey together.",
+    title: "Create Your Profile",
+    desc: "Set up your account and build your profile to start connecting with others.",
   },
   {
     num: "02",
-    icon: "💌",
-    title: "Invite Your Partner",
-    desc: "Send a single link to connect. Share a phone, tablet, or any device easily.",
+    title: "See Your Matches",
+    desc: "Discover compatible partners who share your values and relationship goals.",
   },
   {
     num: "03",
-    icon: "🌱",
-    title: "Grow Every Day",
-    desc: "Complete daily rituals and watch your relationship blossom over time.",
+    title: "Grow Together",
+    desc: "Build healthy relationships through meaningful connections and shared experiences.",
   },
 ];
 
@@ -243,203 +219,14 @@ const Steps = () => (
     <div className="section__header">
       <h2 className="section__title">Three steps to a better bond</h2>
     </div>
-    <p
-      className="section__subtitle"
-      style={{
-        textAlign: "center",
-        color: "var(--gray-500)",
-        marginTop: "-40px",
-        marginBottom: "64px",
-      }}
-    >
-      Getting connected is effortless. We handle the structure so you can focus
-      on the connection.
-    </p>
     <div className="steps-grid">
       {steps.map((s) => (
         <div className="step-card" key={s.num}>
           <div className="step-card__number">{s.num}</div>
-          <div className="step-card__icon">{s.icon}</div>
           <h3 className="step-card__title">{s.title}</h3>
           <p className="step-card__desc">{s.desc}</p>
         </div>
       ))}
-    </div>
-  </section>
-);
-
-/* ─── Screenshots ─── */
-const Screenshots = () => (
-  <section className="screenshots-section">
-    <div className="section__header">
-      <h2 className="section__title">
-        Beautifully designed
-        <br />
-        for clarity
-      </h2>
-      <p className="section__subtitle">
-        A peek inside the interface couples love to use every morning.
-      </p>
-    </div>
-    <div className="screenshots-grid">
-      <div>
-        <div className="screenshot-card">
-          <div className="screenshot-mockup screenshot-mockup--dark">
-            <div className="mockup-topbar">
-              <span>9:41</span>
-              <span>●●●</span>
-            </div>
-            <div className="mockup-title">Daily Spark</div>
-            <p
-              style={{
-                fontSize: "0.8rem",
-                color: "rgba(255,255,255,0.6)",
-                lineHeight: 1.6,
-              }}
-            >
-              "What's a small habit your partner has that secretly makes you
-              feel loved?"
-            </p>
-            <div className="mockup-emoji">💬</div>
-            <div
-              style={{
-                background: "var(--gradient-cta)",
-                borderRadius: "10px",
-                padding: "10px 14px",
-                fontSize: "0.78rem",
-                color: "white",
-                textAlign: "center",
-                marginTop: "auto",
-              }}
-            >
-              Send your reply ✨
-            </div>
-          </div>
-        </div>
-        <div className="screenshot-label">Daily Prompts</div>
-      </div>
-
-      <div>
-        <div className="screenshot-card">
-          <div className="screenshot-mockup screenshot-mockup--light">
-            <div className="mockup-topbar" style={{ color: "var(--gray-500)" }}>
-              <span>Weekly Report</span>
-              <span>📈</span>
-            </div>
-            <div className="mockup-title" style={{ color: "var(--gray-900)" }}>
-              Connection Score
-            </div>
-            <div
-              style={{
-                fontSize: "3rem",
-                fontFamily: "var(--font-display)",
-                fontWeight: 800,
-                color: "var(--purple)",
-                margin: "8px 0",
-              }}
-            >
-              92%
-            </div>
-            <div
-              className="mockup-bar mockup-bar--full"
-              style={{ width: "92%" }}
-            ></div>
-            <div
-              style={{
-                fontSize: "0.75rem",
-                color: "var(--gray-400)",
-                margin: "4px 0 12px",
-              }}
-            >
-              Up 7% from last week
-            </div>
-            <div className="mockup-grid">
-              {["Communication", "Quality Time", "Intimacy", "Support"].map(
-                (l) => (
-                  <div
-                    key={l}
-                    style={{
-                      background: "white",
-                      borderRadius: "10px",
-                      padding: "10px",
-                      border: "1px solid var(--gray-100)",
-                      fontSize: "0.7rem",
-                      color: "var(--gray-500)",
-                      textAlign: "center",
-                    }}
-                  >
-                    <div style={{ fontSize: "1.1rem", marginBottom: "4px" }}>
-                      {l === "Communication"
-                        ? "💬"
-                        : l === "Quality Time"
-                          ? "⏰"
-                          : l === "Intimacy"
-                            ? "💜"
-                            : "🤝"}
-                    </div>
-                    {l}
-                  </div>
-                ),
-              )}
-            </div>
-          </div>
-        </div>
-        <div className="screenshot-label">Weekly Analytics</div>
-      </div>
-
-      <div>
-        <div className="screenshot-card">
-          <div className="screenshot-mockup screenshot-mockup--purple">
-            <div className="mockup-topbar" style={{ color: "var(--gray-500)" }}>
-              <span>Shared Vault</span>
-              <span>🔒</span>
-            </div>
-            <div className="mockup-title" style={{ color: "var(--gray-900)" }}>
-              Our Memories
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "8px",
-                marginTop: "8px",
-              }}
-            >
-              {["🌅", "🎂", "🏖️", "🥂", "🌸", "🎵"].map((e, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: "white",
-                    borderRadius: "12px",
-                    height: "60px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1.6rem",
-                    boxShadow: "var(--shadow-sm)",
-                  }}
-                >
-                  {e}
-                </div>
-              ))}
-            </div>
-            <div
-              style={{
-                background: "var(--gradient-cta)",
-                borderRadius: "10px",
-                padding: "8px 14px",
-                fontSize: "0.78rem",
-                color: "white",
-                textAlign: "center",
-                marginTop: "auto",
-              }}
-            >
-              Add a new memory +
-            </div>
-          </div>
-        </div>
-        <div className="screenshot-label">Shared Vault</div>
-      </div>
     </div>
   </section>
 );
@@ -570,11 +357,12 @@ const CTA = () => (
       </div>
       <div className="cta__stores">
         {[
-          { label: "App Store", icon: "🍎" },
-          { label: "Google Play", icon: "▶" },
+          { label: "App Store", img: "appstore.png" },
+          { label: "Google Play", img: "google.png" },
         ].map((s) => (
           <div className="cta__store" key={s.label}>
-            <span>{s.icon}</span> {s.label}
+            <img src={`/${s.img}`} alt={s.label} className="cta__store-img" />
+            <span>{s.label}</span>
           </div>
         ))}
       </div>
@@ -658,11 +446,9 @@ const Footer = () => (
 export default function App() {
   return (
     <div>
-      <Navbar />
       <Hero />
       <Features />
       <Steps />
-      <Screenshots />
       <Testimonials />
       <FAQ />
       <CTA />
