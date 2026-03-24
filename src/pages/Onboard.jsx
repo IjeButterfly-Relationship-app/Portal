@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 import "../styles/OnboardAdmin.css";
+import "../styles/AdminCoreDashboard.css";
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -205,11 +207,30 @@ const icons = {
 // ── Main Component ────────────────────────────────────────────────────────────
 
 const OnboardAdmin = () => {
+  const navigate = useNavigate();
+  const [activeNav, setActiveNav] = useState("Onboard");
+
   // Personal Information
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+
+  // ── Navigation Items ───────────────────────────────────────────────────────
+  const NAV_ITEMS = [
+    { icon: "", label: "Dashboard" },
+    { icon: "", label: "Admins" },
+    { icon: "", label: "Onboard" },
+    { icon: "", label: "Activity Log" },
+  ];
+
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  const CHART_DATA = [2600, 3800, 3200, 4800, 4200, 5600];
+
+  const ROLE_CLASS = {
+    "Concierge Admin": "concierge",
+    "Head Concierge": "concierge",
+    "Super User": "superuser",
+  };
+
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("Uganda");
 
@@ -299,87 +320,72 @@ const OnboardAdmin = () => {
   ];
 
   return (
-    <div className="onboard-app">
-      {/* ── Top Nav ── */}
-      <nav className="navbar">
-        <div className="navbar__left">
-          <div className="navbar__logo">
-            <div className="logo-mark" aria-label="AdminCore logo" />
+    <div className="app">
+      {/* ── Sidebar ── */}
+      <aside className="sidebar">
+        <div className="sidebar-logo">
+          <img
+            src="/butterfly-logo.png"
+            alt="Butterfly Logo"
+            className="logo-icon"
+          />
+          AdminCore
+        </div>
+
+        <nav className="sidebar-nav">
+          {NAV_ITEMS.map((item) => (
+            <div
+              key={item.label}
+              className={`nav-item${activeNav === item.label ? " active" : ""}`}
+              onClick={() => {
+                if (item.label === "Admins") {
+                  navigate("/moderatordashboard");
+                } else if (item.label === "Onboard") {
+                  navigate("/onboard");
+                } else {
+                  setActiveNav(item.label);
+                }
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
+        </nav>
+
+        <div className="sidebar-footer">
+          <div className="system-health">
+            <span className="health-dot" />
+            System Health
+          </div>
+          <div className="health-bars">
+            {[1, 1, 1, 1, 0, 1, 1, 0, 1, 1].map((active, i) => (
+              <div key={i} className={`health-bar${active ? " active" : ""}`} />
+            ))}
           </div>
         </div>
-        <div className="navbar__center">
-          <div className="navbar__search">
-            <svg className="search-icon" viewBox="0 0 20 20" fill="none">
-              <circle
-                cx="8.5"
-                cy="8.5"
-                r="5.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M13 13l3.5 3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-            <input
-              type="text"
-              placeholder="Search dashboard…"
-              className="navbar__search-input"
-              aria-label="Search dashboard"
-            />
-          </div>
-        </div>
-        <div className="navbar__right">
-          <button className="icon-btn" aria-label="Notifications">
-            <svg viewBox="0 0 20 20" fill="none">
-              <path
-                d="M10 2a6 6 0 00-6 6c0 3.5-2 5-2 5h16s-2-1.5-2-5a6 6 0 00-6-6z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M11.73 17a2 2 0 01-3.46 0"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <button className="icon-btn" aria-label="Settings">
-            <svg viewBox="0 0 20 20" fill="none">
-              <circle
-                cx="10"
-                cy="10"
-                r="2.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
-          <div className="navbar__avatar">
-            <span className="navbar__avatar-name">Super Admin</span>
-            <span className="navbar__avatar-email">admin@admincore.io</span>
-            <div className="avatar-circle" aria-hidden="true">
-              SA
+      </aside>
+
+      {/* ── Main ── */}
+      <main className="main">
+        {/* Topbar */}
+        <header className="topbar">
+          <div className="topbar__left">
+            <div className="breadcrumb">
+              <span>Onboard</span>
             </div>
           </div>
-        </div>
-      </nav>
+          <div className="topbar__right">
+            <div className="user-menu">
+              <div className="user-avatar">
+                <span>A</span>
+              </div>
+            </div>
+          </div>
+        </header>
 
-      {/* ── Page ── */}
-      <main className="page">
-        {/* Page header */}
-        <div className="page__header">
-          <div>
+        {/* Page content */}
+        <div className="page__content">
+          <div className="page__header">
             <h1 className="page__title">Onboard New Admin</h1>
             <p className="page__subtitle">
               Create account, assign role and set granular permissions.
@@ -397,177 +403,61 @@ const OnboardAdmin = () => {
               Create Admin Account
             </button>
           </div>
-        </div>
 
-        {/* ── Two-column layout ── */}
-        <div className="layout">
           {/* Left column */}
           <div className="layout__left">
-            <form id="onboard-form" onSubmit={handleSubmit} noValidate>
-              {/* Personal Information */}
-              <section className="card" aria-labelledby="personal-info-heading">
-                <h2 className="card__title" id="personal-info-heading">
-                  Personal Information
+            {/* Module Permissions */}
+            <section className="card" aria-labelledby="permissions-heading">
+              <div className="card__header">
+                <h2 className="card__title" id="permissions-heading">
+                  Module Permissions
                 </h2>
+                <span className="card__badge">CONTROL ACCESS</span>
+              </div>
+              <div className="module-list">
+                {moduleList.map((m) => (
+                  <ModulePermission
+                    key={m.key}
+                    id={`perm-${m.key}`}
+                    icon={m.icon}
+                    title={m.title}
+                    description={m.description}
+                    checked={permissions[m.key]}
+                    onChange={() => togglePermission(m.key)}
+                  />
+                ))}
+              </div>
+            </section>
 
-                <div className="form-grid form-grid--2">
-                  <div className="field">
-                    <label className="field__label" htmlFor="firstName">
-                      First Name
-                    </label>
-                    <input
-                      id="firstName"
-                      className="field__input"
-                      type="text"
-                      placeholder="e.g. Sarah"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
+            {/* Send Welcome Email */}
+            <section className="card" aria-labelledby="email-heading">
+              <h2 className="card__title" id="email-heading">
+                Send Welcome Email
+              </h2>
+              <div className="module-list">
+                <div className="module-row">
+                  <div className="module-row__icon">{icons.email}</div>
+                  <div className="module-row__info">
+                    <p className="module-row__title">Send login credentials</p>
+                    <p className="module-row__desc">
+                      Email temporary password to admin
+                    </p>
                   </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="lastName">
-                      Last Name
-                    </label>
-                    <input
-                      id="lastName"
-                      className="field__input"
-                      type="text"
-                      placeholder="e.g. Nakato"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="email">
-                      Email Address
-                    </label>
-                    <input
-                      id="email"
-                      className="field__input"
-                      type="email"
-                      placeholder="sarah.nakato@admincore.io"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="phone">
-                      Phone Number
-                    </label>
-                    <input
-                      id="phone"
-                      className="field__input"
-                      type="tel"
-                      placeholder="+256 700 123456"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="city">
-                      City / Region
-                    </label>
-                    <input
-                      id="city"
-                      className="field__input"
-                      type="text"
-                      placeholder="Kampala, Uganda"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="country">
-                      Country
-                    </label>
-                    <div className="field__select-wrap">
-                      <select
-                        id="country"
-                        className="field__select"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                      >
-                        <option>Uganda</option>
-                        <option>Kenya</option>
-                        <option>Tanzania</option>
-                        <option>Rwanda</option>
-                        <option>Nigeria</option>
-                        <option>South Africa</option>
-                        <option>United Kingdom</option>
-                        <option>United States</option>
-                      </select>
-                      <svg
-                        className="field__select-arrow"
-                        viewBox="0 0 12 8"
-                        fill="none"
-                      >
-                        <path
-                          d="M1 1l5 5 5-5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
+                  <Toggle
+                    checked={sendCredentials}
+                    onChange={setSendCredentials}
+                    id="toggle-credentials"
+                  />
                 </div>
-              </section>
+              </div>
+            </section>
 
-              {/* Role & Department */}
-              <section className="card" aria-labelledby="role-heading">
-                <h2 className="card__title" id="role-heading">
-                  Role & Department
-                </h2>
-
-                <div className="form-grid form-grid--2">
-                  <div className="field">
-                    <label className="field__label" htmlFor="adminRole">
-                      Admin Role
-                    </label>
-                    <div className="field__select-wrap">
-                      <select
-                        id="adminRole"
-                        className="field__select"
-                        value={adminRole}
-                        onChange={(e) => setAdminRole(e.target.value)}
-                      >
-                        <option>Concierge Admin</option>
-                        <option>Super Admin</option>
-                        <option>Content Admin</option>
-                        <option>Support Admin</option>
-                        <option>Analytics Admin</option>
-                      </select>
-                      <svg
-                        className="field__select-arrow"
-                        viewBox="0 0 12 8"
-                        fill="none"
-                      >
-                        <path
-                          d="M1 1l5 5 5-5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="jobTitle">
-                      Job Title
-                    </label>
-                    <input
-                      id="jobTitle"
-                      className="field__input"
-                      type="text"
-                      placeholder="Head Concierge"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
-                    />
-                  </div>
-                </div>
-
+            {/* Additional Admin Fields */}
+            <section className="card" aria-labelledby="admin-fields-heading">
+              <h2 className="card__title" id="admin-fields-heading">
+                Admin Details
+              </h2>
+              <div className="form-grid form-grid--2">
                 <div className="field field--full">
                   <label className="field__label" htmlFor="reportingTo">
                     Reporting To
@@ -606,7 +496,9 @@ const OnboardAdmin = () => {
                     role="radiogroup"
                     aria-label="Access Level"
                   >
-                    <label className={`radio-btn ${accessLevel === "standard" ? "radio-btn--active" : ""}`}>
+                    <label
+                      className={`radio-btn ${accessLevel === "standard" ? "radio-btn--active" : ""}`}
+                    >
                       <input
                         type="radio"
                         name="accessLevel"
@@ -617,7 +509,9 @@ const OnboardAdmin = () => {
                       <span className="radio-btn__circle" />
                       <span className="radio-btn__label">standard Access</span>
                     </label>
-                    <label className={`radio-btn ${accessLevel === "elevated" ? "radio-btn--active" : ""}`}>
+                    <label
+                      className={`radio-btn ${accessLevel === "elevated" ? "radio-btn--active" : ""}`}
+                    >
                       <input
                         type="radio"
                         name="accessLevel"
@@ -628,7 +522,9 @@ const OnboardAdmin = () => {
                       <span className="radio-btn__circle" />
                       <span className="radio-btn__label">elevated Access</span>
                     </label>
-                    <label className={`radio-btn ${accessLevel === "full" ? "radio-btn--active" : ""}`}>
+                    <label
+                      className={`radio-btn ${accessLevel === "full" ? "radio-btn--active" : ""}`}
+                    >
                       <input
                         type="radio"
                         name="accessLevel"
@@ -641,73 +537,69 @@ const OnboardAdmin = () => {
                     </label>
                   </div>
                 </div>
-              </section>
+              </div>
+            </section>
 
-              {/* Account Security */}
-              <section className="card" aria-labelledby="security-heading">
-                <h2 className="card__title" id="security-heading">
-                  Account Security
-                </h2>
+            {/* Account Security */}
+            <section className="card" aria-labelledby="security-heading">
+              <h2 className="card__title" id="security-heading">
+                Account Security
+              </h2>
 
-                <div className="form-grid form-grid--2">
-                  <div className="field">
-                    <label className="field__label" htmlFor="tempPassword">
-                      Temporary Password
-                    </label>
-                    <input
-                      id="tempPassword"
-                      className="field__input"
-                      type="password"
-                      placeholder="············"
-                      value={tempPassword}
-                      onChange={(e) => setTempPassword(e.target.value)}
-                      autoComplete="new-password"
-                    />
-                  </div>
-                  <div className="field">
-                    <label className="field__label" htmlFor="confirmPassword">
-                      Confirm Password
-                    </label>
-                    <input
-                      id="confirmPassword"
-                      className="field__input"
-                      type="password"
-                      placeholder="············"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      autoComplete="new-password"
-                    />
-                  </div>
+              <div className="form-grid form-grid--2">
+                <div className="field">
+                  <label className="field__label" htmlFor="tempPassword">
+                    Temporary Password
+                  </label>
+                  <input
+                    id="tempPassword"
+                    className="field__input"
+                    type="password"
+                    placeholder="············"
+                    value={tempPassword}
+                    onChange={(e) => setTempPassword(e.target.value)}
+                    autoComplete="new-password"
+                  />
                 </div>
-
-                <div className="info-box">
-                  <svg
-                    className="info-box__icon"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                  >
-                    <circle
-                      cx="10"
-                      cy="10"
-                      r="8"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    />
-                    <path
-                      d="M10 9v5M10 7v.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  <p className="info-box__text">
-                    Admin will be required to change password on first login.
-                    Two-factor authentication will be enabled by default and
-                    must be configured during the first onboarding session.
-                  </p>
+                <div className="field">
+                  <label className="field__label" htmlFor="confirmPassword">
+                    Confirm Password
+                  </label>
+                  <input
+                    id="confirmPassword"
+                    className="field__input"
+                    type="password"
+                    placeholder="············"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="new-password"
+                  />
                 </div>
-              </section>
-            </form>
+              </div>
+
+              <div className="info-box">
+                <svg className="info-box__icon" viewBox="0 0 20 20" fill="none">
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="8"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M10 9v5M10 7v.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <p className="info-box__text">
+                  Admin will be required to change password on first login.
+                  Two-factor authentication will be enabled by default and must
+                  be configured during the first onboarding session.
+                </p>
+              </div>
+            </section>
           </div>
 
           {/* Right column */}

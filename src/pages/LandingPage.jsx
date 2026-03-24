@@ -113,19 +113,19 @@ const Hero = () => (
           <button className="btn btn--primary">💜 Download the app</button>
         </div> */}
         <div className="hero__stores">
-          <div className="store-badge">
-            <img
-              src="/google.png"
-              alt="Google Play"
-            />
+          <div className="store-badges">
+            <div className="store-badge">
+              <img src="/google.png" alt="Google Play" />
+            </div>
+            <div className="store-badge">
+              <img src="/appstore.png" alt="App Store" />
+            </div>
           </div>
-          <div className="store-badge">
-            <img
-              src="/appstore.png"
-              alt="App Store"
-            />
+          <div className="qr-code">
+            <QRCode />
           </div>
         </div>
+        <p className="qr-text">Scan to download</p>
         {/* <div className="hero__stats">
           <span className="hero__stars">★★★★★</span>
           <span>4.9/5 · Over 12,000 ratings on App Store</span>
@@ -139,24 +139,34 @@ const Hero = () => (
 /* ─── Features ─── */
 const features = [
   {
-    icon: "shared.png",
-    title: "Discover Matches",
+    icon: "lovers.png",
+    title: "Deep Compatibility",
     desc: "Find compatible partners who share your values and relationship goals. Connect with people who complement your personality and lifestyle.",
   },
   {
-    icon: "relation.png",
+    icon: "verified.png",
     title: "Verified Profiles",
     desc: "Every profile goes through photo & identity verification. No catifishing, no fake accounts-only real people",
   },
   {
-    icon: "coaches.png",
+    icon: "coach.png",
     title: "Relationship Coaches",
     desc: "Get expert guidance from certified relationship coaches. Learn proven techniques to strengthen your bond.",
   },
   {
     icon: "security1.png",
     title: "Private Secure Vault",
-    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
+    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by to two of you.",
+  },
+  {
+    icon: "premium.png",
+    title: "Butterfly Premium",
+    desc: "Unlock exclusive features and enhanced matching. Get priority support, advanced filters, and unlimited likes to find your perfect match faster.",
+  },
+  {
+    icon: "global.png",
+    title: "Local & Global",
+    desc: "Meet people around the corner or across the world. Filter by proximity or open your heart to long-distance connections.",
   },
 ];
 
@@ -171,7 +181,8 @@ const Features = () => (
             real love.
           </h2>
           <p className="section__subtitle">
-            Built different.No endless swiping, no shallow connections-just meaningful matches backed by real compatibility science.
+            Built different.No endless swiping, no shallow connections-just
+            meaningful matches backed by real compatibility science.
           </p>
         </div>
       </div>
@@ -179,7 +190,11 @@ const Features = () => (
         {features.map((f) => (
           <div className="feature-card animate-in" key={f.title}>
             <div className="feature-card__icon">
-              <img src={`/${f.icon}`} alt={f.title} className="feature-icon-img" />
+              <img
+                src={`/${f.icon}`}
+                alt={f.title}
+                className="feature-icon-img"
+              />
             </div>
             <h3 className="feature-card__title">{f.title}</h3>
             <p className="feature-card__desc">{f.desc}</p>
@@ -204,6 +219,11 @@ const steps = [
   },
   {
     num: "03",
+    title: "Start real conversations",
+    desc: "Begin meaningful dialogues with daily prompts designed to deepen your connection.",
+  },
+  {
+    num: "04",
     title: "Grow Together",
     desc: "Build healthy relationships through meaningful connections and shared experiences.",
   },
@@ -213,7 +233,7 @@ const Steps = () => (
   <section className="steps-section" id="how-it-works">
     <div className="badge">💫 HOW IT WORKS</div>
     <div className="section__header">
-      <h2 className="section__title">Three steps to a better bond</h2>
+      <h2 className="section__title">Four steps to a better bond</h2>
     </div>
     <div className="steps-grid">
       {steps.map((s) => (
@@ -253,7 +273,8 @@ const Testimonials = () => (
           Hear from <span>happy</span> couples.
         </h2>
         <p className="testimonials__subtitle">
-          Real stories from real couples who've found their spark with Butterfly.
+          Real stories from real couples who've found their spark with
+          Butterfly.
         </p>
         <div className="testimonials-grid">
           {testimonials.map((t) => (
@@ -262,7 +283,11 @@ const Testimonials = () => (
               <p className="testimonial-text">"{t.text}"</p>
               <div className="testimonial-author">
                 <div className={`testimonial-avatar ${t.avatarClass}`}>
-                  <img src={`/${t.avatar}`} alt={t.name} className="testimonial-avatar-img" />
+                  <img
+                    src={`/${t.avatar}`}
+                    alt={t.name}
+                    className="testimonial-avatar-img"
+                  />
                 </div>
                 <div className="testimonial-author__info">
                   <strong>{t.name}</strong>
@@ -275,7 +300,11 @@ const Testimonials = () => (
       </div>
       <div className="testimonials__right">
         <div className="testimonials__image-card">
-          <img src="/couple2.png" alt="Happy couple" className="testimonials__image" />
+          <img
+            src="/couple2.png"
+            alt="Happy couple"
+            className="testimonials__image"
+          />
         </div>
       </div>
     </div>
@@ -338,48 +367,44 @@ const FAQ = () => {
 /* ─── CTA ─── */
 const CTA = () => (
   <section className="cta-section">
-    <div>
-      <h2 className="cta__title">
-        Ready to grow your
-        <br />
-        relationship?
-      </h2>
-      <p className="cta__subtitle">
-        Join 50,000+ couples who are blooming together. Download Butterfly today
-        and start your journey with a 7-day free trial of Premium.
-      </p>
-      <div className="cta__actions">
-        <button className="btn btn--white">Get Started Now</button>
-      </div>
-      <div className="cta__stores">
-        {[
-          { label: "", img: "appstore.png" },
-          { label: "", img: "google.png" },
-        ].map((s) => (
-          <div className="cta__store" key={s.label}>
-            <img src={`/${s.img}`} alt={s.label} className="cta__store-img" />
-            <span>{s.label}</span>
+    <div className="cta-container">
+      <div className="cta-left">
+        <h3 className="cta-badge">GET THE APP</h3>
+        <h2 className="cta-title">
+          Your person is already
+          <br />
+          waiting for you
+        </h2>
+        <p className="cta-subtitle">
+          Download Butterfly free. No subscription required to start - just open the app and begin.
+        </p>
+        <div className="cta-stores">
+          <div className="store-badges">
+            <div className="store-badge">
+              <img src="/google.png" alt="Google Play" />
+            </div>
+            <div className="store-badge">
+              <img src="/appstore.png" alt="App Store" />
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-    <div className="cta__visual">
-      <div className="features__phone-mockup">
-        <div className="phone-screen">
-          <img
-            src="/chat.jpeg"
-            alt="Butterfly App"
-            className="phone-image"
-          />
+          <div className="qr-code">
+            <QRCode />
+          </div>
         </div>
+        <p className="qr-text">Scan to download</p>
       </div>
-    </div>
-    <div className="cta__qr">
-      <QRCode />
-      <div className="cta__qr-label">
-        Scan to
-        <br />
-        Download
+      <div className="cta-right">
+        <div className="floating-screens">
+          <div className="screen screen-1">
+            <img src="/discover.jpeg" alt="Discover screen" />
+          </div>
+          <div className="screen screen-2">
+            <img src="/onboard.jpeg" alt="Onboard screen" />
+          </div>
+          <div className="screen screen-3">
+            <img src="/profile.jpeg" alt="Profile screen" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -391,36 +416,24 @@ const Footer = () => (
     <div className="footer__inner">
       <div className="footer__brand">
         <div className="navbar__logo" style={{ fontSize: "1.1rem" }}>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-          >
-            <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
-          </svg>
+          <img
+            src="/butterfly-logo.png"
+            alt="Butterfly"
+            className="footer__logo-img"
+          />
           Butterfly
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
           build deeper coannection through science-backed habits.
         </p>
-        <div className="footer__social">
-          {["𝕏", "in", "f", "▶"].map((s) => (
-            <div className="social-icon" key={s}>
-              {s}
-            </div>
-          ))}
-        </div>
       </div>
       {[
         {
           title: "Product",
-          links: ["Features", "Security",],
+          links: ["Features", "Security"],
         },
-        { title: "Company", links: ["About Us", "Press",] },
+        { title: "Company", links: ["About Us", "Press"] },
         {
           title: "Legal",
           links: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
