@@ -111,9 +111,6 @@ const Hero = () => (
         </p>
         <div className="hero__actions">
           <button className="btn btn--primary">💜 Download the app</button>
-          <a href="#how-it-works" className="btn btn--ghost">
-            Learn more →
-          </a>
         </div>
         <div className="hero__stores">
           <div className="store-badge">
@@ -142,19 +139,19 @@ const Hero = () => (
 /* ─── Features ─── */
 const features = [
   {
-    icon: "🔒",
+    icon: "security1.png",
     title: "Private Secure Vault",
     desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
   },
   {
-    icon: "📊",
+    icon: "relation.png",
     title: "Relationship Check-Ins",
     desc: "Smart check-ins that help you identify areas of growth and celebrate connection milestones together, week after week.",
   },
 ];
 
 const Features = () => (
-  <section className="section" id="features">
+  <section className="section section--alt" id="features">
     <div className="features__inner">
       <div className="features__visual">
         <div className="features__phone-mockup">
@@ -183,7 +180,9 @@ const Features = () => (
         <div className="features-grid">
           {features.map((f) => (
             <div className="feature-card animate-in" key={f.title}>
-              <div className="feature-card__icon">{f.icon}</div>
+              <div className="feature-card__icon">
+                <img src={`/${f.icon}`} alt={f.title} className="feature-icon-img" />
+              </div>
               <h3 className="feature-card__title">{f.title}</h3>
               <p className="feature-card__desc">{f.desc}</p>
             </div>
@@ -237,14 +236,14 @@ const testimonials = [
     text: "Butterfly changed the way we communicate. The daily prompts spark conversations we'd never have had on our own in 4 years of marriage.",
     name: "Sarah Johnson",
     role: "Married 4 years",
-    avatar: "SJ",
+    avatar: "couple1.png",
     avatarClass: "testimonial-avatar--a",
   },
   {
     text: "Long distance for 11 months was tough, but the shared reminders we got each week made us feel less like two separate halves — more like one.",
     name: "Marcus Stone",
     role: "Long-distance couple",
-    avatar: "MS",
+    avatar: "couple.png",
     avatarClass: "testimonial-avatar--b",
   },
 ];
@@ -256,31 +255,31 @@ const Testimonials = () => (
         <h2>
           Hear from <span>happy</span> couples.
         </h2>
-        <p className="testimonials__tagline">
-          Over 50,000 partners use Butterfly to navigate everything from
-          long-distance to decades of marriage.
+        <p className="testimonials__subtitle">
+          Real stories from real couples who've found their spark with Butterfly.
         </p>
-        <div className="aggregate-rating">
-          <span className="rating-stars">★★★★★</span>
-          <span>4.9/5 average rating · App Store</span>
-        </div>
-      </div>
-      <div className="testimonials-grid">
-        {testimonials.map((t) => (
-          <div className="testimonial-card" key={t.name}>
-            <div className="testimonial-stars">★★★★★</div>
-            <p className="testimonial-text">"{t.text}"</p>
-            <div className="testimonial-author">
-              <div className={`testimonial-avatar ${t.avatarClass}`}>
-                {t.avatar}
-              </div>
-              <div className="testimonial-author__info">
-                <strong>{t.name}</strong>
-                <span>{t.role}</span>
+        <div className="testimonials-grid">
+          {testimonials.map((t) => (
+            <div className="testimonial-card" key={t.name}>
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">"{t.text}"</p>
+              <div className="testimonial-author">
+                <div className={`testimonial-avatar ${t.avatarClass}`}>
+                  <img src={`/${t.avatar}`} alt={t.name} className="testimonial-avatar-img" />
+                </div>
+                <div className="testimonial-author__info">
+                  <strong>{t.name}</strong>
+                  <span>{t.role}</span>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+      <div className="testimonials__right">
+        <div className="testimonials__image-card">
+          <img src="/couple2.png" alt="Happy couple" className="testimonials__image" />
+        </div>
       </div>
     </div>
   </section>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles/Onboard.css";
 import "../styles/OnboardAdmin.css";
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -788,7 +789,7 @@ const OnboardAdmin = () => {
       </main>
 
       <footer className="site-footer">
-        <p>© 2024 AdminCore Wireframe System</p>
+        <p> 2024 AdminCore Wireframe System</p>
       </footer>
     </div>
   );
