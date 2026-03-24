@@ -109,27 +109,27 @@ const Hero = () => (
           help you build meaningful habits, spark deep conversations, and grow
           closer every day.
         </p>
-        <div className="hero__actions">
+        {/* <div className="hero__actions">
           <button className="btn btn--primary">💜 Download the app</button>
-        </div>
+        </div> */}
         <div className="hero__stores">
-          <div className="store-badge">
-            <img
-              src="/appstore.png"
-              alt="App Store"
-            />
-          </div>
           <div className="store-badge">
             <img
               src="/google.png"
               alt="Google Play"
             />
           </div>
+          <div className="store-badge">
+            <img
+              src="/appstore.png"
+              alt="App Store"
+            />
+          </div>
         </div>
-        <div className="hero__stats">
+        {/* <div className="hero__stats">
           <span className="hero__stars">★★★★★</span>
           <span>4.9/5 · Over 12,000 ratings on App Store</span>
-        </div>
+        </div> */}
       </div>
     </div>
     <div className="hero__background"></div>
@@ -139,55 +139,52 @@ const Hero = () => (
 /* ─── Features ─── */
 const features = [
   {
-    icon: "security1.png",
-    title: "Private Secure Vault",
-    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
+    icon: "shared.png",
+    title: "Discover Matches",
+    desc: "Find compatible partners who share your values and relationship goals. Connect with people who complement your personality and lifestyle.",
   },
   {
     icon: "relation.png",
-    title: "Relationship Check-Ins",
-    desc: "Smart check-ins that help you identify areas of growth and celebrate connection milestones together, week after week.",
+    title: "Verified Profiles",
+    desc: "Every profile goes through photo & identity verification. No catifishing, no fake accounts-only real people",
+  },
+  {
+    icon: "coaches.png",
+    title: "Relationship Coaches",
+    desc: "Get expert guidance from certified relationship coaches. Learn proven techniques to strengthen your bond.",
+  },
+  {
+    icon: "security1.png",
+    title: "Private Secure Vault",
+    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
   },
 ];
 
 const Features = () => (
   <section className="section section--alt" id="features">
     <div className="features__inner">
-      <div className="features__visual">
-        <div className="features__phone-mockup">
-          <div className="phone-screen">
-            <img
-              src="/chat.jpeg"
-              alt="Butterfly App"
-              className="phone-image"
-            />
-          </div>
-        </div>
-      </div>
       <div className="features__content">
         <div className="section__header">
           <h2 className="section__title">
-            Everything you need to <em>bloom</em>
+            Everything you need to <em>find</em>
             <br />
-            together.
+            real love.
           </h2>
           <p className="section__subtitle">
-            We believe relationships aren't just found — they're built.
-            Butterfly gives you the scientific tools to maintain the spark
-            through every season of life.
+            Built different.No endless swiping, no shallow connections-just meaningful matches backed by real compatibility science.
           </p>
         </div>
-        <div className="features-grid">
-          {features.map((f) => (
-            <div className="feature-card animate-in" key={f.title}>
-              <div className="feature-card__icon">
-                <img src={`/${f.icon}`} alt={f.title} className="feature-icon-img" />
-              </div>
-              <h3 className="feature-card__title">{f.title}</h3>
-              <p className="feature-card__desc">{f.desc}</p>
+      </div>
+      <div className="features-grid">
+        {features.map((f) => (
+          <div className="feature-card animate-in" key={f.title}>
+            <div className="feature-card__icon">
+              <img src={`/${f.icon}`} alt={f.title} className="feature-icon-img" />
             </div>
-          ))}
-        </div>
+            <h3 className="feature-card__title">{f.title}</h3>
+            <p className="feature-card__desc">{f.desc}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -356,14 +353,25 @@ const CTA = () => (
       </div>
       <div className="cta__stores">
         {[
-          { label: "App Store", img: "appstore.png" },
-          { label: "Google Play", img: "google.png" },
+          { label: "", img: "appstore.png" },
+          { label: "", img: "google.png" },
         ].map((s) => (
           <div className="cta__store" key={s.label}>
             <img src={`/${s.img}`} alt={s.label} className="cta__store-img" />
             <span>{s.label}</span>
           </div>
         ))}
+      </div>
+    </div>
+    <div className="cta__visual">
+      <div className="features__phone-mockup">
+        <div className="phone-screen">
+          <img
+            src="/chat.jpeg"
+            alt="Butterfly App"
+            className="phone-image"
+          />
+        </div>
       </div>
     </div>
     <div className="cta__qr">
@@ -410,16 +418,16 @@ const Footer = () => (
       {[
         {
           title: "Product",
-          links: ["Features", "Pricing", "Security", "Roadmap"],
+          links: ["Features", "Security",],
         },
-        { title: "Company", links: ["About Us", "Careers", "Press", "Blog"] },
+        { title: "Company", links: ["About Us", "Press",] },
         {
           title: "Legal",
           links: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
         },
         {
           title: "Connect",
-          links: ["Help Centre", "Contact Us", "Community", "Give Feedback"],
+          links: ["Help Centre", "Contact Us", "Give Feedback"],
         },
       ].map((col) => (
         <div className="footer__col" key={col.title}>
