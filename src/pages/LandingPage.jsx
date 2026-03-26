@@ -51,92 +51,83 @@ const QRCode = () => {
   );
 };
 
-// /* ─── Navbar ─── */
-// const Navbar = () => (
-//   <nav className="navbar">
-//     <div className="navbar__logo">
-//       <img
-//         src="/butterfly-logo.png"
-//         alt="Butterfly"
-//         className="navbar__logo-img"
-//       />
-//       <span className="navbar__logo-text">Butterfly</span>
-//     </div>
-//     <div className="navbar__right">
-//       <div className="navbar__social">
-//         <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Instagram">
-//           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-//             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-//             <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
-//             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-//           </svg>
-//         </a>
-//         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="Facebook">
-//           <svg viewBox="0 0 24 24" fill="currentColor">
-//             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-//           </svg>
-//         </a>
-//         <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="navbar__social-icon" aria-label="YouTube">
-//           <svg viewBox="0 0 24 24" fill="currentColor">
-//             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-//           </svg>
-//         </a>
-//       </div>
-//       <a href="#register" className="navbar__cta">
-//         Register Now
-//         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-//           <path d="M7 17L17 7M17 7H7M17 7V17"/>
-//         </svg>
-//       </a>
-//     </div>
-//   </nav>
-// );
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+const Navbar = () => (
+  <nav className="navbar">
+    {/* Logo */}
+    <a href="/" className="navbar__logo">
+      <img
+        src="/butterfly-logo.png"
+        alt="Butterfly"
+        className="navbar__logo-img"
+      />
+      <span className="navbar__logo-text">Butterfly</span>
+    </a>
 
-/* ─── Hero ─── */
+    {/* Center nav links */}
+    <div className="navbar__nav-container">
+      <ul className="navbar__links">
+        <li>
+          <a href="#features">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              width="13"
+              height="13"
+            >
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            Features
+          </a>
+        </li>
+        <li>
+          <a href="#testimonials">Reviews</a>
+        </li>
+        <li>
+          <a href="#pricing">Pricing</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+);
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
 const Hero = () => (
   <section className="hero">
+    {/* Smoke white background */}
+    <div className="hero__background" />
+
     <div className="hero__inner">
+      {/* Text content */}
       <div className="hero__content">
         <h1 className="hero__title">
-          Find deeper,
+          Trusted
           <br />
-          <span>healthier</span>
+          Connections,
           <br />
-          connections.
+          <span>Real</span> Relationships.
         </h1>
         <p className="hero__subtitle">
           Butterfly is the world's most intuitive relationship app, designed to
           help you build meaningful habits, spark deep conversations, and grow
           closer every day.
         </p>
-        {/* <div className="hero__actions">
-          <button className="btn btn--primary">💜 Download the app</button>
-        </div> */}
-        <div className="hero__stores">
-          <div className="store-badges">
-            <div className="store-badge">
-              <img src="/google.png" alt="Google Play" />
-            </div>
-            <div className="store-badge">
-              <img src="/appstore.png" alt="App Store" />
-            </div>
-          </div>
-          <div className="qr-code">
-            <QRCode />
-          </div>
-        </div>
-        <p className="qr-text">Scan to download</p>
-        {/* <div className="hero__stats">
-          <span className="hero__stars">★★★★★</span>
-          <span>4.9/5 · Over 12,000 ratings on App Store</span>
-        </div> */}
       </div>
     </div>
-    <div className="hero__background"></div>
   </section>
 );
 
-/* ─── Features ─── */
+/* ══════════════════════════════════════════
+   FEATURES
+══════════════════════════════════════════ */
 const features = [
   {
     icon: "lovers.png",
@@ -146,7 +137,7 @@ const features = [
   {
     icon: "verified.png",
     title: "Verified Profiles",
-    desc: "Every profile goes through photo & identity verification. No catifishing, no fake accounts-only real people",
+    desc: "Every profile goes through photo & identity verification. No catfishing, no fake accounts — only real people.",
   },
   {
     icon: "coach.png",
@@ -156,7 +147,7 @@ const features = [
   {
     icon: "security1.png",
     title: "Private Secure Vault",
-    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by to two of you.",
+    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
   },
   {
     icon: "premium.png",
@@ -181,7 +172,7 @@ const Features = () => (
             real love.
           </h2>
           <p className="section__subtitle">
-            Built different.No endless swiping, no shallow connections-just
+            Built different. No endless swiping, no shallow connections — just
             meaningful matches backed by real compatibility science.
           </p>
         </div>
@@ -205,7 +196,9 @@ const Features = () => (
   </section>
 );
 
-/* ─── Steps ─── */
+/* ══════════════════════════════════════════
+   STEPS
+══════════════════════════════════════════ */
 const steps = [
   {
     num: "01",
@@ -219,7 +212,7 @@ const steps = [
   },
   {
     num: "03",
-    title: "Start real conversations",
+    title: "Start Real Conversations",
     desc: "Begin meaningful dialogues with daily prompts designed to deepen your connection.",
   },
   {
@@ -231,7 +224,6 @@ const steps = [
 
 const Steps = () => (
   <section className="steps-section" id="how-it-works">
-    <div className="badge">💫 HOW IT WORKS</div>
     <div className="section__header">
       <h2 className="section__title">Four steps to a better bond</h2>
     </div>
@@ -247,7 +239,9 @@ const Steps = () => (
   </section>
 );
 
-/* ─── Testimonials ─── */
+/* ══════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════ */
 const testimonials = [
   {
     text: "Butterfly changed the way we communicate. The daily prompts spark conversations we'd never have had on our own in 4 years of marriage.",
@@ -266,13 +260,13 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <section className="testimonials-section">
+  <section className="testimonials-section" id="testimonials">
     <div className="testimonials-inner">
       <div className="testimonials__left">
         <h2>
           Hear from <span>happy</span> couples.
         </h2>
-        <p className="testimonials__subtitle">
+        <p className="testimonials__tagline">
           Real stories from real couples who've found their spark with
           Butterfly.
         </p>
@@ -311,7 +305,9 @@ const Testimonials = () => (
   </section>
 );
 
-/* ─── FAQ ─── */
+/* ══════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════ */
 const faqs = [
   {
     q: "Is Butterfly for couples only?",
@@ -364,7 +360,9 @@ const FAQ = () => {
   );
 };
 
-/* ─── CTA ─── */
+/* ══════════════════════════════════════════
+   CTA
+══════════════════════════════════════════ */
 const CTA = () => (
   <section className="cta-section">
     <div className="cta-container">
@@ -376,19 +374,18 @@ const CTA = () => (
           waiting for you
         </h2>
         <p className="cta-subtitle">
-          Download Butterfly free. No subscription required to start - just open the app and begin.
+          Download Butterfly free. No subscription required to start — just open
+          the app and begin.
         </p>
         <div className="cta-stores">
-          <div className="store-badges">
-            <div className="store-badge">
-              <img src="/google.png" alt="Google Play" />
-            </div>
-            <div className="store-badge">
-              <img src="/appstore.png" alt="App Store" />
-            </div>
-          </div>
           <div className="qr-code">
             <QRCode />
+          </div>
+          <div className="store-badge">
+            <img src="/google.png" alt="Google Play" />
+          </div>
+          <div className="store-badge">
+            <img src="/appstore.png" alt="App Store" />
           </div>
         </div>
         <p className="qr-text">Scan to download</p>
@@ -410,7 +407,9 @@ const CTA = () => (
   </section>
 );
 
-/* ─── Footer ─── */
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
 const Footer = () => (
   <footer className="footer">
     <div className="footer__inner">
@@ -425,14 +424,11 @@ const Footer = () => (
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
-          build deeper coannection through science-backed habits.
+          build deeper connection through science-backed habits.
         </p>
       </div>
       {[
-        {
-          title: "Product",
-          links: ["Features", "Security"],
-        },
+        { title: "Product", links: ["Features", "Security"] },
         { title: "Company", links: ["About Us", "Press"] },
         {
           title: "Legal",
@@ -462,10 +458,13 @@ const Footer = () => (
   </footer>
 );
 
-/* ─── App ─── */
+/* ══════════════════════════════════════════
+   APP
+══════════════════════════════════════════ */
 export default function App() {
   return (
     <div>
+      <Navbar />
       <Hero />
       <Features />
       <Steps />

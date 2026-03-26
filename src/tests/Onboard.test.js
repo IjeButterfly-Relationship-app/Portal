@@ -1,57 +1,89 @@
 import React from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import OnboardAdmin from "../pages/Onboard";
+import { MemoryRouter } from "react-router-dom";
+import Onboard from "./Onboard";
 
-// ── Helper ────────────────────────────────────────────────────────────────────
-const setup = () => render(<OnboardAdmin />);
+const renderOnboard = () =>
+  render(
+    <MemoryRouter initialEntries={["/onboard"]}>
+      <Onboard />
+    </MemoryRouter>,
+  );
 
-// =============================================================================
-// Navbar
-// =============================================================================
-describe("Navbar", () => {
-  test("renders logo mark", () => {
-    setup();
-    expect(document.querySelector(".logo-mark")).toBeInTheDocument();
+// ── Sidebar ──────────────────────────────────────────────────────────────────
+describe("Sidebar", () => {
+  it("renders AdminCore brand text", () => {
+    renderOnboard();
+    expect(screen.getByText("AdminCore")).toBeInTheDocument();
   });
 
-  test("renders search input with correct placeholder", () => {
-    setup();
-    expect(
-      screen.getByPlaceholderText("Search dashboard…"),
-    ).toBeInTheDocument();
+  it("renders all navigation items", () => {
+    renderOnboard();
+    [
+      "Dashboard",
+      "Members",
+      "Admins",
+      "Onboard",
+      "Analytics",
+      "Settings",
+    ].forEach((label) => {
+      expect(screen.getByText(label)).toBeInTheDocument();
+    });
   });
 
-  test("renders notifications icon button", () => {
-    setup();
-    expect(screen.getByLabelText("Notifications")).toBeInTheDocument();
+  it("marks Onboard as the active nav item", () => {
+    renderOnboard();
+    const el = screen.getByText("Onboard").closest(".ob-nav-item");
+    expect(el).toHaveClass("ob-nav-item--active");
   });
 
-  test("renders settings icon button", () => {
-    setup();
-    expect(screen.getByLabelText("Settings")).toBeInTheDocument();
+  it("renders System Health label", () => {
+    renderOnboard();
+    expect(screen.getByText("System Health")).toBeInTheDocument();
   });
 
-  test("renders Super Admin avatar with initials", () => {
-    setup();
-    expect(screen.getByText("SA")).toBeInTheDocument();
-    expect(screen.getByText("Super Admin")).toBeInTheDocument();
+  it("renders 10 health bars", () => {
+    renderOnboard();
+    expect(document.querySelectorAll(".ob-health-bar").length).toBe(10);
+  });
+
+  it("renders 8 active health bars", () => {
+    renderOnboard();
+    expect(document.querySelectorAll(".ob-health-bar--on").length).toBe(8);
   });
 });
 
-// =============================================================================
-// Page Header
-// =============================================================================
-describe("Page Header", () => {
-  test("renders page title", () => {
-    setup();
+// ── Topbar ───────────────────────────────────────────────────────────────────
+describe("Topbar", () => {
+  it("renders search input", () => {
+    renderOnboard();
     expect(
-      screen.getByRole("heading", { name: "Onboard New Admin" }),
+      screen.getByPlaceholderText("Search dashboard..."),
     ).toBeInTheDocument();
   });
 
-  test("renders page subtitle", () => {
-    setup();
+  it("shows notification badge with count 3", () => {
+    renderOnboard();
+    expect(screen.getByText("3")).toBeInTheDocument();
+  });
+
+  it("shows user name and email", () => {
+    renderOnboard();
+    expect(screen.getByText("Super Admin")).toBeInTheDocument();
+    expect(screen.getByText("admin@admincore.io")).toBeInTheDocument();
+  });
+});
+
+// ── Page Header ───────────────────────────────────────────────────────────────
+describe("Page Header", () => {
+  it("renders page title", () => {
+    renderOnboard();
+    expect(screen.getByText("Onboard New Admin")).toBeInTheDocument();
+  });
+
+  it("renders page subtitle", () => {
+    renderOnboard();
     expect(
       screen.getByText(
         "Create account, assign role and set granular permissions.",
@@ -59,200 +91,165 @@ describe("Page Header", () => {
     ).toBeInTheDocument();
   });
 
-  test("renders Cancel button", () => {
-    setup();
-    expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
+  it("renders Cancel button", () => {
+    renderOnboard();
+    expect(screen.getByRole("button", { name: /cancel/i })).toBeInTheDocument();
   });
 
-  test("renders Create Admin Account button", () => {
-    setup();
+  it("renders Create Admin Account button", () => {
+    renderOnboard();
     expect(
-      screen.getByRole("button", { name: "Create Admin Account" }),
+      screen.getByRole("button", { name: /create admin account/i }),
     ).toBeInTheDocument();
   });
 });
 
-// =============================================================================
-// Personal Information Section
-// =============================================================================
+// ── Personal Information ──────────────────────────────────────────────────────
 describe("Personal Information", () => {
-  test("renders section heading", () => {
-    setup();
+  it("renders section heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Personal Information")).toBeInTheDocument();
+  });
+
+  it("renders all field labels", () => {
+    renderOnboard();
+    [
+      "FIRST NAME",
+      "LAST NAME",
+      "EMAIL ADDRESS",
+      "PHONE NUMBER",
+      "CITY / REGION",
+      "COUNTRY",
+    ].forEach((l) => {
+      expect(screen.getByText(l)).toBeInTheDocument();
+    });
+  });
+
+  it("first name placeholder is correct", () => {
+    renderOnboard();
+    expect(screen.getByPlaceholderText("e.g. Sarah")).toBeInTheDocument();
+  });
+
+  it("last name placeholder is correct", () => {
+    renderOnboard();
+    expect(screen.getByPlaceholderText("e.g. Nakato")).toBeInTheDocument();
+  });
+
+  it("email placeholder is correct", () => {
+    renderOnboard();
     expect(
-      screen.getByRole("heading", { name: "Personal Information" }),
+      screen.getByPlaceholderText("sarah.nakato@admincore.io"),
     ).toBeInTheDocument();
   });
 
-  test("renders First Name field", () => {
-    setup();
-    expect(screen.getByLabelText("First Name")).toBeInTheDocument();
+  it("phone placeholder is correct", () => {
+    renderOnboard();
+    expect(screen.getByPlaceholderText("+256 700 123456")).toBeInTheDocument();
   });
 
-  test("renders Last Name field", () => {
-    setup();
-    expect(screen.getByLabelText("Last Name")).toBeInTheDocument();
+  it("city defaults to 'Kampala, Uganda'", () => {
+    renderOnboard();
+    expect(screen.getByDisplayValue("Kampala, Uganda")).toBeInTheDocument();
   });
 
-  test("renders Email Address field", () => {
-    setup();
-    expect(screen.getByLabelText("Email Address")).toBeInTheDocument();
+  it("country defaults to Uganda", () => {
+    renderOnboard();
+    expect(screen.getByDisplayValue("Uganda")).toBeInTheDocument();
   });
 
-  test("renders Phone Number field", () => {
-    setup();
-    expect(screen.getByLabelText("Phone Number")).toBeInTheDocument();
-  });
-
-  test("renders City / Region field", () => {
-    setup();
-    expect(screen.getByLabelText("City / Region")).toBeInTheDocument();
-  });
-
-  test("renders Country dropdown with default Uganda", () => {
-    setup();
-    const country = screen.getByLabelText("Country");
-    expect(country).toBeInTheDocument();
-    expect(country).toHaveValue("Uganda");
-  });
-
-  test("user can type into First Name field", async () => {
-    setup();
-    const input = screen.getByLabelText("First Name");
-    await userEvent.clear(input);
+  it("allows typing in first name", async () => {
+    renderOnboard();
+    const input = screen.getByPlaceholderText("e.g. Sarah");
     await userEvent.type(input, "Sarah");
     expect(input).toHaveValue("Sarah");
   });
 
-  test("user can type into Email Address field", async () => {
-    setup();
-    const input = screen.getByLabelText("Email Address");
-    await userEvent.clear(input);
-    await userEvent.type(input, "test@admincore.io");
-    expect(input).toHaveValue("test@admincore.io");
-  });
-
-  test("user can change Country dropdown", async () => {
-    setup();
-    const select = screen.getByLabelText("Country");
-    await userEvent.selectOptions(select, "Kenya");
+  it("allows changing country", () => {
+    renderOnboard();
+    const select = screen.getByDisplayValue("Uganda");
+    fireEvent.change(select, { target: { value: "Kenya" } });
     expect(select).toHaveValue("Kenya");
   });
 });
 
-// =============================================================================
-// Role & Department Section
-// =============================================================================
+// ── Role & Department ─────────────────────────────────────────────────────────
 describe("Role & Department", () => {
-  test("renders section heading", () => {
-    setup();
+  it("renders section heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Role & Department")).toBeInTheDocument();
+  });
+
+  it("admin role defaults to Concierge Admin", () => {
+    renderOnboard();
+    expect(screen.getByDisplayValue("Concierge Admin")).toBeInTheDocument();
+  });
+
+  it("job title defaults to Head Concierge", () => {
+    renderOnboard();
+    expect(screen.getByDisplayValue("Head Concierge")).toBeInTheDocument();
+  });
+
+  it("reporting to defaults correctly", () => {
+    renderOnboard();
     expect(
-      screen.getByRole("heading", { name: "Role & Department" }),
+      screen.getByDisplayValue("Super User (Alex Kirabo)"),
     ).toBeInTheDocument();
   });
 
-  test("renders Admin Role dropdown with default value", () => {
-    setup();
-    expect(screen.getByLabelText("Admin Role")).toHaveValue("Concierge Admin");
+  it("renders 3 access level radio options", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("radio").length).toBe(3);
   });
 
-  test("renders Job Title input with default value", () => {
-    setup();
-    expect(screen.getByLabelText("Job Title")).toHaveValue("Head Concierge");
+  it("standard Access is selected by default", () => {
+    renderOnboard();
+    expect(screen.getByDisplayValue("standard Access")).toBeChecked();
   });
 
-  test("renders Reporting To dropdown", () => {
-    setup();
-    expect(screen.getByLabelText("Reporting To")).toBeInTheDocument();
-    expect(screen.getByLabelText("Reporting To")).toHaveValue(
-      "Super User (Alex Kirabo)",
-    );
+  it("can switch to elevated Access", () => {
+    renderOnboard();
+    const radio = screen.getByDisplayValue("elevated Access");
+    fireEvent.click(radio);
+    expect(radio).toBeChecked();
   });
 
-  test("renders Access Level radio group", () => {
-    setup();
-    expect(
-      screen.getByRole("radiogroup", { name: "Access Level" }),
-    ).toBeInTheDocument();
-  });
-
-  test("renders all three access-level options", () => {
-    setup();
-    expect(screen.getByLabelText("standard Access")).toBeInTheDocument();
-    expect(screen.getByLabelText("elevated Access")).toBeInTheDocument();
-    expect(screen.getByLabelText("full Access")).toBeInTheDocument();
-  });
-
-  test("standard Access is selected by default", () => {
-    setup();
-    expect(screen.getByLabelText("standard Access")).toBeChecked();
-  });
-
-  test("clicking elevated Access selects it", () => {
-    setup();
-    fireEvent.click(screen.getByLabelText("elevated Access"));
-    expect(screen.getByLabelText("elevated Access")).toBeChecked();
-    expect(screen.getByLabelText("standard Access")).not.toBeChecked();
-  });
-
-  test("user can change Admin Role dropdown", async () => {
-    setup();
-    const select = screen.getByLabelText("Admin Role");
-    await userEvent.selectOptions(select, "Super Admin");
-    expect(select).toHaveValue("Super Admin");
+  it("can switch to full Access", () => {
+    renderOnboard();
+    const radio = screen.getByDisplayValue("full Access");
+    fireEvent.click(radio);
+    expect(radio).toBeChecked();
   });
 });
 
-// =============================================================================
-// Account Security Section
-// =============================================================================
+// ── Account Security ──────────────────────────────────────────────────────────
 describe("Account Security", () => {
-  test("renders section heading", () => {
-    setup();
+  it("renders section heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Account Security")).toBeInTheDocument();
+  });
+
+  it("renders two password fields", () => {
+    renderOnboard();
+    expect(document.querySelectorAll('input[type="password"]').length).toBe(2);
+  });
+
+  it("renders the security notice", () => {
+    renderOnboard();
     expect(
-      screen.getByRole("heading", { name: "Account Security" }),
+      screen.getByText(/Admin will be required to change password/i),
     ).toBeInTheDocument();
   });
 
-  test("renders Temporary Password field (type=password)", () => {
-    setup();
-    const input = screen.getByLabelText("Temporary Password");
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute("type", "password");
-  });
-
-  test("renders Confirm Password field (type=password)", () => {
-    setup();
-    const input = screen.getByLabelText("Confirm Password");
-    expect(input).toBeInTheDocument();
-    expect(input).toHaveAttribute("type", "password");
-  });
-
-  test("renders informational note about 2FA", () => {
-    setup();
-    expect(
-      screen.getByText(
-        /Admin will be required to change password on first login/i,
-      ),
-    ).toBeInTheDocument();
+  it("allows typing in password fields", async () => {
+    renderOnboard();
+    const [pw] = document.querySelectorAll('input[type="password"]');
+    await userEvent.type(pw, "Secret123!");
+    expect(pw).toHaveValue("Secret123!");
   });
 });
 
-// =============================================================================
-// Module Permissions Section
-// =============================================================================
+// ── Module Permissions ────────────────────────────────────────────────────────
 describe("Module Permissions", () => {
-  test("renders section heading", () => {
-    setup();
-    expect(
-      screen.getByRole("heading", { name: "Module Permissions" }),
-    ).toBeInTheDocument();
-  });
-
-  test("renders CONTROL ACCESS badge", () => {
-    setup();
-    expect(screen.getByText("CONTROL ACCESS")).toBeInTheDocument();
-  });
-
   const modules = [
     "Concierge Module",
     "View Member Profiles",
@@ -264,111 +261,146 @@ describe("Module Permissions", () => {
     "Security Access",
   ];
 
-  modules.forEach((mod) => {
-    test(`renders "${mod}" module`, () => {
-      setup();
-      expect(screen.getByText(mod)).toBeInTheDocument();
-    });
+  it("renders section heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Module Permissions")).toBeInTheDocument();
   });
 
-  test("Concierge Module toggle is ON by default", () => {
-    setup();
-    const toggle = screen.getByRole("switch", { name: /Concierge Module/i });
-    // aria-checked reflects initial state
-    expect(toggle).toHaveAttribute("aria-checked", "true");
+  it("renders CONTROL ACCESS label", () => {
+    renderOnboard();
+    expect(screen.getByText("CONTROL ACCESS")).toBeInTheDocument();
   });
 
-  test("Moderation Access toggle is OFF by default", () => {
-    setup();
-    const toggle = screen.getByRole("switch", { name: /Moderation Access/i });
+  it("renders all 8 module labels", () => {
+    renderOnboard();
+    modules.forEach((m) => expect(screen.getByText(m)).toBeInTheDocument());
+  });
+
+  it("renders 10 toggles (8 modules + 2 email options)", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch").length).toBe(10);
+  });
+
+  it("Concierge Module toggle is ON by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[0]).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+  });
+
+  it("Moderation Access toggle is OFF by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[4]).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+  });
+
+  it("Billing Access toggle is OFF by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[6]).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+  });
+
+  it("Security Access toggle is OFF by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[7]).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+  });
+
+  it("clicking ON toggle turns it OFF", () => {
+    renderOnboard();
+    const toggle = screen.getAllByRole("switch")[0];
+    fireEvent.click(toggle);
     expect(toggle).toHaveAttribute("aria-checked", "false");
   });
 
-  test("clicking Moderation Access toggle switches it ON", () => {
-    setup();
-    const toggle = screen.getByRole("switch", { name: /Moderation Access/i });
+  it("clicking OFF toggle turns it ON", () => {
+    renderOnboard();
+    const toggle = screen.getAllByRole("switch")[4]; // Moderation
     fireEvent.click(toggle);
     expect(toggle).toHaveAttribute("aria-checked", "true");
-  });
-
-  test("clicking an active toggle switches it OFF", () => {
-    setup();
-    const toggle = screen.getByRole("switch", { name: /Concierge Module/i });
-    fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute("aria-checked", "false");
   });
 });
 
-// =============================================================================
-// Send Welcome Email Section
-// =============================================================================
+// ── Send Welcome Email ────────────────────────────────────────────────────────
 describe("Send Welcome Email", () => {
-  test("renders section heading", () => {
-    setup();
-    expect(
-      screen.getByRole("heading", { name: "Send Welcome Email" }),
-    ).toBeInTheDocument();
+  it("renders section heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Send Welcome Email")).toBeInTheDocument();
   });
 
-  test("renders Send login credentials toggle ON by default", () => {
-    setup();
-    const toggle = screen.getByRole("switch", {
-      name: /Send login credentials/i,
-    });
-    expect(toggle).toHaveAttribute("aria-checked", "true");
+  it("renders Send login credentials label", () => {
+    renderOnboard();
+    expect(screen.getByText("Send login credentials")).toBeInTheDocument();
   });
 
-  test("renders Require 2FA setup toggle ON by default", () => {
-    setup();
-    const toggle = screen.getByRole("switch", { name: /Require 2FA setup/i });
-    expect(toggle).toHaveAttribute("aria-checked", "true");
+  it("renders Require 2FA setup label", () => {
+    renderOnboard();
+    expect(screen.getByText("Require 2FA setup")).toBeInTheDocument();
   });
 
-  test("toggles Send login credentials off when clicked", () => {
-    setup();
-    const toggle = screen.getByRole("switch", {
-      name: /Send login credentials/i,
-    });
-    fireEvent.click(toggle);
-    expect(toggle).toHaveAttribute("aria-checked", "false");
+  it("Send login credentials is ON by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[8]).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+  });
+
+  it("Require 2FA is ON by default", () => {
+    renderOnboard();
+    expect(screen.getAllByRole("switch")[9]).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
   });
 });
 
-// =============================================================================
-// Next Steps Section
-// =============================================================================
+// ── Next Steps ────────────────────────────────────────────────────────────────
 describe("Next Steps", () => {
-  test("renders Next Steps note", () => {
-    setup();
-    expect(
-      screen.getByRole("note", { name: "Next Steps" }),
-    ).toBeInTheDocument();
+  it("renders Next Steps heading", () => {
+    renderOnboard();
+    expect(screen.getByText("Next Steps")).toBeInTheDocument();
   });
 
-  test("renders invitation link expiry message", () => {
-    setup();
+  it("mentions 48 hour invitation validity", () => {
+    renderOnboard();
     expect(
       screen.getByText(/invitation link valid for 48 hours/i),
     ).toBeInTheDocument();
   });
+
+  it("mentions Admin Management list", () => {
+    renderOnboard();
+    expect(screen.getByText(/Admin Management list/i)).toBeInTheDocument();
+  });
 });
 
+// ── Footer ────────────────────────────────────────────────────────────────────
 describe("Footer", () => {
-  test("renders copyright notice", () => {
-    setup();
+  it("renders copyright text", () => {
+    renderOnboard();
     expect(
-      screen.getByText(/2024 AdminCore Wireframe System/i),
+      screen.getByText(/© 2024 AdminCore Wireframe System/i),
     ).toBeInTheDocument();
   });
 });
 
-describe("Form submission", () => {
-  test("shows alert on Create Admin Account click", () => {
-    setup();
-    window.alert = jest.fn();
-    fireEvent.submit(document.getElementById("onboard-form"));
-    expect(window.alert).toHaveBeenCalledWith(
-      "Admin account created successfully!",
+// ── Submit Action ─────────────────────────────────────────────────────────────
+describe("Submit", () => {
+  it("fires alert on Create Admin Account click", () => {
+    renderOnboard();
+    const spy = jest.spyOn(window, "alert").mockImplementation(() => {});
+    fireEvent.click(
+      screen.getByRole("button", { name: /create admin account/i }),
     );
+    expect(spy).toHaveBeenCalledWith("Admin account created successfully!");
+    spy.mockRestore();
   });
 });

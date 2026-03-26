@@ -1,347 +1,227 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
-import "../styles/OnboardAdmin.css";
-import "../styles/AdminCoreDashboard.css";
 
-// ── Sub-components ────────────────────────────────────────────────────────────
+const NAV_ITEMS = [
+  { label: "Dashboard" },
+  { label: "Members" },
+  { label: "Admins" },
+  { label: "Onboard" },
+  { label: "Analytics" },
+  { label: "Settings" },
+];
 
-const Toggle = ({ checked, onChange, id }) => (
-  <label className="toggle" htmlFor={id}>
-    <input
-      id={id}
-      type="checkbox"
-      checked={checked}
-      onChange={(e) => onChange(e.target.checked)}
+const MODULE_PERMISSIONS = [
+  {
+    label: "Concierge Module",
+    description: "Match curation, member management",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="5.5" stroke="#9c27b0" strokeWidth="1.4" />
+        <circle cx="7" cy="7" r="2.5" stroke="#9c27b0" strokeWidth="1.4" />
+        <circle cx="7" cy="7" r="0.8" fill="#9c27b0" />
+      </svg>
+    ),
+  },
+  {
+    label: "View Member Profiles",
+    description: "Read-only access to all profiles",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="5" r="2.5" stroke="#9c27b0" strokeWidth="1.4" />
+        <path
+          d="M2 13c0-2.761 2.239-5 5-5s5 2.239 5 5"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Send Messages",
+    description: "Contact members directly",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect
+          x="1"
+          y="3"
+          width="12"
+          height="8"
+          rx="1.5"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+        />
+        <path
+          d="M1 5l6 4 6-4"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Manage Coaching",
+    description: "Book and track sessions",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect
+          x="1.5"
+          y="3"
+          width="11"
+          height="9"
+          rx="1.5"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+        />
+        <path
+          d="M1.5 6h11M5 1.5V4M9 1.5V4"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Moderation Access",
+    description: "View flagged accounts",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="5.5" stroke="#9c27b0" strokeWidth="1.4" />
+        <path
+          d="M7 4.5V7.5M7 9.5V10"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Analytics Access",
+    description: "View own performance data",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="8" width="3" height="5" rx="0.5" fill="#9c27b0" />
+        <rect x="5.5" y="5" width="3" height="8" rx="0.5" fill="#9c27b0" />
+        <rect x="10" y="2" width="3" height="11" rx="0.5" fill="#9c27b0" />
+      </svg>
+    ),
+  },
+  {
+    label: "Billing Access",
+    description: "View subscription info",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect
+          x="1"
+          y="3.5"
+          width="12"
+          height="7.5"
+          rx="1.5"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+        />
+        <path d="M1 6.5h12" stroke="#9c27b0" strokeWidth="1.4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Security Access",
+    description: "View security alerts",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path
+          d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+];
+
+function Toggle({ checked, onChange }) {
+  return (
+    <button
+      className={`ob-toggle${checked ? " ob-toggle--on" : ""}`}
+      onClick={() => onChange(!checked)}
       aria-checked={checked}
       role="switch"
-    />
-    <span className="toggle__track">
-      <span className="toggle__thumb" />
-    </span>
-  </label>
-);
+      type="button"
+    >
+      <span className="ob-toggle-knob" />
+    </button>
+  );
+}
 
-const ModulePermission = ({
-  icon,
-  title,
-  description,
-  checked,
-  onChange,
-  id,
-}) => (
-  <div className="module-row">
-    <div className="module-row__icon">{icon}</div>
-    <div className="module-row__info">
-      <p className="module-row__title">{title}</p>
-      <p className="module-row__desc">{description}</p>
-    </div>
-    <Toggle checked={checked} onChange={onChange} id={id} />
-  </div>
-);
-
-// ── Icons (inline SVG) ────────────────────────────────────────────────────────
-
-const icons = {
-  concierge: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M6 13c0-2.21 1.79-4 4-4s4 1.79 4 4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <circle cx="10" cy="7" r="2" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  ),
-  profiles: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        x="2"
-        y="4"
-        width="16"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <circle cx="7" cy="9" r="2" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M12 8h4M12 11h3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  messages: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M3 4h14a1 1 0 011 1v8a1 1 0 01-1 1H5l-3 3V5a1 1 0 011-1z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  coaching: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M4 16V9M8 16V5M12 16V8M16 16V3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  moderation: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M10 2L3 6v5c0 4 3.13 7.74 7 8.93C17 19.74 17 11 17 11V6L10 2z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  analytics: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M3 3v14h14"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M6 14l3-4 3 2 4-6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  billing: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        x="2"
-        y="5"
-        width="16"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path d="M2 9h16" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M6 13h3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  security: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        x="5"
-        y="9"
-        width="10"
-        height="8"
-        rx="1.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M7 9V7a3 3 0 016 0v2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  email: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect
-        x="2"
-        y="4"
-        width="16"
-        height="12"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M2 7l8 5 8-5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  ),
-  twofa: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M10 2L3 6v5c0 4 3.13 7.74 7 8.93C17 19.74 17 11 17 11V6L10 2z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path
-        d="M7 10l2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  next: (
-    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8 7l5 3-5 3V7z" fill="currentColor" />
-    </svg>
-  ),
-};
-
-// ── Main Component ────────────────────────────────────────────────────────────
-
-const OnboardAdmin = () => {
+export default function Onboard() {
   const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState("Onboard");
 
-  // Personal Information
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  // ── Navigation Items ───────────────────────────────────────────────────────
-  const NAV_ITEMS = [
-    { icon: "", label: "Dashboard" },
-    { icon: "", label: "Admins" },
-    { icon: "", label: "Onboard" },
-    { icon: "", label: "Activity Log" },
-  ];
-
-  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-  const CHART_DATA = [2600, 3800, 3200, 4800, 4200, 5600];
-
-  const ROLE_CLASS = {
-    "Concierge Admin": "concierge",
-    "Head Concierge": "concierge",
-    "Super User": "superuser",
-  };
-
-  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("Kampala, Uganda");
   const [country, setCountry] = useState("Uganda");
 
-  // Role & Department
   const [adminRole, setAdminRole] = useState("Concierge Admin");
   const [jobTitle, setJobTitle] = useState("Head Concierge");
   const [reportingTo, setReportingTo] = useState("Super User (Alex Kirabo)");
-  const [accessLevel, setAccessLevel] = useState("standard");
+  const [accessLevel, setAccessLevel] = useState("standard Access");
 
-  // Account Security
-  const [tempPassword, setTempPassword] = useState("············");
-  const [confirmPassword, setConfirmPassword] = useState("············");
+  const [tempPassword, setTempPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Module Permissions
-  const [permissions, setPermissions] = useState({
-    concierge: true,
-    profiles: true,
-    messages: true,
-    coaching: true,
-    moderation: false,
-    analytics: true,
-    billing: false,
-    security: false,
-  });
+  const [permissions, setPermissions] = useState(
+    MODULE_PERMISSIONS.reduce((acc, mod) => {
+      acc[mod.label] = mod.defaultOn;
+      return acc;
+    }, {}),
+  );
 
-  // Welcome Email
   const [sendCredentials, setSendCredentials] = useState(true);
-  const [require2fa, setRequire2fa] = useState(true);
+  const [require2FA, setRequire2FA] = useState(true);
 
-  const togglePermission = (key) =>
-    setPermissions((prev) => ({ ...prev, [key]: !prev[key] }));
+  const togglePermission = (label, value) => {
+    setPermissions((prev) => ({ ...prev, [label]: value }));
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     alert("Admin account created successfully!");
   };
 
-  const moduleList = [
-    {
-      key: "concierge",
-      icon: icons.concierge,
-      title: "Concierge Module",
-      description: "Match curator, member management",
-    },
-    {
-      key: "profiles",
-      icon: icons.profiles,
-      title: "View Member Profiles",
-      description: "Read only access to all profiles",
-    },
-    {
-      key: "messages",
-      icon: icons.messages,
-      title: "Send Messages",
-      description: "Contact members directly",
-    },
-    {
-      key: "coaching",
-      icon: icons.coaching,
-      title: "Manage Coaching",
-      description: "Book and track sessions",
-    },
-    {
-      key: "moderation",
-      icon: icons.moderation,
-      title: "Moderation Access",
-      description: "View flagged accounts",
-    },
-    {
-      key: "analytics",
-      icon: icons.analytics,
-      title: "Analytics Access",
-      description: "View own performance data",
-    },
-    {
-      key: "billing",
-      icon: icons.billing,
-      title: "Billing Access",
-      description: "View subscription info",
-    },
-    {
-      key: "security",
-      icon: icons.security,
-      title: "Security Access",
-      description: "View security alerts",
-    },
-  ];
-
   return (
-    <div className="app">
+    <div className="ob-app">
       {/* ── Sidebar ── */}
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <img
-            src="/butterfly-logo.png"
-            alt="Butterfly Logo"
-            className="logo-icon"
-          />
-          AdminCore
+      <aside className="ob-sidebar">
+        <div className="ob-sidebar-logo">
+          <span className="ob-logo-mark">
+            <img src="/butterfly-logo.png" alt="Butterfly" />
+          </span>
+          <span className="ob-logo-text">AdminCore</span>
         </div>
 
-        <nav className="sidebar-nav">
+        <nav className="ob-sidebar-nav">
           {NAV_ITEMS.map((item) => (
             <div
               key={item.label}
-              className={`nav-item${activeNav === item.label ? " active" : ""}`}
+              className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
               onClick={() => {
                 if (item.label === "Admins") {
                   navigate("/moderatordashboard");
-                } else if (item.label === "Onboard") {
-                  navigate("/onboard");
                 } else {
                   setActiveNav(item.label);
                 }
@@ -352,339 +232,392 @@ const OnboardAdmin = () => {
           ))}
         </nav>
 
-        <div className="sidebar-footer">
-          <div className="system-health">
-            <span className="health-dot" />
+        <div className="ob-sidebar-footer">
+          <div className="ob-system-health">
+            <span className="ob-health-dot" />
             System Health
           </div>
-          <div className="health-bars">
-            {[1, 1, 1, 1, 0, 1, 1, 0, 1, 1].map((active, i) => (
-              <div key={i} className={`health-bar${active ? " active" : ""}`} />
+          <div className="ob-health-bars">
+            {[1, 1, 1, 1, 0, 1, 1, 0, 1, 1].map((on, i) => (
+              <div
+                key={i}
+                className={`ob-health-bar${on ? " ob-health-bar--on" : ""}`}
+              />
             ))}
           </div>
         </div>
       </aside>
 
       {/* ── Main ── */}
-      <main className="main">
+      <div className="ob-main">
         {/* Topbar */}
-        <header className="topbar">
-          <div className="topbar__left">
-            <div className="breadcrumb">
-              <span>Onboard</span>
-            </div>
+        <header className="ob-topbar">
+          <div className="ob-search">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 13 13"
+              fill="none"
+              className="ob-search-svg"
+            >
+              <circle
+                cx="5.5"
+                cy="5.5"
+                r="4"
+                stroke="#9ca3af"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M8.5 8.5L12 12"
+                stroke="#9ca3af"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <input placeholder="Search dashboard..." />
           </div>
-          <div className="topbar__right">
-            <div className="user-menu">
-              <div className="user-avatar">
-                <span>A</span>
+          <div className="ob-topbar-right">
+            <div className="ob-icon-btn">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <circle
+                  cx="7.5"
+                  cy="7.5"
+                  r="2.2"
+                  stroke="#6b7280"
+                  strokeWidth="1.3"
+                />
+                <path
+                  d="M7.5 1v1.5M7.5 12.5V14M1 7.5h1.5M12.5 7.5H14M3 3l1 1M11 11l1 1M3 12l1-1M11 4l1-1"
+                  stroke="#6b7280"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+            <div className="ob-user-chip">
+              <div className="ob-user-info">
+                <span className="ob-user-name">Super Admin</span>
+                <span className="ob-user-email">admin@admincore.io</span>
+              </div>
+              <div className="ob-avatar">
+                <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                  <circle cx="15" cy="15" r="15" fill="#ede0f9" />
+                  <circle cx="15" cy="12" r="5" fill="#9c27b0" />
+                  <path
+                    d="M5 27c0-5.523 4.477-10 10-10s10 4.477 10 10"
+                    fill="#ce93d8"
+                  />
+                </svg>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Page content */}
-        <div className="page__content">
-          <div className="page__header">
-            <h1 className="page__title">Onboard New Admin</h1>
-            <p className="page__subtitle">
-              Create account, assign role and set granular permissions.
-            </p>
-          </div>
-          <div className="page__actions">
-            <button type="button" className="btn btn--ghost">
-              Cancel
-            </button>
-            <button
-              type="submit"
-              form="onboard-form"
-              className="btn btn--primary"
-            >
-              Create Admin Account
-            </button>
-          </div>
-
-          {/* Left column */}
-          <div className="layout__left">
-            {/* Module Permissions */}
-            <section className="card" aria-labelledby="permissions-heading">
-              <div className="card__header">
-                <h2 className="card__title" id="permissions-heading">
-                  Module Permissions
-                </h2>
-                <span className="card__badge">CONTROL ACCESS</span>
-              </div>
-              <div className="module-list">
-                {moduleList.map((m) => (
-                  <ModulePermission
-                    key={m.key}
-                    id={`perm-${m.key}`}
-                    icon={m.icon}
-                    title={m.title}
-                    description={m.description}
-                    checked={permissions[m.key]}
-                    onChange={() => togglePermission(m.key)}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* Send Welcome Email */}
-            <section className="card" aria-labelledby="email-heading">
-              <h2 className="card__title" id="email-heading">
-                Send Welcome Email
-              </h2>
-              <div className="module-list">
-                <div className="module-row">
-                  <div className="module-row__icon">{icons.email}</div>
-                  <div className="module-row__info">
-                    <p className="module-row__title">Send login credentials</p>
-                    <p className="module-row__desc">
-                      Email temporary password to admin
-                    </p>
-                  </div>
-                  <Toggle
-                    checked={sendCredentials}
-                    onChange={setSendCredentials}
-                    id="toggle-credentials"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Additional Admin Fields */}
-            <section className="card" aria-labelledby="admin-fields-heading">
-              <h2 className="card__title" id="admin-fields-heading">
-                Admin Details
-              </h2>
-              <div className="form-grid form-grid--2">
-                <div className="field field--full">
-                  <label className="field__label" htmlFor="reportingTo">
-                    Reporting To
-                  </label>
-                  <div className="field__select-wrap">
-                    <select
-                      id="reportingTo"
-                      className="field__select"
-                      value={reportingTo}
-                      onChange={(e) => setReportingTo(e.target.value)}
-                    >
-                      <option>Super User (Alex Kirabo)</option>
-                      <option>Super User (Janet Omondi)</option>
-                      <option>Manager (David Ssali)</option>
-                    </select>
-                    <svg
-                      className="field__select-arrow"
-                      viewBox="0 0 12 8"
-                      fill="none"
-                    >
-                      <path
-                        d="M1 1l5 5 5-5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div className="field field--full">
-                  <label className="field__label">Access Level</label>
-                  <div
-                    className="radio-group"
-                    role="radiogroup"
-                    aria-label="Access Level"
-                  >
-                    <label
-                      className={`radio-btn ${accessLevel === "standard" ? "radio-btn--active" : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        name="accessLevel"
-                        value="standard"
-                        checked={accessLevel === "standard"}
-                        onChange={() => setAccessLevel("standard")}
-                      />
-                      <span className="radio-btn__circle" />
-                      <span className="radio-btn__label">standard Access</span>
-                    </label>
-                    <label
-                      className={`radio-btn ${accessLevel === "elevated" ? "radio-btn--active" : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        name="accessLevel"
-                        value="elevated"
-                        checked={accessLevel === "elevated"}
-                        onChange={() => setAccessLevel("elevated")}
-                      />
-                      <span className="radio-btn__circle" />
-                      <span className="radio-btn__label">elevated Access</span>
-                    </label>
-                    <label
-                      className={`radio-btn ${accessLevel === "full" ? "radio-btn--active" : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        name="accessLevel"
-                        value="full"
-                        checked={accessLevel === "full"}
-                        onChange={() => setAccessLevel("full")}
-                      />
-                      <span className="radio-btn__circle" />
-                      <span className="radio-btn__label">full Access</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Account Security */}
-            <section className="card" aria-labelledby="security-heading">
-              <h2 className="card__title" id="security-heading">
-                Account Security
-              </h2>
-
-              <div className="form-grid form-grid--2">
-                <div className="field">
-                  <label className="field__label" htmlFor="tempPassword">
-                    Temporary Password
-                  </label>
-                  <input
-                    id="tempPassword"
-                    className="field__input"
-                    type="password"
-                    placeholder="············"
-                    value={tempPassword}
-                    onChange={(e) => setTempPassword(e.target.value)}
-                    autoComplete="new-password"
-                  />
-                </div>
-                <div className="field">
-                  <label className="field__label" htmlFor="confirmPassword">
-                    Confirm Password
-                  </label>
-                  <input
-                    id="confirmPassword"
-                    className="field__input"
-                    type="password"
-                    placeholder="············"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    autoComplete="new-password"
-                  />
-                </div>
-              </div>
-
-              <div className="info-box">
-                <svg className="info-box__icon" viewBox="0 0 20 20" fill="none">
-                  <circle
-                    cx="10"
-                    cy="10"
-                    r="8"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                  <path
-                    d="M10 9v5M10 7v.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <p className="info-box__text">
-                  Admin will be required to change password on first login.
-                  Two-factor authentication will be enabled by default and must
-                  be configured during the first onboarding session.
-                </p>
-              </div>
-            </section>
-          </div>
-
-          {/* Right column */}
-          <div className="layout__right">
-            {/* Module Permissions */}
-            <section className="card" aria-labelledby="permissions-heading">
-              <div className="card__header">
-                <h2 className="card__title" id="permissions-heading">
-                  Module Permissions
-                </h2>
-                <span className="card__badge">CONTROL ACCESS</span>
-              </div>
-              <div className="module-list">
-                {moduleList.map((m) => (
-                  <ModulePermission
-                    key={m.key}
-                    id={`perm-${m.key}`}
-                    icon={m.icon}
-                    title={m.title}
-                    description={m.description}
-                    checked={permissions[m.key]}
-                    onChange={() => togglePermission(m.key)}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* Send Welcome Email */}
-            <section className="card" aria-labelledby="email-heading">
-              <h2 className="card__title" id="email-heading">
-                Send Welcome Email
-              </h2>
-              <div className="module-list">
-                <div className="module-row">
-                  <div className="module-row__icon">{icons.email}</div>
-                  <div className="module-row__info">
-                    <p className="module-row__title">Send login credentials</p>
-                    <p className="module-row__desc">
-                      Email temporary password to admin
-                    </p>
-                  </div>
-                  <Toggle
-                    checked={sendCredentials}
-                    onChange={setSendCredentials}
-                    id="toggle-credentials"
-                  />
-                </div>
-                <div className="module-row">
-                  <div className="module-row__icon">{icons.twofa}</div>
-                  <div className="module-row__info">
-                    <p className="module-row__title">Require 2FA setup</p>
-                    <p className="module-row__desc">
-                      Must set up authenticator on login
-                    </p>
-                  </div>
-                  <Toggle
-                    checked={require2fa}
-                    onChange={setRequire2fa}
-                    id="toggle-2fa"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Next Steps */}
-            <div className="next-steps" role="note" aria-label="Next Steps">
-              <div className="next-steps__header">
-                {icons.next}
-                <strong>Next Steps</strong>
-              </div>
-              <p className="next-steps__body">
-                Once created, the new admin will receive an invitation link
-                valid for 48 hours. You can track their activation status in the
-                Admin Management list.
+        {/* Page Content */}
+        <main className="ob-content">
+          {/* Page Header Row */}
+          <div className="ob-page-header">
+            <div>
+              <h1 className="ob-page-title">Onboard New Admin</h1>
+              <p className="ob-page-sub">
+                Create account, assign role and set granular permissions.
               </p>
             </div>
+            <div className="ob-header-btns">
+              <button
+                className="ob-btn-cancel"
+                type="button"
+                onClick={() => navigate(-1)}
+              >
+                Cancel
+              </button>
+              <button
+                className="ob-btn-create"
+                type="button"
+                onClick={handleSubmit}
+              >
+                Create Admin Account
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
 
-      <footer className="site-footer">
-        <p> 2024 AdminCore Wireframe System</p>
-      </footer>
+          {/* Main Grid */}
+          <div className="ob-grid">
+            {/* Left */}
+            <div className="ob-col-left">
+              {/* Personal Information */}
+              <section className="ob-card">
+                <h2 className="ob-card-title">Personal Information</h2>
+                <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">FIRST NAME</label>
+                    <input
+                      className="ob-input"
+                      placeholder="e.g. Sarah"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </div>
+                  <div className="ob-field">
+                    <label className="ob-label">LAST NAME</label>
+                    <input
+                      className="ob-input"
+                      placeholder="e.g. Nakato"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">EMAIL ADDRESS</label>
+                    <input
+                      className="ob-input"
+                      type="email"
+                      placeholder="sarah.nakato@admincore.io"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                  <div className="ob-field">
+                    <label className="ob-label">PHONE NUMBER</label>
+                    <input
+                      className="ob-input"
+                      placeholder="+256 700 123456"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">CITY / REGION</label>
+                    <input
+                      className="ob-input"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                  <div className="ob-field">
+                    <label className="ob-label">COUNTRY</label>
+                    <select
+                      className="ob-input ob-select"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                    >
+                      <option>Uganda</option>
+                      <option>Kenya</option>
+                      <option>Tanzania</option>
+                      <option>Rwanda</option>
+                      <option>Nigeria</option>
+                      <option>South Africa</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              {/* Role & Department */}
+              <section className="ob-card">
+                <h2 className="ob-card-title">Role &amp; Department</h2>
+                <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">ADMIN ROLE</label>
+                    <select
+                      className="ob-input ob-select"
+                      value={adminRole}
+                      onChange={(e) => setAdminRole(e.target.value)}
+                    >
+                      <option>Concierge Admin</option>
+                      <option>Super Admin</option>
+                      <option>Moderator</option>
+                      <option>Analyst</option>
+                    </select>
+                  </div>
+                  <div className="ob-field">
+                    <label className="ob-label">JOB TITLE</label>
+                    <input
+                      className="ob-input"
+                      value={jobTitle}
+                      onChange={(e) => setJobTitle(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="ob-field ob-field--full">
+                  <label className="ob-label">REPORTING TO</label>
+                  <select
+                    className="ob-input ob-select"
+                    value={reportingTo}
+                    onChange={(e) => setReportingTo(e.target.value)}
+                  >
+                    <option>Super User (Alex Kirabo)</option>
+                    <option>Super Admin</option>
+                    <option>Team Lead</option>
+                  </select>
+                </div>
+                <div className="ob-field ob-field--full">
+                  <label className="ob-label">ACCESS LEVEL</label>
+                  <div className="ob-radio-group">
+                    {["standard Access", "elevated Access", "full Access"].map(
+                      (level) => (
+                        <label key={level} className="ob-radio-label">
+                          <input
+                            type="radio"
+                            name="accessLevel"
+                            value={level}
+                            checked={accessLevel === level}
+                            onChange={() => setAccessLevel(level)}
+                            className="ob-radio-input"
+                          />
+                          <span className="ob-radio-dot" />
+                          {level}
+                        </label>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </section>
+
+              {/* Account Security */}
+              <section className="ob-card">
+                <h2 className="ob-card-title">Account Security</h2>
+                <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">TEMPORARY PASSWORD</label>
+                    <input
+                      className="ob-input"
+                      type="password"
+                      placeholder="••••••••••••"
+                      value={tempPassword}
+                      onChange={(e) => setTempPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="ob-field">
+                    <label className="ob-label">CONFIRM PASSWORD</label>
+                    <input
+                      className="ob-input"
+                      type="password"
+                      placeholder="••••••••••••"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="ob-notice">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    className="ob-notice-icon"
+                  >
+                    <circle
+                      cx="7"
+                      cy="7"
+                      r="5.5"
+                      stroke="#9c27b0"
+                      strokeWidth="1.3"
+                    />
+                    <path
+                      d="M7 5.5V8M7 9.5V10"
+                      stroke="#9c27b0"
+                      strokeWidth="1.3"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <p>
+                    Admin will be required to change password on first login.
+                    Two factor authentication will be enabled by default and
+                    must be configured during the first onboarding session.
+                  </p>
+                </div>
+              </section>
+            </div>
+
+            {/* Right */}
+            <div className="ob-col-right">
+              {/* Module Permissions */}
+              <section className="ob-card">
+                <div className="ob-perm-header">
+                  <h2 className="ob-card-title ob-card-title--nm">
+                    Module Permissions
+                  </h2>
+                  <span className="ob-ctrl-label">CONTROL ACCESS</span>
+                </div>
+                <div className="ob-perm-list">
+                  {MODULE_PERMISSIONS.map((mod) => (
+                    <div key={mod.label} className="ob-perm-row">
+                      <div className="ob-perm-icon">{mod.icon}</div>
+                      <div className="ob-perm-info">
+                        <div className="ob-perm-name">{mod.label}</div>
+                        <div className="ob-perm-desc">{mod.description}</div>
+                      </div>
+                      <Toggle
+                        checked={permissions[mod.label]}
+                        onChange={(val) => togglePermission(mod.label, val)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Send Welcome Email */}
+              <section className="ob-card">
+                <h2 className="ob-card-title">Send Welcome Email</h2>
+                <div className="ob-perm-row">
+                  <div className="ob-perm-info">
+                    <div className="ob-perm-name">Send login credentials</div>
+                    <div className="ob-perm-desc">
+                      Email temporary password to admin
+                    </div>
+                  </div>
+                  <Toggle
+                    checked={sendCredentials}
+                    onChange={setSendCredentials}
+                  />
+                </div>
+                <div className="ob-perm-row ob-perm-row--last">
+                  <div className="ob-perm-info">
+                    <div className="ob-perm-name">Require 2FA setup</div>
+                    <div className="ob-perm-desc">
+                      Must set up authenticator on login
+                    </div>
+                  </div>
+                  <Toggle checked={require2FA} onChange={setRequire2FA} />
+                </div>
+              </section>
+
+              {/* Next Steps */}
+              <div className="ob-next-steps">
+                <div className="ob-next-steps-hd">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <circle
+                      cx="7"
+                      cy="7"
+                      r="5.5"
+                      stroke="white"
+                      strokeWidth="1.3"
+                    />
+                    <path
+                      d="M7 4V7.5L9.5 9"
+                      stroke="white"
+                      strokeWidth="1.3"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <strong>Next Steps</strong>
+                </div>
+                <p>
+                  Once created, the new admin will receive an invitation link
+                  valid for 48 hours. You can track their activation status in
+                  the Admin Management list.
+                </p>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <footer className="ob-footer">© 2024 AdminCore Wireframe System</footer>
+      </div>
     </div>
   );
-};
-
-export default OnboardAdmin;
+}
