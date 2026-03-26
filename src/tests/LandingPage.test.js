@@ -153,31 +153,31 @@ describe("Screenshots Section", () => {
   });
 });
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
+// // ─── Testimonials ─────────────────────────────────────────────────────────────
 
-describe("Testimonials Section", () => {
-  it('renders "Hear from happy couples" heading', () => {
-    render(<App />);
-    expect(screen.getByText(/hear from/i)).toBeInTheDocument();
-  });
+// describe("Testimonials Section", () => {
+//   it('renders "Hear from happy couples" heading', () => {
+//     render(<App />);
+//     expect(screen.getByText(/hear from/i)).toBeInTheDocument();
+//   });
 
-  it("renders both testimonial author names", () => {
-    render(<App />);
-    expect(screen.getByText("Sarah Johnson")).toBeInTheDocument();
-    expect(screen.getByText("Marcus Stone")).toBeInTheDocument();
-  });
+//   it("renders both testimonial author names", () => {
+//     render(<App />);
+//     expect(screen.getByText("Sarah Johnson")).toBeInTheDocument();
+//     expect(screen.getByText("Marcus Stone")).toBeInTheDocument();
+//   });
 
-  it("renders testimonial role labels", () => {
-    render(<App />);
-    expect(screen.getByText("Married 4 years")).toBeInTheDocument();
-    expect(screen.getByText("Long-distance couple")).toBeInTheDocument();
-  });
+//   it("renders testimonial role labels", () => {
+//     render(<App />);
+//     expect(screen.getByText("Married 4 years")).toBeInTheDocument();
+//     expect(screen.getByText("Long-distance couple")).toBeInTheDocument();
+//   });
 
-  it("renders aggregate rating text", () => {
-    render(<App />);
-    expect(screen.getByText(/4\.9\/5 average rating/i)).toBeInTheDocument();
-  });
-});
+//   it("renders aggregate rating text", () => {
+//     render(<App />);
+//     expect(screen.getByText(/4\.9\/5 average rating/i)).toBeInTheDocument();
+//   });
+// });
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 

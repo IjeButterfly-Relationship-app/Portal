@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/LandingPage.css";
 import "../App.css";
 
@@ -76,9 +76,6 @@ const Navbar = () => (
           <a href="#how-it-works">Steps</a>
         </li>
         <li>
-          <a href="#testimonials">Testimonies</a>
-        </li>
-        <li>
           <a href="#faqs">FAQS</a>
         </li>
         <li>
@@ -94,8 +91,11 @@ const Navbar = () => (
 ══════════════════════════════════════════ */
 const Hero = () => (
   <section className="hero">
-    {/* Smoke white background */}
+    {/* Background image */}
     <div className="hero__background" />
+
+    {/* Glass gradient overlay */}
+    <div className="hero__glass-overlay" />
 
     <div className="hero__inner">
       {/* Text content */}
@@ -118,75 +118,142 @@ const Hero = () => (
 );
 
 /* ══════════════════════════════════════════
-   FEATURES
+   FEATURES — single card carousel (50s per card)
 ══════════════════════════════════════════ */
 const features = [
   {
-    icon: "lovers.png",
+    image: "butterfly1.jpeg",
     title: "Deep Compatibility",
-    desc: "Find compatible partners who share your values and relationship goals. Connect with people who complement your personality and lifestyle.",
+    desc: "Find compatible partners who share your values and relationship goals.",
+    tag: "Compatibility"
   },
   {
-    icon: "verified.png",
+    image: "butterfly2.jpeg",
     title: "Verified Profiles",
-    desc: "Every profile goes through photo & identity verification. No catfishing, no fake accounts — only real people.",
+    desc: "Every profile goes through photo & identity verification.",
+    tag: "Security"
   },
   {
-    icon: "coach.png",
+    image: "butterfly3.jpeg",
     title: "Relationship Coaches",
-    desc: "Get expert guidance from certified relationship coaches. Learn proven techniques to strengthen your bond.",
+    desc: "Get expert guidance from certified relationship coaches.",
+    tag: "Coaching"
   },
   {
-    icon: "security1.png",
+    image: "butterfly4.jpeg",
     title: "Private Secure Vault",
-    desc: "A dedicated and encrypted space for your photos, milestones, diary entries, and shared memories. Trusted only by the two of you.",
+    desc: "A dedicated and encrypted space for your photos and memories.",
+    tag: "Privacy"
   },
   {
-    icon: "premium.png",
+    image: "couple2.png",
     title: "Butterfly Premium",
-    desc: "Unlock exclusive features and enhanced matching. Get priority support, advanced filters, and unlimited likes to find your perfect match faster.",
+    desc: "Unlock exclusive features and enhanced matching.",
+    tag: "Premium"
   },
   {
-    icon: "global.png",
+    image: "couple.png",
     title: "Local & Global",
-    desc: "Meet people around the corner or across the world. Filter by proximity or open your heart to long-distance connections.",
+    desc: "Meet people around the corner or across the world.",
+    tag: "Global"
   },
 ];
 
-const Features = () => (
-  <section className="section section--alt" id="features">
-    <div className="features__inner">
-      <div className="features__content">
-        <div className="section__header">
-          <h2 className="section__title">
+const CARD_DURATION = 10000; // 10 seconds per card
+
+const Features = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const startTime = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const cardElapsed = elapsed % CARD_DURATION;
+      const pct = (cardElapsed / CARD_DURATION) * 100;
+      setProgress(pct);
+
+      const newIndex = Math.floor(elapsed / CARD_DURATION) % features.length;
+      setActiveIndex(newIndex);
+    }, 200);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const goTo = (idx) => {
+    setActiveIndex(idx);
+    setProgress(0);
+  };
+
+  const current = features[activeIndex];
+
+  return (
+    <section className="section section--alt" id="features">
+      <div className="features__two-col">
+        {/* Left side - Header */}
+        <div className="features__header-col">
+          <h2 className="section__title features__title">
             Everything you need to <em>find</em>
             <br />
             real love.
           </h2>
-          <p className="section__subtitle">
+          <p className="section__subtitle features__subtitle">
             Built different. No endless swiping, no shallow connections — just
             meaningful matches backed by real compatibility science.
           </p>
         </div>
-      </div>
-      <div className="features-grid">
-        {features.map((f) => (
-          <div className="feature-card animate-in" key={f.title}>
-            <div className="feature-card__icon">
-              <img
-                src={`/${f.icon}`}
-                alt={f.title}
-                className="feature-icon-img"
-              />
-            </div>
-            <h3 className="feature-card__title">{f.title}</h3>
-            <p className="feature-card__desc">{f.desc}</p>
+
+        {/* Right side - Cards */}
+        <div className="features__cards-col">
+          <div className="feature-cards-horizontal">
+            {features.map((feature, index) => (
+              <div 
+                key={index}
+                className={`feature-card-horizontal${index === activeIndex ? " active" : ""}`}
+                style={{ zIndex: features.length - index }}
+                onClick={() => goTo(index)}
+              >
+                <div className="feature-card-horizontal__image-wrap">
+                  <img
+                    src={`/${feature.image}`}
+                    alt={feature.title}
+                    className="feature-card-horizontal__image"
+                  />
+                </div>
+                <span className="feature-card-horizontal__tag">{feature.tag}</span>
+              </div>
+            ))}
           </div>
-        ))}
+
+          {/* Progress bar */}
+          <div className="feature-carousel__progress-track">
+            <div
+              className="feature-carousel__progress-fill"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+
+          {/* Dot indicators */}
+          <div className="feature-carousel__dots">
+            {features.map((_, i) => (
+              <button
+                key={i}
+                className={`feature-carousel__dot${i === activeIndex ? " active" : ""}`}
+                onClick={() => goTo(i)}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Card counter */}
+          <p className="feature-carousel__counter">
+            {activeIndex + 1} / {features.length}
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /* ══════════════════════════════════════════
    STEPS
@@ -227,72 +294,6 @@ const Steps = () => (
           <p className="step-card__desc">{s.desc}</p>
         </div>
       ))}
-    </div>
-  </section>
-);
-
-/* ══════════════════════════════════════════
-   TESTIMONIALS
-══════════════════════════════════════════ */
-const testimonials = [
-  {
-    text: "Butterfly changed the way we communicate. The daily prompts spark conversations we'd never have had on our own in 4 years of marriage.",
-    name: "Sarah Johnson",
-    role: "Married 4 years",
-    avatar: "couple1.png",
-    avatarClass: "testimonial-avatar--a",
-  },
-  {
-    text: "Long distance for 11 months was tough, but the shared reminders we got each week made us feel less like two separate halves — more like one.",
-    name: "Marcus Stone",
-    role: "Long-distance couple",
-    avatar: "couple.png",
-    avatarClass: "testimonial-avatar--b",
-  },
-];
-
-const Testimonials = () => (
-  <section className="testimonials-section" id="testimonials">
-    <div className="testimonials-inner">
-      <div className="testimonials__left">
-        <h2>
-          Hear from <span>happy</span> couples.
-        </h2>
-        <p className="testimonials__tagline">
-          Real stories from real couples who've found their spark with
-          Butterfly.
-        </p>
-        <div className="testimonials-grid">
-          {testimonials.map((t) => (
-            <div className="testimonial-card" key={t.name}>
-              <div className="testimonial-stars">★★★★★</div>
-              <p className="testimonial-text">"{t.text}"</p>
-              <div className="testimonial-author">
-                <div className={`testimonial-avatar ${t.avatarClass}`}>
-                  <img
-                    src={`/${t.avatar}`}
-                    alt={t.name}
-                    className="testimonial-avatar-img"
-                  />
-                </div>
-                <div className="testimonial-author__info">
-                  <strong>{t.name}</strong>
-                  <span>{t.role}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="testimonials__right">
-        <div className="testimonials__image-card">
-          <img
-            src="/couple2.png"
-            alt="Happy couple"
-            className="testimonials__image"
-          />
-        </div>
-      </div>
     </div>
   </section>
 );
@@ -460,7 +461,6 @@ export default function App() {
       <Hero />
       <Features />
       <Steps />
-      <Testimonials />
       <FAQ />
       <CTA />
       <Footer />
