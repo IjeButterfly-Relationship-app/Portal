@@ -658,14 +658,6 @@ export default function AdminCoreDashboard() {
 
             </div>
 
-            <div className="online-badge">
-
-              <div className="health-dot" />
-
-              System Online — v2.4.1
-
-            </div>
-
           </div>
 
 
@@ -806,261 +798,267 @@ export default function AdminCoreDashboard() {
 
 
 
-          {/* Middle Row */}
+          {/* Middle/Bottom Combined Row - Two Column Layout */}
 
-          <div className="middle-row">
+          <div className="dashboard-grid-two-col">
 
-            <div className="chart-card">
+            {/* Left Column */}
 
-              <div className="card-title">Platform Engagement</div>
+            <div className="dashboard-left-col">
 
-              <div className="card-subtitle">
+              <div className="chart-card">
 
-                Daily growth and match frequency
+                <div className="card-title">Platform Engagement</div>
 
-              </div>
+                <div className="card-subtitle">
 
-              <div className="chart-area">
-
-                <MiniChart />
-
-              </div>
-
-            </div>
-
-
-
-            <div className="quick-actions-card">
-
-              <div className="card-title">Quick Actions</div>
-
-              <div className="card-subtitle">Instant executive commands</div>
-
-              <div className="qa-grid">
-
-                <button
-
-                  className="qa-btn primary"
-
-                  onClick={() => navigate("/onboard")}
-
-                >
-
-                  <span className="qa-icon"></span>Onboard New Admin
-
-                </button>
-
-                <button className="qa-btn danger">
-
-                  <span className="qa-icon"></span>Emergency Suspend
-
-                </button>
-
-                <button className="qa-btn">
-
-                  <span className="qa-icon"></span>Override Decision
-
-                </button>
-
-                <button className="qa-btn">
-
-                  <span className="qa-icon"></span>System Config
-
-                </button>
-
-                <button className="qa-btn">
-
-                  <span className="qa-icon"></span>Export Report
-
-                </button>
-
-                <button className="qa-btn">
-
-                  <span className="qa-icon"></span>Broadcast Alert
-
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-
-          {/* Bottom Row */}
-
-          <div className="bottom-row">
-
-            <div className="team-card">
-
-              <div className="card-header">
-
-                <div>
-
-                  <div className="card-title">Admin Team Overview</div>
-
-                  <div className="card-subtitle">
-
-                    Live status across all admin roles
-
-                  </div>
+                  Daily growth and match frequency
 
                 </div>
 
-                <div className="manage-link">Manage Admins →</div>
+                <div className="chart-area">
 
-              </div>
-
-
-
-              <table className="team-table">
-
-                <thead>
-
-                  <tr>
-
-                    <th>Admin</th>
-
-                    <th>Role</th>
-
-                    <th>Status</th>
-
-                    <th>Tasks</th>
-
-                    <th>Last Active</th>
-
-                  </tr>
-
-                </thead>
-
-                <tbody>
-
-                  {TEAM.map((member) => (
-
-                    <tr key={member.name}>
-
-                      <td>
-
-                        <div className="member-cell">
-
-                          <div
-
-                            className="member-avatar"
-
-                            style={{ background: member.color }}
-
-                          >
-
-                            {member.initials}
-
-                          </div>
-
-                          <span className="member-name">{member.name}</span>
-
-                        </div>
-
-                      </td>
-
-                      <td>
-
-                        <span
-
-                          className={`role-chip ${ROLE_CLASS[member.role]}`}
-
-                        >
-
-                          {member.role}
-
-                        </span>
-
-                      </td>
-
-                      <td>
-
-                        <span className="status-dot">
-
-                          <span
-
-                            className={`dot ${member.status === "Busy" ? "busy" : "online"}`}
-
-                          />
-
-                          {member.status}
-
-                        </span>
-
-                      </td>
-
-                      <td>
-
-                        <span className="tasks-badge">{member.tasks}</span>
-
-                      </td>
-
-                      <td className="last-active">{member.last}</td>
-
-                    </tr>
-
-                  ))}
-
-                </tbody>
-
-              </table>
-
-            </div>
-
-
-
-            <div className="alerts-card">
-
-              <div className="card-header">
-
-                <div>
-
-                  <div className="card-title">Critical Alerts</div>
-
-                  <div className="card-subtitle">
-
-                    Security and fraud notifications
-
-                  </div>
+                  <MiniChart />
 
                 </div>
 
               </div>
 
-              <div className="alert-list">
 
-                {ALERTS.map((alert, i) => (
 
-                  <div className="alert-item" key={i}>
+              <div className="team-card">
 
-                    <div
+                <div className="card-header">
 
-                      className="alert-bullet"
+                  <div>
 
-                      style={{ background: alert.color }}
+                    <div className="card-title">Admin Team Overview</div>
 
-                    />
+                    <div className="card-subtitle">
 
-                    <div className="alert-info">
-
-                      <div className="alert-type">{alert.type}</div>
-
-                      <div className="alert-target">{alert.target}</div>
+                      Live status across all admin roles
 
                     </div>
 
-                    <div className="alert-time">{alert.time}</div>
-
                   </div>
 
-                ))}
+                  <div className="manage-link">Manage Admins →</div>
+
+                </div>
+
+
+
+                <table className="team-table">
+
+                  <thead>
+
+                    <tr>
+
+                      <th>Admin</th>
+
+                      <th>Role</th>
+
+                      <th>Status</th>
+
+                      <th>Tasks</th>
+
+                      <th>Last Active</th>
+
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    {TEAM.map((member) => (
+
+                      <tr key={member.name}>
+
+                        <td>
+
+                          <div className="member-cell">
+
+                            <div
+
+                              className="member-avatar"
+
+                              style={{ background: member.color }}
+
+                            >
+
+                              {member.initials}
+
+                            </div>
+
+                            <span className="member-name">{member.name}</span>
+
+                          </div>
+
+                        </td>
+
+                        <td>
+
+                          <span
+
+                            className={`role-chip ${ROLE_CLASS[member.role]}`}
+
+                          >
+
+                            {member.role}
+
+                          </span>
+
+                        </td>
+
+                        <td>
+
+                          <span className="status-dot">
+
+                            <span
+
+                              className={`dot ${member.status === "Busy" ? "busy" : "online"}`}
+
+                            />
+
+                            {member.status}
+
+                          </span>
+
+                        </td>
+
+                        <td>
+
+                          <span className="tasks-badge">{member.tasks}</span>
+
+                        </td>
+
+                        <td className="last-active">{member.last}</td>
+
+                      </tr>
+
+                    ))}
+
+                  </tbody>
+
+                </table>
 
               </div>
 
-              <div className="view-log-link">View All Activity Log</div>
+            </div>
+
+
+
+            {/* Right Column */}
+
+            <div className="dashboard-right-col">
+
+              <div className="quick-actions-card">
+
+                <div className="card-title">Quick Actions</div>
+
+                <div className="card-subtitle">Instant executive commands</div>
+
+                <div className="qa-grid">
+
+                  <button
+
+                    className="qa-btn primary"
+
+                    onClick={() => navigate("/onboard")}
+
+                  >
+
+                    <span className="qa-icon"></span>Onboard New Admin
+
+                  </button>
+
+                  <button className="qa-btn danger">
+
+                    <span className="qa-icon"></span>Emergency Suspend
+
+                  </button>
+
+                  <button className="qa-btn">
+
+                    <span className="qa-icon"></span>Override Decision
+
+                  </button>
+
+                  <button className="qa-btn">
+
+                    <span className="qa-icon"></span>System Config
+
+                  </button>
+
+                  <button className="qa-btn">
+
+                    <span className="qa-icon"></span>Export Report
+
+                  </button>
+
+                  <button className="qa-btn">
+
+                    <span className="qa-icon"></span>Broadcast Alert
+
+                  </button>
+
+                </div>
+
+              </div>
+
+
+
+              <div className="alerts-card">
+
+                <div className="card-header">
+
+                  <div>
+
+                    <div className="card-title">Critical Alerts</div>
+
+                    <div className="card-subtitle">
+
+                      Security and fraud notifications
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div className="alert-list">
+
+                  {ALERTS.map((alert, i) => (
+
+                    <div className="alert-item" key={i}>
+
+                      <div
+
+                        className="alert-bullet"
+
+                        style={{ background: alert.color }}
+
+                      />
+
+                      <div className="alert-info">
+
+                        <div className="alert-type">{alert.type}</div>
+
+                        <div className="alert-target">{alert.target}</div>
+
+                      </div>
+
+                      <div className="alert-time">{alert.time}</div>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+                <div className="view-log-link">View All Activity Log</div>
+
+              </div>
 
             </div>
 

@@ -70,27 +70,19 @@ const Navbar = () => (
     <div className="navbar__nav-container">
       <ul className="navbar__links">
         <li>
-          <a href="#features">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              width="13"
-              height="13"
-            >
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <line x1="3" y1="12" x2="21" y2="12" />
-              <line x1="3" y1="18" x2="21" y2="18" />
-            </svg>
-            Features
-          </a>
+          <a href="#features">Features</a>
         </li>
         <li>
-          <a href="#testimonials">Reviews</a>
+          <a href="#how-it-works">Steps</a>
         </li>
         <li>
-          <a href="#pricing">Pricing</a>
+          <a href="#testimonials">Testimonies</a>
+        </li>
+        <li>
+          <a href="#faqs">FAQS</a>
+        </li>
+        <li>
+          <a href="#get-app">Get the app</a>
         </li>
       </ul>
     </div>
@@ -330,7 +322,7 @@ const faqs = [
 const FAQ = () => {
   const [open, setOpen] = useState(null);
   return (
-    <section className="faq-section" id="pricing">
+    <section className="faq-section" id="faqs">
       <div className="faq-inner">
         <div
           className="section__header"
@@ -364,7 +356,7 @@ const FAQ = () => {
    CTA
 ══════════════════════════════════════════ */
 const CTA = () => (
-  <section className="cta-section">
+  <section className="cta-section" id="get-app">
     <div className="cta-container">
       <div className="cta-left">
         <h3 className="cta-badge">GET THE APP</h3>
@@ -380,6 +372,7 @@ const CTA = () => (
         <div className="cta-stores">
           <div className="qr-code">
             <QRCode />
+            <p className="qr-text">Scan to download</p>
           </div>
           <div className="store-badge">
             <img src="/google.png" alt="Google Play" />
@@ -388,7 +381,6 @@ const CTA = () => (
             <img src="/appstore.png" alt="App Store" />
           </div>
         </div>
-        <p className="qr-text">Scan to download</p>
       </div>
       <div className="cta-right">
         <div className="floating-screens">

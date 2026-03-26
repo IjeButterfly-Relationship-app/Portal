@@ -346,6 +346,26 @@ body {
   color: #94a3b8;
 }
 
+/* ── Two Column Grid Layout ── */
+.dashboard-grid-two-col {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.dashboard-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* ── Middle Row ── */
 .middle-row {
   display: grid;
@@ -687,7 +707,7 @@ body {
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
-  .middle-row, .bottom-row {
+  .middle-row, .bottom-row, .dashboard-grid-two-col {
     grid-template-columns: 1fr;
   }
   

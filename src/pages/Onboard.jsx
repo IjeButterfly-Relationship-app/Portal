@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 
+const BASE_URL = "http://208.68.36.144";
+
 const NAV_ITEMS = [
   { label: "Dashboard" },
   { label: "Members" },
@@ -195,12 +197,105 @@ export default function Onboard() {
   const [sendCredentials, setSendCredentials] = useState(true);
   const [require2FA, setRequire2FA] = useState(true);
 
+  // API state
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState("");
+  const [apiSuccess, setApiSuccess] = useState("");
+
   const togglePermission = (label, value) => {
     setPermissions((prev) => ({ ...prev, [label]: value }));
   };
 
-  const handleSubmit = () => {
-    alert("Admin account created successfully!");
+  const handleSubmit = async () => {
+    // Reset feedback
+    setApiError("");
+    setApiSuccess("");
+
+    // Basic validation
+    if (!firstName.trim() || !lastName.trim()) {
+      setApiError("First name and last name are required.");
+      return;
+    }
+    if (!email.trim()) {
+      setApiError("Email address is required.");
+      return;
+    }
+    if (!tempPassword) {
+      setApiError("Please set a temporary password.");
+      return;
+    }
+    if (tempPassword !== confirmPassword) {
+      setApiError("Passwords do not match.");
+      return;
+    }
+
+    const payload = {
+      // Personal Information
+      first_name: firstName.trim(),
+      last_name: lastName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      city: city.trim(),
+      country: country,
+
+      // Role & Department
+      admin_role: adminRole,
+      job_title: jobTitle.trim(),
+      reporting_to: reportingTo,
+      access_level: accessLevel,
+
+      // Account Security
+      password: tempPassword,
+
+      // Module Permissions
+      permissions: permissions,
+
+      // Welcome Email Settings
+      send_credentials: sendCredentials,
+      require_2fa: require2FA,
+    };
+
+    setIsLoading(true);
+
+    try {
+      const token = localStorage.getItem("authToken");
+
+      const response = await fetch(`http://208.68.36.144/api/admins/onboard`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setApiSuccess(
+          data.message || "Admin account created successfully! Redirecting...",
+        );
+        setTimeout(() => {
+          navigate("/moderatordashboard");
+        }, 2000);
+      } else {
+        // Handle validation errors array or single message
+        if (data.errors && Array.isArray(data.errors)) {
+          setApiError(data.errors.map((e) => e.message || e).join(" "));
+        } else {
+          setApiError(
+            data.message || `Request failed with status ${response.status}.`,
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Onboard API error:", error);
+      setApiError(
+        "Unable to reach the server. Please check your network connection.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -328,6 +423,7 @@ export default function Onboard() {
                 className="ob-btn-cancel"
                 type="button"
                 onClick={() => navigate(-1)}
+                disabled={isLoading}
               >
                 Cancel
               </button>
@@ -335,11 +431,81 @@ export default function Onboard() {
                 className="ob-btn-create"
                 type="button"
                 onClick={handleSubmit}
+                disabled={isLoading}
               >
-                Create Admin Account
+                {isLoading ? "Creating..." : "Create Admin Account"}
               </button>
             </div>
           </div>
+
+          {/* API Feedback Banners */}
+          {apiError && (
+            <div
+              style={{
+                background: "#fef2f2",
+                border: "1px solid #fca5a5",
+                color: "#b91c1c",
+                borderRadius: "8px",
+                padding: "10px 16px",
+                marginBottom: "16px",
+                fontSize: "13px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="5.5"
+                  stroke="#b91c1c"
+                  strokeWidth="1.3"
+                />
+                <path
+                  d="M7 4.5V7.5M7 9.5V10"
+                  stroke="#b91c1c"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                />
+              </svg>
+              {apiError}
+            </div>
+          )}
+          {apiSuccess && (
+            <div
+              style={{
+                background: "#f0fdf4",
+                border: "1px solid #86efac",
+                color: "#15803d",
+                borderRadius: "8px",
+                padding: "10px 16px",
+                marginBottom: "16px",
+                fontSize: "13px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="5.5"
+                  stroke="#15803d"
+                  strokeWidth="1.3"
+                />
+                <path
+                  d="M4.5 7l2 2 3-3"
+                  stroke="#15803d"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              {apiSuccess}
+            </div>
+          )}
 
           {/* Main Grid */}
           <div className="ob-grid">
