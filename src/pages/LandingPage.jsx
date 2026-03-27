@@ -161,14 +161,11 @@ const SCALE_STEP = 0.035;
 
 const Features = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [startTime, setStartTime] = useState(Date.now());
 
   useEffect(() => {
     const id = setInterval(() => {
       const elapsed = Date.now() - startTime;
-      const cardElapsed = elapsed % CARD_DURATION;
-      setProgress((cardElapsed / CARD_DURATION) * 100);
       setActiveIndex(Math.floor(elapsed / CARD_DURATION) % features.length);
     }, 100);
     return () => clearInterval(id);
@@ -176,7 +173,6 @@ const Features = () => {
 
   const goTo = (idx) => {
     setActiveIndex(idx);
-    setProgress(0);
     setStartTime(Date.now() - idx * CARD_DURATION);
   };
 

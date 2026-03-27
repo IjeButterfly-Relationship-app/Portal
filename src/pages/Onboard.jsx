@@ -260,7 +260,7 @@ export default function Onboard() {
     try {
       const token = localStorage.getItem("authToken");
 
-      const response = await fetch(`http://208.68.36.144/api/admins/onboard`, {
+      const response = await fetch(`${BASE_URL}/api/admins/onboard`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
