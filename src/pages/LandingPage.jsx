@@ -56,7 +56,6 @@ const QRCode = () => {
 ══════════════════════════════════════════ */
 const Navbar = () => (
   <nav className="navbar">
-    {/* Logo */}
     <a href="/" className="navbar__logo">
       <img
         src="/butterfly-logo.png"
@@ -65,8 +64,6 @@ const Navbar = () => (
       />
       <span className="navbar__logo-text">Butterfly</span>
     </a>
-
-    {/* Center nav links */}
     <div className="navbar__nav-container">
       <ul className="navbar__links">
         <li>
@@ -91,14 +88,9 @@ const Navbar = () => (
 ══════════════════════════════════════════ */
 const Hero = () => (
   <section className="hero">
-    {/* Background image */}
     <div className="hero__background" />
-
-    {/* Glass gradient overlay */}
     <div className="hero__glass-overlay" />
-
     <div className="hero__inner">
-      {/* Text content */}
       <div className="hero__content">
         <h1 className="hero__title">
           Trusted
@@ -118,79 +110,86 @@ const Hero = () => (
 );
 
 /* ══════════════════════════════════════════
-   FEATURES — single card carousel (50s per card)
+   FEATURES — layered stack (matches reference image)
 ══════════════════════════════════════════ */
 const features = [
   {
     image: "butterfly1.jpeg",
     title: "Deep Compatibility",
     desc: "Find compatible partners who share your values and relationship goals.",
-    tag: "Compatibility"
+    tag: "Compatibility",
   },
   {
     image: "butterfly2.jpeg",
     title: "Verified Profiles",
     desc: "Every profile goes through photo & identity verification.",
-    tag: "Security"
+    tag: "Security",
   },
   {
     image: "butterfly3.jpeg",
     title: "Relationship Coaches",
     desc: "Get expert guidance from certified relationship coaches.",
-    tag: "Coaching"
+    tag: "Coaching",
   },
   {
     image: "butterfly4.jpeg",
     title: "Private Secure Vault",
     desc: "A dedicated and encrypted space for your photos and memories.",
-    tag: "Privacy"
+    tag: "Privacy",
   },
   {
     image: "couple2.png",
     title: "Butterfly Premium",
     desc: "Unlock exclusive features and enhanced matching.",
-    tag: "Premium"
+    tag: "Premium",
   },
   {
     image: "couple.png",
     title: "Local & Global",
     desc: "Meet people around the corner or across the world.",
-    tag: "Global"
+    tag: "Global",
   },
 ];
 
-const CARD_DURATION = 10000; // 10 seconds per card
+const CARD_DURATION = 1000;
+// How many cards peek out behind the front card
+const BEHIND_COUNT = 2;
+// How many px each card behind shifts right
+const PEEK_PX = 56;
+// How much each card behind shrinks (0–1)
+const SCALE_STEP = 0.035;
 
 const Features = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [startTime, setStartTime] = useState(Date.now());
 
   useEffect(() => {
-    const startTime = Date.now();
-    const interval = setInterval(() => {
+    const id = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const cardElapsed = elapsed % CARD_DURATION;
-      const pct = (cardElapsed / CARD_DURATION) * 100;
-      setProgress(pct);
-
-      const newIndex = Math.floor(elapsed / CARD_DURATION) % features.length;
-      setActiveIndex(newIndex);
-    }, 200);
-
-    return () => clearInterval(interval);
-  }, []);
+      setProgress((cardElapsed / CARD_DURATION) * 100);
+      setActiveIndex(Math.floor(elapsed / CARD_DURATION) % features.length);
+    }, 100);
+    return () => clearInterval(id);
+  }, [startTime]);
 
   const goTo = (idx) => {
     setActiveIndex(idx);
     setProgress(0);
+    setStartTime(Date.now() - idx * CARD_DURATION);
   };
 
-  const current = features[activeIndex];
+  // Build ordered slice: [activeIndex, activeIndex+1, activeIndex+2, …]
+  const visibleCards = Array.from({ length: BEHIND_COUNT + 1 }, (_, i) => {
+    const fi = (activeIndex + i) % features.length;
+    return { ...features[fi], featureIndex: fi, stackPos: i };
+  });
 
   return (
     <section className="section section--alt" id="features">
       <div className="features__two-col">
-        {/* Left side - Header */}
+        {/* ── Left col: heading + active-card info + controls ── */}
         <div className="features__header-col">
           <h2 className="section__title features__title">
             Everything you need to <em>find</em>
@@ -201,54 +200,67 @@ const Features = () => {
             Built different. No endless swiping, no shallow connections — just
             meaningful matches backed by real compatibility science.
           </p>
+
+          <div className="features__active-info">
+            <span className="features__active-tag">
+              {features[activeIndex].tag}
+            </span>
+            <h3 className="features__active-title">
+              {features[activeIndex].title}
+            </h3>
+            <p className="features__active-desc">
+              {features[activeIndex].desc}
+            </p>
+          </div>
         </div>
 
-        {/* Right side - Cards */}
+        {/* ── Right col: stacked cards ── */}
         <div className="features__cards-col">
-          <div className="feature-cards-horizontal">
-            {features.map((feature, index) => (
-              <div 
-                key={index}
-                className={`feature-card-horizontal${index === activeIndex ? " active" : ""}`}
-                style={{ zIndex: features.length - index }}
-                onClick={() => goTo(index)}
-              >
-                <div className="feature-card-horizontal__image-wrap">
-                  <img
-                    src={`/${feature.image}`}
-                    alt={feature.title}
-                    className="feature-card-horizontal__image"
-                  />
-                </div>
-                <span className="feature-card-horizontal__tag">{feature.tag}</span>
-              </div>
-            ))}
-          </div>
+          {/*
+            The stack wrapper uses position:relative so absolute children
+            are positioned relative to it.  We render cards back-to-front
+            (reversed) so the front card paints last and sits on top.
+          */}
+          <div className="feature-stack">
+            {[...visibleCards]
+              .reverse()
+              .map(({ image, tag, featureIndex, stackPos }) => {
+                const translateX = stackPos * PEEK_PX;
+                const scale = 1 - stackPos * SCALE_STEP;
+                const brightness = 1 - stackPos * 0.1;
 
-          {/* Progress bar */}
-          <div className="feature-carousel__progress-track">
-            <div
-              className="feature-carousel__progress-fill"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+                return (
+                  <div
+                    key={featureIndex}
+                    className={`feature-stack__card${stackPos === 0 ? " active" : ""}`}
+                    style={{
+                      transform: `translateX(${translateX}px) scale(${scale})`,
+                      zIndex: BEHIND_COUNT + 1 - stackPos,
+                      filter:
+                        stackPos === 0 ? "none" : `brightness(${brightness})`,
+                    }}
+                    onClick={() => stackPos !== 0 && goTo(featureIndex)}
+                  >
+                    {/* Full-bleed photo */}
+                    <div className="feature-stack__image-wrap">
+                      <img
+                        src={`/${image}`}
+                        alt={tag}
+                        className="feature-stack__image"
+                      />
+                    </div>
 
-          {/* Dot indicators */}
-          <div className="feature-carousel__dots">
-            {features.map((_, i) => (
-              <button
-                key={i}
-                className={`feature-carousel__dot${i === activeIndex ? " active" : ""}`}
-                onClick={() => goTo(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
+                    {/*
+                    Yellow pill tag — rotated vertically on the RIGHT edge,
+                    exactly like the reference screenshot.
+                  */}
+                    <div className="feature-stack__tag-wrap">
+                      <span className="feature-stack__tag">{tag}</span>
+                    </div>
+                  </div>
+                );
+              })}
           </div>
-
-          {/* Card counter */}
-          <p className="feature-carousel__counter">
-            {activeIndex + 1} / {features.length}
-          </p>
         </div>
       </div>
     </section>
@@ -375,10 +387,7 @@ const CTA = () => (
             <QRCode />
             <p className="qr-text">Scan to download</p>
           </div>
-          <div className="store-badge">
-            <img src="/google.png" alt="Google Play" />
-          </div>
-          <div className="store-badge">
+          <div className="store-badge appstore-large">
             <img src="/appstore.png" alt="App Store" />
           </div>
         </div>
@@ -407,13 +416,13 @@ const Footer = () => (
   <footer className="footer">
     <div className="footer__inner">
       <div className="footer__brand">
-        <div className="navbar__logo" style={{ fontSize: "1.1rem" }}>
+        <div className="navbar__logo footer__logo-wrapper" style={{ fontSize: "1.1rem" }}>
           <img
             src="/butterfly-logo.png"
             alt="Butterfly"
             className="footer__logo-img"
           />
-          Butterfly
+          <span className="footer__logo-text">Butterfly</span>
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
