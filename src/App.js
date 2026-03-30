@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Onboard from "./pages/Onboard";
 import FlaggedAccount from "./pages/FlaggedAccount";
+import AdminManagement from "./pages/AdminManagement";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/onboard" element={<Onboard />} />
         <Route path="/flaggedAccount" element={<FlaggedAccount />} />
+        <Route path="/adminManagement" element={<AdminManagement />} />
       </Routes>
     </BrowserRouter>
   );

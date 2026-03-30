@@ -37,6 +37,125 @@ html, body, #root {
   min-height: 100vh;
 }
 
+/* ─── Admin Management Layout with Sidebar ──────────────────────── */
+.admin-management-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─── Sidebar (matches moderator dashboard) ────────────────────── */
+.mod-sidebar {
+  width: 240px;
+  background: #4A1A6B;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.mod-sidebar-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mod-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mod-logo-icon {
+  font-size: 24px;
+}
+
+.mod-logo-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mod-sidebar-section {
+  flex: 1;
+  padding: 20px 16px;
+}
+
+.mod-sidebar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding: 0 8px;
+}
+
+.mod-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mod-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #ffffff;
+}
+
+.mod-nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mod-nav-item.active {
+  background: var(--purple);
+  color: white;
+}
+
+.mod-nav-icon {
+  font-size: 18px;
+}
+
+.mod-nav-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mod-sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.mod-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.mod-logout-btn:hover {
+  background: var(--susp-bg);
+  color: var(--susp-red);
+}
+
 /* ─── Header ──────────────────────────────────────────────────── */
 .am-header {
   display: flex;

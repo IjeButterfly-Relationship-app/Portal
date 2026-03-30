@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import "./AdminManagement.css";
+import { useNavigate } from "react-router-dom";
+import "../styles/AdminManagement.css";
 
 const ADMINS = [
   {
@@ -66,7 +67,18 @@ const ROLE_COLORS = {
   "Data Analyst": "role--analyst",
 };
 
+const navItems = [
+  { id: "dashboard", label: "Dashboard", icon: "📊" },
+  { id: "users", label: "Users", icon: "👥" },
+  { id: "reports", label: "Reports", icon: "📋" },
+  { id: "messages", label: "Messages", icon: "💬" },
+  { id: "analytics", label: "Analytics", icon: "📈" },
+  { id: "settings", label: "Settings", icon: "⚙️" },
+];
+
 export default function AdminManagement() {
+  const navigate = useNavigate();
+  const [activeNav, setActiveNav] = useState("dashboard");
   const [admins, setAdmins] = useState(ADMINS);
   const [selected, setSelected] = useState([]);
   const [openMenu, setOpenMenu] = useState(null);
@@ -135,40 +147,78 @@ export default function AdminManagement() {
   const pages = [1, 2, 3, 4, "...", 10];
 
   return (
-    <div className="am-root">
-      {/* ── Header ── */}
-      <header className="am-header">
-        <div className="am-logo">
-          <div className="am-logo-mark">
-            <span>🦋</span>
+    <div className="admin-management-layout">
+      {/* Sidebar */}
+      <aside className="mod-sidebar">
+        <div className="mod-sidebar-header">
+          <div className="mod-logo">
+            <span className="mod-logo-icon">🦋</span>
+            <span className="mod-logo-text">Butterfly</span>
           </div>
         </div>
-        <div className="am-search-wrap">
-          <span className="am-search-ico">🔍</span>
-          <input className="am-search-global" placeholder="Search admin..." />
-        </div>
-        <div className="am-header-right">
-          <button className="am-icon-btn" aria-label="Notifications">
-            🔔
-          </button>
-          <button className="am-icon-btn" aria-label="Settings">
-            ⚙️
-          </button>
-          <div className="am-super-admin">
-            <div className="am-super-info">
-              <span className="am-super-name">Super Admin</span>
-              <span className="am-super-email">alex.kirabo@admincore.io</span>
-            </div>
-            <img
-              src="https://i.pravatar.cc/36?img=3"
-              alt="Super Admin"
-              className="am-super-avatar"
-            />
-          </div>
-        </div>
-      </header>
 
-      <div className="am-page">
+        <div className="mod-sidebar-section">
+          <div className="mod-sidebar-label">CORE OPERATIONS</div>
+          <nav className="mod-sidebar-nav">
+            {navItems.map((item) => (
+              <div
+                key={item.id}
+                className={`mod-nav-item ${activeNav === item.label ? "active" : ""}`}
+                onClick={() => {
+                  setActiveNav(item.label);
+                  if (item.label === "Dashboard") navigate("/dashboard");
+                }}
+              >
+                <span className="mod-nav-icon">{item.icon}</span>
+                <span className="mod-nav-label">{item.label}</span>
+              </div>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mod-sidebar-footer">
+          <button className="mod-logout-btn">
+            <span>↪</span> Logout
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="admin-main">
+        <div className="am-root">
+          {/* ── Header ── */}
+          <header className="am-header">
+            <div className="am-logo">
+              <div className="am-logo-mark">
+                <span>🦋</span>
+              </div>
+            </div>
+            <div className="am-search-wrap">
+              <span className="am-search-ico">🔍</span>
+              <input className="am-search-global" placeholder="Search admin..." />
+            </div>
+            <div className="am-header-right">
+              <button className="am-icon-btn" aria-label="Notifications">
+                🔔
+              </button>
+              <button className="am-icon-btn" aria-label="Settings">
+                ⚙️
+              </button>
+              <div className="am-super-admin">
+                <div className="am-super-info">
+                  <span className="am-super-name">Super Admin</span>
+                  <span className="am-super-email">alex.kirabo@admincore.io</span>
+                </div>
+                <img
+                  src="https://i.pravatar.cc/36?img=3"
+                  alt="Super Admin"
+                  className="am-super-avatar"
+                />
+              </div>
+            </div>
+          </header>
+
+          <div className="am-page">
         {/* ── Page title ── */}
         <div className="am-title-row">
           <div>
@@ -496,6 +546,8 @@ export default function AdminManagement() {
 
       {/* ── Footer ── */}
       <footer className="am-footer">© 2024 AdminCore Webfare System</footer>
+        </div>
+      </main>
     </div>
   );
 }
