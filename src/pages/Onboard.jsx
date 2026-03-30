@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 
-const BASE_URL = "http://208.68.36.144";
+const BASE_URL = "http://localhost:3001";
 
 const NAV_ITEMS = [
   { label: "Dashboard" },
@@ -16,6 +16,7 @@ const NAV_ITEMS = [
 const MODULE_PERMISSIONS = [
   {
     label: "Concierge Module",
+    key: "conciergeModule",
     description: "Match curation, member management",
     defaultOn: true,
     icon: (
@@ -28,6 +29,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "View Member Profiles",
+    key: "viewMemberProfiles",
     description: "Read-only access to all profiles",
     defaultOn: true,
     icon: (
@@ -44,6 +46,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Send Messages",
+    key: "sendMessages",
     description: "Contact members directly",
     defaultOn: true,
     icon: (
@@ -68,6 +71,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Manage Coaching",
+    key: "manageCoaching",
     description: "Book and track sessions",
     defaultOn: true,
     icon: (
@@ -92,6 +96,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Moderation Access",
+    key: "moderationAccess",
     description: "View flagged accounts",
     defaultOn: false,
     icon: (
@@ -108,6 +113,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Analytics Access",
+    key: "analyticsAccess",
     description: "View own performance data",
     defaultOn: true,
     icon: (
@@ -120,6 +126,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Billing Access",
+    key: "billingAccess",
     description: "View subscription info",
     defaultOn: false,
     icon: (
@@ -139,6 +146,7 @@ const MODULE_PERMISSIONS = [
   },
   {
     label: "Security Access",
+    key: "securityAccess",
     description: "View security alerts",
     defaultOn: false,
     icon: (
@@ -175,35 +183,37 @@ export default function Onboard() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [city, setCity] = useState("Kampala, Uganda");
   const [country, setCountry] = useState("Uganda");
 
-  const [adminRole, setAdminRole] = useState("Concierge Admin");
+  const [role, setRole] = useState("Concierge Admin");
   const [jobTitle, setJobTitle] = useState("Head Concierge");
-  const [reportingTo, setReportingTo] = useState("Super User (Alex Kirabo)");
-  const [accessLevel, setAccessLevel] = useState("standard Access");
+  const [reportingToId, setReportingToId] = useState("");
+  const [accessLevel, setAccessLevel] = useState("standard");
 
-  const [tempPassword, setTempPassword] = useState("");
+  const [temporaryPassword, setTemporaryPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showTempPassword, setShowTempPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [permissions, setPermissions] = useState(
     MODULE_PERMISSIONS.reduce((acc, mod) => {
-      acc[mod.label] = mod.defaultOn;
+      acc[mod.key] = mod.defaultOn;
       return acc;
     }, {}),
   );
 
-  const [sendCredentials, setSendCredentials] = useState(true);
-  const [require2FA, setRequire2FA] = useState(true);
+  const [sendWelcomeEmail, setSendWelcomeEmail] = useState(true);
+  const [requireTwoFa, setRequireTwoFa] = useState(true);
 
   // API state
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState("");
   const [apiSuccess, setApiSuccess] = useState("");
 
-  const togglePermission = (label, value) => {
-    setPermissions((prev) => ({ ...prev, [label]: value }));
+  const togglePermission = (key, value) => {
+    setPermissions((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSubmit = async () => {
@@ -220,45 +230,61 @@ export default function Onboard() {
       setApiError("Email address is required.");
       return;
     }
-    if (!tempPassword) {
+    if (!temporaryPassword) {
       setApiError("Please set a temporary password.");
       return;
     }
-    if (tempPassword !== confirmPassword) {
+    if (temporaryPassword !== confirmPassword) {
       setApiError("Passwords do not match.");
       return;
     }
 
     const payload = {
       // Personal Information
-      first_name: firstName.trim(),
-      last_name: lastName.trim(),
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       email: email.trim(),
-      phone: phone.trim(),
+      phoneNumber: phoneNumber.trim(),
       city: city.trim(),
       country: country,
 
       // Role & Department
-      admin_role: adminRole,
-      job_title: jobTitle.trim(),
-      reporting_to: reportingTo,
-      access_level: accessLevel,
+      role: role,
+      jobTitle: jobTitle.trim(),
+      reportingToId: reportingToId || null,
+      accessLevel: accessLevel,
 
       // Account Security
-      password: tempPassword,
+      temporaryPassword: temporaryPassword,
 
       // Module Permissions
-      permissions: permissions,
+      conciergeModule: permissions.conciergeModule,
+      viewMemberProfiles: permissions.viewMemberProfiles,
+      sendMessages: permissions.sendMessages,
+      manageCoaching: permissions.manageCoaching,
+      moderationAccess: permissions.moderationAccess,
+      analyticsAccess: permissions.analyticsAccess,
+      billingAccess: permissions.billingAccess,
+      securityAccess: permissions.securityAccess,
 
       // Welcome Email Settings
-      send_credentials: sendCredentials,
-      require_2fa: require2FA,
+      sendWelcomeEmail: sendWelcomeEmail,
+      requireTwoFa: requireTwoFa,
     };
 
     setIsLoading(true);
 
     try {
       const token = localStorage.getItem("authToken");
+      
+      if (!token) {
+        setApiError("You must be logged in to onboard a new admin. Please login first.");
+        setIsLoading(false);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+        return;
+      }
 
       const response = await fetch(`${BASE_URL}/api/admins/onboard`, {
         method: "POST",
@@ -276,7 +302,7 @@ export default function Onboard() {
           data.message || "Admin account created successfully! Redirecting...",
         );
         setTimeout(() => {
-          navigate("/moderatordashboard");
+          navigate("/dashboard");
         }, 2000);
       } else {
         // Handle validation errors array or single message
@@ -550,8 +576,8 @@ export default function Onboard() {
                     <input
                       className="ob-input"
                       placeholder="+256 700 123456"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
                 </div>
@@ -590,8 +616,8 @@ export default function Onboard() {
                     <label className="ob-label">ADMIN ROLE</label>
                     <select
                       className="ob-input ob-select"
-                      value={adminRole}
-                      onChange={(e) => setAdminRole(e.target.value)}
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
                     >
                       <option>Concierge Admin</option>
                       <option>Super Admin</option>
@@ -612,33 +638,32 @@ export default function Onboard() {
                   <label className="ob-label">REPORTING TO</label>
                   <select
                     className="ob-input ob-select"
-                    value={reportingTo}
-                    onChange={(e) => setReportingTo(e.target.value)}
+                    value={reportingToId}
+                    onChange={(e) => setReportingToId(e.target.value)}
                   >
-                    <option>Super User (Alex Kirabo)</option>
-                    <option>Super Admin</option>
-                    <option>Team Lead</option>
+                    <option value="">Select manager (optional)</option>
+                    <option value="">Super User (Alex Kirabo)</option>
+                    <option value="">Super Admin</option>
+                    <option value="">Team Lead</option>
                   </select>
                 </div>
                 <div className="ob-field ob-field--full">
                   <label className="ob-label">ACCESS LEVEL</label>
                   <div className="ob-radio-group">
-                    {["standard Access", "elevated Access", "full Access"].map(
-                      (level) => (
-                        <label key={level} className="ob-radio-label">
-                          <input
-                            type="radio"
-                            name="accessLevel"
-                            value={level}
-                            checked={accessLevel === level}
-                            onChange={() => setAccessLevel(level)}
-                            className="ob-radio-input"
-                          />
-                          <span className="ob-radio-dot" />
-                          {level}
-                        </label>
-                      ),
-                    )}
+                    {["standard", "elevated", "full"].map((level) => (
+                      <label key={level} className="ob-radio-label">
+                        <input
+                          type="radio"
+                          name="accessLevel"
+                          value={level}
+                          checked={accessLevel === level}
+                          onChange={() => setAccessLevel(level)}
+                          className="ob-radio-input"
+                        />
+                        <span className="ob-radio-dot" />
+                        {level.charAt(0).toUpperCase() + level.slice(1)} Access
+                      </label>
+                    ))}
                   </div>
                 </div>
               </section>
@@ -649,23 +674,63 @@ export default function Onboard() {
                 <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">TEMPORARY PASSWORD</label>
-                    <input
-                      className="ob-input"
-                      type="password"
-                      placeholder="••••••••••••"
-                      value={tempPassword}
-                      onChange={(e) => setTempPassword(e.target.value)}
-                    />
+                    <div className="ob-password-wrapper">
+                      <input
+                        className="ob-input ob-input-password"
+                        type={showTempPassword ? "text" : "password"}
+                        placeholder="••••••••••••"
+                        value={temporaryPassword}
+                        onChange={(e) => setTemporaryPassword(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="ob-eye-btn"
+                        onClick={() => setShowTempPassword(!showTempPassword)}
+                        aria-label={showTempPassword ? "Hide password" : "Show password"}
+                      >
+                        {showTempPassword ? (
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                          </svg>
+                        ) : (
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                   <div className="ob-field">
                     <label className="ob-label">CONFIRM PASSWORD</label>
-                    <input
-                      className="ob-input"
-                      type="password"
-                      placeholder="••••••••••••"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
+                    <div className="ob-password-wrapper">
+                      <input
+                        className="ob-input ob-input-password"
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder="••••••••••••"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                      <button
+                        type="button"
+                        className="ob-eye-btn"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                      >
+                        {showConfirmPassword ? (
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                            <line x1="1" y1="1" x2="23" y2="23" />
+                          </svg>
+                        ) : (
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className="ob-notice">
@@ -718,8 +783,8 @@ export default function Onboard() {
                         <div className="ob-perm-desc">{mod.description}</div>
                       </div>
                       <Toggle
-                        checked={permissions[mod.label]}
-                        onChange={(val) => togglePermission(mod.label, val)}
+                        checked={permissions[mod.key]}
+                        onChange={(val) => togglePermission(mod.key, val)}
                       />
                     </div>
                   ))}
@@ -737,8 +802,8 @@ export default function Onboard() {
                     </div>
                   </div>
                   <Toggle
-                    checked={sendCredentials}
-                    onChange={setSendCredentials}
+                    checked={sendWelcomeEmail}
+                    onChange={setSendWelcomeEmail}
                   />
                 </div>
                 <div className="ob-perm-row ob-perm-row--last">
@@ -748,7 +813,7 @@ export default function Onboard() {
                       Must set up authenticator on login
                     </div>
                   </div>
-                  <Toggle checked={require2FA} onChange={setRequire2FA} />
+                  <Toggle checked={requireTwoFa} onChange={setRequireTwoFa} />
                 </div>
               </section>
 

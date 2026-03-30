@@ -143,6 +143,41 @@
   box-sizing: border-box;
 }
 
+.passwordContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordContainer .input {
+  padding-right: 45px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.eyeButton:hover {
+  color: #4b5563;
+}
+
+.eyeButton:focus {
+  outline: none;
+  color: #667eea;
+}
+
 .input:focus {
   outline: none;
   border-color: #667eea;

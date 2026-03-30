@@ -356,6 +356,45 @@ body {
   box-shadow: 0 0 0 3px rgba(156,39,176,0.08);
   background: var(--ob-white);
 }
+
+/* Password field with eye icon */
+.ob-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ob-input-password {
+  padding-right: 38px;
+  width: 100%;
+}
+
+.ob-eye-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--ob-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+  border-radius: 4px;
+}
+
+.ob-eye-btn:hover {
+  color: var(--ob-purple);
+  background: rgba(156,39,176,0.08);
+}
+
+.ob-eye-btn:focus {
+  outline: none;
+  color: var(--ob-purple);
+}
 .ob-select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239c27b0' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
