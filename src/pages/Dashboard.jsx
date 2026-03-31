@@ -48,6 +48,8 @@ const Dashboard = () => {
   const handleNavClick = (item) => {
     if (item.id === "onboard") {
       navigate("/onboard");
+    } else if (item.id === "analytics") {
+      navigate("/analytics");
     } else {
       setActiveNav(item.label);
     }
@@ -484,10 +486,13 @@ const Dashboard = () => {
               <div className="modules-grid">
                 {modules.map((mod) => (
                   <div 
-                    className={`module-card ${mod.label === "Admin Management" ? "clickable" : ""}`} 
+                    className={`module-card ${mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "clickable" : ""}`} 
                     key={mod.label}
-                    onClick={() => mod.label === "Admin Management" && navigate("/adminManagement")}
-                    style={{ cursor: mod.label === "Admin Management" ? "pointer" : "default" }}
+                    onClick={() => {
+                      if (mod.label === "Admin Management") navigate("/adminManagement");
+                      if (mod.label === "Analytics Engine") navigate("/analytics");
+                    }}
+                    style={{ cursor: mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "pointer" : "default" }}
                   >
                     <div className="module-icon" style={{ background: mod.bg }}>
                       {mod.icon}
@@ -514,7 +519,7 @@ const Dashboard = () => {
       <aside className="mod-sidebar">
         <div className="mod-sidebar-header">
           <div className="mod-logo">
-            <span className="mod-logo-icon">🦋</span>
+            <img src="/butterfly-logo.png" alt="Butterfly" className="mod-logo-img" />
             <span className="mod-logo-text">Butterfly</span>
           </div>
         </div>

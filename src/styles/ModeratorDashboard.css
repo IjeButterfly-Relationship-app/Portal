@@ -264,15 +264,16 @@
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 24px;
 }
 
 .metric-card {
   background: white;
   border-radius: 16px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  min-width: 0;
 }
 
 .metric-header {
@@ -833,10 +834,6 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
   .dashboard-row {
     grid-template-columns: 1fr;
   }
@@ -853,10 +850,6 @@
   
   .main-content {
     margin-left: 200px;
-  }
-  
-  .metrics-grid {
-    grid-template-columns: 1fr;
   }
   
   .header-search {

@@ -41,6 +41,12 @@
   font-size: 1.5rem;
 }
 
+.mod-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
 .mod-logo-text {
   font-size: 1.25rem;
   font-weight: 600;
@@ -1474,12 +1480,6 @@
 }
 
 /* Responsive */
-@media (max-width: 1400px) {
-  .mod-metrics-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 @media (max-width: 1200px) {
   .mod-dashboard-row {
     grid-template-columns: 1fr;
