@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css";
 import "../App.css";
 
@@ -364,46 +365,63 @@ const FAQ = () => {
 /* ══════════════════════════════════════════
    CTA
 ══════════════════════════════════════════ */
-const CTA = () => (
-  <section className="cta-section" id="get-app">
-    <div className="cta-container">
-      <div className="cta-left">
-        <h3 className="cta-badge">GET THE APP</h3>
-        <h2 className="cta-title">
-          Your person is already
-          <br />
-          waiting for you
-        </h2>
-        <p className="cta-subtitle">
-          Download Butterfly free. No subscription required to start — just open
-          the app and begin.
-        </p>
-        <div className="cta-stores">
-          <div className="qr-code">
-            <QRCode />
-            <p className="qr-text">Scan to download</p>
+const CTA = () => {
+  const navigate = useNavigate();
+  return (
+    <section className="cta-section" id="get-app">
+      <div className="cta-container">
+        <div className="cta-left">
+          <h3 className="cta-badge">GET THE APP</h3>
+          <h2 className="cta-title">
+            Your person is already
+            <br />
+            waiting for you
+          </h2>
+          <p className="cta-subtitle">
+            Download Butterfly free. No subscription required to start — just open
+            the app and begin.
+          </p>
+          <div className="cta-stores">
+            <div className="qr-code">
+              <QRCode />
+              <p className="qr-text">Scan to download</p>
+            </div>
+            <div className="store-badges">
+              <div className="store-badge appstore-large">
+                <img src="/appstore.png" alt="App Store" />
+              </div>
+              <button 
+                className="google-play-btn"
+                onClick={() => navigate("/download")}
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="google-play-icon">
+                  <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31zM6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z"/>
+                </svg>
+                <div className="btn-text">
+                  <span className="btn-text-small">GET IT ON</span>
+                  <span className="btn-text-large">Google Play</span>
+                </div>
+              </button>
+            </div>
           </div>
-          <div className="store-badge appstore-large">
-            <img src="/appstore.png" alt="App Store" />
+        </div>
+        <div className="cta-right">
+          <div className="floating-screens">
+            <div className="screen screen-1">
+              <img src="/discover.jpeg" alt="Discover screen" />
+            </div>
+            <div className="screen screen-2">
+              <img src="/onboard.jpeg" alt="Onboard screen" />
+            </div>
+            <div className="screen screen-3">
+              <img src="/profile.jpeg" alt="Profile screen" />
+            </div>
           </div>
         </div>
       </div>
-      <div className="cta-right">
-        <div className="floating-screens">
-          <div className="screen screen-1">
-            <img src="/discover.jpeg" alt="Discover screen" />
-          </div>
-          <div className="screen screen-2">
-            <img src="/onboard.jpeg" alt="Onboard screen" />
-          </div>
-          <div className="screen screen-3">
-            <img src="/profile.jpeg" alt="Profile screen" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /* ══════════════════════════════════════════
    FOOTER

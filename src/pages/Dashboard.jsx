@@ -29,20 +29,20 @@ const Dashboard = () => {
   // Navigation items
   const navItems = isSuperAdmin
     ? [
-        { id: "dashboard", label: "Dashboard", icon: "📊" },
-        { id: "admins", label: "Admins", icon: "👥" },
-        { id: "onboard", label: "Onboard", icon: "➕" },
-        { id: "activity", label: "Activity Log", icon: "📝" },
+        { id: "moderation", label: "Moderation", icon: "" },
+        { id: "analytics", label: "Analytics", icon: "" },
+        { id: "billing", label: "Billing", icon: "" },
+        { id: "security", label: "Security & APIs", icon: "" },
+        { id: "policies", label: "Policies", icon: "" },
+        { id: "activity", label: "Activity Logs", icon: "" },
       ]
     : [
-        { id: "concierge", label: "Concierge", icon: "💬" },
-        { id: "moderation", label: "Moderation", icon: "👁" },
-        { id: "analytics", label: "Analytics", icon: "📊" },
-        { id: "billing", label: "Billing", icon: "💳" },
-        { id: "security", label: "Security & API", icon: "🔒" },
-        { id: "policies", label: "Policies", icon: "📄" },
-        { id: "activity", label: "Activity Logs", icon: "📝" },
-        { id: "tech", label: "Tech Panel", icon: "⚙️" },
+        { id: "moderation", label: "Moderation", icon: "" },
+        { id: "analytics", label: "Analytics", icon: "" },
+        { id: "billing", label: "Billing", icon: "" },
+        { id: "security", label: "Security & API", icon: "" },
+        { id: "policies", label: "Policies", icon: "" },
+        { id: "activity", label: "Activity Logs", icon: "" },
       ];
 
   const handleNavClick = (item) => {
@@ -245,27 +245,31 @@ const Dashboard = () => {
     return (
       <div className="admin-dashboard">
         <aside className="admin-sidebar">
-          <div className="sidebar-brand">
-            <span className="nav-icon">🦋</span>
-            <span className="brand-name">Butterfly</span>
+          <div className="admin-sidebar-header">
+            <div className="admin-logo">
+              <img src="/butterfly-logo.png" alt="Butterfly" className="admin-logo-img" />
+              <span className="admin-logo-text">Butterfly</span>
+            </div>
           </div>
-          <div className="sidebar-section">
-            <div className="sidebar-label">CORE OPERATIONS</div>
-            <nav className="sidebar-nav">
+
+          <div className="admin-sidebar-section">
+            <div className="admin-sidebar-label">CORE OPERATIONS</div>
+            <nav className="admin-sidebar-nav">
               {navItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`nav-item ${activeNav === item.label ? "active" : ""}`}
+                  className={`admin-nav-item ${activeNav === item.label ? "active" : ""}`}
                   onClick={() => handleNavClick(item)}
                 >
-                  <span className="nav-icon">{item.icon}</span>
-                  <span className="nav-label">{item.label}</span>
+                  <span className="admin-nav-icon">{item.icon}</span>
+                  <span className="admin-nav-label">{item.label}</span>
                 </div>
               ))}
             </nav>
           </div>
-          <div className="sidebar-footer">
-            <button className="logout-btn">
+
+          <div className="admin-sidebar-footer">
+            <button className="admin-logout-btn">
               <span>↪</span> Logout
             </button>
           </div>
@@ -690,32 +694,8 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Bottom Row - Live Concierge, Live Activity, Security Alerts */}
+          {/* Bottom Row - Live Activity, Security Alerts */}
           <div className="mod-bottom-row">
-            {/* Live Concierge */}
-            <div className="mod-concierge-card">
-              <div className="mod-card-header">
-                <div className="mod-concierge-title">
-                  <span className="mod-live-icon">🔵</span>
-                  <h3>Live Concierge</h3>
-                </div>
-                <span className="mod-live-badge">Live</span>
-              </div>
-              <div className="mod-concierge-list">
-                {liveConcierge.map((item) => (
-                  <div key={item.id} className="mod-concierge-item">
-                    <div className="mod-concierge-avatar">{item.avatar}</div>
-                    <div className="mod-concierge-info">
-                      <div className="mod-concierge-name">{item.name}</div>
-                      <div className="mod-concierge-message">{item.message}</div>
-                    </div>
-                    <div className="mod-concierge-time">{item.time}</div>
-                  </div>
-                ))}
-              </div>
-              <button className="mod-support-btn">Open Support Dashboard ↗</button>
-            </div>
-
             {/* Live Activity */}
             <div className="mod-activity-card">
               <div className="mod-card-header">

@@ -6,6 +6,7 @@ import Onboard from "./pages/Onboard";
 import FlaggedAccount from "./pages/FlaggedAccount";
 import AdminManagement from "./pages/AdminManagement";
 import Analytics from "./pages/Analytics";
+import DownloadApp from "./pages/DownloadApp";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/flaggedAccount" element={<FlaggedAccount />} />
         <Route path="/adminManagement" element={<AdminManagement />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/download" element={<DownloadApp />} />
       </Routes>
     </BrowserRouter>
   );

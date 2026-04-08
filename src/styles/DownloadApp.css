@@ -1,0 +1,503 @@
+/* ========================================
+   Google Play Store Page Styles
+   ======================================== */
+
+.play-store-page {
+  min-height: 100vh;
+  background: #fff;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+/* ─── Play Store Header ─── */
+.play-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.play-header__left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.play-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.play-logo {
+  width: 28px;
+  height: 28px;
+}
+
+.play-logo-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #5f6368;
+  letter-spacing: -0.5px;
+}
+
+.play-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.play-nav__link {
+  font-size: 0.9rem;
+  color: #5f6368;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.play-nav__link:hover,
+.play-nav__link.active {
+  color: #01875f;
+  border-bottom-color: #01875f;
+}
+
+.play-header__right {
+  display: flex;
+  gap: 16px;
+}
+
+.play-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.play-icon-btn:hover {
+  background: #f1f3f4;
+}
+
+.play-icon-btn svg {
+  width: 24px;
+  height: 24px;
+  color: #5f6368;
+}
+
+/* ─── Main Content ─── */
+.play-store-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ─── App Header Section ─── */
+.app-header {
+  padding: 24px 0;
+}
+
+.app-header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.app-header__left {
+  flex: 1;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #202124;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.app-developer {
+  font-size: 1rem;
+  color: #01875f;
+  margin: 0 0 12px 0;
+  font-weight: 500;
+}
+
+.app-meta {
+  margin-bottom: 16px;
+}
+
+.app-badge {
+  font-size: 0.75rem;
+  color: #5f6368;
+  font-weight: 500;
+}
+
+.app-stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.app-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.app-stat__value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #202124;
+}
+
+.app-stat__label {
+  font-size: 0.75rem;
+  color: #5f6368;
+  margin-top: 4px;
+}
+
+.app-stat__icon {
+  font-size: 1.25rem;
+}
+
+.app-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: #dadce0;
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.app-install-btn {
+  padding: 12px 32px;
+  background: #01875f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.app-install-btn:hover {
+  background: #016e4d;
+  box-shadow: 0 2px 8px rgba(1, 135, 95, 0.3);
+}
+
+.app-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  color: #01875f;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.app-action-btn:hover {
+  background: #f1f3f4;
+}
+
+.app-action-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.app-device-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #5f6368;
+  margin: 0;
+}
+
+.device-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.app-header__right {
+  flex-shrink: 0;
+}
+
+.app-icon-large {
+  width: 200px;
+  height: 200px;
+  border-radius: 20%;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #f59e0b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-icon-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+}
+
+/* ─── Screenshots Section ─── */
+.app-screenshots {
+  padding: 32px 0;
+  overflow-x: auto;
+}
+
+.screenshots-container {
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+
+.screenshot-card {
+  flex-shrink: 0;
+  width: 200px;
+  height: 356px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #f8f9fa;
+}
+
+.screenshot-card--featured {
+  width: 320px;
+  height: 356px;
+  position: relative;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.screenshot-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+}
+
+.screenshot-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.screenshot-text {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.screenshot-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── About Section ─── */
+.app-about {
+  padding: 32px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.about-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 16px 0;
+}
+
+.about-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #5f6368;
+  margin: 0 0 16px 0;
+  max-width: 800px;
+}
+
+.about-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.about-tag {
+  padding: 6px 14px;
+  background: #f1f3f4;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #5f6368;
+  font-weight: 500;
+}
+
+/* ─── Features Section ─── */
+.app-features {
+  padding: 32px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.features-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #202124;
+  margin: 0 0 24px 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.feature-item:hover {
+  background: #f1f3f4;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+}
+
+.feature-text {
+  font-size: 0.9rem;
+  color: #202124;
+  font-weight: 500;
+}
+
+/* ─── App Support Section ─── */
+.app-support {
+  padding: 24px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.app-support__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.app-support__title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #202124;
+  margin: 0;
+}
+
+.app-support__toggle {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.app-support__toggle:hover {
+  background: #f1f3f4;
+}
+
+.app-support__toggle svg {
+  width: 24px;
+  height: 24px;
+  color: #5f6368;
+}
+
+/* ─── Responsive Design ─── */
+@media (max-width: 768px) {
+  .play-header {
+    padding: 12px 16px;
+  }
+  
+  .play-nav {
+    display: none;
+  }
+  
+  .play-store-main {
+    padding: 16px;
+  }
+  
+  .app-header__content {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+  
+  .app-title {
+    font-size: 1.75rem;
+  }
+  
+  .app-icon-large {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .app-stats {
+    gap: 16px;
+  }
+  
+  .app-actions {
+    flex-wrap: wrap;
+  }
+  
+  .screenshot-card {
+    width: 150px;
+    height: 267px;
+  }
+  
+  .screenshot-card--featured {
+    width: 250px;
+    height: 267px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}
