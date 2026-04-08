@@ -1,9 +1,25 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import AdminCoreDashboard from "../pages/AdminDashbord";
+import { BrowserRouter } from "react-router-dom";
+import Dashboard from "../pages/Dashboard";
 
-describe("AdminCoreDashboard", () => {
+const renderDashboard = () => {
+  render(
+    <BrowserRouter>
+      <Dashboard />
+    </BrowserRouter>
+  );
+};
+
+describe("Dashboard", () => {
   beforeEach(() => {
-    render(<AdminCoreDashboard />);
+    // Set up localStorage for Super Admin role
+    localStorage.setItem("admin_role", "Super Admin");
+    localStorage.setItem("admin_email", "superadmin@example.com");
+    renderDashboard();
+  });
+
+  afterEach(() => {
+    localStorage.clear();
   });
 
   // ── Layout / Structure ──────────────────────────────────────

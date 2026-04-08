@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "http://208.68.36.144";
 
 const NAV_ITEMS = [
   { label: "Dashboard" },
@@ -14,19 +14,6 @@ const NAV_ITEMS = [
 ];
 
 const MODULE_PERMISSIONS = [
-  {
-    label: "Concierge Module",
-    key: "conciergeModule",
-    description: "Match curation, member management",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="5.5" stroke="#9c27b0" strokeWidth="1.4" />
-        <circle cx="7" cy="7" r="2.5" stroke="#9c27b0" strokeWidth="1.4" />
-        <circle cx="7" cy="7" r="0.8" fill="#9c27b0" />
-      </svg>
-    ),
-  },
   {
     label: "View Member Profiles",
     key: "viewMemberProfiles",
@@ -286,11 +273,11 @@ export default function Onboard() {
         return;
       }
 
-      const response = await fetch(`${BASE_URL}/api/admins/onboard`, {
+      const response = await fetch(`${BASE_URL}/admin-onboarding`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          ...(token && { Authorization: `Bearer ${token}` }),
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
@@ -299,11 +286,15 @@ export default function Onboard() {
 
       if (response.ok) {
         setApiSuccess(
-          data.message || "Admin account created successfully! Redirecting...",
+          data.message || "Admin onboarded successfully! Email invitation sent.",
         );
+        // Stay on page, clear form
         setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+          // Optional: reset form here if needed
+        }, 3000);
+      } else if (response.status === 401) {
+        setApiError("Session expired. Please log in again.");
+        setTimeout(() => navigate("/login"), 2000);
       } else {
         // Handle validation errors array or single message
         if (data.errors && Array.isArray(data.errors)) {
@@ -332,40 +323,43 @@ export default function Onboard() {
           <span className="ob-logo-mark">
             <img src="/butterfly-logo.png" alt="Butterfly" />
           </span>
-          <span className="ob-logo-text">AdminCore</span>
+          <span className="ob-logo-text">Butterfly</span>
         </div>
 
-        <nav className="ob-sidebar-nav">
-          {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
-              onClick={() => {
-                if (item.label === "Admins") {
-                  navigate("/moderatordashboard");
-                } else {
+        <div className="ob-sidebar-section">
+          <div className="ob-sidebar-label">CORE OPERATIONS</div>
+          <nav className="ob-sidebar-nav">
+            {[
+              { label: "Moderation", path: "/moderation" },
+              { label: "Analytics", path: "/analytics" },
+              { label: "Billing", path: "/billing" },
+              { label: "Security & APIs", path: "/security" },
+              { label: "Policies", path: "/policies" },
+              { label: "Activity Logs", path: "/activity-logs" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
+                onClick={() => {
                   setActiveNav(item.label);
-                }
-              }}
-            >
-              {item.label}
-            </div>
-          ))}
-        </nav>
+                  if (item.path) navigate(item.path);
+                }}
+              >
+                {item.label}
+              </div>
+            ))}
+          </nav>
+        </div>
 
         <div className="ob-sidebar-footer">
-          <div className="ob-system-health">
-            <span className="ob-health-dot" />
-            System Health
-          </div>
-          <div className="ob-health-bars">
-            {[1, 1, 1, 1, 0, 1, 1, 0, 1, 1].map((on, i) => (
-              <div
-                key={i}
-                className={`ob-health-bar${on ? " ob-health-bar--on" : ""}`}
-              />
-            ))}
-          </div>
+          <button className="ob-logout-btn" onClick={() => navigate("/")}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+          </button>
         </div>
       </aside>
 

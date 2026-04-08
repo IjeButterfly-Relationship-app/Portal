@@ -59,103 +59,63 @@ const Dashboard = () => {
   const moderatorMetrics = [
     {
       label: "Total Users",
-      value: "12,842",
-      trend: "+ 12.5%",
+      value: "0",
+      trend: "+0%",
       trendUp: true,
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" />
-          <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" />
-        </svg>
-      ),
+      icon: "/members.jpeg",
     },
     {
       label: "Flagged Accounts",
-      value: "1,429",
-      trend: "+ 3.2%",
+      value: "0",
+      trend: "+ 0%",
       trendUp: true,
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M4 15C4 15 5.5 14 8 14C10.5 14 12 15 15 15C17.5 15 19 14 19 14V4C19 4 17.5 5 15 5C12 5 10.5 4 8 4C5.5 4 4 5 4 5V21" />
-        </svg>
-      ),
+      icon: "/flaggedAccount.png",
     },
     {
       label: "Reports Pending",
-      value: "48",
-      trend: "- 18.4%",
+      value: "0",
+      trend: "- 0%",
       trendUp: false,
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 6V12L16 14" strokeLinecap="round" />
-        </svg>
-      ),
+      icon: "/reports.png",
     },
     {
       label: "Platform Revenue",
-      value: "$42,390",
-      trend: "+ 8.1%",
+      value: "$0",
+      trend: "+ 0%",
       trendUp: true,
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <rect x="2" y="7" width="20" height="14" rx="2" />
-          <path d="M16 21V5C16 4.46957 15.7893 3.96086 15.4142 3.58579C15.0391 3.21071 14.5304 3 14 3H10C9.46957 3 8.96086 3.21071 8.58579 3.58579C8.21071 3.96086 8 4.46957 8 5V21" />
-        </svg>
-      ),
+      icon: "/revenue.jpeg",
     },
     {
       label: "Fraud alerts",
-      value: "12",
+      value: "0",
       trend: "",
       trendUp: null,
       subtitle: "Critical security incidents",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M10.29 3.86L1.82 18C1.64547 18.3024 1.55298 18.6453 1.552 18.9945C1.55102 19.3437 1.64158 19.6871 1.81442 19.9895C1.98727 20.2919 2.23664 20.5427 2.53849 20.7164C2.84033 20.8901 3.18357 20.9812 3.53 21H20.47C20.8164 20.9812 21.1597 20.8901 21.4615 20.7164C21.7634 20.5427 22.0127 20.2919 22.1856 19.9895C22.3584 19.6871 22.449 19.3437 22.448 18.9945C22.447 18.6453 22.3545 18.3024 22.18 18L13.71 3.86C13.5317 3.56611 13.2807 3.32312 12.9823 3.15551C12.6839 2.98791 12.3483 2.90128 12.0075 2.90423C11.6667 2.90718 11.3326 2.99963 11.0368 3.17206C10.741 3.34448 10.4937 3.59139 10.32 3.888L10.29 3.86Z" />
-          <path d="M12 9V13" strokeLinecap="round" />
-          <path d="M12 17H12.01" strokeLinecap="round" />
-        </svg>
-      ),
+      icon: "/Fraudalerts.png",
     },
     {
       label: "Subscription stats",
-      value: "$42.5k",
-      trend: "+ 3.8%",
+      value: "$0",
+      trend: "+ 0",
       trendUp: true,
       subtitle: "Monthly recurring revenue",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" />
-          <path d="M3 10H21" />
-        </svg>
-      ),
+      icon: "/stats.png",
     },
     {
       label: "Verified users",
-      value: "9,421",
-      trend: "+ 8.1%",
+      value: "0",
+      trend: "+ 0%",
       trendUp: true,
       subtitle: "Accounts with completed KYC",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" />
-          <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" />
-          <path d="M9 11L11 13L15 9" />
-        </svg>
-      ),
+      icon: "/verified.png",
     },
     {
       label: "Active matches",
-      value: "2,109",
-      trend: "+ 22.5%",
+      value: "0",
+      trend: "+ 0%",
       trendUp: true,
       subtitle: "Ongoing real-time interactions",
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
-        </svg>
-      ),
+      icon: "/matches.png",
     },
   ];
 
@@ -201,11 +161,11 @@ const Dashboard = () => {
 
   // Super Admin Data
   const superAdminMetrics = [
-    { label: "TOTAL MEMBERS", value: "1,284,502", trend: "+ 8.2% this month", sub: "Free + Premium globally", icon: "users", trendType: "positive" },
-    { label: "PREMIUM USERS", value: "87,430", trend: "+ 13.4% this month", sub: "5.8% conversion rate", icon: "star", trendType: "positive" },
-    { label: "REVENUE (24HRS)", value: "$142,890", trend: "+ 15.4% vs yesterday", sub: "Subscriptions + events", icon: "dollar", trendType: "positive" },
-    { label: "ADMINS ONLINE", value: "42 / 50", trend: "8 currently offline", sub: "Across all departments", icon: "admin", trendType: "offline" },
-    { label: "ACTIVE ESCALATIONS", value: "18", trend: "3 active yesterday", sub: "Require SU intervention", icon: "alert", trendType: "negative", isAlert: true },
+    { label: "TOTAL MEMBERS", value: "1,284,502", trend: "+ 8.2% this month", sub: "Free + Premium globally", icon: "/members.jpeg", trendType: "positive" },
+    { label: "PREMIUM USERS", value: "87,430", trend: "+ 13.4% this month", sub: "5.8% conversion rate", icon: "/premium.png", trendType: "positive" },
+    { label: "REVENUE (24HRS)", value: "$142,890", trend: "+ 15.4% vs yesterday", sub: "Subscriptions + events", icon: "/revenue.jpeg", trendType: "positive" },
+    { label: "ADMINS ONLINE", value: "42 / 50", trend: "8 currently offline", sub: "Across all departments", icon: "/adminonline.png", trendType: "offline" },
+    { label: "ACTIVE ESCALATIONS", value: "18", trend: "3 active yesterday", sub: "Require SU intervention", icon: "/escalations.png", trendType: "negative", isAlert: true },
   ];
 
   const adminTeam = [
@@ -224,20 +184,20 @@ const Dashboard = () => {
   ];
 
   const quickActions = [
-    { icon: "+", label: "Onboard New Admin", action: () => navigate("/onboard") },
-    { icon: "⚡", label: "Emergency Suspend" },
-    { icon: "↺", label: "Override Decision" },
-    { icon: "⚙️", label: "System Config" },
-    { icon: "📄", label: "Export Report" },
-    { icon: "📢", label: "Broadcast Alert" },
+    { icon: "/onboard.png", label: "Onboard New Admin", path: "/onboard" },
+    { icon: "/suspend.png", label: "Emergency Suspend" },
+    { icon: "/override.png", label: "Override Decision" },
+    { icon: "/configs.png", label: "System Config" },
+    { icon: "/export.png", label: "Export Report" },
+    { icon: "/broard.png", label: "Broadcast Alert" },
   ];
 
   const modules = [
-    { icon: "💳", label: "Billing & Revenue", bg: "#FEF3C7" },
-    { icon: "🔒", label: "Security & APIs", bg: "#EDE9FE" },
-    { icon: "📄", label: "Policies & Terms", bg: "#DBEAFE" },
-    { icon: "📊", label: "Analytics Engine", bg: "#D1FAE5" },
-    { icon: "👤", label: "Admin Management", bg: "#FCE7F3" },
+    { icon: "/bill.png", label: "Billing & Revenue", bg: "#FEF3C7" },
+    { icon: "/security.png", label: "Security & APIs", bg: "#EDE9FE" },
+    { icon: "/policies.png", label: "Policies & Terms", bg: "#DBEAFE" },
+    { icon: "/analytics.png", label: "Analytics Engine", bg: "#D1FAE5" },
+    { icon: "/admin.jpeg", label: "Admin Management", bg: "#FCE7F3" },
   ];
 
   if (isSuperAdmin) {
@@ -323,51 +283,51 @@ const Dashboard = () => {
             <div className="admin-metrics-row">
               <div className="admin-metric-card">
                 <div className="admin-metric-header">
-                  <div className="admin-metric-icon">👥</div>
+                  <img src="/members.jpeg" alt="Members" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend positive">↗ 8.2% this month</span>
                 </div>
                 <div className="admin-metric-label">TOTAL MEMBERS</div>
-                <div className="admin-metric-value">1,384,502</div>
+                <div className="admin-metric-value">0</div>
                 <div className="admin-metric-subtitle">Free + Premium globally</div>
               </div>
 
               <div className="admin-metric-card">
                 <div className="admin-metric-header">
-                  <div className="admin-metric-icon">👤</div>
-                  <span className="admin-metric-trend positive">↗ 13.4% this month</span>
+                  <img src="/premium.png" alt="Premium" className="admin-metric-icon-img" />
+                  <span className="admin-metric-trend positive">↗ 0% this month</span>
                 </div>
                 <div className="admin-metric-label">PREMIUM USERS</div>
-                <div className="admin-metric-value">87,430</div>
-                <div className="admin-metric-subtitle">6.8% conversion rate</div>
+                <div className="admin-metric-value">0</div>
+                <div className="admin-metric-subtitle">0% conversion rate</div>
               </div>
 
               <div className="admin-metric-card">
                 <div className="admin-metric-header">
-                  <div className="admin-metric-icon">$</div>
+                  <img src="/revenue.jpeg" alt="Revenue" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend positive">↗ 15.4% vs yesterday</span>
                 </div>
                 <div className="admin-metric-label">REVENUE (24HRS)</div>
-                <div className="admin-metric-value">$142,890</div>
+                <div className="admin-metric-value">$0</div>
                 <div className="admin-metric-subtitle">Subscriptions + events</div>
               </div>
 
               <div className="admin-metric-card">
                 <div className="admin-metric-header">
-                  <div className="admin-metric-icon">👥</div>
+                  <img src="/adminonline.png" alt="Admin Online" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend negative">8 currently offline</span>
                 </div>
                 <div className="admin-metric-label">ADMINS ONLINE</div>
-                <div className="admin-metric-value">42 / 50</div>
+                <div className="admin-metric-value">0 / 0</div>
                 <div className="admin-metric-subtitle">Across all departments</div>
               </div>
 
               <div className="admin-metric-card escalations">
                 <div className="admin-metric-header">
-                  <div className="admin-metric-icon">🛡️</div>
+                  <img src="/escalations.png" alt="Escalations" className="admin-metric-icon-img" />
                   <span className="admin-metric-badge">3 since yesterday</span>
                 </div>
                 <div className="admin-metric-label">ACTIVE ESCALATIONS</div>
-                <div className="admin-metric-value">18</div>
+                <div className="admin-metric-value">0</div>
                 <div className="admin-metric-subtitle">Require SU intervention</div>
               </div>
             </div>
@@ -408,8 +368,14 @@ const Dashboard = () => {
                 </div>
                 <div className="qa-grid">
                   {quickActions.map((action, idx) => (
-                    <button key={idx} className="qa-btn" onClick={action.action}>
-                      <span className="qa-icon">{action.icon}</span>
+                    <button 
+                      key={idx} 
+                      className="qa-btn" 
+                      onClick={() => {
+                        if (action.path) navigate(action.path);
+                      }}
+                    >
+                      <img src={action.icon} alt="" className="qa-icon-img" />
                       <span>{action.label}</span>
                     </button>
                   ))}
@@ -499,7 +465,7 @@ const Dashboard = () => {
                     style={{ cursor: mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "pointer" : "default" }}
                   >
                     <div className="module-icon" style={{ background: mod.bg }}>
-                      {mod.icon}
+                      <img src={mod.icon} alt="" className="module-icon-img" />
                     </div>
                     <span className="module-label">{mod.label}</span>
                   </div>
@@ -598,9 +564,7 @@ const Dashboard = () => {
                 style={{ cursor: metric.label === "Flagged Accounts" ? "pointer" : "default" }}
               >
                 <div className="mod-metric-header">
-                  <div className="mod-metric-icon-wrapper">
-                    {metric.icon}
-                  </div>
+                  <img src={metric.icon} alt="" className="mod-metric-icon-img" />
                   {metric.trend && (
                     <span className={`mod-metric-trend ${metric.trendUp ? "positive" : "negative"}`}>
                       {metric.trend}

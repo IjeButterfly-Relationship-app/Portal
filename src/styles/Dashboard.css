@@ -12,6 +12,14 @@
 }
 
 /* Sidebar - Dark Purple */
+.mod-sidebar,
+.mod-sidebar *,
+.mod-sidebar *::before,
+.mod-sidebar *::after {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 .mod-sidebar {
   width: 240px;
   background: #4A1D6A;
@@ -28,13 +36,25 @@
 
 .mod-sidebar-header {
   padding: 24px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+.mod-sidebar-header::after,
+.mod-sidebar-header::before {
+  display: none !important;
+  content: none !important;
+  border: none !important;
 }
 
 .mod-logo {
   display: flex;
   align-items: center;
   gap: 10px;
+  border: none !important;
 }
 
 .mod-logo-icon {
@@ -56,6 +76,7 @@
 .mod-sidebar-section {
   flex: 1;
   padding: 16px 12px;
+  border: none;
 }
 
 .mod-sidebar-label {
@@ -66,6 +87,7 @@
   text-transform: uppercase;
   margin-bottom: 12px;
   padding: 0 12px;
+  border: none;
 }
 
 .mod-sidebar-nav {
@@ -105,7 +127,7 @@
 
 .mod-sidebar-footer {
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
 }
 
 .mod-logout-btn {
@@ -250,13 +272,13 @@
 .mod-dashboard-title h1 {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff !important;
   margin-bottom: 4px;
 }
 
 .mod-dashboard-title p {
   font-size: 0.9rem;
-  color: #6B7280;
+  color: #ffffff !important;
 }
 
 /* Metrics Grid - 8 cards in 2 rows of 4 */
@@ -297,6 +319,13 @@
   align-items: center;
   justify-content: center;
   color: #6B7280;
+}
+
+.mod-metric-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .mod-metric-trend {
@@ -914,7 +943,7 @@
 /* New Super Admin Sidebar Styles */
 .admin-sidebar-header {
   padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .admin-logo {
@@ -991,7 +1020,7 @@
 
 .admin-sidebar-footer {
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 .admin-logout-btn {
@@ -1248,6 +1277,13 @@
   font-size: 1.1rem;
 }
 
+.admin-metric-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
 .admin-metric-trend {
   font-size: 0.7rem;
   padding: 4px 8px;
@@ -1375,6 +1411,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.qa-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.qa-icon {
   font-size: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -1567,6 +1613,14 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
+  overflow: hidden;
+}
+
+.module-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 6px;
 }
 
 .module-label {

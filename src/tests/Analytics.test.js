@@ -2,20 +2,20 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import AnalyticsGrowth from "./AnalyticsGrowth";
+import Analytics from "../pages/Analytics";
 
-describe("AnalyticsGrowth Component", () => {
+describe("Analytics Component", () => {
   // ──────────────────────────────────────
   // Rendering Tests
   // ──────────────────────────────────────
 
   test("renders the component without crashing", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Analytics & Growth")).toBeInTheDocument();
   });
 
   test("renders the header with title and subtitle", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Analytics & Growth")).toBeInTheDocument();
     expect(
       screen.getByText(/Comprehensive insights into conversion funnels/i),
@@ -23,21 +23,21 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("renders all three metric cards", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Platform Health Score")).toBeInTheDocument();
     expect(screen.getByText("Matching Success Rate")).toBeInTheDocument();
     expect(screen.getByText("Active Subscriptions")).toBeInTheDocument();
   });
 
   test("renders metric values correctly", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("15.4%")).toBeInTheDocument();
     expect(screen.getByText("8.2 / 10")).toBeInTheDocument();
     expect(screen.getByText("1,248")).toBeInTheDocument();
   });
 
   test("renders all chart sections", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(
       screen.getByText("Subscription Conversion Funnel"),
     ).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("renders funnel stages correctly", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Awareness")).toBeInTheDocument();
     expect(screen.getByText("Interest")).toBeInTheDocument();
     expect(screen.getByText("Consideration")).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("renders matching quality legend items", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Highly Successful")).toBeInTheDocument();
     expect(screen.getByText("Successful")).toBeInTheDocument();
     expect(screen.getByText("Needs Review")).toBeInTheDocument();
@@ -64,13 +64,13 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("renders cohort retention table with all rows", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Jan 2023")).toBeInTheDocument();
     expect(screen.getByText("Jun 2023")).toBeInTheDocument();
   });
 
   test("renders table headers correctly", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Cohort Month")).toBeInTheDocument();
     expect(screen.getByText("Month 0")).toBeInTheDocument();
     expect(screen.getByText("Month 1")).toBeInTheDocument();
@@ -81,19 +81,19 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("renders time range select", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const selectElement = screen.getByDisplayValue("Last 12 Months");
     expect(selectElement).toBeInTheDocument();
   });
 
   test("time range select has all options", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const selectElement = screen.getByDisplayValue("Last 12 Months");
     expect(selectElement.querySelectorAll("option")).toHaveLength(5);
   });
 
   test("allows changing time range", async () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const selectElement = screen.getByDisplayValue("Last 12 Months");
 
     await userEvent.selectOptions(selectElement, "7days");
@@ -101,14 +101,14 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("renders all control buttons", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Today")).toBeInTheDocument();
     expect(screen.getByText("Previous Body")).toBeInTheDocument();
     expect(screen.getByText("Share Analysis")).toBeInTheDocument();
   });
 
   test("button click changes active state", async () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const todayBtn = screen.getByText("Today");
 
     fireEvent.click(todayBtn);
@@ -116,7 +116,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("export and details buttons are rendered in cohort section", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Export")).toBeInTheDocument();
     expect(screen.getByText("Details")).toBeInTheDocument();
   });
@@ -126,7 +126,7 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("metric cards display correct descriptions", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(
       screen.getByText("Overall platform performance score"),
     ).toBeInTheDocument();
@@ -139,14 +139,14 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("metric badges display correct values", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("+2.5%")).toBeInTheDocument();
     expect(screen.getByText("↑ 6.2")).toBeInTheDocument();
     expect(screen.getByText("+215 est")).toBeInTheDocument();
   });
 
   test("funnel data percentages are displayed correctly", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("100.0%")).toBeInTheDocument();
     expect(screen.getByText("84.4%")).toBeInTheDocument();
     expect(screen.getByText("54.6%")).toBeInTheDocument();
@@ -154,13 +154,13 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("legend displays percentages for quality metrics", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const legendPercentages = screen.getAllByText(/\d+%/);
     expect(legendPercentages.length).toBeGreaterThan(0);
   });
 
   test("cohort retention values are displayed correctly", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("100%")).toBeInTheDocument();
     expect(screen.getByText("78%")).toBeInTheDocument();
     expect(screen.getByText("65%")).toBeInTheDocument();
@@ -171,7 +171,7 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("pie chart renders without errors", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const pieChart = screen
       .getByText("Matching Quality")
       .closest(".ag-chart-container");
@@ -179,13 +179,13 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("funnel chart renders all bars", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const funnelCharts = screen.getAllByText(/100\.0%|84\.4%|54\.6%|27\.9%/);
     expect(funnelCharts.length).toBeGreaterThan(0);
   });
 
   test("retention table has correct number of rows", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const table = screen.getByText("Cohort Month").closest("table");
     const rows = table.querySelectorAll("tbody tr");
     expect(rows).toHaveLength(6); // 6 cohort months
@@ -196,7 +196,7 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("all sections have proper headings", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(
       screen.getByRole("heading", { name: /Analytics & Growth/i }),
     ).toBeInTheDocument();
@@ -209,18 +209,18 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("select element has proper label", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByLabelText("Last 12 Months")).toBeInTheDocument();
   });
 
   test("buttons are keyboard accessible", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const todayBtn = screen.getByText("Today");
     expect(todayBtn).toHaveProperty("type", "button");
   });
 
   test("table has proper structure", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const table = screen.getByText("Cohort Month").closest("table");
     expect(table.querySelector("thead")).toBeInTheDocument();
     expect(table.querySelector("tbody")).toBeInTheDocument();
@@ -231,12 +231,12 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("footer is rendered", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText(/© 2024 Analytics Suite/)).toBeInTheDocument();
   });
 
   test("footer contains navigation links", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     expect(screen.getByText("Privacy Policy")).toBeInTheDocument();
     expect(screen.getByText("Terms of Service")).toBeInTheDocument();
     expect(screen.getByText("Support Center")).toBeInTheDocument();
@@ -247,7 +247,7 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("changing time range doesn't break the component", async () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const selectElement = screen.getByDisplayValue("Last 12 Months");
 
     await userEvent.selectOptions(selectElement, "30days");
@@ -258,7 +258,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("clicking multiple buttons doesn't break the component", async () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
 
     const todayBtn = screen.getByText("Today");
     const previousBtn = screen.getByText("Previous Body");
@@ -271,7 +271,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("all metrics data is displayed and accurate", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
 
     const healthScore = screen.getByText("Platform Health Score");
     const matchingRate = screen.getByText("Matching Success Rate");
@@ -283,7 +283,7 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("cohort table displays all months and retention data", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
 
     const allCohorts = [
       "Jan 2023",
@@ -302,7 +302,7 @@ describe("AnalyticsGrowth Component", () => {
   test("rendering doesn't produce console errors", () => {
     const consoleSpy = jest.spyOn(console, "error").mockImplementation();
 
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
 
     expect(consoleSpy).not.toHaveBeenCalled();
 
@@ -314,7 +314,7 @@ describe("AnalyticsGrowth Component", () => {
   // ──────────────────────────────────────
 
   test("metric cards have proper styling classes", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const cards = screen.getAllByRole("heading", { level: 3 });
     cards.forEach((card) => {
       const parentCard = card.closest(".ag-metric-card");
@@ -323,13 +323,13 @@ describe("AnalyticsGrowth Component", () => {
   });
 
   test("chart containers have proper classes", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const containers = document.querySelectorAll(".ag-chart-container");
     expect(containers.length).toBeGreaterThan(0);
   });
 
   test("retention table has color-coded cells", () => {
-    render(<AnalyticsGrowth />);
+    render(<Analytics />);
     const table = screen.getByText("Cohort Month").closest("table");
     const cells = table.querySelectorAll('td[style*="backgroundColor"]');
     expect(cells.length).toBeGreaterThan(0);

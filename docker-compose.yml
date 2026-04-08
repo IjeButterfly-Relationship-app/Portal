@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    container_name: butterfly-frontend
+    networks:
+      - butterfly-network
+
+networks:
+  butterfly-network:
+    driver: bridge

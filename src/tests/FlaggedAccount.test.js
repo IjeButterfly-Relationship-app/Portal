@@ -1,10 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import ButterflyAdmin from "./ButterflyAdmin";
+import FlaggedAccount from "../pages/FlaggedAccount";
 
 // ─── Render helper ────────────────────────────────────────────────────────────
 function setup() {
-  return render(<ButterflyAdmin />);
+  return render(<FlaggedAccount />);
 }
 
 // ─── Header ───────────────────────────────────────────────────────────────────

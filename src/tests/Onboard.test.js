@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import Onboard from "./Onboard";
+import Onboard from "../pages/Onboard";
 
 const renderOnboard = () =>
   render(
