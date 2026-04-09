@@ -143,27 +143,27 @@ const Features = () => (
     <h2 className="features-title">Key Features</h2>
     <div className="features-grid">
       <div className="feature-item">
-        <span className="feature-icon">💜</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Deep Compatibility Matching</span>
       </div>
       <div className="feature-item">
-        <span className="feature-icon">🔒</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Verified Profiles</span>
       </div>
       <div className="feature-item">
-        <span className="feature-icon">✨</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Daily Conversation Prompts</span>
       </div>
       <div className="feature-item">
-        <span className="feature-icon">🛡️</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Private Secure Vault</span>
       </div>
       <div className="feature-item">
-        <span className="feature-icon">👨‍🏫</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Relationship Coaching</span>
       </div>
       <div className="feature-item">
-        <span className="feature-icon">🌍</span>
+        <span className="feature-icon"></span>
         <span className="feature-text">Local & Global Matching</span>
       </div>
     </div>

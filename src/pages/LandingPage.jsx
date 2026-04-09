@@ -468,7 +468,7 @@ const Footer = () => (
       ))}
     </div>
     <div className="footer__bottom">
-      <span>© 2025 Butterfly Inc. All rights reserved.</span>
+      <span>© 2026 Butterfly . Ijeoma Limmite All rights reserved.</span>
       <span>Made with 💜 for couples everywhere</span>
     </div>
   </footer>

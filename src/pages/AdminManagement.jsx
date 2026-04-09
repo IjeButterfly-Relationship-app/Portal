@@ -68,12 +68,12 @@ const ROLE_COLORS = {
 };
 
 const navItems = [
-  { id: "dashboard", label: "Dashboard", icon: "📊" },
-  { id: "users", label: "Users", icon: "👥" },
-  { id: "reports", label: "Reports", icon: "📋" },
-  { id: "messages", label: "Messages", icon: "💬" },
-  { id: "analytics", label: "Analytics", icon: "📈" },
-  { id: "settings", label: "Settings", icon: "⚙️" },
+  { id: "dashboard", label: "Dashboard", icon: "" },
+  { id: "users", label: "Users", icon: "" },
+  { id: "reports", label: "Reports", icon: "" },
+  { id: "messages", label: "Messages", icon: "" },
+  { id: "analytics", label: "Analytics", icon: "" },
+  { id: "settings", label: "Settings", icon: "" },
 ];
 
 export default function AdminManagement() {
@@ -152,7 +152,7 @@ export default function AdminManagement() {
       <aside className="mod-sidebar">
         <div className="mod-sidebar-header">
           <div className="mod-logo">
-            <span className="mod-logo-icon">🦋</span>
+            <span className="mod-logo-icon"></span>
             <span className="mod-logo-text">Butterfly</span>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function AdminManagement() {
           <header className="am-header">
             <div className="am-logo">
               <div className="am-logo-mark">
-                <span>🦋</span>
+                <span></span>
               </div>
             </div>
             <div className="am-search-wrap">
@@ -442,10 +442,10 @@ export default function AdminManagement() {
                             data-testid={`menu-${admin.id}`}
                           >
                             <button className="am-ctx-item">
-                              <span>✏️</span> Edit
+                              <span></span> Edit
                             </button>
                             <button className="am-ctx-item">
-                              <span>🚫</span> Suspend
+                              <span></span> Suspend
                             </button>
                             <button
                               className="am-ctx-item am-ctx-item--danger"
@@ -545,7 +545,7 @@ export default function AdminManagement() {
       )}
 
       {/* ── Footer ── */}
-      <footer className="am-footer">© 2024 AdminCore Webfare System</footer>
+      <footer className="am-footer">© 2026 Butterfly Ijeoma Limited</footer>
         </div>
       </main>
     </div>

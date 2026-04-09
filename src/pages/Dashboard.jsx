@@ -474,7 +474,7 @@ const Dashboard = () => {
             </div>
 
             <footer className="admin-footer">
-              <span>© 2024 AdminCore Webframe System</span>
+              <span>© 2026 Butterfly Ijeoma Limmited</span>
             </footer>
           </div>
         </main>
@@ -692,7 +692,7 @@ const Dashboard = () => {
                 {securityAlerts.map((alert, idx) => (
                   <div key={idx} className={`mod-security-alert ${alert.type}`}>
                     <div className="mod-alert-icon">
-                      {alert.type === "critical" ? "🚨" : "⚠️"}
+                      {alert.type === "critical" ? "" : ""}
                     </div>
                     <div className="mod-alert-content">
                       <div className="mod-alert-title">{alert.title}</div>
