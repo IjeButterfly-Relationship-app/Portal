@@ -71,15 +71,19 @@ const Navbar = () => (
           <a href="#features">Features</a>
         </li>
         <li>
-          <a href="#how-it-works">Steps</a>
+          <a href="#how-it-works">How it Works</a>
         </li>
         <li>
-          <a href="#faqs">FAQS</a>
+          <a href="#pricing">Pricing</a>
         </li>
         <li>
-          <a href="#get-app">Get the app</a>
+          <a href="#contact">Contact</a>
         </li>
       </ul>
+    </div>
+    <div className="navbar__buttons">
+      <button className="navbar__login">Login</button>
+      <button className="navbar__download">Download</button>
     </div>
   </nav>
 );
@@ -93,19 +97,45 @@ const Hero = () => (
     <div className="hero__glass-overlay" />
     <div className="hero__inner">
       <div className="hero__content">
+        <p className="hero__eyebrow">Join 40,000+ couples</p>
         <h1 className="hero__title">
-          Trusted
+          Find deeper
           <br />
-          Connections,
+          <em>healthier</em>
           <br />
-          <span>Real</span> Relationships.
+          relationships.
         </h1>
         <p className="hero__subtitle">
           Butterfly is the world's most intuitive relationship app, designed to
           help you build meaningful habits, spark deep conversations, and grow
           closer every day.
         </p>
+        <div className="hero__cta">
+          <button className="hero__download-btn">Download the app</button>
+        </div>
+        <div className="hero__store-badges">
+          <span className="hero__app-store">App Store</span>
+          <span className="hero__google-play">Google Play</span>
+        </div>
+        <div className="hero__ratings">
+          <span className="hero__stars">★★★★★</span>
+          <span className="hero__rating-text">12,000 ratings</span>
+        </div>
       </div>
+    </div>
+  </section>
+);
+
+/* ══════════════════════════════════════════
+   PRESS BAR
+═════════════════════════════════════════ */
+const PressBar = () => (
+  <section className="press-bar">
+    <p className="press-bar__label">As seen in</p>
+    <div className="press-bar__logos">
+      <span className="press-bar__publication">TechPulse</span>
+      <span className="press-bar__publication">Wellness</span>
+      <span className="press-bar__publication">UX Daily</span>
     </div>
   </section>
 );
@@ -116,33 +146,33 @@ const Hero = () => (
 const features = [
   {
     image: "butterfly1.jpeg",
-    title: "Deep Compatibility",
-    desc: "Find compatible partners who share your values and relationship goals.",
-    tag: "Compatibility",
+    title: "Daily Spark Prompts",
+    desc: "1,500 therapist-approved conversation starters to deepen your connection.",
+    tag: "Prompts",
   },
   {
     image: "butterfly2.jpeg",
-    title: "Verified Profiles",
-    desc: "Every profile goes through photo & identity verification.",
+    title: "Private Secure Vault",
+    desc: "End-to-end encrypted space for your photos and memories.",
     tag: "Security",
   },
   {
     image: "butterfly3.jpeg",
-    title: "Relationship Coaches",
-    desc: "Get expert guidance from certified relationship coaches.",
-    tag: "Coaching",
+    title: "Relationship Check-Ins",
+    desc: "Weekly wellness check-ins to keep your bond strong.",
+    tag: "Check-Ins",
   },
   {
     image: "butterfly4.jpeg",
-    title: "Private Secure Vault",
-    desc: "A dedicated and encrypted space for your photos and memories.",
-    tag: "Privacy",
+    title: "Deep Compatibility",
+    desc: "Find compatible partners who share your values.",
+    tag: "Compatibility",
   },
   {
     image: "couple2.png",
-    title: "Butterfly Premium",
-    desc: "Unlock exclusive features and enhanced matching.",
-    tag: "Premium",
+    title: "Relationship Coaches",
+    desc: "Expert guidance from certified professionals.",
+    tag: "Coaching",
   },
   {
     image: "couple.png",
@@ -161,21 +191,7 @@ const PEEK_PX = 56;
 const SCALE_STEP = 0.035;
 
 const Features = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [startTime, setStartTime] = useState(Date.now());
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      const elapsed = Date.now() - startTime;
-      setActiveIndex(Math.floor(elapsed / CARD_DURATION) % features.length);
-    }, 100);
-    return () => clearInterval(id);
-  }, [startTime]);
-
-  const goTo = (idx) => {
-    setActiveIndex(idx);
-    setStartTime(Date.now() - idx * CARD_DURATION);
-  };
+  const [activeIndex] = useState(0);
 
   // Build ordered slice: [activeIndex, activeIndex+1, activeIndex+2, …]
   const visibleCards = Array.from({ length: BEHIND_COUNT + 1 }, (_, i) => {
@@ -189,9 +205,9 @@ const Features = () => {
         {/* ── Left col: heading + active-card info + controls ── */}
         <div className="features__header-col">
           <h2 className="section__title features__title">
-            Everything you need to <em>find</em>
+            Bloom together with
             <br />
-            real love.
+            <em>deeper</em> connections.
           </h2>
           <p className="section__subtitle features__subtitle">
             Built different. No endless swiping, no shallow connections — just
@@ -209,6 +225,12 @@ const Features = () => {
               {features[activeIndex].desc}
             </p>
           </div>
+
+        <div className="features__static" style={{display:'none'}}>
+          <p>Daily Spark Prompts</p>
+          <p>Private Secure Vault</p>
+          <p>Relationship Check-Ins</p>
+        </div>
         </div>
 
         {/* ── Right col: stacked cards ── */}
@@ -270,29 +292,25 @@ const Features = () => {
 const steps = [
   {
     num: "01",
-    title: "Create Your Profile",
-    desc: "Set up your account and build your profile to start connecting with others.",
+    title: "Build Your Style",
+    desc: "Create your profile and preferences to find your perfect match.",
   },
   {
     num: "02",
-    title: "See Your Matches",
-    desc: "Discover compatible partners who share your values and relationship goals.",
+    title: "Invite Your Partner",
+    desc: "Connect with your partner to start your journey together.",
   },
   {
     num: "03",
-    title: "Start Real Conversations",
-    desc: "Begin meaningful dialogues with daily prompts designed to deepen your connection.",
-  },
-  {
-    num: "04",
-    title: "Grow Together",
-    desc: "Build healthy relationships through meaningful connections and shared experiences.",
+    title: "Grow Every Day",
+    desc: "Build healthy habits through daily prompts and check-ins.",
   },
 ];
 
 const Steps = () => (
   <section className="steps-section" id="how-it-works">
     <div className="section__header">
+      <p className="section__badge">💫 HOW IT WORKS</p>
       <h2 className="section__title">Four steps to a better bond</h2>
     </div>
     <div className="steps-grid">
@@ -303,6 +321,35 @@ const Steps = () => (
           <p className="step-card__desc">{s.desc}</p>
         </div>
       ))}
+    </div>
+  </section>
+);
+
+/* ══════════════════════════════════════════
+   SCREENSHOTS
+══════════════════════════════════════════ */
+const Screenshots = () => (
+  <section className="screenshots-section">
+    <div className="section__header">
+      <h2 className="section__title">Beautifully designed for connection</h2>
+    </div>
+    <div className="screenshots-grid">
+      <div className="screenshot-card">
+        <div className="screenshot-card__image" />
+        <p className="screenshot-card__label">Daily Prompts</p>
+      </div>
+      <div className="screenshot-card">
+        <div className="screenshot-card__image" />
+        <p className="screenshot-card__label">Weekly Analytics</p>
+      </div>
+      <div className="screenshot-card">
+        <div className="screenshot-card__image" />
+        <p className="screenshot-card__label">Shared Vault</p>
+      </div>
+    </div>
+    <div className="connection-score">
+      <span className="connection-score__value">92%</span>
+      <span className="connection-score__label">Connection Score</span>
     </div>
   </section>
 );
@@ -371,38 +418,28 @@ const CTA = () => {
     <section className="cta-section" id="get-app">
       <div className="cta-container">
         <div className="cta-left">
-          <h3 className="cta-badge">GET THE APP</h3>
           <h2 className="cta-title">
-            Your person is already
+            Ready to grow your
             <br />
-            waiting for you
+            relationship?
           </h2>
+          <div className="cta-stats">
+            <span className="cta-stat">50,000+ couples</span>
+          </div>
           <p className="cta-subtitle">
             Download Butterfly free. No subscription required to start — just open
             the app and begin.
           </p>
-          <div className="cta-stores">
-            <div className="qr-code">
-              <QRCode />
-              <p className="qr-text">Scan to download</p>
-            </div>
-            <div className="store-badges">
-              <div className="store-badge appstore-large">
-                <img src="/appstore.png" alt="App Store" />
-              </div>
-              <button 
-                className="google-play-btn"
-                onClick={() => navigate("/download")}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="google-play-icon">
-                  <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35zm13.81-5.38L6.05 21.34l8.49-8.49 2.27 2.27zm3.35-4.31c.34.27.59.69.59 1.19s-.22.9-.57 1.18l-2.29 1.32-2.5-2.5 2.5-2.5 2.27 1.31zM6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z"/>
-                </svg>
-                <div className="btn-text">
-                  <span className="btn-text-small">GET IT ON</span>
-                  <span className="btn-text-large">Google Play</span>
-                </div>
-              </button>
-            </div>
+          <p className="cta-trial">
+            <span className="cta-trial__highlight">7-day free trial</span> of Premium
+          </p>
+          <div className="cta-actions">
+            <button 
+              className="cta-primary-btn"
+              onClick={() => navigate("/download")}
+            >
+              Get Started Now
+            </button>
           </div>
         </div>
         <div className="cta-right">
@@ -445,7 +482,7 @@ const Footer = () => (
       </div>
       {[
         { title: "Product", links: ["Features", "Security"] },
-        { title: "Company", links: ["About Us", "Press"] },
+        { title: "Company", links: ["About Us", "Press", "Careers"] },
         {
           title: "Legal",
           links: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
@@ -468,10 +505,47 @@ const Footer = () => (
       ))}
     </div>
     <div className="footer__bottom">
-      <span>© 2026 Butterfly . Ijeoma Limmite All rights reserved.</span>
+      <span>© 2025 Butterfly Inc. All rights reserved.</span>
       <span>Made with 💜 for couples everywhere</span>
     </div>
   </footer>
+);
+
+/* ══════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════ */
+const Pricing = () => (
+  <section className="pricing-section" id="pricing">
+    <div className="section__header">
+      <h2 className="section__title">Simple, transparent pricing</h2>
+    </div>
+    <div className="pricing-cards">
+      <div className="pricing-card">
+        <h3 className="pricing-card__title">Free</h3>
+        <p className="pricing-card__desc">Essential features for couples</p>
+      </div>
+      <div className="pricing-card pricing-card--premium">
+        <h3 className="pricing-card__title">Premium</h3>
+        <p className="pricing-card__desc">Full access to all features</p>
+      </div>
+    </div>
+  </section>
+);
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+const Contact = () => (
+  <section className="contact-section" id="contact">
+    <div className="section__header">
+      <h2 className="section__title">Get in touch</h2>
+    </div>
+    <div className="contact-form">
+      <input type="email" placeholder="Your email" />
+      <textarea placeholder="Message" />
+      <button>Send</button>
+    </div>
+  </section>
 );
 
 /* ══════════════════════════════════════════
@@ -482,9 +556,13 @@ export default function App() {
     <div>
       <Navbar />
       <Hero />
+      <PressBar />
       <Features />
       <Steps />
+      <Screenshots />
       <FAQ />
+      <Pricing />
+      <Contact />
       <CTA />
       <Footer />
     </div>

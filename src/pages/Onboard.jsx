@@ -11,81 +11,15 @@ const NAV_ITEMS = [
   { label: "Onboard" },
   { label: "Analytics" },
   { label: "Settings" },
+  { label: "System Health" },
 ];
 
 const MODULE_PERMISSIONS = [
   {
-    label: "View Member Profiles",
-    key: "viewMemberProfiles",
-    description: "Read-only access to all profiles",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="5" r="2.5" stroke="#9c27b0" strokeWidth="1.4" />
-        <path
-          d="M2 13c0-2.761 2.239-5 5-5s5 2.239 5 5"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Send Messages",
-    key: "sendMessages",
-    description: "Contact members directly",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect
-          x="1"
-          y="3"
-          width="12"
-          height="8"
-          rx="1.5"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-        />
-        <path
-          d="M1 5l6 4 6-4"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Manage Coaching",
-    key: "manageCoaching",
-    description: "Book and track sessions",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect
-          x="1.5"
-          y="3"
-          width="11"
-          height="9"
-          rx="1.5"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-        />
-        <path
-          d="M1.5 6h11M5 1.5V4M9 1.5V4"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Moderation Access",
+    label: "Moderation",
     key: "moderationAccess",
     description: "View flagged accounts",
-    defaultOn: false,
+    defaultOn: true,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <circle cx="7" cy="7" r="5.5" stroke="#9c27b0" strokeWidth="1.4" />
@@ -99,10 +33,10 @@ const MODULE_PERMISSIONS = [
     ),
   },
   {
-    label: "Analytics Access",
+    label: "Analytics",
     key: "analyticsAccess",
     description: "View own performance data",
-    defaultOn: true,
+    defaultOn: false,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <rect x="1" y="8" width="3" height="5" rx="0.5" fill="#9c27b0" />
@@ -112,7 +46,7 @@ const MODULE_PERMISSIONS = [
     ),
   },
   {
-    label: "Billing Access",
+    label: "Billing",
     key: "billingAccess",
     description: "View subscription info",
     defaultOn: false,
@@ -132,9 +66,50 @@ const MODULE_PERMISSIONS = [
     ),
   },
   {
-    label: "Security Access",
+    label: "Security & APIs",
     key: "securityAccess",
     description: "View security alerts",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path
+          d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Policies",
+    key: "policiesAccess",
+    description: "Manage organization policies",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect
+          x="2"
+          y="3"
+          width="10"
+          height="8"
+          rx="1.5"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+        />
+        <path
+          d="M4 6h6M4 9h6"
+          stroke="#9c27b0"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "System Health",
+    key: "systemHealth",
+    description: "View system health",
     defaultOn: false,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -176,8 +151,8 @@ export default function Onboard() {
 
   const [role, setRole] = useState("Concierge Admin");
   const [jobTitle, setJobTitle] = useState("Head Concierge");
-  const [reportingToId, setReportingToId] = useState("");
-  const [accessLevel, setAccessLevel] = useState("standard");
+  const [reportingToId, setReportingToId] = useState("alex-kirabo");
+  const [accessLevel, setAccessLevel] = useState("standard Access");
 
   const [temporaryPassword, setTemporaryPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -245,14 +220,12 @@ export default function Onboard() {
       temporaryPassword: temporaryPassword,
 
       // Module Permissions
-      conciergeModule: permissions.conciergeModule,
-      viewMemberProfiles: permissions.viewMemberProfiles,
-      sendMessages: permissions.sendMessages,
-      manageCoaching: permissions.manageCoaching,
       moderationAccess: permissions.moderationAccess,
       analyticsAccess: permissions.analyticsAccess,
       billingAccess: permissions.billingAccess,
       securityAccess: permissions.securityAccess,
+      policiesAccess: permissions.policiesAccess,
+      systemHealth: permissions.systemHealth,
 
       // Welcome Email Settings
       sendWelcomeEmail: sendWelcomeEmail,
@@ -263,9 +236,11 @@ export default function Onboard() {
 
     try {
       const token = localStorage.getItem("authToken");
-      
+
       if (!token) {
-        setApiError("You must be logged in to onboard a new admin. Please login first.");
+        setApiError(
+          "You must be logged in to onboard a new admin. Please login first.",
+        );
         setIsLoading(false);
         setTimeout(() => {
           navigate("/login");
@@ -277,7 +252,7 @@ export default function Onboard() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
@@ -286,7 +261,8 @@ export default function Onboard() {
 
       if (response.ok) {
         setApiSuccess(
-          data.message || "Admin onboarded successfully! Email invitation sent.",
+          data.message ||
+            "Admin onboarded successfully! Email invitation sent.",
         );
         // Stay on page, clear form
         setTimeout(() => {
@@ -330,12 +306,12 @@ export default function Onboard() {
           <div className="ob-sidebar-label">CORE OPERATIONS</div>
           <nav className="ob-sidebar-nav">
             {[
-              { label: "Moderation", path: "/moderation" },
+              { label: "Dashboard", path: "/dashboard" },
+              { label: "Members", path: "/members" },
+              { label: "Admins", path: "/admins" },
+              { label: "Onboard", path: "/onboard" },
               { label: "Analytics", path: "/analytics" },
-              { label: "Billing", path: "/billing" },
-              { label: "Security & APIs", path: "/security" },
-              { label: "Policies", path: "/policies" },
-              { label: "Activity Logs", path: "/activity-logs" },
+              { label: "Settings", path: "/settings" },
             ].map((item) => (
               <div
                 key={item.label}
@@ -353,7 +329,14 @@ export default function Onboard() {
 
         <div className="ob-sidebar-footer">
           <button className="ob-logout-btn" onClick={() => navigate("/")}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
               <polyline points="16 17 21 12 16 7"></polyline>
               <line x1="21" y1="12" x2="9" y2="12"></line>
@@ -392,7 +375,7 @@ export default function Onboard() {
             <input placeholder="Search dashboard..." />
           </div>
           <div className="ob-topbar-right">
-            <div className="ob-icon-btn">
+            <div className="ob-icon-btn ob-notification-btn">
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <circle
                   cx="7.5"
@@ -408,6 +391,7 @@ export default function Onboard() {
                   strokeLinecap="round"
                 />
               </svg>
+              <span className="ob-notification-badge">3</span>
             </div>
             <div className="ob-user-chip">
               <div className="ob-user-info">
@@ -536,8 +520,11 @@ export default function Onboard() {
                 <h2 className="ob-card-title">Personal Information</h2>
                 <div className="ob-row2">
                   <div className="ob-field">
-                    <label className="ob-label">FIRST NAME</label>
+                    <label className="ob-label" htmlFor="first-name">
+                      FIRST NAME
+                    </label>
                     <input
+                      id="first-name"
                       className="ob-input"
                       placeholder="e.g. Sarah"
                       value={firstName}
@@ -545,8 +532,11 @@ export default function Onboard() {
                     />
                   </div>
                   <div className="ob-field">
-                    <label className="ob-label">LAST NAME</label>
+                    <label className="ob-label" htmlFor="last-name">
+                      LAST NAME
+                    </label>
                     <input
+                      id="last-name"
                       className="ob-input"
                       placeholder="e.g. Nakato"
                       value={lastName}
@@ -555,6 +545,17 @@ export default function Onboard() {
                   </div>
                 </div>
                 <div className="ob-row2">
+                  <div className="ob-field">
+                    <label className="ob-label">USERNAME</label>
+                    <input
+                      className="ob-input"
+                      placeholder="e.g. sarah.jenkins"
+                      value={email.split("@")[0]}
+                      onChange={(e) =>
+                        setEmail(e.target.value + "@admincore.io")
+                      }
+                    />
+                  </div>
                   <div className="ob-field">
                     <label className="ob-label">EMAIL ADDRESS</label>
                     <input
@@ -565,6 +566,8 @@ export default function Onboard() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
+                </div>
+                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">PHONE NUMBER</label>
                     <input
@@ -574,8 +577,6 @@ export default function Onboard() {
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
-                </div>
-                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">CITY / REGION</label>
                     <input
@@ -584,6 +585,8 @@ export default function Onboard() {
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
+                </div>
+                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">COUNTRY</label>
                     <select
@@ -599,6 +602,7 @@ export default function Onboard() {
                       <option>South Africa</option>
                     </select>
                   </div>
+                  <div className="ob-field" />
                 </div>
               </section>
 
@@ -636,9 +640,11 @@ export default function Onboard() {
                     onChange={(e) => setReportingToId(e.target.value)}
                   >
                     <option value="">Select manager (optional)</option>
-                    <option value="">Super User (Alex Kirabo)</option>
-                    <option value="">Super Admin</option>
-                    <option value="">Team Lead</option>
+                    <option value="alex-kirabo">
+                      Super User (Alex Kirabo)
+                    </option>
+                    <option value="super-admin">Super Admin</option>
+                    <option value="team-lead">Team Lead</option>
                   </select>
                 </div>
                 <div className="ob-field ob-field--full">
@@ -649,13 +655,13 @@ export default function Onboard() {
                         <input
                           type="radio"
                           name="accessLevel"
-                          value={level}
-                          checked={accessLevel === level}
-                          onChange={() => setAccessLevel(level)}
+                          value={`${level} Access`}
+                          checked={accessLevel === `${level} Access`}
+                          onChange={(e) => setAccessLevel(e.target.value)}
                           className="ob-radio-input"
                         />
                         <span className="ob-radio-dot" />
-                        {level.charAt(0).toUpperCase() + level.slice(1)} Access
+                        {`${level} Access`}
                       </label>
                     ))}
                   </div>
@@ -680,15 +686,31 @@ export default function Onboard() {
                         type="button"
                         className="ob-eye-btn"
                         onClick={() => setShowTempPassword(!showTempPassword)}
-                        aria-label={showTempPassword ? "Hide password" : "Show password"}
+                        aria-label={
+                          showTempPassword ? "Hide password" : "Show password"
+                        }
                       >
                         {showTempPassword ? (
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                             <line x1="1" y1="1" x2="23" y2="23" />
                           </svg>
                         ) : (
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                             <circle cx="12" cy="12" r="3" />
                           </svg>
@@ -709,16 +731,36 @@ export default function Onboard() {
                       <button
                         type="button"
                         className="ob-eye-btn"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                        aria-label={
+                          showConfirmPassword
+                            ? "Hide password"
+                            : "Show password"
+                        }
                       >
                         {showConfirmPassword ? (
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
                             <line x1="1" y1="1" x2="23" y2="23" />
                           </svg>
                         ) : (
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                             <circle cx="12" cy="12" r="3" />
                           </svg>
