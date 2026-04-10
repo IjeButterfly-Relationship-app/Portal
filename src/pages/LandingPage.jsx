@@ -258,7 +258,7 @@ const Features = () => {
                       filter:
                         stackPos === 0 ? "none" : `brightness(${brightness})`,
                     }}
-                    onClick={() => stackPos !== 0 && goTo(featureIndex)}
+                    onClick={() => stackPos !== 0 && setActiveIndex(featureIndex)}
                   >
                     {/* Full-bleed photo */}
                     <div className="feature-stack__image-wrap">
@@ -395,7 +395,7 @@ const FAQ = () => {
             <div className={`faq-item${open === i ? " open" : ""}`} key={i}>
               <button
                 className="faq-question"
-                onClick={() => setOpen(open === i ? null : i)}
+                onClick={() => setActiveIndex(i)}
               >
                 {f.q}
                 <span className="faq-chevron">▼</span>
