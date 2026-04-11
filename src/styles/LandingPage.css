@@ -173,7 +173,14 @@ a   { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════
    SECTION BASE
 ══════════════════════════════════════════ */
-.section { padding: 96px 40px; }
+.section { 
+  padding: 96px 40px; 
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.section .section__title { color: #f5f3ff; }
+.section .section__subtitle { color: #ddd6fe; }
 .section--alt {
   background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
   backdrop-filter: blur(20px);
@@ -420,9 +427,27 @@ a   { text-decoration: none; color: inherit; }
 }
 
 /* ══════════════════════════════════════════
+   SCREENSHOTS
+══════════════════════════════════════════ */
+.screenshots-section {
+  padding: 96px 40px;
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.screenshots-section .section__title { color: #f5f3ff; }
+.screenshots-section .section__subtitle { color: #ddd6fe; }
+
+/* ══════════════════════════════════════════
    STEPS
 ══════════════════════════════════════════ */
-.steps-section { padding: 96px 40px; background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #f9a8d4 100%); text-align: center; }
+.steps-section { 
+  padding: 96px 40px; 
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  text-align: center; 
+}
 .steps-section .section__header { margin-bottom: 16px; }
 
 .steps-grid {
@@ -447,7 +472,14 @@ a   { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════
    FAQ
 ══════════════════════════════════════════ */
-.faq-section { padding: 96px 40px; background: linear-gradient(180deg, #6b006b 0%, #800080 50%, #9932cc 100%); }
+.faq-section { 
+  padding: 24px 40px;
+  background: radial-gradient(ellipse at center, #7c3aed 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
 .faq-section .section__title { color: #fff; }
 .faq-section .section__subtitle { color: rgba(255,255,255,0.9); }
 .faq-inner   { max-width: 760px; margin: 0 auto; }
@@ -489,7 +521,12 @@ a   { text-decoration: none; color: inherit; }
 /* ══════════════════════════════════════════
    CTA
 ══════════════════════════════════════════ */
-.cta-section { padding: 80px 40px; background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 50%, #ec4899 100%); }
+.cta-section { 
+  padding: 80px 40px; 
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
 .cta-container {
   display: flex; align-items: center; gap: 80px;
   max-width: 1200px; margin: 0 auto; width: 100%;
@@ -640,6 +677,30 @@ a   { text-decoration: none; color: inherit; }
   display: flex; justify-content: space-between; align-items: center;
   font-size: 0.82rem; color: rgba(255,255,255,0.7);
 }
+
+/* ══════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════ */
+.pricing-section {
+  padding: 96px 40px;
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.pricing-section .section__title { color: #f5f3ff; }
+.pricing-section .section__subtitle { color: #ddd6fe; }
+
+/* ══════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════ */
+.contact-section {
+  padding: 96px 40px;
+  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.contact-section .section__title { color: #f5f3ff; }
+.contact-section .section__subtitle { color: #ddd6fe; }
 
 /* ══════════════════════════════════════════
    ANIMATIONS
