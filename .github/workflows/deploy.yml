@@ -32,22 +32,14 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Prepare SSH key file
-        if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$DO_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-        shell: bash
-
       - name: Deploy to Digital Ocean
         if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ env.DO_IP }}
-          username: ${{ env.DO_USER }}
-          key_path: ~/.ssh/deploy_key
-          passphrase: ${{ env.DO_PASSPHRASE }}
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          passphrase: ${{ secrets.DROPLET_SSH_PASSPHRASE }}
           source: "build/*"
           target: "/opt/butterfly/build"
           strip_components: 1
@@ -56,10 +48,10 @@ jobs:
         if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ env.DO_IP }}
-          username: ${{ env.DO_USER }}
-          key_path: ~/.ssh/deploy_key
-          passphrase: ${{ env.DO_PASSPHRASE }}
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          passphrase: ${{ secrets.DROPLET_SSH_PASSPHRASE }}
           script: |
             cd /opt/butterfly
             docker build -t butterfly-app . || true
