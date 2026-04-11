@@ -24,35 +24,55 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy and Restart
+      - name: Create directory and setup Nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           script: |
-            mkdir -p /opt/butterfly/build
-            rm -rf /opt/butterfly/build/*
+            sudo mkdir -p /var/www/butterfly
+            sudo rm -rf /var/www/butterfly/*
+            sudo chown -R $USER:$USER /var/www/butterfly
 
-      - name: Copy build files
+      - name: Deploy to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           source: "build/*"
-          target: "/opt/butterfly/build"
+          target: "/var/www/butterfly"
           strip_components: 1
+          rm: true
 
-      - name: Restart application
+      - name: Setup Nginx and reload
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           password: ${{ secrets.DROPLET_PASSWORD }}
           script: |
-            cd /opt/butterfly
-            docker build -t butterfly-app . || true
-            docker stop butterfly-frontend 2>/dev/null || true
-            docker rm butterfly-frontend 2>/dev/null || true
-            docker run -d --name butterfly-frontend -p 8080:3000 --restart unless-stopped butterfly-app
+            # Create Nginx config
+            sudo tee /etc/nginx/sites-available/butterfly > /dev/null << 'EOF'
+            server {
+                listen 80 default_server;
+                listen [::]:80 default_server;
+                
+                root /var/www/butterfly;
+                index index.html index.htm;
+                
+                location / {
+                    try_files $uri $uri/ /index.html;
+                }
+                
+                location /static/ {
+                    expires 1y;
+                    add_header Cache-Control "public, immutable";
+                }
+            }
+            EOF
+            
+            # Enable site and reload Nginx
+            sudo ln -sf /etc/nginx/sites-available/butterfly /etc/nginx/sites-enabled/default
+            sudo nginx -t && sudo systemctl reload nginx || sudo service nginx reload
