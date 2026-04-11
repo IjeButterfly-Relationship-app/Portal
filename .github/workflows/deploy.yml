@@ -32,13 +32,21 @@ jobs:
     - name: Build project
       run: npm run build
       
+    - name: Prepare SSH key file
+      if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
+      run: |
+        mkdir -p ~/.ssh
+        printf '%s\n' "$DO_KEY" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+      shell: bash
+
     - name: Deploy to Digital Ocean
       if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
       uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ env.DO_IP }}
         username: ${{ env.DO_USER }}
-        key: ${{ env.DO_KEY }}
+        key_path: ~/.ssh/deploy_key
         passphrase: ${{ env.DO_PASSPHRASE }}
         source: "build/*"
         target: "/opt/butterfly/build"
@@ -50,7 +58,7 @@ jobs:
       with:
         host: ${{ env.DO_IP }}
         username: ${{ env.DO_USER }}
-        key: ${{ env.DO_KEY }}
+        key_path: ~/.ssh/deploy_key
         passphrase: ${{ env.DO_PASSPHRASE }}
         script: |
           cd /opt/butterfly
