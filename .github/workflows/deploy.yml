@@ -28,7 +28,6 @@ jobs:
       run: npm run build
       
     - name: Deploy to Digital Ocean
-      if: ${{ secrets.DROPLET_IP != '' && secrets.DROPLET_USER != '' && secrets.DROPLET_SSH_KEY != '' }}
       uses: appleboy/scp-action@v0.1.7
       with:
         host: ${{ secrets.DROPLET_IP }}
@@ -40,7 +39,6 @@ jobs:
         strip_components: 1
         
     - name: Restart Docker container
-      if: ${{ secrets.DROPLET_IP != '' && secrets.DROPLET_USER != '' && secrets.DROPLET_SSH_KEY != '' }}
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ secrets.DROPLET_IP }}
