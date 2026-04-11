@@ -15,13 +15,10 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [activeNav, setActiveNav] = useState("Moderation");
   const [userRole, setUserRole] = useState("");
-  const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
     const role = localStorage.getItem("admin_role") || "Moderator";
-    const email = localStorage.getItem("admin_email") || "marcus@admincore.io";
     setUserRole(role);
-    setUserEmail(email);
   }, []);
 
   const isSuperAdmin = userRole === "Super Admin";
@@ -142,12 +139,6 @@ const Dashboard = () => {
     { title: "Coaching Sessions", amount: "$8,730", percent: "-4%", positive: false },
   ];
 
-  const liveConcierge = [
-    { id: 1, name: "Emma Wilson", message: "Cannot access my billing", time: "2m ago", avatar: "EW" },
-    { id: 2, name: "David Kim", message: "My app keeps returning 401 error...", time: "5m ago", avatar: "DK" },
-    { id: 3, name: "Sofia Garcia", message: "How do I upgrade my team seat?", time: "8m ago", avatar: "SG" },
-  ];
-
   const liveActivity = [
     { id: 1, title: "Elena B. raised a critical payment dispute — escalated to SU", time: "43 MINUTES AGO" },
     { id: 2, title: "Tunde A. deployed algorithm update v2.4.1 — now live", time: "1 HOUR AGO" },
@@ -160,14 +151,6 @@ const Dashboard = () => {
   ];
 
   // Super Admin Data
-  const superAdminMetrics = [
-    { label: "TOTAL MEMBERS", value: "1,284,502", trend: "+ 8.2% this month", sub: "Free + Premium globally", icon: "/members.jpeg", trendType: "positive" },
-    { label: "PREMIUM USERS", value: "87,430", trend: "+ 13.4% this month", sub: "5.8% conversion rate", icon: "/premium.png", trendType: "positive" },
-    { label: "REVENUE (24HRS)", value: "$142,890", trend: "+ 15.4% vs yesterday", sub: "Subscriptions + events", icon: "/revenue.jpeg", trendType: "positive" },
-    { label: "ADMINS ONLINE", value: "42 / 50", trend: "8 currently offline", sub: "Across all departments", icon: "/adminonline.png", trendType: "offline" },
-    { label: "ACTIVE ESCALATIONS", value: "18", trend: "3 active yesterday", sub: "Require SU intervention", icon: "/escalations.png", trendType: "negative", isAlert: true },
-  ];
-
   const adminTeam = [
     { name: "Sarah Nakato", role: "Concierge", initials: "SN", status: "Online", tasks: 14, lastActive: "Active now", color: "#8B5CF6" },
     { name: "Kwame Mensah", role: "Moderation", initials: "KM", status: "Online", tasks: 9, lastActive: "Active now", color: "#F59E0B" },
@@ -664,7 +647,7 @@ const Dashboard = () => {
             <div className="mod-activity-card">
               <div className="mod-card-header">
                 <h3>Live Activity</h3>
-                <a href="#" className="mod-view-log-link">View Log →</a>
+                <button type="button" className="mod-view-log-link">View Log →</button>
               </div>
               <p className="mod-activity-subtitle">Real-time platform events</p>
               <div className="mod-activity-list">
@@ -712,9 +695,9 @@ const Dashboard = () => {
           <footer className="mod-footer">
             <span>© 2023 HouseSquad Systems. All Rights Reserved. Authorized personnel only.</span>
             <div className="mod-footer-links">
-              <a href="#">Privacy</a>
-              <a href="#">Compliance</a>
-              <a href="#">Support</a>
+              <button type="button">Privacy</button>
+              <button type="button">Compliance</button>
+              <button type="button">Support</button>
             </div>
           </footer>
         </div>

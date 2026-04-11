@@ -17,9 +17,9 @@ const PlayStoreHeader = () => {
           <span className="play-logo-text">Google Play</span>
         </button>
         <nav className="play-nav">
-          <a href="#" className="play-nav__link">Games</a>
-          <a href="#" className="play-nav__link active">Apps</a>
-          <a href="#" className="play-nav__link">Kids</a>
+          <button type="button" className="play-nav__link">Games</button>
+          <button type="button" className="play-nav__link active">Apps</button>
+          <button type="button" className="play-nav__link">Kids</button>
         </nav>
       </div>
       <div className="play-header__right">

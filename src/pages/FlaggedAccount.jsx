@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../styles/FlaggedAccount.css";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -90,12 +89,9 @@ const tickets = [
 
 // ── Main Component ──────────────────────────────────────────────────────────────
 const FlaggedAccount = () => {
-  const navigate = useNavigate();
   const [selectedTicket, setSelectedTicket] = useState("T-1024");
   const [activeTab, setActiveTab] = useState("Pending");
   const [metaExpanded, setMetaExpanded] = useState(true);
-
-  const currentTicket = tickets.find(t => t.id === selectedTicket) || tickets[0];
 
   return (
     <div className="ba-root">
@@ -197,7 +193,7 @@ const FlaggedAccount = () => {
                   <span className="ba-dot">•</span>
                   <span>Joined: Oct 2023</span>
                   <span className="ba-dot">•</span>
-                  <a href="#" className="ba-full-profile">Full Profile ↗</a>
+                  <button type="button" className="ba-full-profile">Full Profile ↗</button>
                 </div>
               </div>
             </div>
@@ -369,9 +365,9 @@ const FlaggedAccount = () => {
           <span className="ba-system-online">● Online: v2.4.1</span>
         </div>
         <div className="ba-footer-right">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Internal Documentation</a>
-          <a href="#">Support Ticket</a>
+          <button type="button">Privacy Policy</button>
+          <button type="button">Internal Documentation</button>
+          <button type="button">Support Ticket</button>
         </div>
       </footer>
     </div>

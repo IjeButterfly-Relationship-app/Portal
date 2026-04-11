@@ -4,16 +4,6 @@ import "../styles/Onboard.css";
 
 const BASE_URL = "http://208.68.36.144";
 
-const NAV_ITEMS = [
-  { label: "Dashboard" },
-  { label: "Members" },
-  { label: "Admins" },
-  { label: "Onboard" },
-  { label: "Analytics" },
-  { label: "Settings" },
-  { label: "System Health" },
-];
-
 const MODULE_PERMISSIONS = [
   {
     label: "Moderation",

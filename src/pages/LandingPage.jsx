@@ -1,57 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css";
 import "../App.css";
 
 /* ─── QR Code (SVG pattern) ─── */
-const QRCode = () => {
-  const pattern = [
-    [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0],
-    [0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1],
-    [1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0],
-    [1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0],
-    [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0],
-    [1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1],
-    [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0],
-    [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1],
-  ];
-  return (
-    <svg
-      width="84"
-      height="84"
-      viewBox="0 0 21 19"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {pattern.map((row, r) =>
-        row.map((cell, c) =>
-          cell ? (
-            <rect
-              key={`${r}-${c}`}
-              x={c}
-              y={r}
-              width={1}
-              height={1}
-              fill="#111827"
-              rx="0.1"
-            />
-          ) : null,
-        ),
-      )}
-    </svg>
-  );
-};
-
 /* ══════════════════════════════════════════
    NAVBAR
 ══════════════════════════════════════════ */
@@ -182,7 +134,6 @@ const features = [
   },
 ];
 
-const CARD_DURATION = 1000;
 // How many cards peek out behind the front card
 const BEHIND_COUNT = 2;
 // How many px each card behind shifts right
@@ -191,7 +142,7 @@ const PEEK_PX = 56;
 const SCALE_STEP = 0.035;
 
 const Features = () => {
-  const [activeIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // Build ordered slice: [activeIndex, activeIndex+1, activeIndex+2, …]
   const visibleCards = Array.from({ length: BEHIND_COUNT + 1 }, (_, i) => {
@@ -395,7 +346,7 @@ const FAQ = () => {
             <div className={`faq-item${open === i ? " open" : ""}`} key={i}>
               <button
                 className="faq-question"
-                onClick={() => setActiveIndex(i)}
+                onClick={() => setOpen(open === i ? null : i)}
               >
                 {f.q}
                 <span className="faq-chevron">▼</span>
