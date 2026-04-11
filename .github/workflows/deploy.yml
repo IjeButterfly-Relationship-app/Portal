@@ -10,7 +10,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    
+    env:
+      DO_IP: ${{ secrets.DROPLET_IP }}
+      DO_USER: ${{ secrets.DROPLET_USER }}
+      DO_KEY: ${{ secrets.DROPLET_SSH_KEY }}
+      DO_PASSPHRASE: ${{ secrets.DROPLET_SSH_PASSPHRASE }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -28,23 +33,25 @@ jobs:
       run: npm run build
       
     - name: Deploy to Digital Ocean
+      if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
       uses: appleboy/scp-action@v0.1.7
       with:
-        host: ${{ secrets.DROPLET_IP }}
-        username: ${{ secrets.DROPLET_USER }}
-        key: ${{ secrets.DROPLET_SSH_KEY }}
-        passphrase: ${{ secrets.DROPLET_SSH_PASSPHRASE }}
+        host: ${{ env.DO_IP }}
+        username: ${{ env.DO_USER }}
+        key: ${{ env.DO_KEY }}
+        passphrase: ${{ env.DO_PASSPHRASE }}
         source: "build/*"
         target: "/opt/butterfly/build"
         strip_components: 1
         
     - name: Restart Docker container
+      if: env.DO_IP != '' && env.DO_USER != '' && env.DO_KEY != ''
       uses: appleboy/ssh-action@v1.0.3
       with:
-        host: ${{ secrets.DROPLET_IP }}
-        username: ${{ secrets.DROPLET_USER }}
-        key: ${{ secrets.DROPLET_SSH_KEY }}
-        passphrase: ${{ secrets.DROPLET_SSH_PASSPHRASE }}
+        host: ${{ env.DO_IP }}
+        username: ${{ env.DO_USER }}
+        key: ${{ env.DO_KEY }}
+        passphrase: ${{ env.DO_PASSPHRASE }}
         script: |
           cd /opt/butterfly
           docker build -t butterfly-app . || true
