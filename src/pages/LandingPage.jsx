@@ -177,11 +177,11 @@ const Features = () => {
             </p>
           </div>
 
-        <div className="features__static" style={{display:'none'}}>
-          <p>Daily Spark Prompts</p>
-          <p>Private Secure Vault</p>
-          <p>Relationship Check-Ins</p>
-        </div>
+          <div className="features__static" style={{ display: "none" }}>
+            <p>Daily Spark Prompts</p>
+            <p>Private Secure Vault</p>
+            <p>Relationship Check-Ins</p>
+          </div>
         </div>
 
         {/* ── Right col: stacked cards ── */}
@@ -209,7 +209,9 @@ const Features = () => {
                       filter:
                         stackPos === 0 ? "none" : `brightness(${brightness})`,
                     }}
-                    onClick={() => stackPos !== 0 && setActiveIndex(featureIndex)}
+                    onClick={() =>
+                      stackPos !== 0 && setActiveIndex(featureIndex)
+                    }
                   >
                     {/* Full-bleed photo */}
                     <div className="feature-stack__image-wrap">
@@ -378,14 +380,15 @@ const CTA = () => {
             <span className="cta-stat">50,000+ couples</span>
           </div>
           <p className="cta-subtitle">
-            Download Butterfly free. No subscription required to start — just open
-            the app and begin.
+            Download Butterfly free. No subscription required to start — just
+            open the app and begin.
           </p>
           <p className="cta-trial">
-            <span className="cta-trial__highlight">7-day free trial</span> of Premium
+            <span className="cta-trial__highlight">7-day free trial</span> of
+            Premium
           </p>
           <div className="cta-actions">
-            <button 
+            <button
               className="cta-primary-btn"
               onClick={() => navigate("/download")}
             >
@@ -418,7 +421,10 @@ const Footer = () => (
   <footer className="footer">
     <div className="footer__inner">
       <div className="footer__brand">
-        <div className="navbar__logo footer__logo-wrapper" style={{ fontSize: "1.1rem" }}>
+        <div
+          className="navbar__logo footer__logo-wrapper"
+          style={{ fontSize: "1.1rem" }}
+        >
           <img
             src="/butterfly-logo.png"
             alt="Butterfly"
