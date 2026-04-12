@@ -15,7 +15,7 @@ const Navbar = () => (
         alt="Amoura"
         className="navbar__logo-img"
       />
-      <span className="navbar__logo-text">Amoura</span>
+      <span className="navbar__logo-text">Amoura<sup className="trademark">™</sup></span>
     </a>
     <div className="navbar__nav-container">
       <ul className="navbar__links">
@@ -45,7 +45,6 @@ const Hero = () => (
     <div className="hero__glass-overlay" />
     <div className="hero__inner">
       <div className="hero__content">
-        <p className="hero__eyebrow">Join 40,000+ couples</p>
         <h1 className="hero__title">
           Find deeper
           <br />
@@ -418,7 +417,7 @@ const Footer = () => (
             alt="Amoura"
             className="footer__logo-img"
           />
-          <span className="footer__logo-text">Amoura</span>
+          <span className="footer__logo-text">Amoura<sup className="trademark">™</sup></span>
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
