@@ -12,10 +12,10 @@ const Navbar = () => (
     <a href="/" className="navbar__logo">
       <img
         src="/butterfly-logo.png"
-        alt="Butterfly"
+        alt="Amoura"
         className="navbar__logo-img"
       />
-      <span className="navbar__logo-text">Butterfly</span>
+      <span className="navbar__logo-text">Amoura</span>
     </a>
     <div className="navbar__nav-container">
       <ul className="navbar__links">
@@ -23,21 +23,17 @@ const Navbar = () => (
           <a href="#features">Features</a>
         </li>
         <li>
-          <a href="#how-it-works">How it Works</a>
+          <a href="#how-it-works">Steps</a>
         </li>
         <li>
-          <a href="#pricing">Pricing</a>
+          <a href="#faqs">FAQs</a>
         </li>
         <li>
-          <a href="#contact">Contact</a>
+          <a href="#get-app">Get the App</a>
         </li>
       </ul>
     </div>
-    <div className="navbar__buttons">
-      <button className="navbar__login">Login</button>
-      <button className="navbar__download">Download</button>
-    </div>
-  </nav>
+      </nav>
 );
 
 /* ══════════════════════════════════════════
@@ -58,36 +54,31 @@ const Hero = () => (
           relationships.
         </h1>
         <p className="hero__subtitle">
-          Butterfly is the world's most intuitive relationship app, designed to
+          Amoura is the world's most intuitive relationship app, designed to
           help you build meaningful habits, spark deep conversations, and grow
           closer every day.
         </p>
-        <div className="hero__cta">
-          <button className="hero__download-btn">Download the app</button>
+                <div className="hero__store-badges">
+          <button className="hero__app-store-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div className="hero__badge-text">
+              <span className="hero__badge-small">Download on the</span>
+              <span className="hero__badge-large">App Store</span>
+            </div>
+          </button>
+          <button className="hero__google-play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+            </svg>
+            <div className="hero__badge-text">
+              <span className="hero__badge-small">GET IT ON</span>
+              <span className="hero__badge-large">Google Play</span>
+            </div>
+          </button>
         </div>
-        <div className="hero__store-badges">
-          <span className="hero__app-store">App Store</span>
-          <span className="hero__google-play">Google Play</span>
-        </div>
-        <div className="hero__ratings">
-          <span className="hero__stars">★★★★★</span>
-          <span className="hero__rating-text">12,000 ratings</span>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-/* ══════════════════════════════════════════
-   PRESS BAR
-═════════════════════════════════════════ */
-const PressBar = () => (
-  <section className="press-bar">
-    <p className="press-bar__label">As seen in</p>
-    <div className="press-bar__logos">
-      <span className="press-bar__publication">TechPulse</span>
-      <span className="press-bar__publication">Wellness</span>
-      <span className="press-bar__publication">UX Daily</span>
+              </div>
     </div>
   </section>
 );
@@ -245,25 +236,30 @@ const Features = () => {
 const steps = [
   {
     num: "01",
-    title: "Build Your Style",
-    desc: "Create your profile and preferences to find your perfect match.",
+    title: "Create Your Profile",
+    desc: "Set up your account and build your profile to start connecting with others",
   },
   {
-    num: "02",
-    title: "Invite Your Partner",
-    desc: "Connect with your partner to start your journey together.",
+    num: "02", 
+    title: "See Your Matches",
+    desc: "Discover compatible partners who share your values and relationship goals.",
   },
   {
     num: "03",
-    title: "Grow Every Day",
-    desc: "Build healthy habits through daily prompts and check-ins.",
+    title: "Start Real Conversations",
+    desc: "Begin meaningful dialogues with daily prompts designed to deepen your connection.",
+  },
+  {
+    num: "04",
+    title: "Grow Together",
+    desc: "Build healthy relationships through meaningful connections and shared experiences.",
   },
 ];
 
 const Steps = () => (
   <section className="steps-section" id="how-it-works">
     <div className="section__header">
-      <p className="section__badge">💫 HOW IT WORKS</p>
+      {/* <p className="section__badge">💫 HOW IT WORKS</p> */}
       <h2 className="section__title">Four steps to a better bond</h2>
     </div>
     <div className="steps-grid">
@@ -278,42 +274,14 @@ const Steps = () => (
   </section>
 );
 
-/* ══════════════════════════════════════════
-   SCREENSHOTS
-══════════════════════════════════════════ */
-const Screenshots = () => (
-  <section className="screenshots-section">
-    <div className="section__header">
-      <h2 className="section__title">Beautifully designed for connection</h2>
-    </div>
-    <div className="screenshots-grid">
-      <div className="screenshot-card">
-        <div className="screenshot-card__image" />
-        <p className="screenshot-card__label">Daily Prompts</p>
-      </div>
-      <div className="screenshot-card">
-        <div className="screenshot-card__image" />
-        <p className="screenshot-card__label">Weekly Analytics</p>
-      </div>
-      <div className="screenshot-card">
-        <div className="screenshot-card__image" />
-        <p className="screenshot-card__label">Shared Vault</p>
-      </div>
-    </div>
-    <div className="connection-score">
-      <span className="connection-score__value">92%</span>
-      <span className="connection-score__label">Connection Score</span>
-    </div>
-  </section>
-);
 
 /* ══════════════════════════════════════════
    FAQ
 ══════════════════════════════════════════ */
 const faqs = [
   {
-    q: "Is Butterfly for couples only?",
-    a: "While our core is designed for romantic journeys, Butterfly is designed for any two people looking to deepen their bond — siblings, long-term friends, or family members who want to improve communication habits.",
+    q: "Is Amoura for couples only?",
+    a: "While our core is designed for romantic journeys, Amoura is designed for any two people looking to deepen their bond — siblings, long-term friends, or family members who want to improve communication habits.",
   },
   {
     q: "How secure is my private data?",
@@ -325,7 +293,7 @@ const faqs = [
   },
   {
     q: "Can I use it if we live in different time zones?",
-    a: "Absolutely! Butterfly is fully asynchronous. Each partner receives prompts at a time that suits their local timezone, and replies are stored safely until the other person checks in.",
+    a: "Absolutely! Amoura is fully asynchronous. Each partner receives prompts at a time that suits their local timezone, and replies are stored safely until the other person checks in.",
   },
 ];
 
@@ -340,7 +308,7 @@ const FAQ = () => {
         >
           <h2 className="section__title">Frequently Asked Questions</h2>
           <p className="section__subtitle">
-            Everything you need to know about the Butterfly experience.
+            Everything you need to know about the Amoura experience.
           </p>
         </div>
         <div className="faq-list">
@@ -380,7 +348,7 @@ const CTA = () => {
             <span className="cta-stat">50,000+ couples</span>
           </div>
           <p className="cta-subtitle">
-            Download Butterfly free. No subscription required to start — just
+            Download Amoura free. No subscription required to start — just
             open the app and begin.
           </p>
           <p className="cta-trial">
@@ -393,6 +361,26 @@ const CTA = () => {
               onClick={() => navigate("/download")}
             >
               Get Started Now
+            </button>
+          </div>
+          <div className="cta-store-badges">
+            <button className="cta__app-store-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div className="cta__badge-text">
+                <span className="cta__badge-small">Download on the</span>
+                <span className="cta__badge-large">App Store</span>
+              </div>
+            </button>
+            <button className="cta__google-play-btn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              </svg>
+              <div className="cta__badge-text">
+                <span className="cta__badge-small">GET IT ON</span>
+                <span className="cta__badge-large">Google Play</span>
+              </div>
             </button>
           </div>
         </div>
@@ -427,10 +415,10 @@ const Footer = () => (
         >
           <img
             src="/butterfly-logo.png"
-            alt="Butterfly"
+            alt="Amoura"
             className="footer__logo-img"
           />
-          <span className="footer__logo-text">Butterfly</span>
+          <span className="footer__logo-text">Amoura</span>
         </div>
         <p>
           The world's most intuitive relationship app for couples who want to
@@ -462,48 +450,12 @@ const Footer = () => (
       ))}
     </div>
     <div className="footer__bottom">
-      <span>© 2025 Butterfly Inc. All rights reserved.</span>
+      <span>© 2025 Amoura Inc. All rights reserved.</span>
       <span>Made with 💜 for couples everywhere</span>
     </div>
   </footer>
 );
 
-/* ══════════════════════════════════════════
-   PRICING
-══════════════════════════════════════════ */
-const Pricing = () => (
-  <section className="pricing-section" id="pricing">
-    <div className="section__header">
-      <h2 className="section__title">Simple, transparent pricing</h2>
-    </div>
-    <div className="pricing-cards">
-      <div className="pricing-card">
-        <h3 className="pricing-card__title">Free</h3>
-        <p className="pricing-card__desc">Essential features for couples</p>
-      </div>
-      <div className="pricing-card pricing-card--premium">
-        <h3 className="pricing-card__title">Premium</h3>
-        <p className="pricing-card__desc">Full access to all features</p>
-      </div>
-    </div>
-  </section>
-);
-
-/* ══════════════════════════════════════════
-   CONTACT
-══════════════════════════════════════════ */
-const Contact = () => (
-  <section className="contact-section" id="contact">
-    <div className="section__header">
-      <h2 className="section__title">Get in touch</h2>
-    </div>
-    <div className="contact-form">
-      <input type="email" placeholder="Your email" />
-      <textarea placeholder="Message" />
-      <button>Send</button>
-    </div>
-  </section>
-);
 
 /* ══════════════════════════════════════════
    APP
@@ -513,13 +465,9 @@ export default function App() {
     <div>
       <Navbar />
       <Hero />
-      <PressBar />
       <Features />
       <Steps />
-      <Screenshots />
       <FAQ />
-      <Pricing />
-      <Contact />
       <CTA />
       <Footer />
     </div>
