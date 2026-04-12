@@ -21,8 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run tests
+        run: npm test -- --watchAll=false --passWithNoTests
+
       - name: Build project
         run: npm run build
+
+      - name: Debug build files
+        run: ls -la build/
 
       - name: Create directory and setup Nginx
         uses: appleboy/ssh-action@v1.0.3
@@ -76,3 +82,9 @@ jobs:
             # Enable site and reload Nginx
             sudo ln -sf /etc/nginx/sites-available/butterfly /etc/nginx/sites-enabled/default
             sudo nginx -t && sudo systemctl reload nginx || sudo service nginx reload
+            
+            # Verify deployment
+            echo "=== Deployment verification ==="
+            ls -la /var/www/butterfly/
+            curl -I http://localhost:8080 || echo "Local test failed"
+            echo "=== Deployment complete ==="
