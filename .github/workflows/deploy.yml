@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, master]
     paths:
-      - 'Portal/**'              # Only Portal changes
+      - 'Portal/**'
       - '.github/workflows/**'
   pull_request:
     branches: [main, master]
@@ -23,7 +23,6 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: "Portal/package-lock.json"
 
       - name: Install dependencies
         run: npm install
@@ -55,7 +54,6 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: "Portal/package-lock.json"
 
       - name: Install dependencies
         run: npm install
