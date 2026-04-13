@@ -423,20 +423,26 @@ a   { text-decoration: none; color: inherit; }
   max-width: 380px;
 }
 
-/* Frosted-glass info block (active card details) - COMPACT */
+/* Purple info block (active card details) - COMPACT */
 .features__active-info {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 16px 20px;
-  background: rgba(255,255,255,0.45);
+  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 50%, #4c1d95 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 16px;
   width: 280px;
   height: 180px;
   transition: all 0.4s ease;
+}
+
+/* Pink text for find */
+.pink-text {
+  color: #ec4899;
+  font-style: italic;
 }
 .features__active-tag {
   display: inline-block;

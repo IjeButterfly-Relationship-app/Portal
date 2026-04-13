@@ -151,7 +151,7 @@ const Features = () => {
           <h2 className="section__title features__title">
             Everthing you need to 
             <br />
-            <em>find</em> real love.
+            <span className="pink-text">find</span> real love.
           </h2>
           <p className="section__subtitle features__subtitle">
             Built different. No endless swiping, no shallow connections - just meaningful matches backed by real compatibility science.
