@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css";
 import "../App.css";
@@ -129,6 +129,14 @@ const SCALE_STEP = 0.035;
 const Features = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Auto-rotate cards every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % features.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   // Build ordered slice: [activeIndex, activeIndex+1, activeIndex+2, …]
   const visibleCards = Array.from({ length: BEHIND_COUNT + 1 }, (_, i) => {
     const fi = (activeIndex + i) % features.length;
@@ -146,8 +154,7 @@ const Features = () => {
             <em>deeper</em> connections.
           </h2>
           <p className="section__subtitle features__subtitle">
-            Built different. No endless swiping, no shallow connections — just
-            meaningful matches backed by real compatibility science.
+            Everthing you need to find real love.
           </p>
 
           <div className="features__active-info">
