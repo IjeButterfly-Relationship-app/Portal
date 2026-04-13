@@ -423,13 +423,13 @@ a   { text-decoration: none; color: inherit; }
   max-width: 380px;
 }
 
-/* Purple info block (active card details) - COMPACT */
+/* Deep purple info block (active card details) - COMPACT */
 .features__active-info {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 16px 20px;
-  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 50%, #4c1d95 100%);
+  background: linear-gradient(135deg, #3a0d5c 0%, #4a0e4e 50%, #2e0043 100%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.2);
@@ -442,7 +442,6 @@ a   { text-decoration: none; color: inherit; }
 /* Pink text for find */
 .pink-text {
   color: #ec4899;
-  font-style: italic;
 }
 .features__active-tag {
   display: inline-block;
