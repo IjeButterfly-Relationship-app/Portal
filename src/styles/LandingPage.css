@@ -376,6 +376,7 @@ a   { text-decoration: none; color: inherit; }
   background: linear-gradient(135deg, #74266C 0%, #8A377B 48%, #542A53 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  padding: 60px 40px;
 }
 .section--alt .section__title { color: #f5f3ff; }
 .section--alt .section__subtitle { color: #ddd6fe; }
@@ -422,19 +423,19 @@ a   { text-decoration: none; color: inherit; }
   max-width: 380px;
 }
 
-/* Frosted-glass info block (active card details) - SQUARE */
+/* Frosted-glass info block (active card details) - COMPACT */
 .features__active-info {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 20px 24px;
+  padding: 16px 20px;
   background: rgba(255,255,255,0.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.6);
   border-radius: 16px;
   width: 280px;
-  height: 280px;
+  height: 180px;
   transition: all 0.4s ease;
 }
 .features__active-tag {
@@ -476,9 +477,9 @@ a   { text-decoration: none; color: inherit; }
   */
   width: 472px;
   /*
-    Height matches the card height — tall portrait cards
+    Height matches the card height — reduced height
   */
-  height: 580px;
+  height: 480px;
 }
 
 .feature-stack__card {
@@ -486,9 +487,9 @@ a   { text-decoration: none; color: inherit; }
   top: 0;
   left: 0;
 
-  /* Tall portrait card like reference image */
+  /* Reduced height portrait card */
   width: 360px;
-  height: 580px;
+  height: 480px;
   border-radius: 28px;
   overflow: hidden;
 
@@ -994,9 +995,9 @@ a   { text-decoration: none; color: inherit; }
     font-size: 0.95rem;
   }
 
-  /* Shrink cards on small screens - tall portrait */
-  .feature-stack { width: 320px; height: 420px; }
-  .feature-stack__card { width: 260px; height: 420px; }
+  /* Shrink cards on small screens - reduced height */
+  .feature-stack { width: 320px; height: 380px; }
+  .feature-stack__card { width: 260px; height: 380px; }
   .features__cards-col { padding-right: 120px; }
 
   .steps-grid { grid-template-columns: 1fr; }
