@@ -1,15 +1,19 @@
-name: Deploy to Digital Ocean
+name: Deploy Frontend to Digital Ocean
 
 on:
   push:
     branches: [main, master]
+    paths:
+      - 'frontend/**'           # Only trigger on frontend folder changes
+      - '.github/workflows/**'  # And workflow file changes
   pull_request:
     branches: [main, master]
+    paths:
+      - 'frontend/**'
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,25 +23,29 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
+          cache-dependency-path: 'frontend/package-lock.json'  # Specify frontend package-lock
 
       - name: Install dependencies
         run: npm install
+        working-directory: frontend  # Run in frontend folder
 
       - name: Lint code
         run: npm run lint
+        working-directory: frontend
         continue-on-error: false
 
       - name: Run tests
         run: npm test -- --watchAll=false --passWithNoTests
+        working-directory: frontend
 
       - name: Build project
         run: npm run build
+        working-directory: frontend
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,12 +55,15 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
+          cache-dependency-path: 'frontend/package-lock.json'
 
       - name: Install dependencies
         run: npm install
+        working-directory: frontend
 
       - name: Build project
         run: npm run build
+        working-directory: frontend
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
@@ -71,7 +82,7 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build/*"
+          source: "frontend/build/*"  # Point to frontend build folder
           target: "/var/www/butterfly"
           strip_components: 1
           rm: true
@@ -83,7 +94,6 @@ jobs:
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Create Nginx config
             sudo tee /etc/nginx/sites-available/butterfly > /dev/null << 'EOF'
             server {
                 listen 80 default_server;
@@ -103,7 +113,6 @@ jobs:
             }
             EOF
             
-            # Enable site and reload Nginx
             sudo ln -sf /etc/nginx/sites-available/butterfly /etc/nginx/sites-enabled/default
             sudo nginx -t && sudo systemctl reload nginx || echo "Nginx reload failed"
 
@@ -120,4 +129,4 @@ jobs:
 
       - name: Deployment notification
         if: always()
-        run: echo "Deployment status - Success! "
+        run: echo "Deployment status - Success!"
