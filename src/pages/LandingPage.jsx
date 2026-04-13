@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../styles/LandingPage.css";
 import "../App.css";
 
@@ -12,11 +11,7 @@ const Hero = () => (
   <section className="hero">
     {/* Background Image - Butterfly */}
     <div className="hero-background">
-      <img
-        src="/butterfly.jpg"
-        alt="Community"
-        className="hero-image"
-      />
+      <img src="/butterfly.jpg" alt="Community" className="hero-image" />
     </div>
 
     {/* Deep Purple Glass Overlay */}
@@ -35,10 +30,18 @@ const Hero = () => (
         </span>
       </a>
       <div className="nav-menu">
-        <a href="#features" className="nav-link">Features</a>
-        <a href="#how-it-works" className="nav-link">Steps</a>
-        <a href="#faqs" className="nav-link">FAQs</a>
-        <a href="#get-app" className="nav-link">Get the App</a>
+        <a href="#features" className="nav-link">
+          Features
+        </a>
+        <a href="#how-it-works" className="nav-link">
+          Steps
+        </a>
+        <a href="#faqs" className="nav-link">
+          FAQs
+        </a>
+        <a href="#get-app" className="nav-link">
+          Get the App
+        </a>
       </div>
     </nav>
 
@@ -73,7 +76,6 @@ const Hero = () => (
         </button>
       </div>
     </div>
-
   </section>
 );
 
@@ -149,12 +151,13 @@ const Features = () => {
         {/* ── Left col: heading + active-card info + controls ── */}
         <div className="features__header-col">
           <h2 className="section__title features__title">
-            Everthing you need to 
+            Everthing you need to
             <br />
             <span className="pink-text">find</span> real love.
           </h2>
           <p className="section__subtitle features__subtitle">
-            Built different. No endless swiping, no shallow connections - just meaningful matches backed by real compatibility science.
+            Built different. No endless swiping, no shallow connections - just
+            meaningful matches backed by real compatibility science.
           </p>
 
           <div className="features__active-info">
@@ -335,64 +338,54 @@ const FAQ = () => {
 ══════════════════════════════════════════ */
 const CTA = () => (
   <section className="cta-section" id="get-app">
-      <div className="cta-container">
-        <div className="cta-left">
-          <h2 className="cta-title purple-text">
-            Ready to grow your
-            <br />
-            relationship?
-          </h2>
-          <p className="cta-subtitle purple-text">
-            Download Amoura free. No subscription required to start — just open
-            the app and begin.
-          </p>
-          <div className="cta-store-badges">
-            <button className="cta__app-store-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-              </svg>
-              <div className="cta__badge-text">
-                <span className="cta__badge-small">Download on the</span>
-                <span className="cta__badge-large">App Store</span>
-              </div>
-            </button>
-            <button className="cta__google-play-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
-              </svg>
-              <div className="cta__badge-text">
-                <span className="cta__badge-small">GET IT ON</span>
-                <span className="cta__badge-large">Google Play</span>
-              </div>
-            </button>
-          </div>
+    <div className="cta-container">
+      <div className="cta-left">
+        <h2 className="cta-title purple-text">
+          Ready to grow your
+          <br />
+          relationship?
+        </h2>
+        <p className="cta-subtitle purple-text">
+          Download Amoura free. No subscription required to start — just open
+          the app and begin.
+        </p>
+        <div className="cta-store-badges">
+          <button className="cta__app-store-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+            </svg>
+            <div className="cta__badge-text">
+              <span className="cta__badge-small">Download on the</span>
+              <span className="cta__badge-large">App Store</span>
+            </div>
+          </button>
+          <button className="cta__google-play-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+            </svg>
+            <div className="cta__badge-text">
+              <span className="cta__badge-small">GET IT ON</span>
+              <span className="cta__badge-large">Google Play</span>
+            </div>
+          </button>
         </div>
-        <div className="cta-right">
-          <div className="floating-screens">
-            <div className="screen screen-1">
-              <img src="/discover.jpeg" alt="Discover screen" />
-            </div>
-            <div className="screen screen-2">
-              <img src="/onboard.jpeg" alt="Onboard screen" />
-            </div>
-            <div className="screen screen-3">
-              <img src="/profile.jpeg" alt="Profile screen" />
-            </div>
+      </div>
+      <div className="cta-right">
+        <div className="floating-screens">
+          <div className="screen screen-1">
+            <img src="/discover.jpeg" alt="Discover screen" />
+          </div>
+          <div className="screen screen-2">
+            <img src="/onboard.jpeg" alt="Onboard screen" />
+          </div>
+          <div className="screen screen-3">
+            <img src="/profile.jpeg" alt="Profile screen" />
           </div>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 
 /* ══════════════════════════════════════════
    FOOTER
