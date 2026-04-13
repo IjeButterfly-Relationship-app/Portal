@@ -333,36 +333,19 @@ const FAQ = () => {
 /* ══════════════════════════════════════════
    CTA
 ══════════════════════════════════════════ */
-const CTA = () => {
-  const navigate = useNavigate();
-  return (
-    <section className="cta-section" id="get-app">
+const CTA = () => (
+  <section className="cta-section" id="get-app">
       <div className="cta-container">
         <div className="cta-left">
-          <h2 className="cta-title">
+          <h2 className="cta-title purple-text">
             Ready to grow your
             <br />
             relationship?
           </h2>
-          <div className="cta-stats">
-            <span className="cta-stat">50,000+ couples</span>
-          </div>
-          <p className="cta-subtitle">
+          <p className="cta-subtitle purple-text">
             Download Amoura free. No subscription required to start — just open
             the app and begin.
           </p>
-          <p className="cta-trial">
-            <span className="cta-trial__highlight">7-day free trial</span> of
-            Premium
-          </p>
-          <div className="cta-actions">
-            <button
-              className="cta-primary-btn"
-              onClick={() => navigate("/download")}
-            >
-              Get Started Now
-            </button>
-          </div>
           <div className="cta-store-badges">
             <button className="cta__app-store-btn">
               <svg

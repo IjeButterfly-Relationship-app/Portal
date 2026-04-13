@@ -747,9 +747,10 @@ a   { text-decoration: none; color: inherit; }
 .cta-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 800; line-height: 1.15; color: #831843; letter-spacing: -0.02em;
+  font-weight: 800; line-height: 1.15; color: #5D2E5E; letter-spacing: -0.02em;
 }
-.cta-subtitle { font-size: 1rem; color: #9f1239; line-height: 1.7; max-width: 460px; }
+.cta-subtitle { font-size: 1rem; color: #6B3A6B; line-height: 1.7; max-width: 460px; }
+.cta-section .purple-text { color: #5D2E5E; }
 
 .cta-store-badges {
   display: flex;
