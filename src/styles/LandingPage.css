@@ -373,7 +373,7 @@ a   { text-decoration: none; color: inherit; }
 .section .section__title { color: #f5f3ff; }
 .section .section__subtitle { color: #ddd6fe; }
 .section--alt {
-  background: radial-gradient(ellipse at center, #c41e9c 0%, #8b0f6b 40%, #4a0e4e 100%);
+  background: linear-gradient(135deg, #d63384 0%, #ad1a7a 50%, #8b0f6b 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -471,13 +471,13 @@ a   { text-decoration: none; color: inherit; }
   position: relative;
   /*
     Width = card width + (BEHIND_COUNT × PEEK_PX)
-    Card width = 400px, PEEK_PX = 56, BEHIND_COUNT = 2  →  400 + 112 = 512px
+    Card width = 360px, PEEK_PX = 56, BEHIND_COUNT = 2  →  360 + 112 = 472px
   */
-  width: 512px;
+  width: 472px;
   /*
-    Height matches the card height — square cards
+    Height matches the card height — tall portrait cards
   */
-  height: 400px;
+  height: 580px;
 }
 
 .feature-stack__card {
@@ -485,9 +485,9 @@ a   { text-decoration: none; color: inherit; }
   top: 0;
   left: 0;
 
-  /* Square card */
-  width: 400px;
-  height: 400px;
+  /* Tall portrait card like reference image */
+  width: 360px;
+  height: 580px;
   border-radius: 28px;
   overflow: hidden;
 
@@ -993,9 +993,9 @@ a   { text-decoration: none; color: inherit; }
     font-size: 0.95rem;
   }
 
-  /* Shrink cards on small screens - keep square */
-  .feature-stack { width: 380px; height: 300px; }
-  .feature-stack__card { width: 300px; height: 300px; }
+  /* Shrink cards on small screens - tall portrait */
+  .feature-stack { width: 320px; height: 420px; }
+  .feature-stack__card { width: 260px; height: 420px; }
   .features__cards-col { padding-right: 120px; }
 
   .steps-grid { grid-template-columns: 1fr; }
