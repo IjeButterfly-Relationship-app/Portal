@@ -4,12 +4,12 @@ on:
   push:
     branches: [main, master]
     paths:
-      - 'frontend/**'           # Only trigger on frontend folder changes
+      - 'Portal/**'           # Only trigger on Portal folder changes
       - '.github/workflows/**'  # And workflow file changes
   pull_request:
     branches: [main, master]
     paths:
-      - 'frontend/**'
+      - 'Portal/**'
 
 jobs:
   test:
@@ -23,24 +23,24 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: 'frontend/package-lock.json'  # Specify frontend package-lock
+          cache-dependency-path: 'Portal/package-lock.json'
 
       - name: Install dependencies
         run: npm install
-        working-directory: frontend  # Run in frontend folder
+        working-directory: Portal
 
       - name: Lint code
         run: npm run lint
-        working-directory: frontend
+        working-directory: Portal
         continue-on-error: false
 
       - name: Run tests
         run: npm test -- --watchAll=false --passWithNoTests
-        working-directory: frontend
+        working-directory: Portal
 
       - name: Build project
         run: npm run build
-        working-directory: frontend
+        working-directory: Portal
 
   deploy:
     needs: test
@@ -55,15 +55,15 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: 'frontend/package-lock.json'
+          cache-dependency-path: 'Portal/package-lock.json'
 
       - name: Install dependencies
         run: npm install
-        working-directory: frontend
+        working-directory: Portal
 
       - name: Build project
         run: npm run build
-        working-directory: frontend
+        working-directory: Portal
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
@@ -82,7 +82,7 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "frontend/build/*"  # Point to frontend build folder
+          source: "Portal/build/*"
           target: "/var/www/butterfly"
           strip_components: 1
           rm: true
