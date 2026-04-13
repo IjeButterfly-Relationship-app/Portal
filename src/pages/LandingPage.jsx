@@ -149,12 +149,12 @@ const Features = () => {
         {/* ── Left col: heading + active-card info + controls ── */}
         <div className="features__header-col">
           <h2 className="section__title features__title">
-            Bloom together with
+            Everthing you need to 
             <br />
-            <em>deeper</em> connections.
+            <em>find</em> real love.
           </h2>
           <p className="section__subtitle features__subtitle">
-            Everthing you need to find real love.
+            Built different. No endless swiping, no shallow connections - just meaningful matches backed by real compatibility science.
           </p>
 
           <div className="features__active-info">
