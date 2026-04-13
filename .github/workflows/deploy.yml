@@ -1,13 +1,15 @@
-name: Deploy to Digital Ocean - v2
+name: Deploy to Digital Ocean
 
 on:
   push:
     branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,32 +23,54 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Lint code
+        run: npm run lint
+        continue-on-error: false
+
       - name: Run tests
         run: npm test -- --watchAll=false --passWithNoTests
 
       - name: Build project
         run: npm run build
 
-      - name: Debug build files
-        run: ls -la build/
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Create directory and setup Nginx
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             sudo mkdir -p /var/www/butterfly
             sudo rm -rf /var/www/butterfly/*
             sudo chown -R $USER:$USER /var/www/butterfly
 
-      - name: Deploy to server
+      - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "build/*"
           target: "/var/www/butterfly"
           strip_components: 1
@@ -57,13 +81,13 @@ jobs:
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             # Create Nginx config
             sudo tee /etc/nginx/sites-available/butterfly > /dev/null << 'EOF'
             server {
-                listen 8080 default_server;
-                listen [::]:8080 default_server;
+                listen 80 default_server;
+                listen [::]:80 default_server;
                 
                 root /var/www/butterfly;
                 index index.html index.htm;
@@ -81,10 +105,19 @@ jobs:
             
             # Enable site and reload Nginx
             sudo ln -sf /etc/nginx/sites-available/butterfly /etc/nginx/sites-enabled/default
-            sudo nginx -t && sudo systemctl reload nginx || sudo service nginx reload
-            
-            # Verify deployment
-            echo "=== Deployment verification ==="
-            ls -la /var/www/butterfly/
-            curl -I http://localhost:8080 || echo "Local test failed"
-            echo "=== Deployment complete ==="
+            sudo nginx -t && sudo systemctl reload nginx || echo "Nginx reload failed"
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "=== Deployment Verification ==="
+            curl -I http://localhost || echo "Health check failed"
+            echo "=== Deployment Complete ==="
+
+      - name: Deployment notification
+        if: always()
+        run: echo "Deployment status - Success! "
