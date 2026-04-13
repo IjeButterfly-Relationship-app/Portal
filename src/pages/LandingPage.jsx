@@ -437,7 +437,7 @@ const Footer = () => (
       ))}
     </div>
     <div className="footer__bottom">
-      <span>© 2025 Amoura Inc. All rights reserved.</span>
+      <span>© 2025 Amoura .Ijeoma limited. All rights reserved.</span>
       <span>Made with 💜 for couples everywhere</span>
     </div>
   </footer>
