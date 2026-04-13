@@ -15,7 +15,9 @@ const Navbar = () => (
         alt="Amoura"
         className="navbar__logo-img"
       />
-      <span className="navbar__logo-text">Amoura<sup className="trademark">™</sup></span>
+      <span className="navbar__logo-text">
+        Amoura<sup className="trademark">™</sup>
+      </span>
     </a>
     <div className="navbar__nav-container">
       <ul className="navbar__links">
@@ -33,7 +35,7 @@ const Navbar = () => (
         </li>
       </ul>
     </div>
-      </nav>
+  </nav>
 );
 
 /* ══════════════════════════════════════════
@@ -53,14 +55,14 @@ const Hero = () => (
           relationships.
         </h1>
         <p className="hero__subtitle">
-          Amoura is the world's most intuitive relationship app, designed to
-          help you build meaningful habits, spark deep conversations, and grow
-          closer every day.
+          Amoura is the world&apos;s most intuitive relationship app, designed
+          to help you build meaningful habits, spark deep conversations, and
+          grow closer every day.
         </p>
-                <div className="hero__store-badges">
+        <div className="hero__store-badges">
           <button className="hero__app-store-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
             </svg>
             <div className="hero__badge-text">
               <span className="hero__badge-small">Download on the</span>
@@ -69,7 +71,7 @@ const Hero = () => (
           </button>
           <button className="hero__google-play-btn">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
             </svg>
             <div className="hero__badge-text">
               <span className="hero__badge-small">GET IT ON</span>
@@ -77,7 +79,7 @@ const Hero = () => (
             </div>
           </button>
         </div>
-              </div>
+      </div>
     </div>
   </section>
 );
@@ -239,7 +241,7 @@ const steps = [
     desc: "Set up your account and build your profile to start connecting with others",
   },
   {
-    num: "02", 
+    num: "02",
     title: "See Your Matches",
     desc: "Discover compatible partners who share your values and relationship goals.",
   },
@@ -273,7 +275,6 @@ const Steps = () => (
   </section>
 );
 
-
 /* ══════════════════════════════════════════
    FAQ
 ══════════════════════════════════════════ */
@@ -287,7 +288,7 @@ const faqs = [
     a: "Your data is end-to-end encrypted and stored on secure servers. We never sell or share your personal data with third parties. Your vault content is accessible only to you and your partner.",
   },
   {
-    q: "What's the difference between Free and Premium?",
+    q: "What&apos;s the difference between Free and Premium?",
     a: "Free gives you access to 3 daily prompts and basic check-ins. Premium unlocks unlimited prompts, the full vault, analytics dashboard, priority support, and our entire library of relationship courses.",
   },
   {
@@ -347,8 +348,8 @@ const CTA = () => {
             <span className="cta-stat">50,000+ couples</span>
           </div>
           <p className="cta-subtitle">
-            Download Amoura free. No subscription required to start — just
-            open the app and begin.
+            Download Amoura free. No subscription required to start — just open
+            the app and begin.
           </p>
           <p className="cta-trial">
             <span className="cta-trial__highlight">7-day free trial</span> of
@@ -364,8 +365,13 @@ const CTA = () => {
           </div>
           <div className="cta-store-badges">
             <button className="cta__app-store-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
               </svg>
               <div className="cta__badge-text">
                 <span className="cta__badge-small">Download on the</span>
@@ -373,8 +379,13 @@ const CTA = () => {
               </div>
             </button>
             <button className="cta__google-play-btn">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
               </svg>
               <div className="cta__badge-text">
                 <span className="cta__badge-small">GET IT ON</span>
@@ -417,11 +428,13 @@ const Footer = () => (
             alt="Amoura"
             className="footer__logo-img"
           />
-          <span className="footer__logo-text">Amoura<sup className="trademark">™</sup></span>
+          <span className="footer__logo-text">
+            Amoura<sup className="trademark">™</sup>
+          </span>
         </div>
         <p>
-          The world's most intuitive relationship app for couples who want to
-          build deeper connection through science-backed habits.
+          The world&apos;s most intuitive relationship app for couples who want
+          to build deeper connection through science-backed habits.
         </p>
       </div>
       {[
@@ -454,7 +467,6 @@ const Footer = () => (
     </div>
   </footer>
 );
-
 
 /* ══════════════════════════════════════════
    APP

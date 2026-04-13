@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 
@@ -127,6 +128,11 @@ function Toggle({ checked, onChange }) {
     </button>
   );
 }
+
+Toggle.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default function Onboard() {
   const navigate = useNavigate();
@@ -272,7 +278,6 @@ export default function Onboard() {
         }
       }
     } catch (error) {
-      console.error("Onboard API error:", error);
       setApiError(
         "Unable to reach the server. Please check your network connection.",
       );
@@ -308,7 +313,9 @@ export default function Onboard() {
                 className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
                 onClick={() => {
                   setActiveNav(item.label);
-                  if (item.path) navigate(item.path);
+                  if (item.path) {
+                    navigate(item.path);
+                  }
                 }}
               >
                 {item.label}

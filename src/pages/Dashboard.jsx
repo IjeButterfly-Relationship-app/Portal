@@ -26,21 +26,21 @@ const Dashboard = () => {
   // Navigation items
   const navItems = isSuperAdmin
     ? [
-        { id: "moderation", label: "Moderation", icon: "" },
-        { id: "analytics", label: "Analytics", icon: "" },
-        { id: "billing", label: "Billing", icon: "" },
-        { id: "security", label: "Security & APIs", icon: "" },
-        { id: "policies", label: "Policies", icon: "" },
-        { id: "activity", label: "Activity Logs", icon: "" },
-      ]
+      { id: "moderation", label: "Moderation", icon: "" },
+      { id: "analytics", label: "Analytics", icon: "" },
+      { id: "billing", label: "Billing", icon: "" },
+      { id: "security", label: "Security & APIs", icon: "" },
+      { id: "policies", label: "Policies", icon: "" },
+      { id: "activity", label: "Activity Logs", icon: "" },
+    ]
     : [
-        { id: "moderation", label: "Moderation", icon: "" },
-        { id: "analytics", label: "Analytics", icon: "" },
-        { id: "billing", label: "Billing", icon: "" },
-        { id: "security", label: "Security & API", icon: "" },
-        { id: "policies", label: "Policies", icon: "" },
-        { id: "activity", label: "Activity Logs", icon: "" },
-      ];
+      { id: "moderation", label: "Moderation", icon: "" },
+      { id: "analytics", label: "Analytics", icon: "" },
+      { id: "billing", label: "Billing", icon: "" },
+      { id: "security", label: "Security & API", icon: "" },
+      { id: "policies", label: "Policies", icon: "" },
+      { id: "activity", label: "Activity Logs", icon: "" },
+    ];
 
   const handleNavClick = (item) => {
     if (item.id === "onboard") {
@@ -333,8 +333,8 @@ const Dashboard = () => {
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
-                      <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                      <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: "#9CA3AF", fontSize: 12 }} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fill: "#9CA3AF", fontSize: 12 }} />
                       <Tooltip />
                       <Area type="monotone" dataKey="users" stroke="#A855F7" strokeWidth={3} fillOpacity={1} fill="url(#colorUsers)" />
                     </AreaChart>
@@ -355,7 +355,7 @@ const Dashboard = () => {
                       key={idx} 
                       className="qa-btn" 
                       onClick={() => {
-                        if (action.path) navigate(action.path);
+                        if (action.path) {navigate(action.path);}
                       }}
                     >
                       <img src={action.icon} alt="" className="qa-icon-img" />
@@ -442,8 +442,8 @@ const Dashboard = () => {
                     className={`module-card ${mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "clickable" : ""}`} 
                     key={mod.label}
                     onClick={() => {
-                      if (mod.label === "Admin Management") navigate("/adminManagement");
-                      if (mod.label === "Analytics Engine") navigate("/analytics");
+                      if (mod.label === "Admin Management") {navigate("/adminManagement");}
+                      if (mod.label === "Analytics Engine") {navigate("/analytics");}
                     }}
                     style={{ cursor: mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "pointer" : "default" }}
                   >
@@ -588,8 +588,8 @@ const Dashboard = () => {
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" vertical={false} />
-                    <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 11 }} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                    <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fill: "#9CA3AF", fontSize: 11 }} />
+                    <YAxis axisLine={false} tickLine={false} tick={{ fill: "#9CA3AF", fontSize: 11 }} />
                     <Tooltip />
                     <Area type="monotone" dataKey="users" stroke="#3B82F6" strokeWidth={2} fillOpacity={1} fill="url(#colorTraffic)" />
                   </AreaChart>

@@ -73,9 +73,9 @@ const AnalyticsGrowth = () => {
 
   const getRetentionColor = (value) => {
     const percentage = parseInt(value);
-    if (percentage >= 75) return "#1DB854";
-    if (percentage >= 50) return "#69F0AE";
-    if (percentage >= 25) return "#FFE082";
+    if (percentage >= 75) {return "#1DB854";}
+    if (percentage >= 50) {return "#69F0AE";}
+    if (percentage >= 25) {return "#FFE082";}
     return "#FFAB91";
   };
 

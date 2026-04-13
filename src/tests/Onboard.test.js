@@ -233,7 +233,7 @@ describe("Account Security", () => {
 
   it("renders two password fields", () => {
     renderOnboard();
-    expect(document.querySelectorAll('input[type="password"]').length).toBe(2);
+    expect(document.querySelectorAll("input[type=\"password\"]").length).toBe(2);
   });
 
   it("renders the security notice", () => {
@@ -245,7 +245,7 @@ describe("Account Security", () => {
 
   it("allows typing in password fields", async () => {
     renderOnboard();
-    const [pw] = document.querySelectorAll('input[type="password"]');
+    const [pw] = document.querySelectorAll("input[type=\"password\"]");
     await userEvent.type(pw, "Secret123!");
     expect(pw).toHaveValue("Secret123!");
   });
