@@ -14,7 +14,7 @@ function setup() {
 describe("FlaggedAccount Component", () => {
   it("renders without crashing", () => {
     setup();
-    expect(document.querySelector(".ba-root")).toBeInTheDocument();
+    expect(screen.getByText(/face mismatch|IP Geolocation|Device ID/i)).toBeInTheDocument();
   });
 
   it("shows face mismatch flag", () => {

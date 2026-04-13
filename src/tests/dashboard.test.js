@@ -21,33 +21,32 @@ describe("Dashboard", () => {
     localStorage.clear();
   });
 
-  const setupDashboard = () => renderDashboard();
-
   // ── Layout / Structure ──────────────────────────────────────
   describe("Layout", () => {
-    beforeEach(() => {
-      setupDashboard();
-    });
-
     it("renders the sidebar with Butterfly logo", () => {
+      renderDashboard();
       expect(screen.getByText("Butterfly")).toBeInTheDocument();
     });
 
     it("renders the topbar search input", () => {
+      renderDashboard();
       expect(
         screen.getByPlaceholderText("Search dashboard..."),
       ).toBeInTheDocument();
     });
 
     it("renders the page title", () => {
+      renderDashboard();
       expect(screen.getByText("System Overview")).toBeInTheDocument();
     });
 
     it("renders the online badge", () => {
+      renderDashboard();
       expect(screen.getByText(/System Online/i)).toBeInTheDocument();
     });
 
     it("renders the user chip with Super Admin name", () => {
+      renderDashboard();
       expect(screen.getByText("Super Admin")).toBeInTheDocument();
     });
   });
@@ -65,7 +64,7 @@ describe("Dashboard", () => {
 
     NAV_ITEMS.forEach((label) => {
       it(`renders nav item: ${label}`, () => {
-        setupDashboard();
+        renderDashboard();
         const nav = screen.getByRole("navigation");
         expect(nav).toBeInTheDocument();
         expect(within(nav).getByText(label)).toBeInTheDocument();
@@ -73,73 +72,65 @@ describe("Dashboard", () => {
     });
 
     it("renders CORE OPERATIONS section label", () => {
-      setupDashboard();
+      renderDashboard();
       expect(screen.getByText("CORE OPERATIONS")).toBeInTheDocument();
     });
 
     it("renders Logout button", () => {
-      setupDashboard();
+      renderDashboard();
       expect(screen.getByText("Logout")).toBeInTheDocument();
     });
   });
 
   // ── Stats Cards ─────────────────────────────────────────────
   describe("Stats Cards", () => {
-    beforeEach(() => {
-      setupDashboard();
-    });
-
     it("renders TOTAL MEMBERS stat", () => {
+      renderDashboard();
       expect(screen.getByText("TOTAL MEMBERS")).toBeInTheDocument();
     });
 
     it("renders PREMIUM USERS stat", () => {
+      renderDashboard();
       expect(screen.getByText("PREMIUM USERS")).toBeInTheDocument();
     });
 
     it("renders REVENUE stat", () => {
+      renderDashboard();
       expect(screen.getByText("REVENUE (24HRS)")).toBeInTheDocument();
     });
 
     it("renders ADMINS ONLINE stat", () => {
+      renderDashboard();
       expect(screen.getByText("ADMINS ONLINE")).toBeInTheDocument();
     });
 
     it("renders ACTIVE ESCALATIONS stat", () => {
+      renderDashboard();
       expect(screen.getByText("ACTIVE ESCALATIONS")).toBeInTheDocument();
     });
 
     it("renders metric cards with admin-metric-card class", () => {
-      const cards = screen.getAllByRole("heading").filter(h => 
-        h.closest("[class*='admin-metric-card']")
-      );
-      expect(cards.length).toBeGreaterThan(0);
+      renderDashboard();
+      expect(screen.getAllByTestId(/metric-card|admin-metric/).length).toBeGreaterThan(0);
     });
   });
 
   // ── Chart ───────────────────────────────────────────────────
   describe("Platform Engagement Chart", () => {
-    beforeEach(() => {
-      setupDashboard();
-    });
-
     it("renders the chart section title", () => {
+      renderDashboard();
       expect(screen.getByText("Platform Engagement")).toBeInTheDocument();
     });
 
     it("renders chart container", () => {
-      expect(screen.getByText(/Platform Engagement/i).closest("section") || 
-            screen.getByRole("region", { name: /chart/i }) ||
+      renderDashboard();
+      expect(screen.getByRole("region", { name: /chart|platform engagement/i }) ||
             screen.getByTestId("chart-container")).toBeInTheDocument();
     });
   });
 
   // ── Quick Actions ────────────────────────────────────────────
   describe("Quick Actions", () => {
-    beforeEach(() => {
-      setupDashboard();
-    });
-
     const ACTIONS = [
       "Onboard New Admin",
       "Emergency Suspend",
@@ -151,11 +142,13 @@ describe("Dashboard", () => {
 
     ACTIONS.forEach((label) => {
       it(`renders Quick Action button: ${label}`, () => {
+        renderDashboard();
         expect(screen.getByText(label)).toBeInTheDocument();
       });
     });
 
     it("renders quick action buttons with qa-btn class", () => {
+      renderDashboard();
       const btn = screen.getByRole("button", { name: /Onboard New Admin/i });
       expect(btn).toBeInTheDocument();
     });
