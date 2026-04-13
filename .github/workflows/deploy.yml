@@ -60,6 +60,42 @@ jobs:
           target: "/var/www/butterfly"
           strip_components: 1
           rm: true
+      - name: Setup Nginx for frontend SPA routing
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Create Nginx config for frontend only (separate file, doesn't touch backend)
+            sudo tee /etc/nginx/sites-available/butterfly-frontend > /dev/null << 'EOF'
+            server {
+                listen 8080;
+                server_name _;
+                
+                root /var/www/butterfly;
+                index index.html;
+                
+                # SPA routing - serve index.html for all non-file paths
+                location / {
+                    try_files $uri $uri/ /index.html;
+                }
+                
+                # Cache static assets
+                location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+                    expires 1y;
+                    add_header Cache-Control "public, immutable";
+                }
+            }
+            EOF
+            
+            # Enable the site (if not already)
+            sudo ln -sf /etc/nginx/sites-available/butterfly-frontend /etc/nginx/sites-enabled/butterfly-frontend
+            
+            # Test config and reload
+            sudo nginx -t && sudo systemctl reload nginx
+            
+            echo "Frontend deployed on port 8080"
       - name: Deployment notification
         if: always()
         run: echo "Deployment status - Success!"
