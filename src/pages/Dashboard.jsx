@@ -340,7 +340,7 @@ const Dashboard = () => {
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
-              </div>
+              </section>
 
               <div className="quick-actions">
                 <div className="section-header">

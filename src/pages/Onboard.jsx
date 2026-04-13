@@ -673,12 +673,12 @@ export default function Onboard() {
                 <h2 className="ob-card-title">Account Security</h2>
                 <div className="ob-row2">
                   <div className="ob-field">
-                  <label className="ob-label" htmlFor="temporary-password">
-                    TEMPORARY PASSWORD
-                  </label>
-                  <div className="ob-password-wrapper">
-                    <input
-                      id="temporary-password"
+                    <label className="ob-label" htmlFor="temporary-password">
+                      TEMPORARY PASSWORD
+                    </label>
+                    <div className="ob-password-wrapper">
+                      <input
+                        id="temporary-password"
                         className="ob-input ob-input-password"
                         type={showTempPassword ? "text" : "password"}
                         placeholder="••••••••••••"
@@ -722,12 +722,12 @@ export default function Onboard() {
                     </div>
                   </div>
                   <div className="ob-field">
-                  <label className="ob-label" htmlFor="confirm-password">
-                    CONFIRM PASSWORD
-                  </label>
-                  <div className="ob-password-wrapper">
-                    <input
-                      id="confirm-password"
+                    <label className="ob-label" htmlFor="confirm-password">
+                      CONFIRM PASSWORD
+                    </label>
+                    <div className="ob-password-wrapper">
+                      <input
+                        id="confirm-password"
                         className="ob-input ob-input-password"
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="••••••••••••"
