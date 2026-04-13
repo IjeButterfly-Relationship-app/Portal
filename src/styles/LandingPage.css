@@ -141,7 +141,7 @@ a   { text-decoration: none; color: inherit; }
   background: url('../../public/butterfly.jpg') center center / cover no-repeat;
   z-index: 0;
 }
-/* Deep Intense Purple Glassy Overlay - Lighter for visibility */
+/* Deep Purple Glassy Overlay - Background visible through tint */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -150,14 +150,12 @@ a   { text-decoration: none; color: inherit; }
   height: 100%;
   background: linear-gradient(
     135deg,
-    rgba(46, 0, 67, 0.55) 0%,
-    rgba(75, 0, 110, 0.5) 25%,
-    rgba(106, 13, 150, 0.45) 50%,
-    rgba(128, 0, 128, 0.5) 75%,
-    rgba(85, 0, 105, 0.55) 100%
+    rgba(40, 0, 80, 0.7) 0%,
+    rgba(60, 0, 120, 0.65) 30%,
+    rgba(90, 0, 150, 0.6) 50%,
+    rgba(70, 0, 130, 0.65) 70%,
+    rgba(50, 0, 100, 0.7) 100%
   );
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   z-index: 1;
 }
 
@@ -355,35 +353,6 @@ a   { text-decoration: none; color: inherit; }
   font-size: 1.05rem;
   font-weight: 700;
   margin-top: 2px;
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-}
-
-.scroll-dot {
-  width: 10px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.5;
-  }
-  50% {
-    transform: translateY(-10px);
-    opacity: 1;
-  }
 }
 
 /* ══════════════════════════════════════════
