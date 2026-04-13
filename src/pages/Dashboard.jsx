@@ -317,7 +317,9 @@ const Dashboard = () => {
               {navItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`admin-nav-item ${activeNav === item.label ? "active" : ""}`}
+                  className={`admin-nav-item ${
+                    activeNav === item.label ? "active" : ""
+                  }`}
                   onClick={() => handleNavClick(item)}
                 >
                   <span className="admin-nav-icon">{item.icon}</span>
@@ -684,7 +686,12 @@ const Dashboard = () => {
               <div className="modules-grid">
                 {modules.map((mod) => (
                   <div
-                    className={`module-card ${mod.label === "Admin Management" || mod.label === "Analytics Engine" ? "clickable" : ""}`}
+                    className={`module-card ${
+                      mod.label === "Admin Management" ||
+                      mod.label === "Analytics Engine"
+                        ? "clickable"
+                        : ""
+                    }`}
                     key={mod.label}
                     onClick={() => {
                       if (mod.label === "Admin Management") {
@@ -742,7 +749,9 @@ const Dashboard = () => {
             {navItems.map((item) => (
               <div
                 key={item.id}
-                className={`mod-nav-item ${activeNav === item.label ? "active" : ""}`}
+                className={`mod-nav-item ${
+                  activeNav === item.label ? "active" : ""
+                }`}
                 onClick={() => handleNavClick(item)}
               >
                 <span className="mod-nav-icon">{item.icon}</span>
@@ -819,7 +828,9 @@ const Dashboard = () => {
             {moderatorMetrics.map((metric, index) => (
               <div
                 key={index}
-                className={`mod-metric-card ${metric.label === "Flagged Accounts" ? "clickable" : ""}`}
+                className={`mod-metric-card ${
+                  metric.label === "Flagged Accounts" ? "clickable" : ""
+                }`}
                 onClick={() =>
                   metric.label === "Flagged Accounts" &&
                   navigate("/flaggedAccount")
@@ -837,7 +848,9 @@ const Dashboard = () => {
                   />
                   {metric.trend && (
                     <span
-                      className={`mod-metric-trend ${metric.trendUp ? "positive" : "negative"}`}
+                      className={`mod-metric-trend ${
+                        metric.trendUp ? "positive" : "negative"
+                      }`}
                     >
                       {metric.trend}
                     </span>
