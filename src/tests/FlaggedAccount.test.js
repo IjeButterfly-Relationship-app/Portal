@@ -14,7 +14,9 @@ function setup() {
 describe("FlaggedAccount Component", () => {
   it("renders without crashing", () => {
     setup();
-    expect(screen.getByText(/face mismatch|IP Geolocation|Device ID/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /flagged account review/i }),
+    ).toBeInTheDocument();
   });
 
   it("shows face mismatch flag", () => {

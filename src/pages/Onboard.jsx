@@ -300,27 +300,30 @@ export default function Onboard() {
         <div className="ob-sidebar-section">
           <div className="ob-sidebar-label">CORE OPERATIONS</div>
           <nav className="ob-sidebar-nav">
-            {[
-              { label: "Dashboard", path: "/dashboard" },
-              { label: "Members", path: "/members" },
-              { label: "Admins", path: "/admins" },
-              { label: "Onboard", path: "/onboard" },
-              { label: "Analytics", path: "/analytics" },
-              { label: "Settings", path: "/settings" },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
-                onClick={() => {
-                  setActiveNav(item.label);
-                  if (item.path) {
-                    navigate(item.path);
-                  }
-                }}
-              >
-                {item.label}
-              </div>
-            ))}
+            <ul className="ob-nav-list">
+              {[
+                { label: "Dashboard", path: "/dashboard" },
+                { label: "Members", path: "/members" },
+                { label: "Admins", path: "/admins" },
+                { label: "Onboard", path: "/onboard" },
+                { label: "Analytics", path: "/analytics" },
+                { label: "Settings", path: "/settings" },
+              ].map((item) => (
+                <li
+                  key={item.label}
+                  className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
+                  role="listitem"
+                  onClick={() => {
+                    setActiveNav(item.label);
+                    if (item.path) {
+                      navigate(item.path);
+                    }
+                  }}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
           </nav>
         </div>
 
@@ -670,9 +673,12 @@ export default function Onboard() {
                 <h2 className="ob-card-title">Account Security</h2>
                 <div className="ob-row2">
                   <div className="ob-field">
-                    <label className="ob-label">TEMPORARY PASSWORD</label>
-                    <div className="ob-password-wrapper">
-                      <input
+                  <label className="ob-label" htmlFor="temporary-password">
+                    TEMPORARY PASSWORD
+                  </label>
+                  <div className="ob-password-wrapper">
+                    <input
+                      id="temporary-password"
                         className="ob-input ob-input-password"
                         type={showTempPassword ? "text" : "password"}
                         placeholder="••••••••••••"
@@ -716,9 +722,12 @@ export default function Onboard() {
                     </div>
                   </div>
                   <div className="ob-field">
-                    <label className="ob-label">CONFIRM PASSWORD</label>
-                    <div className="ob-password-wrapper">
-                      <input
+                  <label className="ob-label" htmlFor="confirm-password">
+                    CONFIRM PASSWORD
+                  </label>
+                  <div className="ob-password-wrapper">
+                    <input
+                      id="confirm-password"
                         className="ob-input ob-input-password"
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="••••••••••••"

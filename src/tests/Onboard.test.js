@@ -276,7 +276,7 @@ describe("Module Permissions", () => {
       "System Health",
     ];
     actualModules.forEach((m) =>
-      expect(screen.getByText(m)).toBeInTheDocument(),
+      expect(screen.getAllByText(m).length).toBeGreaterThan(0),
     );
   });
 

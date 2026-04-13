@@ -264,7 +264,7 @@ const Dashboard = () => {
 
             {/* Metrics Cards Row */}
             <div className="admin-metrics-row">
-              <div className="admin-metric-card">
+              <div className="admin-metric-card" data-testid="metric-card">
                 <div className="admin-metric-header">
                   <img src="/members.jpeg" alt="Members" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend positive">↗ 8.2% this month</span>
@@ -274,7 +274,7 @@ const Dashboard = () => {
                 <div className="admin-metric-subtitle">Free + Premium globally</div>
               </div>
 
-              <div className="admin-metric-card">
+              <div className="admin-metric-card" data-testid="metric-card">
                 <div className="admin-metric-header">
                   <img src="/premium.png" alt="Premium" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend positive">↗ 0% this month</span>
@@ -284,7 +284,7 @@ const Dashboard = () => {
                 <div className="admin-metric-subtitle">0% conversion rate</div>
               </div>
 
-              <div className="admin-metric-card">
+              <div className="admin-metric-card" data-testid="metric-card">
                 <div className="admin-metric-header">
                   <img src="/revenue.jpeg" alt="Revenue" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend positive">↗ 15.4% vs yesterday</span>
@@ -294,7 +294,7 @@ const Dashboard = () => {
                 <div className="admin-metric-subtitle">Subscriptions + events</div>
               </div>
 
-              <div className="admin-metric-card">
+              <div className="admin-metric-card" data-testid="metric-card">
                 <div className="admin-metric-header">
                   <img src="/adminonline.png" alt="Admin Online" className="admin-metric-icon-img" />
                   <span className="admin-metric-trend negative">8 currently offline</span>
@@ -304,7 +304,7 @@ const Dashboard = () => {
                 <div className="admin-metric-subtitle">Across all departments</div>
               </div>
 
-              <div className="admin-metric-card escalations">
+              <div className="admin-metric-card escalations" data-testid="metric-card">
                 <div className="admin-metric-header">
                   <img src="/escalations.png" alt="Escalations" className="admin-metric-icon-img" />
                   <span className="admin-metric-badge">3 since yesterday</span>
@@ -316,10 +316,10 @@ const Dashboard = () => {
             </div>
 
             <div className="dashboard-middle">
-              <div className="chart-section">
+              <section className="chart-section" role="region" aria-labelledby="platform-engagement-heading" data-testid="chart-container">
                 <div className="section-header">
                   <div>
-                    <h3>Platform Engagement</h3>
+                    <h3 id="platform-engagement-heading">Platform Engagement</h3>
                     <p>Daily growth and match frequency</p>
                   </div>
                 </div>
