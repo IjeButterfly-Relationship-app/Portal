@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  render,
-  screen,
-  fireEvent,
-  within,
-} from "@testing-library/react";
+import { render, screen, fireEvent, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import Onboard from "../pages/Onboard";
@@ -41,7 +36,9 @@ describe("Sidebar", () => {
   it("marks Onboard as the active nav item", () => {
     renderOnboard();
     const navItems = screen.getAllByRole("listitem");
-    const onboardItem = navItems.find(item => item.textContent.includes("Onboard"));
+    const onboardItem = navItems.find((item) =>
+      item.textContent.includes("Onboard"),
+    );
     expect(onboardItem).toHaveClass("ob-nav-item--active");
   });
 
@@ -233,7 +230,9 @@ describe("Account Security", () => {
 
   it("renders two password fields", () => {
     renderOnboard();
-    expect(screen.getAllByLabelText(/password/i, { exact: false }).length).toBe(2);
+    expect(screen.getAllByLabelText(/password/i, { exact: false }).length).toBe(
+      2,
+    );
   });
 
   it("renders the security notice", () => {
@@ -253,7 +252,6 @@ describe("Account Security", () => {
 
 // ── Module Permissions ────────────────────────────────────────────────────────
 describe("Module Permissions", () => {
-
   it("renders section heading", () => {
     renderOnboard();
     expect(screen.getByText("Module Permissions")).toBeInTheDocument();

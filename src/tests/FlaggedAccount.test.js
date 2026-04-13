@@ -84,4 +84,3 @@ describe("Action buttons", () => {
     ).toBeInTheDocument();
   });
 });
-

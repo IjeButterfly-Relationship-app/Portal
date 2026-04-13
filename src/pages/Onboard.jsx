@@ -690,7 +690,9 @@ export default function Onboard() {
                         className="ob-eye-btn"
                         onClick={() => setShowTempPassword(!showTempPassword)}
                         aria-label={
-                          showTempPassword ? "Hide temporary value" : "Show temporary value"
+                          showTempPassword
+                            ? "Hide temporary value"
+                            : "Show temporary value"
                         }
                       >
                         {showTempPassword ? (

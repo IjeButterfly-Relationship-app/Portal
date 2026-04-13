@@ -4,12 +4,12 @@ on:
   push:
     branches: [main, master]
     paths:
-      - '**'
+      - 'Portal/**'              # Only Portal changes
       - '.github/workflows/**'
   pull_request:
     branches: [main, master]
     paths:
-      - '**'
+      - 'Portal/**'
 
 jobs:
   test:
@@ -23,20 +23,24 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: 'package-lock.json'
+          cache-dependency-path: "Portal/package-lock.json"
 
       - name: Install dependencies
         run: npm install
+        working-directory: Portal
 
       - name: Lint code
         run: npm run lint
+        working-directory: Portal
         continue-on-error: false
 
       - name: Run tests
         run: npm test -- --watchAll=false --passWithNoTests
+        working-directory: Portal
 
       - name: Build project
         run: npm run build
+        working-directory: Portal
 
   deploy:
     needs: test
@@ -51,13 +55,15 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: 'package-lock.json'
+          cache-dependency-path: "Portal/package-lock.json"
 
       - name: Install dependencies
         run: npm install
+        working-directory: Portal
 
       - name: Build project
         run: npm run build
+        working-directory: Portal
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
@@ -76,7 +82,7 @@ jobs:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build/*"
+          source: "Portal/build/*"
           target: "/var/www/butterfly"
           strip_components: 1
           rm: true
@@ -106,7 +112,7 @@ jobs:
                 }
             }
             EOF
-            
+
             sudo ln -sf /etc/nginx/sites-available/butterfly /etc/nginx/sites-enabled/default
             sudo nginx -t && sudo systemctl reload nginx || echo "Nginx reload failed"
 
