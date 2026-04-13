@@ -26,21 +26,21 @@ const Dashboard = () => {
   // Navigation items
   const navItems = isSuperAdmin
     ? [
-        { id: "moderation", label: "Moderation", icon: "" },
-        { id: "analytics", label: "Analytics", icon: "" },
-        { id: "billing", label: "Billing", icon: "" },
-        { id: "security", label: "Security & APIs", icon: "" },
-        { id: "policies", label: "Policies", icon: "" },
-        { id: "activity", label: "Activity Logs", icon: "" },
-      ]
+      { id: "moderation", label: "Moderation", icon: "" },
+      { id: "analytics", label: "Analytics", icon: "" },
+      { id: "billing", label: "Billing", icon: "" },
+      { id: "security", label: "Security & APIs", icon: "" },
+      { id: "policies", label: "Policies", icon: "" },
+      { id: "activity", label: "Activity Logs", icon: "" },
+    ]
     : [
-        { id: "moderation", label: "Moderation", icon: "" },
-        { id: "analytics", label: "Analytics", icon: "" },
-        { id: "billing", label: "Billing", icon: "" },
-        { id: "security", label: "Security & API", icon: "" },
-        { id: "policies", label: "Policies", icon: "" },
-        { id: "activity", label: "Activity Logs", icon: "" },
-      ];
+      { id: "moderation", label: "Moderation", icon: "" },
+      { id: "analytics", label: "Analytics", icon: "" },
+      { id: "billing", label: "Billing", icon: "" },
+      { id: "security", label: "Security & API", icon: "" },
+      { id: "policies", label: "Policies", icon: "" },
+      { id: "activity", label: "Activity Logs", icon: "" },
+    ];
 
   const handleNavClick = (item) => {
     if (item.id === "onboard") {
