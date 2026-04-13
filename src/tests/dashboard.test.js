@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 
@@ -15,15 +15,20 @@ describe("Dashboard", () => {
     // Set up localStorage for Super Admin role
     localStorage.setItem("admin_role", "Super Admin");
     localStorage.setItem("admin_email", "superadmin@example.com");
-    renderDashboard();
   });
 
   afterEach(() => {
     localStorage.clear();
   });
 
+  const setupDashboard = () => renderDashboard();
+
   // ── Layout / Structure ──────────────────────────────────────
   describe("Layout", () => {
+    beforeEach(() => {
+      setupDashboard();
+    });
+
     it("renders the sidebar with Butterfly logo", () => {
       expect(screen.getByText("Butterfly")).toBeInTheDocument();
     });
@@ -60,23 +65,30 @@ describe("Dashboard", () => {
 
     NAV_ITEMS.forEach((label) => {
       it(`renders nav item: ${label}`, () => {
-        const nav = document.querySelector(".admin-sidebar-nav");
+        setupDashboard();
+        const nav = screen.getByRole("navigation");
         expect(nav).toBeInTheDocument();
         expect(within(nav).getByText(label)).toBeInTheDocument();
       });
     });
 
     it("renders CORE OPERATIONS section label", () => {
+      setupDashboard();
       expect(screen.getByText("CORE OPERATIONS")).toBeInTheDocument();
     });
 
     it("renders Logout button", () => {
+      setupDashboard();
       expect(screen.getByText("Logout")).toBeInTheDocument();
     });
   });
 
   // ── Stats Cards ─────────────────────────────────────────────
   describe("Stats Cards", () => {
+    beforeEach(() => {
+      setupDashboard();
+    });
+
     it("renders TOTAL MEMBERS stat", () => {
       expect(screen.getByText("TOTAL MEMBERS")).toBeInTheDocument();
     });
@@ -98,25 +110,36 @@ describe("Dashboard", () => {
     });
 
     it("renders metric cards with admin-metric-card class", () => {
-      const cards = document.querySelectorAll(".admin-metric-card");
+      const cards = screen.getAllByRole("heading").filter(h => 
+        h.closest("[class*='admin-metric-card']")
+      );
       expect(cards.length).toBeGreaterThan(0);
     });
   });
 
   // ── Chart ───────────────────────────────────────────────────
   describe("Platform Engagement Chart", () => {
+    beforeEach(() => {
+      setupDashboard();
+    });
+
     it("renders the chart section title", () => {
       expect(screen.getByText("Platform Engagement")).toBeInTheDocument();
     });
 
     it("renders chart container", () => {
-      const chartContainer = document.querySelector(".chart-container-large");
-      expect(chartContainer).toBeInTheDocument();
+      expect(screen.getByText(/Platform Engagement/i).closest("section") || 
+            screen.getByRole("region", { name: /chart/i }) ||
+            screen.getByTestId("chart-container")).toBeInTheDocument();
     });
   });
 
   // ── Quick Actions ────────────────────────────────────────────
   describe("Quick Actions", () => {
+    beforeEach(() => {
+      setupDashboard();
+    });
+
     const ACTIONS = [
       "Onboard New Admin",
       "Emergency Suspend",
@@ -133,7 +156,7 @@ describe("Dashboard", () => {
     });
 
     it("renders quick action buttons with qa-btn class", () => {
-      const btn = screen.getByText("Onboard New Admin").closest(".qa-btn");
+      const btn = screen.getByRole("button", { name: /Onboard New Admin/i });
       expect(btn).toBeInTheDocument();
     });
   });

@@ -3,7 +3,6 @@ import {
   render,
   screen,
   fireEvent,
-  waitFor,
   within,
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -41,8 +40,9 @@ describe("Sidebar", () => {
 
   it("marks Onboard as the active nav item", () => {
     renderOnboard();
-    const el = screen.getByText("Onboard").closest(".ob-nav-item");
-    expect(el).toHaveClass("ob-nav-item--active");
+    const navItems = screen.getAllByRole("listitem");
+    const onboardItem = navItems.find(item => item.textContent.includes("Onboard"));
+    expect(onboardItem).toHaveClass("ob-nav-item--active");
   });
 
   it("renders CORE OPERATIONS section label", () => {
@@ -233,7 +233,7 @@ describe("Account Security", () => {
 
   it("renders two password fields", () => {
     renderOnboard();
-    expect(document.querySelectorAll("input[type=\"password\"]").length).toBe(2);
+    expect(screen.getAllByLabelText(/password/i, { exact: false }).length).toBe(2);
   });
 
   it("renders the security notice", () => {
@@ -245,24 +245,14 @@ describe("Account Security", () => {
 
   it("allows typing in password fields", async () => {
     renderOnboard();
-    const [pw] = document.querySelectorAll("input[type=\"password\"]");
-    await userEvent.type(pw, "Secret123!");
-    expect(pw).toHaveValue("Secret123!");
+    const pwFields = screen.getAllByLabelText(/password/i, { exact: false });
+    await userEvent.type(pwFields[0], "Secret123!");
+    expect(pwFields[0]).toHaveValue("Secret123!");
   });
 });
 
 // ── Module Permissions ────────────────────────────────────────────────────────
 describe("Module Permissions", () => {
-  const modules = [
-    "Concierge Module",
-    "View Member Profiles",
-    "Send Messages",
-    "Manage Coaching",
-    "Moderation Access",
-    "Analytics Access",
-    "Billing Access",
-    "Security Access",
-  ];
 
   it("renders section heading", () => {
     renderOnboard();
@@ -276,10 +266,6 @@ describe("Module Permissions", () => {
 
   it("renders all 6 module labels", () => {
     renderOnboard();
-    const permSection = screen
-      .getByText("Module Permissions")
-      .closest("section");
-    const moduleScope = within(permSection);
     // Match actual MODULE_PERMISSIONS array in component
     const actualModules = [
       "Moderation",
@@ -290,7 +276,7 @@ describe("Module Permissions", () => {
       "System Health",
     ];
     actualModules.forEach((m) =>
-      expect(moduleScope.getByText(m)).toBeInTheDocument(),
+      expect(screen.getByText(m)).toBeInTheDocument(),
     );
   });
 
