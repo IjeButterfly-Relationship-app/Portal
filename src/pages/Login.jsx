@@ -45,18 +45,16 @@ export default function Login() {
   return (
     <div className={styles.page}>
       <div className={styles.loginContainer}>
-        {/* Left Side - Logo */}
+        {/* Left Side - Logo & Branding */}
         <div className={styles.leftSide}>
           <div className={styles.logoContainer}>
             <img
-              src="/butterfly-logo.png"
-              alt="Butterfly Logo"
+              src="/amoura-logo.png"
+              alt="Amoura Logo"
               className={styles.logo}
             />
             <div className={styles.brandSection}>
-              <h1 className={styles.brandName}>
-                Butterfly<span className={styles.trademark}>™</span>
-              </h1>
+              <h1 className={styles.brandName}>Amoura</h1>
               <p className={styles.slogan}>
                 Trusted Connections, Real Relationships
               </p>
@@ -64,7 +62,7 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Right Side - Glassy Card */}
+        {/* Right Side - Form */}
         <div className={styles.rightSide}>
           <div className={styles.glassCard}>
             <div className={styles.formContainer}>
@@ -162,6 +160,17 @@ export default function Login() {
                   {loading ? "Signing in..." : "Sign In"}
                 </button>
               </form>
+
+              <div className={styles.loginFooter}>
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  className={styles.signupLink}
+                  onClick={() => navigate("/signup")}
+                >
+                  Sign up for free
+                </button>
+              </div>
             </div>
           </div>
         </div>
