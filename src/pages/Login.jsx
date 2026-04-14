@@ -54,7 +54,10 @@ export default function Login() {
               className={styles.logo}
             />
             <div className={styles.brandSection}>
-              <h1 className={styles.brandName}>Amoura</h1>
+              <h1 className={styles.brandName}>
+                Amoura
+                <span className={styles.trademark}>™</span>
+              </h1>
               <p className={styles.slogan}>
                 Trusted Connections, Real Relationships
               </p>
@@ -161,16 +164,6 @@ export default function Login() {
                 </button>
               </form>
 
-              <div className={styles.loginFooter}>
-                Don't have an account?{" "}
-                <button
-                  type="button"
-                  className={styles.signupLink}
-                  onClick={() => navigate("/signup")}
-                >
-                  Sign up for free
-                </button>
-              </div>
             </div>
           </div>
         </div>
