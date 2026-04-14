@@ -1,0 +1,35 @@
+# Add this job to backend's workflow for combined deployment
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout frontend code
+        uses: actions/checkout@v4
+        with:
+          repository: IjeButterfly-Relationship-app/Portal
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Build frontend
+        run: npm run build
+        
+      - name: Deploy frontend to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: root
+          password: ${{ secrets.DO_PASSWORD }}
+          source: "build/*"
+          target: "/var/www/butterfly"
+          strip_components: 1
+          rm: true
