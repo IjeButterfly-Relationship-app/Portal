@@ -50,7 +50,7 @@ const Hero = () => (
       <h1 className="hero-title">
         TRUSTED CONNECTIONS
         <br />
-        REAL RELATIONSHIPS.
+        REAL RELATIONSHIPS
       </h1>
 
       {/* App Store Buttons */}

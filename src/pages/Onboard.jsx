@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import "../styles/Onboard.css";
 
@@ -129,10 +129,10 @@ function Toggle({ checked, onChange }) {
   );
 }
 
-Toggle.propTypes = {
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+// Toggle.propTypes = {
+//   checked: PropTypes.bool.isRequired,
+//   onChange: PropTypes.func.isRequired,
+// };
 
 export default function Onboard() {
   const navigate = useNavigate();
