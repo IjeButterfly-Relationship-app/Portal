@@ -16,7 +16,7 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch("http://208.68.36.144/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
