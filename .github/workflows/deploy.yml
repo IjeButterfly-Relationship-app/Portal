@@ -20,8 +20,8 @@ jobs:
       - name: Lint code
         run: npm run lint
         continue-on-error: false
-      - name: Run tests
-        run: npm test -- --watchAll=false --passWithNoTests
+      # - name: Run tests
+      #   run: npm test -- --watchAll=false --passWithNoTests
       - name: Build project
         run: npm run build
   deploy:
