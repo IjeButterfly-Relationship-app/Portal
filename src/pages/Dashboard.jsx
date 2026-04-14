@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import {
   ChevronRight,
   Bell,
-  Settings,
   MoreVertical,
-  Eye,
-  EyeOff,
   AlertCircle,
+  Home,
+  UserCheck,
+  Shield,
+  BarChart3,
+  DollarSign,
+  Settings,
+  FileText,
+  Activity,
+  Menu,
 } from "lucide-react";
 import {
   LineChart,
@@ -19,29 +25,28 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import Sidebar from "../components/Sidebar";
-import "../styles/Dashboard.css";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("Daily");
 
   const analyticsData = [
-    { name: "Mon", purple: 2400, cyan: 300 },
-    { name: "Tue", purple: 1398, cyan: 221 },
-    { name: "Wed", purple: 9800, cyan: 229 },
-    { name: "Thu", purple: 3908, cyan: 200 },
-    { name: "Fri", purple: 4800, cyan: 218 },
-    { name: "Sat", purple: 3800, cyan: 250 },
-    { name: "Sun", purple: 4300, cyan: 210 },
+    { name: "Mon", value: 2700 },
+    { name: "Tue", value: 2800 },
+    { name: "Wed", value: 2900 },
+    { name: "Thu", value: 2950 },
+    { name: "Fri", value: 3000 },
+    { name: "Sat", value: 2980 },
+    { name: "Sun", value: 3020 },
   ];
 
   const revenueData = [
     { name: "Jan", value: 4000 },
-    { name: "Feb", value: 3000 },
-    { name: "Mar", value: 5000 },
-    { name: "Apr", value: 5500 },
-    { name: "May", value: 6000 },
-    { name: "Jun", value: 6500 },
+    { name: "Feb", value: 3800 },
+    { name: "Mar", value: 4200 },
+    { name: "Apr", value: 4500 },
+    { name: "May", value: 4800 },
+    { name: "Jun", value: 5200 },
   ];
 
   const coachData = [
@@ -87,7 +92,7 @@ const Dashboard = () => {
       id: 1,
       type: "HARASSMENT",
       target: "Alex M.",
-      reporter: "James L.",
+      reporter: "Jamie L.",
       time: "10m ago",
     },
     {
@@ -134,316 +139,313 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="dashboard-wrapper">
-      <Sidebar />
-
-      <div className="main-content">
-        <div className="header">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="header-search"
-          />
-
-          <div className="header-right">
-            <div className="header-system-status">
-              <div className="header-system-status-title">System Online</div>
-              <div className="header-system-status-time">Oct 24 • 10:42 AM</div>
-            </div>
-            <Bell size={16} className="header-bell-icon" />
-            <div className="header-filter-btn">Filter</div>
-          </div>
+    <div className="dashboard">
+      {/* SIDEBAR */}
+      <aside className="sidebar">
+        <div className="sidebar-logo">
+          <div className="logo-icon">🦋</div>
+          <span className="logo-text">Butterfly</span>
         </div>
 
-        <div className="content-area">
-          <div className="stats-grid">
-            {[
-              {
-                icon: "👥",
-                label: "Active Users",
-                value: "1.28M",
-                change: "+12.5%",
-                color: "#7F55E0",
-              },
-              {
-                icon: "📊",
-                label: "Daily Sessions",
-                value: "42.9K",
-                change: "+5.2%",
-                color: "#06B6D4",
-              },
-              {
-                icon: "⏳",
-                label: "Pending Verifications",
-                value: "154",
-                change: null,
-                color: "#FF9500",
-              },
-              {
-                icon: "💰",
-                label: "Weekly Revenue",
-                value: "$168.3K",
-                change: "+45%",
-                color: "#2563EB",
-              },
-            ].map((stat, idx) => (
-              <div key={idx} className="stat-card">
-                <div className="stat-card-header">
-                  <div
-                    className="stat-card-icon"
-                    style={{ background: stat.color }}
-                  >
-                    {stat.icon}
-                  </div>
-                  {stat.change && (
-                    <span className="stat-card-change">{stat.change}</span>
-                  )}
-                </div>
-                <div className="stat-card-label">{stat.label}</div>
-                <div className="stat-card-value">{stat.value}</div>
-              </div>
-            ))}
+        <div className="sidebar-section">
+          <div className="section-label">GENERAL</div>
+          <nav className="nav-group">
+            <div className="nav-item active">
+              <span>🏠 Dashboard</span>
+            </div>
+            <div className="nav-item">
+              <span>👤 Profile</span>
+            </div>
+            <div className="nav-item">
+              <span>✓ Coach Verification</span>
+            </div>
+          </nav>
+        </div>
+
+        <div className="sidebar-section">
+          <div className="section-label">SYSTEM</div>
+          <nav className="nav-group">
+            <div className="nav-item">
+              <span>🛡️ Moderation</span>
+            </div>
+            <div className="nav-item">
+              <span>📊 Analytics</span>
+            </div>
+            <div className="nav-item">
+              <span>💰 Billing & Revenue</span>
+            </div>
+            <div className="nav-item">
+              <span>⚙️ Management</span>
+            </div>
+            <div className="nav-item">
+              <span className="indent">📋 Policies</span>
+            </div>
+            <div className="nav-item">
+              <span className="indent">📜 Activity Logs</span>
+            </div>
+            <div className="nav-item">
+              <span className="indent">🔧 Settings</span>
+            </div>
+          </nav>
+        </div>
+      </aside>
+
+      {/* MAIN CONTENT */}
+      <main className="main-content">
+        {/* HEADER */}
+        <header className="header">
+          <div className="header-left">
+            <input
+              type="text"
+              placeholder="Search users, coaches, or logs..."
+              className="search-input"
+            />
           </div>
-
-          <div className="charts-row">
-            <div className="panel">
-              <div style={{ marginBottom: "8px" }}>
-                <h3 className="panel-title">Growth Analytics</h3>
-                <p className="panel-subtitle">User retention trends</p>
+          <div className="header-right">
+            <div className="system-status">
+              <div className="status-title">System Online</div>
+              <div className="status-time">
+                Median, IDN • Oct 24, 2023 • 10:42 AM
               </div>
+            </div>
+            <Bell size={18} className="bell-icon" />
+            <button className="filter-btn">Filter Period</button>
+          </div>
+        </header>
 
-              <div className="analytics-tabs">
-                {["Daily", "Weekly", "Monthly"].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`analytics-tab${activeTab === tab ? " active" : ""}`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
+        {/* CONTENT AREA */}
+        <div className="content-area">
+          {/* GROWTH ANALYTICS SECTION */}
+          <div className="analytics-section">
+            <div className="section-header">
+              <h2 className="section-title">Growth Analytics</h2>
+              <p className="section-subtitle">
+                User retention and acquisition trends
+              </p>
+            </div>
 
-              <ResponsiveContainer width="100%" height={140}>
+            <div className="analytics-tabs">
+              <button
+                className={`tab ${activeTab === "Daily" ? "active" : ""}`}
+                onClick={() => setActiveTab("Daily")}
+              >
+                Daily
+              </button>
+              <button
+                className={`tab ${activeTab === "Weekly" ? "active" : ""}`}
+                onClick={() => setActiveTab("Weekly")}
+              >
+                Weekly
+              </button>
+              <button
+                className={`tab ${activeTab === "Monthly" ? "active" : ""}`}
+                onClick={() => setActiveTab("Monthly")}
+              >
+                Monthly
+              </button>
+            </div>
+
+            <div className="chart-container">
+              <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={analyticsData}>
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="rgba(0,0,0,0.1)"
-                  />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 10, fill: "#6b7280" }}
+                    tick={{ fontSize: 12, fill: "#6b7280" }}
                   />
-                  <YAxis tick={{ fontSize: 10, fill: "#6b7280" }} />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#fff",
-                      border: "1px solid rgba(0,0,0,0.1)",
-                      borderRadius: "6px",
-                      fontSize: "10px",
-                      padding: "4px 8px",
-                    }}
+                  <YAxis
+                    domain={[2600, 3100]}
+                    tick={{ fontSize: 12, fill: "#6b7280" }}
+                    ticks={[2600, 2700, 2800, 2900, 3000, 3100]}
                   />
+                  <Tooltip />
                   <Line
                     type="monotone"
-                    dataKey="purple"
-                    stroke="#7F55E0"
-                    strokeWidth={2}
-                    dot={false}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="cyan"
-                    stroke="#06B6D4"
-                    strokeWidth={2}
-                    dot={false}
+                    dataKey="value"
+                    stroke="#7C3AED"
+                    strokeWidth={3}
+                    dot={{ fill: "#7C3AED", r: 4 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
-
-              <div className="analytics-metrics">
-                <div className="analytics-metric">
-                  <div
-                    className="analytics-metric-value"
-                    style={{ color: "#7F55E0" }}
-                  >
-                    64.2%
-                  </div>
-                  <div className="analytics-metric-label">CONVERSION</div>
-                </div>
-                <div className="analytics-metric">
-                  <div
-                    className="analytics-metric-value"
-                    style={{ color: "#EF4444" }}
-                  >
-                    1.4%
-                  </div>
-                  <div className="analytics-metric-label">CHURN</div>
-                </div>
-                <div className="analytics-metric">
-                  <div
-                    className="analytics-metric-value"
-                    style={{ color: "#06B6D4" }}
-                  >
-                    18m 42s
-                  </div>
-                  <div className="analytics-metric-label">SESSION</div>
-                </div>
-              </div>
             </div>
 
-            <div className="panel">
-              <div className="moderation-header">
-                <h3 className="panel-title">Moderation Hub</h3>
-                <span className="moderation-badge">3</span>
-              </div>
-
-              <div className="moderation-list">
-                {moderationItems.map((item) => (
-                  <div key={item.id} className="moderation-item">
-                    <div className="moderation-item-header">
-                      <span className="moderation-item-type">{item.type}</span>
-                      <span className="moderation-item-time">{item.time}</span>
-                    </div>
-                    <div className="moderation-item-target">{item.target}</div>
-                    <div className="moderation-item-reporter">by {item.reporter}</div>
-                    <div className="moderation-item-actions">
-                      <button className="moderation-item-btn">✓</button>
-                      <button className="moderation-item-btn">✗</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button className="moderation-view-all">Open Suite →</button>
-            </div>
-          </div>
-
-          <div className="coach-system-row">
-            <div className="panel">
-              <div className="coach-header">
-                <div>
-                  <h3 className="panel-title">Coach Queue</h3>
-                  <p className="panel-subtitle">Pending reviews</p>
+            <div className="metrics-grid">
+              <div className="metric-card">
+                <div className="metric-value" style={{ color: "#7C3AED" }}>
+                  64.2%
                 </div>
-                <button className="coach-view-all">View All →</button>
+                <div className="metric-label">USER CONVERSION</div>
               </div>
-
-              <div className="coach-table-wrapper">
-                <table className="coach-table">
-                  <thead>
-                    <tr>
-                      <th>COACH</th>
-                      <th>SPECIALIZATION</th>
-                      <th>DATE</th>
-                      <th>STATUS</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {coachData.slice(0, 4).map((coach) => (
-                      <tr key={coach.id}>
-                        <td className="td-name">{coach.name.split(" ")[0]}</td>
-                        <td className="td-muted">{coach.role.split(" ")[0]}</td>
-                        <td className="td-muted">{coach.date.slice(5)}</td>
-                        <td>
-                          <span className="coach-status-badge">
-                            {coach.status}
-                          </span>
-                        </td>
-                        <td className="td-center">
-                          <MoreVertical size={12} className="coach-more-icon" />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="metric-card">
+                <div className="metric-value" style={{ color: "#EF4444" }}>
+                  1.4%
+                </div>
+                <div className="metric-label">CHURN RATE</div>
               </div>
-            </div>
-
-            <div className="panel">
-              <h3 className="system-pulse-title">System Pulse</h3>
-
-              <div className="system-pulse-list">
-                {systemPulse.map((item) => (
-                  <div key={item.id} className="system-pulse-item">
-                    <div className="system-pulse-item-header">
-                      <div className="system-pulse-item-user">{item.user}</div>
-                      <span className="system-pulse-item-time">{item.time}</span>
-                    </div>
-                    <div className="system-pulse-item-action">{item.action}</div>
-                  </div>
-                ))}
+              <div className="metric-card">
+                <div className="metric-value" style={{ color: "#06B6D4" }}>
+                  18m 42s
+                </div>
+                <div className="metric-label">AVG. SESSION</div>
               </div>
             </div>
           </div>
 
-          <div className="bottom-row">
-            <div className="panel">
-              <h3 className="revenue-title">Revenue Flow</h3>
-              <ResponsiveContainer width="100%" height={100}>
-                <BarChart data={revenueData}>
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    stroke="rgba(0,0,0,0.1)"
-                  />
-                  <XAxis
-                    dataKey="name"
-                    tick={{ fontSize: 9, fill: "#6b7280" }}
-                  />
-                  <YAxis tick={{ fontSize: 9, fill: "#6b7280" }} />
-                  <Bar dataKey="value" fill="#2563EB" radius={[2, 2, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className="panel">
-              <h3 className="quick-actions-title">Quick Actions</h3>
-
-              <div className="quick-actions-list">
-                <button className="quick-actions-btn">📤 Export</button>
-                <button className="quick-actions-btn">✓ Verify</button>
-                <button className="quick-actions-btn">🔍 Logs</button>
-              </div>
-            </div>
-
-            <div className="security-alert">
-              <div className="security-alert-header">
-                <AlertCircle size={14} style={{ flexShrink: 0 }} />
-                <h3 className="security-alert-title">Security Alert</h3>
-              </div>
-              <p className="security-alert-body">
-                Multiple failed logins from unusual IPs
+          {/* COACH VERIFICATION QUEUE */}
+          <div className="coach-section">
+            <div className="section-header">
+              <h2 className="section-title">Coach Verification Queue</h2>
+              <p className="section-subtitle">
+                Manual review required for professional credentials
               </p>
-              <button className="security-alert-btn">Lockdown</button>
+            </div>
+
+            <div className="table-wrapper">
+              <table className="coach-table">
+                <thead>
+                  <tr>
+                    <th>COACH PROFILE</th>
+                    <th>SPECIALIZATION</th>
+                    <th>SUBMITTED</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {coachData.map((coach) => (
+                    <tr key={coach.id}>
+                      <td className="coach-name">{coach.name}</td>
+                      <td>{coach.role}</td>
+                      <td>{coach.date}</td>
+                      <td>
+                        <span className="status-badge">{coach.status}</span>
+                      </td>
+                      <td>
+                        <MoreVertical size={16} className="action-icon" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* TWO COLUMN LAYOUT */}
+          <div className="two-columns">
+            {/* LEFT COLUMN */}
+            <div className="left-column">
+              {/* Revenue Flow */}
+              <div className="revenue-section">
+                <h2 className="section-title">Revenue Flow</h2>
+                <p className="section-subtitle">
+                  Subscription vs. One-time gifts
+                </p>
+                <div className="chart-container small">
+                  <ResponsiveContainer width="100%" height={200}>
+                    <BarChart data={revenueData}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                      <XAxis
+                        dataKey="name"
+                        tick={{ fontSize: 12, fill: "#6b7280" }}
+                      />
+                      <YAxis tick={{ fontSize: 12, fill: "#6b7280" }} />
+                      <Tooltip />
+                      <Bar
+                        dataKey="value"
+                        fill="#3B82F6"
+                        radius={[4, 4, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* Quick Actions */}
+              <div className="quick-actions-section">
+                <h2 className="section-title">Quick Actions</h2>
+                <p className="section-subtitle">Admin operational shortcuts</p>
+                <div className="actions-grid">
+                  <button className="action-btn">📤 Export Data</button>
+                  <button className="action-btn">✓ Bulk Verify</button>
+                  <button className="action-btn">🔍 Filter Logs</button>
+                  <button className="action-btn">📅 Schedule</button>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN */}
+            <div className="right-column">
+              {/* Moderation Hub */}
+              <div className="moderation-section">
+                <div className="moderation-header">
+                  <h2 className="section-title">Moderator Hub</h2>
+                </div>
+                <div className="moderation-list">
+                  {moderationItems.map((item) => (
+                    <div key={item.id} className="moderation-item">
+                      <div className="moderation-item-header">
+                        <span className="moderation-type">{item.type}</span>
+                        <span className="moderation-time">{item.time}</span>
+                      </div>
+                      <div className="moderation-target">
+                        Target: {item.target}
+                      </div>
+                      <div className="moderation-reporter">
+                        Reported by {item.reporter}
+                      </div>
+                      <div className="moderation-actions">
+                        <button className="moderation-btn approve">
+                          Approve
+                        </button>
+                        <button className="moderation-btn remove">
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="view-all-btn">
+                  Open Full Moderation Suite <ChevronRight size={14} />
+                </button>
+              </div>
+
+              {/* System Pulse */}
+              <div className="pulse-section">
+                <h2 className="section-title">System Pulse</h2>
+                <p className="section-subtitle">
+                  Recent administrative actions
+                </p>
+                <div className="pulse-list">
+                  {systemPulse.map((item) => (
+                    <div key={item.id} className="pulse-item">
+                      <div className="pulse-header">
+                        <span className="pulse-user">{item.user}</span>
+                        <span className="pulse-time">{item.time}</span>
+                      </div>
+                      <div className="pulse-action">{item.action}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Security Alert */}
+              <div className="security-alert">
+                <div className="alert-header">
+                  <AlertCircle size={18} />
+                  <h3 className="alert-title">Security Alert</h3>
+                </div>
+                <p className="alert-subtitle">Action Required Immediately</p>
+                <p className="alert-message">
+                  Detected multiple failed login attempts from unusual IP
+                  addresses (192.168.0.21) targeting Admin Panel.
+                </p>
+                <button className="alert-btn">Enforce Lockdown</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="footer">
-          <div className="footer-user">
-            <div className="footer-avatar"></div>
-            <div>
-              <div className="footer-user-name">William Finn</div>
-              <div className="footer-user-role">Super Admin</div>
-            </div>
-          </div>
-
-          <div className="footer-links">
-            <a href="#" className="footer-link">
-              Privacy
-            </a>
-            <a href="#" className="footer-link">
-              Terms
-            </a>
-            <a href="#" className="footer-link">
-              Support
-            </a>
-          </div>
-
-          <div className="footer-copyright">© 2023 Butterfly</div>
-        </div>
-      </div>
+      </main>
     </div>
   );
 };
