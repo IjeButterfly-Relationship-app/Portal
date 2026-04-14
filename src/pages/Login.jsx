@@ -54,7 +54,7 @@ export default function Login() {
               className={styles.logo}
             />
             <div className={styles.brandSection}>
-              <h1 className={styles.brandName}>Butterfly</h1>
+              <h1 className={styles.brandName}>Amoura</h1>
               <p className={styles.slogan}>
                 Trusted Connections, Real Relationships
               </p>
