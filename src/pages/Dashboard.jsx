@@ -137,9 +137,7 @@ const Dashboard = () => {
     <div className="dashboard-wrapper">
       <Sidebar />
 
-      {/* MAIN CONTENT */}
       <div className="main-content">
-        {/* HEADER */}
         <div className="header">
           <input
             type="text"
@@ -154,14 +152,12 @@ const Dashboard = () => {
                 Oct 24, 2023 • 10:42 AM
               </div>
             </div>
-            <Bell size={20} className="header-bell-icon" />
+            <Bell size={18} className="header-bell-icon" />
             <div className="header-filter-btn">Filter Period</div>
           </div>
         </div>
 
-        {/* CONTENT AREA */}
         <div className="content-area">
-          {/* Stats Cards */}
           <div className="stats-grid">
             {[
               {
@@ -211,11 +207,9 @@ const Dashboard = () => {
             ))}
           </div>
 
-          {/* Charts Row */}
           <div className="charts-row">
-            {/* Growth Analytics */}
             <div className="panel">
-              <div style={{ marginBottom: "20px" }}>
+              <div style={{ marginBottom: "12px" }}>
                 <h3 className="panel-title">Growth Analytics</h3>
                 <p className="panel-subtitle">
                   User retention and acquisition trends
@@ -234,7 +228,7 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <ResponsiveContainer width="100%" height={200}>
+              <ResponsiveContainer width="100%" height={160}>
                 <LineChart data={analyticsData}>
                   <CartesianGrid
                     strokeDasharray="3 3"
@@ -242,14 +236,16 @@ const Dashboard = () => {
                   />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 12, fill: "#6b7280" }}
+                    tick={{ fontSize: 11, fill: "#6b7280" }}
                   />
-                  <YAxis tick={{ fontSize: 12, fill: "#6b7280" }} />
+                  <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
                   <Tooltip
                     contentStyle={{
                       background: "#fff",
                       border: "1px solid rgba(0,0,0,0.1)",
                       borderRadius: "8px",
+                      fontSize: "11px",
+                      padding: "6px 10px",
                     }}
                   />
                   <Line
@@ -300,7 +296,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Moderation Hub */}
             <div className="panel">
               <div className="moderation-header">
                 <h3 className="panel-title">Moderation Hub</h3>
@@ -331,16 +326,14 @@ const Dashboard = () => {
               <button className="moderation-view-all">
                 Open Full Moderation Suite{" "}
                 <ChevronRight
-                  size={14}
+                  size={12}
                   style={{ display: "inline", marginLeft: "4px" }}
                 />
               </button>
             </div>
           </div>
 
-          {/* Coach Verification & System Pulse */}
           <div className="coach-system-row">
-            {/* Coach Verification Queue */}
             <div className="panel">
               <div className="coach-header">
                 <div>
@@ -351,7 +344,7 @@ const Dashboard = () => {
                 </div>
                 <button className="coach-view-all">
                   View All{" "}
-                  <ChevronRight size={14} style={{ display: "inline" }} />
+                  <ChevronRight size={12} style={{ display: "inline" }} />
                 </button>
               </div>
 
@@ -378,7 +371,7 @@ const Dashboard = () => {
                           </span>
                         </td>
                         <td className="td-center">
-                          <MoreVertical size={14} className="coach-more-icon" />
+                          <MoreVertical size={12} className="coach-more-icon" />
                         </td>
                       </tr>
                     ))}
@@ -387,7 +380,6 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* System Pulse */}
             <div className="panel">
               <h3 className="system-pulse-title">System Pulse</h3>
               <p className="system-pulse-subtitle">
@@ -412,16 +404,14 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Bottom Charts Row */}
           <div className="bottom-row">
-            {/* Revenue Flow */}
             <div className="panel">
               <h3 className="revenue-title">Revenue Flow</h3>
               <p className="revenue-subtitle">
                 Subscription vs. One-time gifts
               </p>
 
-              <ResponsiveContainer width="100%" height={150}>
+              <ResponsiveContainer width="100%" height={120}>
                 <BarChart data={revenueData}>
                   <CartesianGrid
                     strokeDasharray="3 3"
@@ -429,15 +419,14 @@ const Dashboard = () => {
                   />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 11, fill: "#6b7280" }}
+                    tick={{ fontSize: 10, fill: "#6b7280" }}
                   />
-                  <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
-                  <Bar dataKey="value" fill="#2563EB" radius={[4, 4, 0, 0]} />
+                  <YAxis tick={{ fontSize: 10, fill: "#6b7280" }} />
+                  <Bar dataKey="value" fill="#2563EB" radius={[3, 3, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
-            {/* Quick Actions */}
             <div className="panel">
               <h3 className="quick-actions-title">Quick Actions</h3>
               <p className="quick-actions-subtitle">
@@ -452,10 +441,9 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Security Alert */}
             <div className="security-alert">
               <div className="security-alert-header">
-                <AlertCircle size={20} style={{ flexShrink: 0 }} />
+                <AlertCircle size={18} style={{ flexShrink: 0 }} />
                 <h3 className="security-alert-title">Security Alert</h3>
               </div>
               <p className="security-alert-action-label">
@@ -470,7 +458,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* FOOTER */}
         <div className="footer">
           <div className="footer-user">
             <div className="footer-avatar"></div>
