@@ -306,9 +306,7 @@ const Dashboard = () => {
                       <span className="moderation-item-time">{item.time}</span>
                     </div>
                     <div className="moderation-item-target">{item.target}</div>
-                    <div className="moderation-item-reporter">
-                      by {item.reporter}
-                    </div>
+                    <div className="moderation-item-reporter">by {item.reporter}</div>
                     <div className="moderation-item-actions">
                       <button className="moderation-item-btn">✓</button>
                       <button className="moderation-item-btn">✗</button>
@@ -365,18 +363,15 @@ const Dashboard = () => {
 
             <div className="panel">
               <h3 className="system-pulse-title">System Pulse</h3>
+
               <div className="system-pulse-list">
                 {systemPulse.map((item) => (
                   <div key={item.id} className="system-pulse-item">
                     <div className="system-pulse-item-header">
                       <div className="system-pulse-item-user">{item.user}</div>
-                      <span className="system-pulse-item-time">
-                        {item.time}
-                      </span>
+                      <span className="system-pulse-item-time">{item.time}</span>
                     </div>
-                    <div className="system-pulse-item-action">
-                      {item.action}
-                    </div>
+                    <div className="system-pulse-item-action">{item.action}</div>
                   </div>
                 ))}
               </div>
@@ -404,6 +399,7 @@ const Dashboard = () => {
 
             <div className="panel">
               <h3 className="quick-actions-title">Quick Actions</h3>
+
               <div className="quick-actions-list">
                 <button className="quick-actions-btn">📤 Export</button>
                 <button className="quick-actions-btn">✓ Verify</button>
