@@ -11,7 +11,7 @@ body {
 .dashboard {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(90deg, #74266C 0%, #8A377B 48%, #542A53 100%);
+  background: linear-gradient(90deg, #74266C 0%, #8A377B 48%, #542A53 70%, #483B54 85%, #74266C 95%, #332D39 100%);
 }
 
 /* ===== SIDEBAR ===== */
@@ -131,15 +131,15 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-  background: rgba(74, 26, 107, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(74, 26, 107, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 16px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
 }
 
 .header-left {
@@ -222,7 +222,6 @@ body {
 .content-area {
   flex: 1;
   padding: 32px;
-  background: #f9fafb;
 }
 
 /* ===== STAT CARDS ===== */
