@@ -63,7 +63,7 @@ jobs:
             sudo rm -rf /var/www/butterfly/*
             sudo chown -R $USER:$USER /var/www/butterfly
 
-      # ✅ FIXED: use dist instead of build
+      # FIXED: use dist instead of build
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -75,36 +75,21 @@ jobs:
           strip_components: 1
           rm: true
 
-      - name: Setup Nginx for frontend SPA routing
+      - name: Remove old port 8080 Nginx config
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: ${{ secrets.DROPLET_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo tee /etc/nginx/sites-available/butterfly-frontend > /dev/null << 'EOF'
-            server {
-                listen 8080;
-                server_name _;
-                
-                root /var/www/butterfly;
-                index index.html;
-
-                location / {
-                    try_files $uri $uri/ /index.html;
-                }
-
-                location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
-                    expires 1y;
-                    add_header Cache-Control "public, immutable";
-                }
-            }
-            EOF
-
-            sudo ln -sf /etc/nginx/sites-available/butterfly-frontend /etc/nginx/sites-enabled/butterfly-frontend
-            sudo nginx -t && sudo systemctl reload nginx
-
-            echo "Frontend deployed on port 8080"
+            # Remove port 8080 Nginx configuration
+            sudo rm -f /etc/nginx/sites-available/butterfly-frontend
+            sudo rm -f /etc/nginx/sites-enabled/butterfly-frontend
+            
+            # Reload Nginx if config test passes
+            sudo nginx -t && sudo systemctl reload nginx || echo "Nginx reload skipped"
+            
+            echo "Port 8080 config removed"
 
       - name: Deployment notification
         if: always()
