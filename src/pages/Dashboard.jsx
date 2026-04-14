@@ -44,31 +44,26 @@ const Dashboard = () => {
           <span className="logo-text">Amoura<sup>™</sup></span>
         </div>
 
-        <div className="sidebar-divider"></div>
-
-        <div className="sidebar-section">
-          <div className="section-label">CORE<br/>OPERATIONS</div>
-          <nav className="nav-group">
-            <div className="nav-item">
-              <span>Moderation</span>
-            </div>
-            <div className="nav-item">
-              <span>Analytics</span>
-            </div>
-            <div className="nav-item">
-              <span>Billing</span>
-            </div>
-            <div className="nav-item">
-              <span>Security &<br/>APIs</span>
-            </div>
-            <div className="nav-item">
-              <span>Policies</span>
-            </div>
-            <div className="nav-item">
-              <span>Activity Logs</span>
-            </div>
-          </nav>
-        </div>
+        <nav className="nav-group">
+          <div className="nav-item">
+            <span>Moderation</span>
+          </div>
+          <div className="nav-item">
+            <span>Analytics</span>
+          </div>
+          <div className="nav-item">
+            <span>Billing</span>
+          </div>
+          <div className="nav-item">
+            <span>Security & APIs</span>
+          </div>
+          <div className="nav-item">
+            <span>Policies</span>
+          </div>
+          <div className="nav-item">
+            <span>Activity Logs</span>
+          </div>
+        </nav>
 
         <div className="sidebar-footer">
           <button className="logout-btn">
