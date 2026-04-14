@@ -1,19 +1,5 @@
 import React, { useState } from "react";
-import {
-  ChevronRight,
-  Bell,
-  MoreVertical,
-  AlertCircle,
-  Home,
-  UserCheck,
-  Shield,
-  BarChart3,
-  DollarSign,
-  Settings,
-  FileText,
-  Activity,
-  Menu,
-} from "lucide-react";
+import { ChevronRight, Bell, MoreVertical, AlertCircle } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -25,19 +11,19 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("Daily");
 
   const analyticsData = [
-    { name: "Mon", value: 2700 },
-    { name: "Tue", value: 2800 },
-    { name: "Wed", value: 2900 },
-    { name: "Thu", value: 2950 },
-    { name: "Fri", value: 3000 },
-    { name: "Sat", value: 2980 },
-    { name: "Sun", value: 3020 },
+    { name: "Mon", purple: 2675, cyan: 400 },
+    { name: "Tue", purple: 1800, cyan: 300 },
+    { name: "Wed", purple: 9800, cyan: 800 },
+    { name: "Thu", purple: 3900, cyan: 450 },
+    { name: "Fri", purple: 5050, cyan: 600 },
+    { name: "Sat", purple: 3800, cyan: 350 },
+    { name: "Sun", purple: 4500, cyan: 500 },
   ];
 
   const revenueData = [
@@ -49,144 +35,50 @@ const Dashboard = () => {
     { name: "Jun", value: 5200 },
   ];
 
-  const coachData = [
-    {
-      id: 1,
-      name: "Dr. Sarah Jenkins",
-      role: "Relationship Coach",
-      date: "2023-10-24",
-      status: "Reviewing",
-    },
-    {
-      id: 2,
-      name: "Marcus Thorne",
-      role: "Emotional Intelligence",
-      date: "2023-10-23",
-      status: "Reviewing",
-    },
-    {
-      id: 3,
-      name: "Elena Rodriguez",
-      role: "Marriage Specialist",
-      date: "2023-10-23",
-      status: "Reviewing",
-    },
-    {
-      id: 4,
-      name: "David Kim",
-      role: "Dating Strategy",
-      date: "2023-10-22",
-      status: "Reviewing",
-    },
-    {
-      id: 5,
-      name: "Sophia Chen",
-      role: "Conflict Resolution",
-      date: "2023-10-21",
-      status: "Reviewing",
-    },
-  ];
-
-  const moderationItems = [
-    {
-      id: 1,
-      type: "HARASSMENT",
-      target: "Alex M.",
-      reporter: "Jamie L.",
-      time: "10m ago",
-    },
-    {
-      id: 2,
-      type: "SPAM/BOTS",
-      target: "Jordan P.",
-      reporter: "System",
-      time: "24m ago",
-    },
-    {
-      id: 3,
-      type: "INAPPROPRIATE CONTENT",
-      target: "Casey W.",
-      reporter: "Morgan S.",
-      time: "1h ago",
-    },
-  ];
-
-  const systemPulse = [
-    {
-      id: 1,
-      user: "William F.",
-      action: "Updated Privacy Policy",
-      time: "10:30 AM",
-    },
-    {
-      id: 2,
-      user: "System",
-      action: "Auto-flagged 12 spam accounts",
-      time: "09:15 AM",
-    },
-    {
-      id: 3,
-      user: "Elena R.",
-      action: "Approved Coach: David Kim",
-      time: "08:42 AM",
-    },
-    {
-      id: 4,
-      user: "William F.",
-      action: "Generated Weekly Rev Report",
-      time: "08:00 AM",
-    },
-  ];
-
   return (
     <div className="dashboard">
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-logo">
-          <div className="logo-icon">🦋</div>
-          <span className="logo-text">Butterfly</span>
+          <img src="/butterfly-logo.png" alt="Amoura" className="logo-image" />
+          <span className="logo-text">Amoura<sup>™</sup></span>
         </div>
 
+        <div className="sidebar-divider"></div>
+
         <div className="sidebar-section">
-          <div className="section-label">GENERAL</div>
+          <div className="section-label">CORE<br/>OPERATIONS</div>
           <nav className="nav-group">
-            <div className="nav-item active">
-              <span>🏠 Dashboard</span>
+            <div className="nav-item">
+              <span>Moderation</span>
             </div>
             <div className="nav-item">
-              <span>👤 Profile</span>
+              <span>Analytics</span>
             </div>
             <div className="nav-item">
-              <span>✓ Coach Verification</span>
+              <span>Billing</span>
+            </div>
+            <div className="nav-item">
+              <span>Security &<br/>APIs</span>
+            </div>
+            <div className="nav-item">
+              <span>Policies</span>
+            </div>
+            <div className="nav-item">
+              <span>Activity Logs</span>
             </div>
           </nav>
         </div>
 
-        <div className="sidebar-section">
-          <div className="section-label">SYSTEM</div>
-          <nav className="nav-group">
-            <div className="nav-item">
-              <span>🛡️ Moderation</span>
-            </div>
-            <div className="nav-item">
-              <span>📊 Analytics</span>
-            </div>
-            <div className="nav-item">
-              <span>💰 Billing & Revenue</span>
-            </div>
-            <div className="nav-item">
-              <span>⚙️ Management</span>
-            </div>
-            <div className="nav-item">
-              <span className="indent">📋 Policies</span>
-            </div>
-            <div className="nav-item">
-              <span className="indent">📜 Activity Logs</span>
-            </div>
-            <div className="nav-item">
-              <span className="indent">🔧 Settings</span>
-            </div>
-          </nav>
+        <div className="sidebar-footer">
+          <button className="logout-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Logout
+          </button>
         </div>
       </aside>
 
@@ -215,236 +107,430 @@ const Dashboard = () => {
 
         {/* CONTENT AREA */}
         <div className="content-area">
-          {/* GROWTH ANALYTICS SECTION */}
-          <div className="analytics-section">
-            <div className="section-header">
-              <h2 className="section-title">Growth Analytics</h2>
-              <p className="section-subtitle">
-                User retention and acquisition trends
-              </p>
-            </div>
-
-            <div className="analytics-tabs">
-              <button
-                className={`tab ${activeTab === "Daily" ? "active" : ""}`}
-                onClick={() => setActiveTab("Daily")}
-              >
-                Daily
-              </button>
-              <button
-                className={`tab ${activeTab === "Weekly" ? "active" : ""}`}
-                onClick={() => setActiveTab("Weekly")}
-              >
-                Weekly
-              </button>
-              <button
-                className={`tab ${activeTab === "Monthly" ? "active" : ""}`}
-                onClick={() => setActiveTab("Monthly")}
-              >
-                Monthly
-              </button>
-            </div>
-
-            <div className="chart-container">
-              <ResponsiveContainer width="100%" height={250}>
-                <LineChart data={analyticsData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                  <XAxis
-                    dataKey="name"
-                    tick={{ fontSize: 12, fill: "#6b7280" }}
-                  />
-                  <YAxis
-                    domain={[2600, 3100]}
-                    tick={{ fontSize: 12, fill: "#6b7280" }}
-                    ticks={[2600, 2700, 2800, 2900, 3000, 3100]}
-                  />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="value"
-                    stroke="#7C3AED"
-                    strokeWidth={3}
-                    dot={{ fill: "#7C3AED", r: 4 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-
-            <div className="metrics-grid">
-              <div className="metric-card">
-                <div className="metric-value" style={{ color: "#7C3AED" }}>
-                  64.2%
+          {/* STAT CARDS */}
+          <div className="stats-grid">
+            {[
+              {
+                icon: "https://api.iconify.design/mdi/users.svg",
+                label: "Active Users",
+                value: "1,284,592",
+                change: "+12.5%",
+                color: "#7F55E0",
+              },
+              {
+                icon: "https://api.iconify.design/mdi/chart-line.svg",
+                label: "Daily Active Sessions",
+                value: "42,890",
+                change: "+5.2%",
+                color: "#06B6D4",
+              },
+              {
+                icon: "https://api.iconify.design/mdi/clock-outline.svg",
+                label: "Pending Verifications",
+                value: "154",
+                change: null,
+                color: "#FF9500",
+              },
+              {
+                icon: "https://api.iconify.design/mdi/currency-usd.svg",
+                label: "Weekly Revenue",
+                value: "$168,331.09",
+                change: "+45%",
+                color: "#2563EB",
+              },
+            ].map((stat, idx) => (
+              <div key={idx} className="stat-card">
+                <div className="stat-card-header">
+                  <div
+                    className="stat-card-icon"
+                    style={{ background: stat.color }}
+                  >
+                    <img src={stat.icon} alt="" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} />
+                  </div>
+                  {stat.change && (
+                    <span className="stat-card-change">{stat.change}</span>
+                  )}
                 </div>
-                <div className="metric-label">USER CONVERSION</div>
+                <div className="stat-card-label">{stat.label}</div>
+                <div className="stat-card-value">{stat.value}</div>
               </div>
-              <div className="metric-card">
-                <div className="metric-value" style={{ color: "#EF4444" }}>
-                  1.4%
-                </div>
-                <div className="metric-label">CHURN RATE</div>
-              </div>
-              <div className="metric-card">
-                <div className="metric-value" style={{ color: "#06B6D4" }}>
-                  18m 42s
-                </div>
-                <div className="metric-label">AVG. SESSION</div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* COACH VERIFICATION QUEUE */}
-          <div className="coach-section">
-            <div className="section-header">
-              <h2 className="section-title">Coach Verification Queue</h2>
-              <p className="section-subtitle">
-                Manual review required for professional credentials
-              </p>
-            </div>
-
-            <div className="table-wrapper">
-              <table className="coach-table">
-                <thead>
-                  <tr>
-                    <th>COACH PROFILE</th>
-                    <th>SPECIALIZATION</th>
-                    <th>SUBMITTED</th>
-                    <th>STATUS</th>
-                    <th>ACTIONS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {coachData.map((coach) => (
-                    <tr key={coach.id}>
-                      <td className="coach-name">{coach.name}</td>
-                      <td>{coach.role}</td>
-                      <td>{coach.date}</td>
-                      <td>
-                        <span className="status-badge">{coach.status}</span>
-                      </td>
-                      <td>
-                        <MoreVertical size={16} className="action-icon" />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* TWO COLUMN LAYOUT */}
-          <div className="two-columns">
-            {/* LEFT COLUMN */}
-            <div className="left-column">
-              {/* Revenue Flow */}
-              <div className="revenue-section">
-                <h2 className="section-title">Revenue Flow</h2>
-                <p className="section-subtitle">
-                  Subscription vs. One-time gifts
-                </p>
-                <div className="chart-container small">
-                  <ResponsiveContainer width="100%" height={200}>
-                    <BarChart data={revenueData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                      <XAxis
-                        dataKey="name"
-                        tick={{ fontSize: 12, fill: "#6b7280" }}
-                      />
-                      <YAxis tick={{ fontSize: 12, fill: "#6b7280" }} />
-                      <Tooltip />
-                      <Bar
-                        dataKey="value"
-                        fill="#3B82F6"
-                        radius={[4, 4, 0, 0]}
-                      />
-                    </BarChart>
-                  </ResponsiveContainer>
+          {/* GROWTH ANALYTICS + SIDE CARDS ROW */}
+          <div className="analytics-row">
+            {/* GROWTH ANALYTICS SECTION */}
+            <div className="analytics-section">
+              <div className="analytics-header">
+                <div className="analytics-title-group">
+                  <h2 className="section-title">Growth Analytics</h2>
+                  <p className="section-subtitle">
+                    User retention and acquisition trends
+                  </p>
+                </div>
+                <div className="analytics-tabs">
+                  <button
+                    className={`tab ${activeTab === "Daily" ? "active" : ""}`}
+                    onClick={() => setActiveTab("Daily")}
+                  >
+                    Daily
+                  </button>
+                  <button
+                    className={`tab ${activeTab === "Weekly" ? "active" : ""}`}
+                    onClick={() => setActiveTab("Weekly")}
+                  >
+                    Weekly
+                  </button>
+                  <button
+                    className={`tab ${activeTab === "Monthly" ? "active" : ""}`}
+                    onClick={() => setActiveTab("Monthly")}
+                  >
+                    Monthly
+                  </button>
                 </div>
               </div>
 
+              <div className="chart-container">
+                <ResponsiveContainer width="100%" height={280}>
+                  <LineChart data={analyticsData}>
+                    <CartesianGrid strokeDasharray="5 5" stroke="#e5e7eb" horizontal={true} vertical={false} />
+                    <XAxis
+                      dataKey="name"
+                      tick={{ fontSize: 12, fill: "#6b7280" }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      domain={[0, 10000]}
+                      tick={{ fontSize: 12, fill: "#6b7280" }}
+                      ticks={[300, 2675, 5050, 7425, 9800]}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="purple"
+                      stroke="#9333ea"
+                      strokeWidth={2}
+                      dot={{ fill: "#9333ea", r: 4, strokeWidth: 2, stroke: "#fff" }}
+                      activeDot={{ r: 6, fill: "#9333ea" }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="cyan"
+                      stroke="#06b6d4"
+                      strokeWidth={2}
+                      dot={{ fill: "#06b6d4", r: 3, strokeWidth: 0 }}
+                      activeDot={{ r: 5, fill: "#06b6d4" }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="metrics-grid">
+                <div className="metric-card">
+                  <div className="metric-label">USER CONVERSION</div>
+                  <div className="metric-value" style={{ color: "#9333ea" }}>
+                    64.2%
+                  </div>
+                </div>
+                <div className="metric-card">
+                  <div className="metric-label">CHURN RATE</div>
+                  <div className="metric-value" style={{ color: "#ef4444" }}>
+                    1.4%
+                  </div>
+                </div>
+                <div className="metric-card">
+                  <div className="metric-label">AVG. SESSION</div>
+                  <div className="metric-value" style={{ color: "#06b6d4" }}>
+                    18m 42s
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT SIDE CARDS - Quick Actions & Security Alert */}
+            <div className="side-cards">
               {/* Quick Actions */}
               <div className="quick-actions-section">
                 <h2 className="section-title">Quick Actions</h2>
                 <p className="section-subtitle">Admin operational shortcuts</p>
                 <div className="actions-grid">
-                  <button className="action-btn">📤 Export Data</button>
-                  <button className="action-btn">✓ Bulk Verify</button>
-                  <button className="action-btn">🔍 Filter Logs</button>
-                  <button className="action-btn">📅 Schedule</button>
+                  <button className="action-btn">Export Data</button>
+                  <button className="action-btn">Bulk Verify</button>
+                  <button className="action-btn">Filter Logs</button>
+                  <button className="action-btn">Schedule</button>
                 </div>
               </div>
-            </div>
 
-            {/* RIGHT COLUMN */}
-            <div className="right-column">
-              {/* Moderation Hub */}
-              <div className="moderation-section">
-                <div className="moderation-header">
-                  <h2 className="section-title">Moderator Hub</h2>
+              {/* Security Alerts */}
+              <div className="security-alerts-card">
+                <div className="security-alerts-header">
+                  <svg className="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                  <h3 className="security-alerts-title">Security Alerts</h3>
                 </div>
-                <div className="moderation-list">
-                  {moderationItems.map((item) => (
-                    <div key={item.id} className="moderation-item">
-                      <div className="moderation-item-header">
-                        <span className="moderation-type">{item.type}</span>
-                        <span className="moderation-time">{item.time}</span>
+
+                <div className="alert-items">
+                  {/* Alert 1 - Brute Force */}
+                  <div className="alert-item critical">
+                    <div className="alert-item-header">
+                      <div className="alert-icon-circle">
+                        <AlertCircle size={16} />
                       </div>
-                      <div className="moderation-target">
-                        Target: {item.target}
-                      </div>
-                      <div className="moderation-reporter">
-                        Reported by {item.reporter}
-                      </div>
-                      <div className="moderation-actions">
-                        <button className="moderation-btn approve">
-                          Approve
-                        </button>
-                        <button className="moderation-btn remove">
-                          Remove
-                        </button>
-                      </div>
+                      <h4 className="alert-item-title">Brute Force Attack Detected</h4>
                     </div>
-                  ))}
-                </div>
-                <button className="view-all-btn">
-                  Open Full Moderation Suite <ChevronRight size={14} />
-                </button>
-              </div>
-
-              {/* System Pulse */}
-              <div className="pulse-section">
-                <h2 className="section-title">System Pulse</h2>
-                <p className="section-subtitle">
-                  Recent administrative actions
-                </p>
-                <div className="pulse-list">
-                  {systemPulse.map((item) => (
-                    <div key={item.id} className="pulse-item">
-                      <div className="pulse-header">
-                        <span className="pulse-user">{item.user}</span>
-                        <span className="pulse-time">{item.time}</span>
-                      </div>
-                      <div className="pulse-action">{item.action}</div>
+                    <p className="alert-item-message">
+                      Multiple failed login attempts from IP 192.168.1.45 targeting admin accounts.
+                    </p>
+                    <div className="alert-item-actions">
+                      <button className="alert-btn-primary">Block IP</button>
+                      <button className="alert-btn-link">Ignore</button>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              {/* Security Alert */}
-              <div className="security-alert">
-                <div className="alert-header">
-                  <AlertCircle size={18} />
-                  <h3 className="alert-title">Security Alert</h3>
                 </div>
-                <p className="alert-subtitle">Action Required Immediately</p>
-                <p className="alert-message">
-                  Detected multiple failed login attempts from unusual IP
-                  addresses (192.168.0.21) targeting Admin Panel.
-                </p>
-                <button className="alert-btn">Enforce Lockdown</button>
               </div>
             </div>
           </div>
+
+          {/* SYSTEM PULSE + REVENUE ROW */}
+          <div className="pulse-revenue-row">
+            {/* SYSTEM PULSE */}
+            <div className="system-pulse-section">
+              <h2 className="section-title">System Pulse</h2>
+              <p className="section-subtitle">Recent administrative actions</p>
+              <div className="pulse-list">
+                <div className="pulse-item">
+                  <div className="pulse-icon document">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <polyline points="14 2 14 8 20 8" />
+                      <line x1="16" y1="13" x2="8" y2="13" />
+                      <line x1="16" y1="17" x2="8" y2="17" />
+                      <polyline points="10 9 9 9 8 9" />
+                    </svg>
+                  </div>
+                  <div className="pulse-content">
+                    <div className="pulse-header">
+                      <span className="pulse-user">William F.</span>
+                      <span className="pulse-time">10:30 AM</span>
+                    </div>
+                    <div className="pulse-action">Updated Privacy Policy</div>
+                  </div>
+                </div>
+                <div className="pulse-item">
+                  <div className="pulse-icon system">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                  </div>
+                  <div className="pulse-content">
+                    <div className="pulse-header">
+                      <span className="pulse-user">System</span>
+                      <span className="pulse-time">09:15 AM</span>
+                    </div>
+                    <div className="pulse-action">Auto-flagged 12 spam accounts</div>
+                  </div>
+                </div>
+                <div className="pulse-item">
+                  <div className="pulse-icon user">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div className="pulse-content">
+                    <div className="pulse-header">
+                      <span className="pulse-user">Elena R.</span>
+                      <span className="pulse-time">08:42 AM</span>
+                    </div>
+                    <div className="pulse-action">Approved Coach: David Kim</div>
+                  </div>
+                </div>
+                <div className="pulse-item">
+                  <div className="pulse-icon chart">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="18" y1="20" x2="18" y2="10" />
+                      <line x1="12" y1="20" x2="12" y2="4" />
+                      <line x1="6" y1="20" x2="6" y2="14" />
+                    </svg>
+                  </div>
+                  <div className="pulse-content">
+                    <div className="pulse-header">
+                      <span className="pulse-user">William F.</span>
+                      <span className="pulse-time">08:00 AM</span>
+                    </div>
+                    <div className="pulse-action">Generated Weekly Rev Report</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* REVENUE BREAKDOWN */}
+            <div className="revenue-breakdown-section">
+              <div className="revenue-header">
+                <h2 className="section-title">Revenue breakdown</h2>
+                <span className="full-toggle">Full —</span>
+              </div>
+
+              <div className="revenue-chart-container">
+                <ResponsiveContainer width="100%" height={280}>
+                  <BarChart
+                    data={[
+                      { name: "Subscriptions", value: 284500 },
+                      { name: "Events", value: 18200 },
+                      { name: "Ads", value: 9440 },
+                      { name: "Coaching", value: 6750 },
+                    ]}
+                    barSize={60}
+                    margin={{ left: 10, right: 10, top: 20, bottom: 20 }}
+                  >
+                    <CartesianGrid strokeDasharray="4 4" stroke="#f3f4f6" vertical={false} />
+                    <XAxis
+                      dataKey="name"
+                      tick={{ fontSize: 13, fill: "#6b7280" }}
+                      axisLine={false}
+                      tickLine={false}
+                      dy={10}
+                    />
+                    <YAxis
+                      domain={[0, 300000]}
+                      tickFormatter={(value) => `$${value / 1000}k`}
+                      tick={{ fontSize: 12, fill: "#9ca3af" }}
+                      axisLine={false}
+                      tickLine={false}
+                      ticks={[0, 50000, 100000, 150000, 200000, 250000, 300000]}
+                    />
+                    <Tooltip
+                      formatter={(value) => [`$${value.toLocaleString()}`, ""]}
+                      cursor={{ fill: "transparent" }}
+                    />
+                    <Bar
+                      dataKey="value"
+                      fill="#3B82F6"
+                      radius={[8, 8, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+
+          {/* ADMIN TEAM OVERVIEW */}
+          <div className="admin-team-section">
+            <div className="admin-team-header">
+              <div className="admin-team-title-group">
+                <h2 className="section-title">Admin Team Overview</h2>
+                <p className="section-subtitle" style={{ color: '#7c3aed' }}>
+                  Live status across all admin roles
+                </p>
+              </div>
+              <a href="#" className="manage-admins-link">
+                Manage Admins <ChevronRight size={16} />
+              </a>
+            </div>
+
+            <div className="admin-table-wrapper">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>ADMIN</th>
+                    <th>ROLE</th>
+                    <th>STATUS</th>
+                    <th>TASKS</th>
+                    <th>LAST ACTIVE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="admin-cell">
+                      <div className="admin-profile">
+                        <div className="admin-avatar" style={{ background: '#f3e8ff' }}>SN</div>
+                        <span className="admin-name">Sarah Nakato</span>
+                      </div>
+                    </td>
+                    <td><span className="admin-role-badge">Concierge</span></td>
+                    <td>
+                      <div className="admin-status">
+                        <span className="status-dot online"></span>
+                        <span>Online</span>
+                      </div>
+                    </td>
+                    <td className="admin-tasks">14</td>
+                    <td className="admin-last-active">Active now</td>
+                  </tr>
+                  <tr>
+                    <td className="admin-cell">
+                      <div className="admin-profile">
+                        <div className="admin-avatar" style={{ background: '#fce7f3' }}>KM</div>
+                        <span className="admin-name">Kwame Mensah</span>
+                      </div>
+                    </td>
+                    <td><span className="admin-role-badge">Moderation</span></td>
+                    <td>
+                      <div className="admin-status">
+                        <span className="status-dot online"></span>
+                        <span>Online</span>
+                      </div>
+                    </td>
+                    <td className="admin-tasks">9</td>
+                    <td className="admin-last-active">Active now</td>
+                  </tr>
+                  <tr>
+                    <td className="admin-cell">
+                      <div className="admin-profile">
+                        <div className="admin-avatar" style={{ background: '#dcfce7' }}>TA</div>
+                        <span className="admin-name">Tunde Adesanya</span>
+                      </div>
+                    </td>
+                    <td><span className="admin-role-badge">Tech</span></td>
+                    <td>
+                      <div className="admin-status">
+                        <span className="status-dot busy"></span>
+                        <span>Busy</span>
+                      </div>
+                    </td>
+                    <td className="admin-tasks">7</td>
+                    <td className="admin-last-active">Active now</td>
+                  </tr>
+                  <tr>
+                    <td className="admin-cell">
+                      <div className="admin-profile">
+                        <div className="admin-avatar" style={{ background: '#ffedd5' }}>FO</div>
+                        <span className="admin-name">Fatima Osei</span>
+                      </div>
+                    </td>
+                    <td><span className="admin-role-badge">Analytics</span></td>
+                    <td>
+                      <div className="admin-status">
+                        <span className="status-dot online"></span>
+                        <span>Online</span>
+                      </div>
+                    </td>
+                    <td className="admin-tasks">5</td>
+                    <td className="admin-last-active">Active now</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
+
+        {/* FOOTER */}
+        <footer className="dashboard-footer">
+          <div className="footer-links">
+            <a href="#" className="footer-link">Privacy</a>
+            <a href="#" className="footer-link">Terms</a>
+            <a href="#" className="footer-link">Support</a>
+          </div>
+          <div className="footer-copyright">© 2023 Butterfly</div>
+        </footer>
       </main>
     </div>
   );
