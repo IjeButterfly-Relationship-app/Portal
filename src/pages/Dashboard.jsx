@@ -141,19 +141,17 @@ const Dashboard = () => {
         <div className="header">
           <input
             type="text"
-            placeholder="Search users, coaches, or logs..."
+            placeholder="Search..."
             className="header-search"
           />
 
           <div className="header-right">
             <div className="header-system-status">
               <div className="header-system-status-title">System Online</div>
-              <div className="header-system-status-time">
-                Oct 24, 2023 • 10:42 AM
-              </div>
+              <div className="header-system-status-time">Oct 24 • 10:42 AM</div>
             </div>
-            <Bell size={18} className="header-bell-icon" />
-            <div className="header-filter-btn">Filter Period</div>
+            <Bell size={16} className="header-bell-icon" />
+            <div className="header-filter-btn">Filter</div>
           </div>
         </div>
 
@@ -162,15 +160,15 @@ const Dashboard = () => {
             {[
               {
                 icon: "👥",
-                label: "Total Active Users",
-                value: "1,284,592",
+                label: "Active Users",
+                value: "1.28M",
                 change: "+12.5%",
                 color: "#7F55E0",
               },
               {
                 icon: "📊",
-                label: "Daily Active Sessions",
-                value: "42,890",
+                label: "Daily Sessions",
+                value: "42.9K",
                 change: "+5.2%",
                 color: "#06B6D4",
               },
@@ -184,7 +182,7 @@ const Dashboard = () => {
               {
                 icon: "💰",
                 label: "Weekly Revenue",
-                value: "$168,331.09",
+                value: "$168.3K",
                 change: "+45%",
                 color: "#2563EB",
               },
@@ -209,11 +207,9 @@ const Dashboard = () => {
 
           <div className="charts-row">
             <div className="panel">
-              <div style={{ marginBottom: "12px" }}>
+              <div style={{ marginBottom: "8px" }}>
                 <h3 className="panel-title">Growth Analytics</h3>
-                <p className="panel-subtitle">
-                  User retention and acquisition trends
-                </p>
+                <p className="panel-subtitle">User retention trends</p>
               </div>
 
               <div className="analytics-tabs">
@@ -228,7 +224,7 @@ const Dashboard = () => {
                 ))}
               </div>
 
-              <ResponsiveContainer width="100%" height={160}>
+              <ResponsiveContainer width="100%" height={140}>
                 <LineChart data={analyticsData}>
                   <CartesianGrid
                     strokeDasharray="3 3"
@@ -236,16 +232,16 @@ const Dashboard = () => {
                   />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 11, fill: "#6b7280" }}
+                    tick={{ fontSize: 10, fill: "#6b7280" }}
                   />
-                  <YAxis tick={{ fontSize: 11, fill: "#6b7280" }} />
+                  <YAxis tick={{ fontSize: 10, fill: "#6b7280" }} />
                   <Tooltip
                     contentStyle={{
                       background: "#fff",
                       border: "1px solid rgba(0,0,0,0.1)",
-                      borderRadius: "8px",
-                      fontSize: "11px",
-                      padding: "6px 10px",
+                      borderRadius: "6px",
+                      fontSize: "10px",
+                      padding: "4px 8px",
                     }}
                   />
                   <Line
@@ -273,7 +269,7 @@ const Dashboard = () => {
                   >
                     64.2%
                   </div>
-                  <div className="analytics-metric-label">USER CONVERSION</div>
+                  <div className="analytics-metric-label">CONVERSION</div>
                 </div>
                 <div className="analytics-metric">
                   <div
@@ -282,7 +278,7 @@ const Dashboard = () => {
                   >
                     1.4%
                   </div>
-                  <div className="analytics-metric-label">CHURN RATE</div>
+                  <div className="analytics-metric-label">CHURN</div>
                 </div>
                 <div className="analytics-metric">
                   <div
@@ -291,7 +287,7 @@ const Dashboard = () => {
                   >
                     18m 42s
                   </div>
-                  <div className="analytics-metric-label">AVG. SESSION</div>
+                  <div className="analytics-metric-label">SESSION</div>
                 </div>
               </div>
             </div>
@@ -299,7 +295,7 @@ const Dashboard = () => {
             <div className="panel">
               <div className="moderation-header">
                 <h3 className="panel-title">Moderation Hub</h3>
-                <span className="moderation-badge">3 Live Requests</span>
+                <span className="moderation-badge">3</span>
               </div>
 
               <div className="moderation-list">
@@ -309,27 +305,19 @@ const Dashboard = () => {
                       <span className="moderation-item-type">{item.type}</span>
                       <span className="moderation-item-time">{item.time}</span>
                     </div>
-                    <div className="moderation-item-target">
-                      Target: {item.target}
-                    </div>
+                    <div className="moderation-item-target">{item.target}</div>
                     <div className="moderation-item-reporter">
-                      Reported by {item.reporter}
+                      by {item.reporter}
                     </div>
                     <div className="moderation-item-actions">
-                      <button className="moderation-item-btn">Approve</button>
-                      <button className="moderation-item-btn">Remove</button>
+                      <button className="moderation-item-btn">✓</button>
+                      <button className="moderation-item-btn">✗</button>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <button className="moderation-view-all">
-                Open Full Moderation Suite{" "}
-                <ChevronRight
-                  size={12}
-                  style={{ display: "inline", marginLeft: "4px" }}
-                />
-              </button>
+              <button className="moderation-view-all">Open Suite →</button>
             </div>
           </div>
 
@@ -337,34 +325,29 @@ const Dashboard = () => {
             <div className="panel">
               <div className="coach-header">
                 <div>
-                  <h3 className="panel-title">Coach Verification Queue</h3>
-                  <p className="panel-subtitle">
-                    Manual review required for professional credentials
-                  </p>
+                  <h3 className="panel-title">Coach Queue</h3>
+                  <p className="panel-subtitle">Pending reviews</p>
                 </div>
-                <button className="coach-view-all">
-                  View All{" "}
-                  <ChevronRight size={12} style={{ display: "inline" }} />
-                </button>
+                <button className="coach-view-all">View All →</button>
               </div>
 
               <div className="coach-table-wrapper">
                 <table className="coach-table">
                   <thead>
                     <tr>
-                      <th>COACH PROFILE</th>
+                      <th>COACH</th>
                       <th>SPECIALIZATION</th>
-                      <th>SUBMITTED</th>
+                      <th>DATE</th>
                       <th>STATUS</th>
-                      <th style={{ textAlign: "center" }}>ACTIONS</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {coachData.map((coach) => (
+                    {coachData.slice(0, 4).map((coach) => (
                       <tr key={coach.id}>
-                        <td className="td-name">{coach.name}</td>
-                        <td className="td-muted">{coach.role}</td>
-                        <td className="td-muted">{coach.date}</td>
+                        <td className="td-name">{coach.name.split(" ")[0]}</td>
+                        <td className="td-muted">{coach.role.split(" ")[0]}</td>
+                        <td className="td-muted">{coach.date.slice(5)}</td>
                         <td>
                           <span className="coach-status-badge">
                             {coach.status}
@@ -382,10 +365,6 @@ const Dashboard = () => {
 
             <div className="panel">
               <h3 className="system-pulse-title">System Pulse</h3>
-              <p className="system-pulse-subtitle">
-                Recent administrative actions
-              </p>
-
               <div className="system-pulse-list">
                 {systemPulse.map((item) => (
                   <div key={item.id} className="system-pulse-item">
@@ -407,11 +386,7 @@ const Dashboard = () => {
           <div className="bottom-row">
             <div className="panel">
               <h3 className="revenue-title">Revenue Flow</h3>
-              <p className="revenue-subtitle">
-                Subscription vs. One-time gifts
-              </p>
-
-              <ResponsiveContainer width="100%" height={120}>
+              <ResponsiveContainer width="100%" height={100}>
                 <BarChart data={revenueData}>
                   <CartesianGrid
                     strokeDasharray="3 3"
@@ -419,41 +394,32 @@ const Dashboard = () => {
                   />
                   <XAxis
                     dataKey="name"
-                    tick={{ fontSize: 10, fill: "#6b7280" }}
+                    tick={{ fontSize: 9, fill: "#6b7280" }}
                   />
-                  <YAxis tick={{ fontSize: 10, fill: "#6b7280" }} />
-                  <Bar dataKey="value" fill="#2563EB" radius={[3, 3, 0, 0]} />
+                  <YAxis tick={{ fontSize: 9, fill: "#6b7280" }} />
+                  <Bar dataKey="value" fill="#2563EB" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
 
             <div className="panel">
               <h3 className="quick-actions-title">Quick Actions</h3>
-              <p className="quick-actions-subtitle">
-                Admin operational shortcuts
-              </p>
-
               <div className="quick-actions-list">
-                <button className="quick-actions-btn">📤 Export Data</button>
-                <button className="quick-actions-btn">✓ Bulk Verify</button>
-                <button className="quick-actions-btn">🔍 Filter Logs</button>
-                <button className="quick-actions-btn">📅 Schedule</button>
+                <button className="quick-actions-btn">📤 Export</button>
+                <button className="quick-actions-btn">✓ Verify</button>
+                <button className="quick-actions-btn">🔍 Logs</button>
               </div>
             </div>
 
             <div className="security-alert">
               <div className="security-alert-header">
-                <AlertCircle size={18} style={{ flexShrink: 0 }} />
+                <AlertCircle size={14} style={{ flexShrink: 0 }} />
                 <h3 className="security-alert-title">Security Alert</h3>
               </div>
-              <p className="security-alert-action-label">
-                Action Required Immediately
-              </p>
               <p className="security-alert-body">
-                Detected multiple failed login attempts from unusual IP
-                addresses (192.168.0.2) targeting Admin Panel.
+                Multiple failed logins from unusual IPs
               </p>
-              <button className="security-alert-btn">Enforce Lockdown</button>
+              <button className="security-alert-btn">Lockdown</button>
             </div>
           </div>
         </div>
@@ -469,22 +435,17 @@ const Dashboard = () => {
 
           <div className="footer-links">
             <a href="#" className="footer-link">
-              Privacy Policy
+              Privacy
             </a>
             <a href="#" className="footer-link">
-              Terms of Service
+              Terms
             </a>
             <a href="#" className="footer-link">
-              Compliance Hub
-            </a>
-            <a href="#" className="footer-link">
-              Contact Support
+              Support
             </a>
           </div>
 
-          <div className="footer-copyright">
-            Butterfly Crypto Admin Dashboard © 2023 • All Rights Reserved
-          </div>
+          <div className="footer-copyright">© 2023 Butterfly</div>
         </div>
       </div>
     </div>
