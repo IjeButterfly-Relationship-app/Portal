@@ -11,7 +11,7 @@ body {
 .dashboard {
   display: flex;
   min-height: 100vh;
-  background: linear-gradient(90deg, #74266C 0%, #8A377B 48%, #542A53 70%, #483B54 85%, #74266C 95%, #332D39 100%);
+  background: linear-gradient(90deg, #74266C 0%, #8A377B 48%, #542A53 70%, #483B54 85%, #332D39 100%);
 }
 
 /* ===== SIDEBAR ===== */
@@ -131,7 +131,7 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-  background: rgba(74, 26, 107, 0.4);
+  background: rgba(120, 60, 160, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 16px 32px;
@@ -233,10 +233,13 @@ body {
 }
 
 .stat-card {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -266,22 +269,22 @@ body {
   font-size: 13px;
   color: #10b981;
   font-weight: 600;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.2);
   padding: 4px 8px;
   border-radius: 6px;
 }
 
 .stat-card-label {
   font-size: 13px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 8px;
   font-weight: 500;
 }
 
 .stat-card-value {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
-  color: #1f2937;
+  color: white;
 }
 
 /* ===== SECTION STYLES ===== */
@@ -310,10 +313,13 @@ body {
 }
 
 .analytics-section {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .side-cards {
@@ -356,7 +362,8 @@ body {
 }
 
 .tab.active {
-  background: #7c3aed;
+  background: rgba(124, 58, 237, 0.8);
+  border-color: rgba(124, 58, 237, 0.8);
   color: white;
 }
 
@@ -395,11 +402,14 @@ body {
 
 /* ===== ADMIN TEAM OVERVIEW ===== */
 .admin-team-section {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .admin-team-header {
@@ -450,7 +460,7 @@ body {
 .admin-table td {
   padding: 16px 0;
   font-size: 14px;
-  color: #374151;
+  color: white;
   border-bottom: 1px solid #f3f4f6;
 }
 
@@ -477,22 +487,22 @@ body {
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .admin-name {
   font-weight: 500;
-  color: #1f2937;
+  color: white;
 }
 
 .admin-role-badge {
   display: inline-block;
   padding: 4px 10px;
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   font-size: 11px;
-  font-weight: 500;
+  color: white;
+  margin-top: 4px;
 }
 
 .admin-status {
@@ -500,7 +510,7 @@ body {
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: #374151;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .status-dot {
@@ -522,11 +532,11 @@ body {
 
 .admin-tasks {
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .admin-last-active {
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 13px;
 }
 
@@ -540,22 +550,25 @@ body {
 
 /* ===== SYSTEM PULSE ===== */
 .system-pulse-section {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .system-pulse-section .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
   margin-bottom: 4px;
 }
 
 .system-pulse-section .section-subtitle {
   font-size: 13px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 20px;
 }
 
@@ -620,25 +633,28 @@ body {
 .pulse-user {
   font-size: 14px;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .pulse-time {
   font-size: 12px;
-  color: #9ca3af;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .pulse-action {
   font-size: 13px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ===== REVENUE BREAKDOWN ===== */
 .revenue-breakdown-section {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .revenue-header {
@@ -651,12 +667,12 @@ body {
 .revenue-header .section-title {
   font-size: 20px;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .full-toggle {
   font-size: 14px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
 }
 
@@ -666,10 +682,13 @@ body {
 
 /* ===== QUICK ACTIONS ===== */
 .quick-actions-section {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .actions-grid {
@@ -681,28 +700,33 @@ body {
 
 .action-btn {
   padding: 12px 16px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #374151;
+  color: white;
   cursor: pointer;
   transition: all 0.2s;
   text-align: left;
 }
 
 .action-btn:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ===== SECURITY ALERTS CARD ===== */
 .security-alerts-card {
-  background: white;
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .security-alerts-header {
@@ -715,13 +739,13 @@ body {
 .shield-icon {
   width: 20px;
   height: 20px;
-  color: #374151;
+  color: #7c3aed;
 }
 
 .security-alerts-title {
   font-size: 16px;
   font-weight: 600;
-  color: #1f2937;
+  color: #7c3aed;
   margin: 0;
 }
 
@@ -751,14 +775,14 @@ body {
 }
 
 .alert-icon-circle {
-  width: 24px;
-  height: 24px;
-  background: #fee2e2;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  background: rgba(124, 58, 237, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #dc2626;
+  color: #7c3aed;
   flex-shrink: 0;
 }
 
@@ -772,17 +796,17 @@ body {
 .alert-item-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1f2937;
+  color: #7c3aed;
   margin: 0;
 }
 
 .alert-item.critical .alert-item-title {
-  color: #dc2626;
+  color: #7c3aed;
 }
 
 .alert-item-message {
   font-size: 13px;
-  color: #6b7280;
+  color: #7c3aed;
   line-height: 1.5;
   margin: 0 0 12px 34px;
 }
@@ -796,7 +820,7 @@ body {
 
 .alert-btn-primary {
   padding: 8px 16px;
-  background: #ef4444;
+  background: #7c3aed;
   border: none;
   border-radius: 6px;
   color: white;
@@ -807,14 +831,14 @@ body {
 }
 
 .alert-btn-primary:hover {
-  background: #dc2626;
+  background: #6d28d9;
 }
 
 .alert-btn-link {
   padding: 8px 0;
   background: transparent;
   border: none;
-  color: #6b7280;
+  color: #7c3aed;
   font-weight: 500;
   font-size: 12px;
   cursor: pointer;
@@ -822,7 +846,7 @@ body {
 }
 
 .alert-btn-link:hover {
-  color: #374151;
+  color: #6d28d9;
 }
 
 /* ===== FOOTER ===== */
