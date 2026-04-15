@@ -423,8 +423,8 @@ const Dashboard = () => {
           <div className="admin-team-section">
             <div className="admin-team-header">
               <div className="admin-team-title-group">
-                <h2 className="section-title">Admin Team Overview</h2>
-                <p className="section-subtitle" style={{ color: '#7c3aed' }}>
+                <h2 className="section-title admin-team-title">Admin Team Overview</h2>
+                <p className="section-subtitle admin-team-subtitle">
                   Live status across all admin roles
                 </p>
               </div>
@@ -437,11 +437,11 @@ const Dashboard = () => {
               <table className="admin-table">
                 <thead>
                   <tr>
-                    <th>ADMIN</th>
-                    <th>ROLE</th>
-                    <th>STATUS</th>
-                    <th>TASKS</th>
-                    <th>LAST ACTIVE</th>
+                    <th className="admin-table-header">ADMIN</th>
+                    <th className="admin-table-header">ROLE</th>
+                    <th className="admin-table-header">STATUS</th>
+                    <th className="admin-table-header">TASKS</th>
+                    <th className="admin-table-header">LAST ACTIVE</th>
                   </tr>
                 </thead>
                 <tbody>

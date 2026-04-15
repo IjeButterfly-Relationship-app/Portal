@@ -439,11 +439,19 @@ body {
   flex: 1;
 }
 
+.admin-team-title {
+  color: white !important;
+}
+
+.admin-team-subtitle {
+  color: #ff69b4 !important;
+}
+
 .manage-admins-link {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #7c3aed;
+  color: white;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
@@ -468,9 +476,13 @@ body {
   padding: 12px 0;
   font-size: 11px;
   font-weight: 600;
-  color: #6b7280;
+  color: #ff69b4;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.admin-table-header {
+  color: #ff69b4 !important;
 }
 
 .admin-table td {
