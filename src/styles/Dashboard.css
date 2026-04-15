@@ -364,7 +364,7 @@ body {
   padding: 8px 16px;
   border: none;
   background: transparent;
-  color: #6b7280;
+  color: white;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -373,8 +373,8 @@ body {
 }
 
 .tab:hover {
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
 }
 
 .tab.active {
@@ -684,6 +684,12 @@ body {
   font-size: 20px;
   font-weight: 600;
   color: white;
+}
+
+.revenue-subtitle {
+  font-size: 13px;
+  color: #ff69b4;
+  margin-top: 4px;
 }
 
 .full-toggle {

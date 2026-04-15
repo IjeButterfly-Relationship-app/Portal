@@ -108,29 +108,29 @@ const Dashboard = () => {
               {
                 icon: "https://api.iconify.design/mdi/users.svg",
                 label: "Total active users",
-                value: "1,284,592",
-                change: "+12.5%",
+                value: "0",
+                change: "+0%",
                 color: "#7F55E0",
               },
               {
                 icon: "https://api.iconify.design/mdi/check-circle.svg",
                 label: "Verified users",
-                value: "42,890",
-                change: "+5.2%",
+                value: "0",
+                change: "+0%",
                 color: "#06B6D4",
               },
               {
                 icon: "https://api.iconify.design/mdi/star.svg",
                 label: "Premium users",
-                value: "154",
+                value: "0",
                 change: null,
                 color: "#FF9500",
               },
               {
                 icon: "https://api.iconify.design/mdi/currency-usd.svg",
                 label: "Monthly revenue",
-                value: "$168,331.09",
-                change: "+45%",
+                value: "$0",
+                change: "+0%",
                 color: "#2563EB",
               },
             ].map((stat, idx) => (
@@ -369,7 +369,10 @@ const Dashboard = () => {
             {/* REVENUE BREAKDOWN */}
             <div className="revenue-breakdown-section">
               <div className="revenue-header">
-                <h2 className="section-title">Revenue breakdown</h2>
+                <div>
+                  <h2 className="section-title">Revenue breakdown</h2>
+                  <p className="revenue-subtitle">This month. all streams</p>
+                </div>
                 <span className="full-toggle">Full —</span>
               </div>
 
@@ -388,7 +391,7 @@ const Dashboard = () => {
                     <CartesianGrid strokeDasharray="4 4" stroke="#f3f4f6" vertical={false} />
                     <XAxis
                       dataKey="name"
-                      tick={{ fontSize: 13, fill: "#6b7280" }}
+                      tick={{ fontSize: 13, fill: "#ffffff" }}
                       axisLine={false}
                       tickLine={false}
                       dy={10}
@@ -396,7 +399,7 @@ const Dashboard = () => {
                     <YAxis
                       domain={[0, 300000]}
                       tickFormatter={(value) => `$${value / 1000}k`}
-                      tick={{ fontSize: 12, fill: "#9ca3af" }}
+                      tick={{ fontSize: 12, fill: "#ffffff" }}
                       axisLine={false}
                       tickLine={false}
                       ticks={[0, 50000, 100000, 150000, 200000, 250000, 300000]}
@@ -456,7 +459,7 @@ const Dashboard = () => {
                         <span>Online</span>
                       </div>
                     </td>
-                    <td className="admin-tasks">14</td>
+                    <td className="admin-tasks">0</td>
                     <td className="admin-last-active">Active now</td>
                   </tr>
                   <tr>
@@ -473,7 +476,7 @@ const Dashboard = () => {
                         <span>Online</span>
                       </div>
                     </td>
-                    <td className="admin-tasks">9</td>
+                    <td className="admin-tasks">0</td>
                     <td className="admin-last-active">Active now</td>
                   </tr>
                   <tr>
@@ -490,7 +493,7 @@ const Dashboard = () => {
                         <span>Busy</span>
                       </div>
                     </td>
-                    <td className="admin-tasks">7</td>
+                    <td className="admin-tasks">0</td>
                     <td className="admin-last-active">Active now</td>
                   </tr>
                   <tr>
