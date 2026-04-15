@@ -600,6 +600,10 @@ body {
   margin-bottom: 20px;
 }
 
+.pulse-subtitle {
+  color: #ff69b4 !important;
+}
+
 .pulse-list {
   display: flex;
   flex-direction: column;

@@ -294,7 +294,7 @@ const Dashboard = () => {
             {/* SYSTEM PULSE */}
             <div className="system-pulse-section">
               <h2 className="section-title">System Pulse</h2>
-              <p className="section-subtitle">Recent administrative actions</p>
+              <p className="section-subtitle pulse-subtitle">Recent administrative actions</p>
               <div className="pulse-list">
                 <div className="pulse-item">
                   <div className="pulse-icon document">
