@@ -249,10 +249,10 @@ const Dashboard = () => {
             <div className="side-cards">
               {/* Quick Actions */}
               <div className="quick-actions-section">
-                <h2 className="section-title">Quick Actions</h2>
-                <p className="section-subtitle">Admin operational shortcuts</p>
+                <h2 className="section-title quick-actions-title">Quick Actions</h2>
+                <p className="section-subtitle quick-actions-subtitle">Admin operational shortcuts</p>
                 <div className="actions-grid">
-                  <button className="action-btn">Export Data</button>
+                  <button className="action-btn">Onboard New Admin</button>
                   <button className="action-btn">Bulk Verify</button>
                   <button className="action-btn">Filter Logs</button>
                   <button className="action-btn">Schedule</button>
