@@ -784,11 +784,56 @@ body {
   color: #7c3aed;
 }
 
+.security-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+}
+
 .security-alerts-title {
   font-size: 16px;
   font-weight: 600;
   color: #7c3aed;
   margin: 0;
+}
+
+.white-title {
+  color: white !important;
+}
+
+/* Pink Theme for Security Alerts */
+.security-alerts-card.pink-theme {
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.security-alerts-card.pink-theme .alert-item {
+  background: rgba(236, 72, 153, 0.3);
+  border: 1px solid rgba(236, 72, 153, 0.5);
+}
+
+.security-alerts-card.pink-theme .alert-item.critical {
+  background: rgba(236, 72, 153, 0.4);
+  border: 1px solid rgba(236, 72, 153, 0.6);
+}
+
+.security-alerts-card.pink-theme .alert-item-title,
+.security-alerts-card.pink-theme .alert-item-message {
+  color: white !important;
+}
+
+.security-alerts-card.pink-theme .alert-icon-circle {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.security-alerts-card.pink-theme .alert-btn-link {
+  color: white;
+}
+
+.security-alerts-card.pink-theme .alert-btn-link:hover {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .alert-items {
