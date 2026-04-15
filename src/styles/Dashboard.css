@@ -322,6 +322,22 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.platform-title {
+  color: white !important;
+}
+
+.platform-subtitle {
+  color: #ff69b4 !important;
+}
+
+.platform-metric-label {
+  color: white !important;
+}
+
+.platform-metric-value {
+  color: #ff69b4 !important;
+}
+
 .side-cards {
   display: flex;
   flex-direction: column;

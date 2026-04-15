@@ -158,8 +158,8 @@ const Dashboard = () => {
             <div className="analytics-section">
               <div className="analytics-header">
                 <div className="analytics-title-group">
-                  <h2 className="section-title">Growth Analytics</h2>
-                  <p className="section-subtitle">
+                  <h2 className="section-title platform-title">Platform Engagement Overview</h2>
+                  <p className="section-subtitle platform-subtitle">
                     User retention and acquisition trends
                   </p>
                 </div>
@@ -191,13 +191,13 @@ const Dashboard = () => {
                     <CartesianGrid strokeDasharray="5 5" stroke="#e5e7eb" horizontal={true} vertical={false} />
                     <XAxis
                       dataKey="name"
-                      tick={{ fontSize: 12, fill: "#6b7280" }}
+                      tick={{ fontSize: 12, fill: "#ffffff" }}
                       axisLine={false}
                       tickLine={false}
                     />
                     <YAxis
                       domain={[0, 10000]}
-                      tick={{ fontSize: 12, fill: "#6b7280" }}
+                      tick={{ fontSize: 12, fill: "#ffffff" }}
                       ticks={[300, 2675, 5050, 7425, 9800]}
                       axisLine={false}
                       tickLine={false}
@@ -225,20 +225,20 @@ const Dashboard = () => {
 
               <div className="metrics-grid">
                 <div className="metric-card">
-                  <div className="metric-label">USER CONVERSION</div>
-                  <div className="metric-value" style={{ color: "#9333ea" }}>
+                  <div className="metric-label platform-metric-label">Sparks</div>
+                  <div className="metric-value platform-metric-value">
                     64.2%
                   </div>
                 </div>
                 <div className="metric-card">
-                  <div className="metric-label">CHURN RATE</div>
-                  <div className="metric-value" style={{ color: "#ef4444" }}>
+                  <div className="metric-label platform-metric-label">Coaches</div>
+                  <div className="metric-value platform-metric-value">
                     1.4%
                   </div>
                 </div>
                 <div className="metric-card">
-                  <div className="metric-label">AVG. SESSION</div>
-                  <div className="metric-value" style={{ color: "#06b6d4" }}>
+                  <div className="metric-label platform-metric-label">Active Interactions</div>
+                  <div className="metric-value platform-metric-value">
                     18m 42s
                   </div>
                 </div>
