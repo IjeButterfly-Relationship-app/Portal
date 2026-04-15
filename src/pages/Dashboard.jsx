@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ChevronRight, Bell, MoreVertical, AlertCircle } from "lucide-react";
 import {
   LineChart,
@@ -14,6 +15,7 @@ import {
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("Daily");
 
   const analyticsData = [
@@ -252,7 +254,7 @@ const Dashboard = () => {
                 <h2 className="section-title quick-actions-title">Quick Actions</h2>
                 <p className="section-subtitle quick-actions-subtitle">Admin operational shortcuts</p>
                 <div className="actions-grid">
-                  <button className="action-btn">Onboard New Admin</button>
+                  <button className="action-btn" onClick={() => navigate("/onboard")}>Onboard New Admin</button>
                   <button className="action-btn">Bulk Verify</button>
                   <button className="action-btn">Filter Logs</button>
                   <button className="action-btn">Schedule</button>
