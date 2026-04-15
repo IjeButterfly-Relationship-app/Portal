@@ -110,28 +110,28 @@ const Dashboard = () => {
                 label: "Total active users",
                 value: "0",
                 change: "+0%",
-                color: "#7F55E0",
+                color: "#ec4899",
               },
               {
                 icon: "https://api.iconify.design/mdi/check-circle.svg",
                 label: "Verified users",
                 value: "0",
                 change: "+0%",
-                color: "#06B6D4",
+                color: "#ec4899",
               },
               {
                 icon: "https://api.iconify.design/mdi/star.svg",
                 label: "Premium users",
                 value: "0",
                 change: null,
-                color: "#FF9500",
+                color: "#ec4899",
               },
               {
                 icon: "https://api.iconify.design/mdi/currency-usd.svg",
                 label: "Monthly revenue",
                 value: "$0",
                 change: "+0%",
-                color: "#2563EB",
+                color: "#ec4899",
               },
             ].map((stat, idx) => (
               <div key={idx} className="stat-card">
