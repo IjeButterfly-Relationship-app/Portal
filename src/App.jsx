@@ -7,6 +7,7 @@ import FlaggedAccount from "./pages/FlaggedAccount";
 import AdminManagement from "./pages/AdminManagement";
 import Analytics from "./pages/Analytics";
 import DownloadApp from "./pages/DownloadApp";
+import CoachVerification from "./pages/CoachVerification";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/adminManagement" element={<AdminManagement />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/download" element={<DownloadApp />} />
+        <Route path="/coach-verification" element={<CoachVerification />} />
       </Routes>
     </BrowserRouter>
   );

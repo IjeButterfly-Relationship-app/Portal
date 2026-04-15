@@ -255,7 +255,7 @@ const Dashboard = () => {
                 <p className="section-subtitle quick-actions-subtitle">Admin operational shortcuts</p>
                 <div className="actions-grid">
                   <button className="action-btn" onClick={() => navigate("/onboard")}>Onboard New Admin</button>
-                  <button className="action-btn">Bulk Verify</button>
+                  <button className="action-btn" onClick={() => navigate("/coach-verification")}>Bulk Verify</button>
                   <button className="action-btn">Filter Logs</button>
                   <button className="action-btn">Schedule</button>
                 </div>

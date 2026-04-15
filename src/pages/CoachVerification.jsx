@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./ButterflyVerification.css";
+import "../styles/CoachVerification.css";
 import {
   ChevronDown,
   Search,
