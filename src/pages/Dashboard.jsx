@@ -106,28 +106,28 @@ const Dashboard = () => {
           <div className="stats-grid">
             {[
               {
-                icon: "https://api.iconify.design/mdi/users.svg",
+                icon: "/members.png",
                 label: "Total active users",
                 value: "0",
                 change: "+0%",
                 color: "#ec4899",
               },
               {
-                icon: "https://api.iconify.design/mdi/check-circle.svg",
+                icon: "/verified.png",
                 label: "Verified users",
                 value: "0",
                 change: "+0%",
                 color: "#ec4899",
               },
               {
-                icon: "https://api.iconify.design/mdi/star.svg",
+                icon: "/premium.png",
                 label: "Premium users",
                 value: "0",
                 change: null,
                 color: "#ec4899",
               },
               {
-                icon: "https://api.iconify.design/mdi/currency-usd.svg",
+                icon: "/revenue.png",
                 label: "Monthly revenue",
                 value: "$0",
                 change: "+0%",
@@ -140,7 +140,7 @@ const Dashboard = () => {
                     className="stat-card-icon"
                     style={{ background: stat.color }}
                   >
-                    <img src={stat.icon} alt="" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} />
+                    <img src={stat.icon} alt="" style={{ width: 24, height: 24, objectFit: 'cover' }} />
                   </div>
                   {stat.change && (
                     <span className="stat-card-change">{stat.change}</span>
