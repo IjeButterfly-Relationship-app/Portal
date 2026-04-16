@@ -1,510 +1,441 @@
 import React, { useState } from "react";
-import "../styles/CoachVerification.css";
-import {
-  ChevronDown,
-  Search,
-  Flag,
-  Mail,
-  CheckCircle,
-  Eye,
-  MessageSquare,
-  Filter,
-  Download,
-  Clock,
-} from "lucide-react";
+import "./VerificationQueue.css";
 
-const ButterflyVerification = () => {
-  const [selectedCoach, setSelectedCoach] = useState("dr-elena-vance");
+const VerificationQueue = () => {
+  const [activeVerification, setActiveVerification] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [reviewerNotes, setReviewerNotes] = useState("");
-  const [filterOpen, setFilterOpen] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(null);
 
-  const coaches = [
+  const verificationQueue = [
     {
-      id: "dr-elena-vance",
+      id: 1,
       name: "Dr. Elena Vance",
-      email: "evance@butterfly.com",
-      handle: "@vance_coach",
+      email: "@vance_coach • evance.clinical@butterfly.com",
       status: "Pending",
       date: "Oct 24, 2023",
+      trustScore: "93%",
       avatar: "👩‍⚕️",
-      trustScore: "92%",
-      documentUrl: "Master_Degree_Clinical.pdf",
-      submittedDate: "Oct 23, 2023",
-      trustId: "#V-29301",
     },
     {
-      id: "marcus-thorne",
+      id: 2,
       name: "Marcus Thorne",
-      email: "mthorne@butterfly.com",
-      handle: "@marcus_coaching",
+      email: "@mthorne_coaching",
       status: "Reviewing",
       date: "Oct 23, 2023",
-      avatar: "👨‍💼",
       trustScore: "87%",
-      documentUrl: "Business_Credentials.pdf",
-      submittedDate: "Oct 22, 2023",
-      trustId: "#V-29300",
+      avatar: "👨‍🏫",
     },
     {
-      id: "sarah-jenkins",
+      id: 3,
       name: "Sarah Jenkins",
-      email: "sjenkins@butterfly.com",
-      handle: "@sarah_coaching",
+      email: "@sarah_wellness",
       status: "Pending",
-      date: "Oct 22, 2023",
-      avatar: "👩‍🏫",
-      trustScore: "89%",
-      documentUrl: "Education_Certificate.pdf",
-      submittedDate: "Oct 21, 2023",
-      trustId: "#V-29299",
+      date: "Oct 23, 2023",
+      trustScore: "91%",
+      avatar: "👩‍⚕️",
     },
     {
-      id: "liam-oconnell",
+      id: 4,
       name: "Liam O'Connell",
-      email: "loconnell@butterfly.com",
-      handle: "@liam_coach",
+      email: "@liamo_coaching",
       status: "Flagged",
       date: "Oct 22, 2023",
-      avatar: "👨‍🎓",
-      trustScore: "76%",
-      documentUrl: "License_Documentation.pdf",
-      submittedDate: "Oct 20, 2023",
-      trustId: "#V-29298",
+      trustScore: "72%",
+      avatar: "👨‍💼",
     },
     {
-      id: "sofia-rodriguez",
+      id: 5,
       name: "Sofia Rodriguez",
-      email: "srodriguez@butterfly.com",
-      handle: "@sofia_coaching",
+      email: "@sofia_coaching",
       status: "Pending",
-      date: "Oct 21, 2023",
-      avatar: "👩‍💻",
-      trustScore: "94%",
-      documentUrl: "Professional_Credentials.pdf",
-      submittedDate: "Oct 20, 2023",
-      trustId: "#V-29297",
+      date: "Oct 22, 2023",
+      trustScore: "88%",
+      avatar: "👩‍⚕️",
     },
   ];
-
-  const selectedCoachData = coaches.find((c) => c.id === selectedCoach);
 
   const auditTrail = [
     {
       timestamp: "Oct 24, 09:12 AM",
       actor: "Sarah Miller",
-      role: "Moderator",
+      role: "Sr. Moderator",
       action: "Document Viewed",
-      details: '"Viewed Master_Degree_Clinical.pdf"',
+      details: "'Viewed Master_Degree_Clinical_P.pdf'",
     },
     {
       timestamp: "Oct 24, 09:10 AM",
       actor: "Sarah Miller",
-      role: "Moderator",
+      role: "Sr. Moderator",
       action: "Checklist Updated",
-      details: '"Verified Educational Credential authenticity"',
+      details: "'Verified Educational Credential authenticity'",
     },
     {
       timestamp: "Oct 23, 02:45 PM",
       actor: "John Doe",
       role: "Compliance Lead",
       action: "Comment Added",
-      details: '"Asked for clearer photo of ID back side"',
+      details: "'Asked for clearer photo of ID back side'",
     },
     {
       timestamp: "Oct 23, 02:44 PM",
       actor: "System",
       role: "Automation",
       action: "Status Changed",
-      details: '"Moved to "Manual Review" queue"',
+      details: "'Moved to 'Manual Review' queue'",
     },
     {
       timestamp: "Oct 23, 02:40 PM",
       actor: "Dr. Elena Vance",
       role: "Coach",
       action: "Submission Received",
-      details: '"Initial verification package submitted"',
+      details: "'Initial verification package submitted'",
     },
   ];
 
-  const checklistItems = [
-    { label: "Full Name matches ID", completed: true },
-    { label: "Degree Credential verified", completed: true },
-    { label: "University seal clearly visible", completed: true },
-    { label: "Profile photo matches ID", completed: false },
-    { label: "ID is not expired", completed: false },
-  ];
-
-  const getStatusColor = (status) => {
+  const statusBadgeClass = (status) => {
     switch (status) {
       case "Pending":
-        return "#FFA500";
+        return "badge-pending";
       case "Reviewing":
-        return "#1E90FF";
+        return "badge-reviewing";
       case "Flagged":
-        return "#FF6B6B";
-      case "Approved":
-        return "#4CAF50";
+        return "badge-flagged";
       default:
-        return "#808080";
+        return "";
     }
   };
 
   return (
-    <div className="butterfly-container">
+    <div className="vq-container">
       {/* Sidebar Navigation */}
-      <aside className="butterfly-sidebar">
-        <div className="sidebar-header">
-          <div className="butterfly-logo">
-            <span className="butterfly-icon">🦋</span>
-            <span className="butterfly-text">Butterfly</span>
+      <aside className="vq-sidebar">
+        <div className="vq-sidebar-header">
+          <div className="vq-logo">
+            <span className="vq-logo-icon">🦋</span>
+            <span className="vq-logo-text">Butterfly</span>
           </div>
         </div>
 
-        <nav className="sidebar-nav">
-          <div className="nav-item">
-            <span>📊</span>
+        <nav className="vq-sidebar-nav">
+          <div className="vq-nav-item">
+            <span className="vq-nav-icon">📊</span>
             <span>Dashboard</span>
           </div>
-          <div className="nav-item">
-            <span>👥</span>
+          <div className="vq-nav-item">
+            <span className="vq-nav-icon">👥</span>
             <span>Coaches</span>
           </div>
-          <div className="nav-item active">
-            <span>✓</span>
+          <div className="vq-nav-item active">
+            <span className="vq-nav-icon">✓</span>
             <span>Verifications</span>
-            <span className="nav-badge">⋮</span>
+            <span className="vq-nav-more">⋮</span>
           </div>
-          <div className="nav-item">
-            <span>🔍</span>
+          <div className="vq-nav-item">
+            <span className="vq-nav-icon">⚖️</span>
             <span>Moderation</span>
           </div>
-          <div className="nav-item">
-            <span>📋</span>
+          <div className="vq-nav-item">
+            <span className="vq-nav-icon">📜</span>
             <span>Activity Logs</span>
           </div>
-          <div className="nav-item">
-            <span>⚙️</span>
+          <div className="vq-nav-item">
+            <span className="vq-nav-icon">⚙️</span>
             <span>Settings</span>
           </div>
         </nav>
 
-        <div className="sidebar-footer">
-          <div className="review-status">
-            <div className="status-number">12</div>
-            <div className="status-text">Pending Today</div>
+        {/* Verification Queue List */}
+        <div className="vq-queue-section">
+          <h3 className="vq-queue-title">Verification Queue</h3>
+          <p className="vq-queue-subtitle">6 coaches awaiting review</p>
+
+          <div className="vq-queue-list">
+            {verificationQueue.map((item, idx) => (
+              <div
+                key={item.id}
+                className={`vq-queue-item ${activeVerification === idx ? "active" : ""}`}
+                onClick={() => setActiveVerification(idx)}
+              >
+                <div className="vq-queue-avatar">{item.avatar}</div>
+                <div className="vq-queue-info">
+                  <h4>{item.name}</h4>
+                  <p>{item.email}</p>
+                  <span
+                    className={`vq-queue-status ${statusBadgeClass(item.status)}`}
+                  >
+                    {item.status}
+                  </span>
+                  <span className="vq-queue-date">{item.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="vq-sidebar-footer">
+          <div className="vq-review-status">
+            <h4>REVIEW STATUS</h4>
+            <p className="vq-review-count">12</p>
+            <span className="vq-review-label">Pending Today</span>
           </div>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="butterfly-main">
-        {/* Header */}
-        <header className="butterfly-header">
-          <div className="header-search">
-            <Search size={18} />
-            <input
-              type="text"
-              placeholder="Search coaches, documents, or IDs..."
-            />
+      <main className="vq-main">
+        {/* Top Bar */}
+        <div className="vq-topbar">
+          <div className="vq-search-box">
+            <span className="vq-search-icon">🔍</span>
+            <input placeholder="Search coaches, documents, or IDs..." />
           </div>
-          <div className="header-right">
-            <div className="notification-bell">
-              <span>🔔</span>
-            </div>
-            <div className="user-profile">
-              <span className="user-avatar">SM</span>
-              <span className="user-name">Sarah Miller</span>
+
+          <div className="vq-topbar-right">
+            <button className="vq-topbar-icon">🔔</button>
+            <div className="vq-user-profile">
+              <span className="vq-user-avatar">SM</span>
+              <div className="vq-user-info">
+                <p className="vq-user-name">Sarah Miller</p>
+                <p className="vq-user-role">MODERATOR, ADMIN</p>
+              </div>
             </div>
           </div>
-        </header>
-
-        <div className="butterfly-content">
-          {/* Left Panel - Queue */}
-          <section className="queue-panel">
-            <h2 className="panel-title">Verification Queue</h2>
-            <p className="queue-subtitle">5 coaches awaiting review</p>
-
-            <div className="coaches-list">
-              {coaches.map((coach) => (
-                <div
-                  key={coach.id}
-                  className={`coach-card ${
-                    selectedCoach === coach.id ? "active" : ""
-                  }`}
-                  onClick={() => setSelectedCoach(coach.id)}
-                >
-                  <div className="coach-avatar">{coach.avatar}</div>
-                  <div className="coach-info">
-                    <div className="coach-name">{coach.name}</div>
-                    <div className="coach-email">{coach.email}</div>
-                    <div className="coach-date">{coach.date}</div>
-                  </div>
-                  <div
-                    className="coach-status"
-                    style={{ color: getStatusColor(coach.status) }}
-                  >
-                    {coach.status}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Middle Panel - Details & Document */}
-          <section className="details-panel">
-            {/* Quick Actions */}
-            <div className="actions-bar">
-              <button className="action-btn secondary">
-                <span>⚙️</span> Review Model Manual
-              </button>
-              <button className="action-btn danger">
-                <Flag size={16} /> Reject
-              </button>
-              <button className="action-btn secondary">
-                <Mail size={16} /> Send rejection email
-              </button>
-              <button className="action-btn primary">
-                <CheckCircle size={16} /> Verify Coach
-              </button>
-            </div>
-
-            {/* Coach Profile Summary */}
-            <div className="coach-summary">
-              <div className="summary-left">
-                <div className="summary-avatar">
-                  {selectedCoachData?.avatar}
-                </div>
-                <div className="summary-info">
-                  <h3 className="summary-name">{selectedCoachData?.name}</h3>
-                  <p className="summary-meta">
-                    {selectedCoachData?.handle} • {selectedCoachData?.email}
-                  </p>
-                  <p className="summary-submitted">
-                    Submitted {selectedCoachData?.submittedDate}
-                  </p>
-                </div>
-              </div>
-              <div className="summary-right">
-                <button className="view-profile-btn">
-                  <Eye size={16} /> View Full Profile
-                </button>
-                <button className="flag-btn">
-                  <Flag size={16} /> Flag Account
-                </button>
-              </div>
-            </div>
-
-            {/* Trust Score */}
-            <div className="trust-score-bar">
-              <div className="trust-label">
-                Trust Score
-                <span className="trust-value">
-                  {selectedCoachData?.trustScore}
-                </span>
-              </div>
-              <div className="trust-id">
-                Trust ID: {selectedCoachData?.trustId}
-              </div>
-            </div>
-
-            {/* Document Viewer */}
-            <div className="document-viewer">
-              <div className="doc-header">
-                <div className="doc-zoom">Page 1 of 4 — 100% Zoom</div>
-                <div className="doc-controls">
-                  <button>−</button>
-                  <button>+</button>
-                  <button>↺</button>
-                  <button>↻</button>
-                </div>
-              </div>
-              <div className="doc-canvas">
-                <div className="doc-placeholder">
-                  <div className="doc-icon">📄</div>
-                  <p>{selectedCoachData?.documentUrl}</p>
-                  <p className="doc-filename">
-                    {selectedCoachData?.documentUrl} (2.4 MB)
-                  </p>
-                </div>
-              </div>
-              <div className="doc-footer">
-                <span>Master_Degree_Clinical.pdf (2.4 MB)</span>
-                <div className="doc-nav">
-                  <button>← Previous</button>
-                  <button>Next Page →</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Reviewer Notes */}
-            <div className="reviewer-notes">
-              <h4 className="notes-title">
-                <MessageSquare size={16} /> Reviewer Notes & Feedback
-              </h4>
-              <div className="notes-list">
-                <div className="note-item">
-                  <div className="note-avatar">JD</div>
-                  <div className="note-content">
-                    <div className="note-header">
-                      <span className="note-author">
-                        John Doe Compliance Lead
-                      </span>
-                      <span className="note-date">Oct 23, 02:45 PM</span>
-                    </div>
-                    <p className="note-text">
-                      The Master's degree looks legitimate, but the seal is
-                      slightly blurry in this scan. Sarah, can you double-check
-                      the University database or request a high-res scan if
-                      you're unsure?
-                    </p>
-                  </div>
-                </div>
-
-                <div className="note-item">
-                  <div className="note-avatar">SM</div>
-                  <div className="note-content">
-                    <div className="note-header">
-                      <span className="note-author">Sarah Miller Mod</span>
-                      <span className="note-date">Today, 09:12 AM</span>
-                    </div>
-                    <p className="note-text">
-                      I've cross-referenced with the official registry. The
-                      serial number #11-192-011 matches. No re-scan needed.
-                      Moving to checklist verification now.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="note-input-area">
-                <textarea
-                  className="note-textarea"
-                  placeholder="Type a note or specific feedback for the coach..."
-                  value={reviewerNotes}
-                  onChange={(e) => setReviewerNotes(e.target.value)}
-                />
-                <button className="note-submit">
-                  <span>💬</span>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          {/* Right Panel - Checklist & Metadata */}
-          <aside className="sidebar-panel">
-            {/* Review Progress */}
-            <div className="review-progress">
-              <h4>Review Progress</h4>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: "80%" }} />
-              </div>
-              <div className="progress-text">CHECKLIST 80% COMPLETION</div>
-              <p className="progress-note">
-                Note: All automated checks passed. Manual verification required
-                for the final step.
-              </p>
-              <p className="protocol-version">BUTTERFLY PROTOCOL v2.4</p>
-            </div>
-
-            {/* Verification Checklist */}
-            <div className="verification-checklist">
-              <h4>VERIFICATION CHECKLIST</h4>
-              <div className="checklist-items">
-                {checklistItems.map((item, idx) => (
-                  <label key={idx} className="checklist-item">
-                    <input type="checkbox" checked={item.completed} readOnly />
-                    <span className={item.completed ? "completed" : ""}>
-                      {item.label}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Document Metadata */}
-            <div className="document-metadata">
-              <h4>DOCUMENT METADATA</h4>
-              <div className="metadata-item">
-                <span className="metadata-label">EXTRACTED FULL NAME</span>
-                <span className="metadata-value">ELENA VICTORIA VANCE</span>
-              </div>
-              <div className="metadata-item">
-                <span className="metadata-label">ID NUMBER</span>
-                <span className="metadata-value">PA-9822033217-X</span>
-              </div>
-              <div className="metadata-item">
-                <span className="metadata-label">EXPIRY DATE</span>
-                <span className="metadata-value">Nov 12, 2028</span>
-              </div>
-              <div className="metadata-item">
-                <span className="metadata-label">FILE SECURITY TAGS</span>
-                <span className="metadata-value">MGL VERIFIED</span>
-              </div>
-              <div className="metadata-item">
-                <span className="metadata-label">ENCRYPTED</span>
-                <span className="metadata-value">YES</span>
-              </div>
-              <div className="metadata-item">
-                <span className="metadata-label">COLLATABLE</span>
-                <span className="metadata-value">YES</span>
-              </div>
-            </div>
-          </aside>
         </div>
 
-        {/* Bottom - Audit Trail */}
-        <section className="audit-section">
-          <div className="audit-header">
-            <h3 className="audit-title">Moderation Audit Trail</h3>
-            <div className="audit-controls">
-              <button className="audit-btn">
-                <Filter size={16} /> Filters
+        {/* Content Area */}
+        <div className="vq-content">
+          {/* Coach Profile Card */}
+          <div className="vq-profile-card">
+            <div className="vq-profile-actions">
+              <button className="vq-btn vq-btn-outline">
+                <span>📋</span> Review Modal Manual
               </button>
-              <button className="audit-btn">
-                <Download size={16} /> Export Logs
+              <button className="vq-btn vq-btn-reject">
+                <span>❌</span> Reject
+              </button>
+              <button className="vq-btn vq-btn-email">
+                <span>✉️</span> Send rejection email
+              </button>
+              <button className="vq-btn vq-btn-verify">
+                <span>✓</span> Verify Coach
               </button>
             </div>
-          </div>
 
-          <div className="audit-table">
-            <div className="audit-row header">
-              <div className="col col-timestamp">Timestamp</div>
-              <div className="col col-actor">Actor</div>
-              <div className="col col-role">Role</div>
-              <div className="col col-action">Action</div>
-              <div className="col col-details">Details</div>
-            </div>
-
-            {auditTrail.map((entry, idx) => (
-              <div key={idx} className="audit-row">
-                <div className="col col-timestamp">
-                  <Clock size={14} />
-                  {entry.timestamp}
-                </div>
-                <div className="col col-actor">{entry.actor}</div>
-                <div className="col col-role">{entry.role}</div>
-                <div className="col col-action">{entry.action}</div>
-                <div className="col col-details">{entry.details}</div>
+            <div className="vq-profile-header">
+              <div className="vq-profile-avatar-large">👩‍⚕️</div>
+              <div className="vq-profile-info">
+                <h2>Dr. Elena Vance</h2>
+                <p className="vq-profile-subtitle">Pending Verification</p>
+                <p className="vq-profile-contact">
+                  @vance_coach • evance.clinical@butterfly.com
+                </p>
+                <p className="vq-profile-meta">
+                  Submitted 2 hours ago • Trust Score: 93%
+                </p>
               </div>
-            ))}
+              <button className="vq-btn vq-btn-secondary">
+                View Full Profile
+              </button>
+              <button className="vq-btn vq-btn-flag">🚩 Flag Account</button>
+            </div>
           </div>
-        </section>
+
+          <div className="vq-content-grid">
+            {/* Document Viewer */}
+            <div className="vq-document-section">
+              <div className="vq-document-viewer">
+                <div className="vq-document-header">
+                  <span className="vq-doc-label">
+                    Master_Degree_Clinical_P.pdf (2.4 MB)
+                  </span>
+                  <div className="vq-doc-controls">
+                    <button>−</button>
+                    <span>Page 1 of 4 • 100% Zoom</span>
+                    <button>+</button>
+                  </div>
+                </div>
+
+                <div className="vq-document-content">
+                  <div className="vq-pdf-placeholder">
+                    <div className="vq-pdf-logo">📄</div>
+                  </div>
+                </div>
+
+                <div className="vq-document-footer">
+                  <button className="vq-btn vq-btn-outline">Previous</button>
+                  <span>Page 1 of 4</span>
+                  <button className="vq-btn vq-btn-outline">Next Page</button>
+                </div>
+              </div>
+
+              {/* Reviewer Notes */}
+              <div className="vq-notes-section">
+                <h3 className="vq-notes-title">Reviewer Notes & Feedback</h3>
+
+                <div className="vq-notes-list">
+                  <div className="vq-note">
+                    <div className="vq-note-avatar">JD</div>
+                    <div className="vq-note-content">
+                      <p className="vq-note-author">John Doe Compliance Lead</p>
+                      <p className="vq-note-time">Oct 23, 02:45 PM</p>
+                      <p className="vq-note-text">
+                        The Master's degree looks legitimate, but the seal is
+                        slightly blurry in this scan, Sarah, can you
+                        double-check the University database or request a
+                        high-res scan if you're unsure?
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="vq-note">
+                    <div className="vq-note-avatar sm">SM</div>
+                    <div className="vq-note-content">
+                      <p className="vq-note-author">Sarah Miller (You)</p>
+                      <p className="vq-note-time">Today, 09:12 AM</p>
+                      <p className="vq-note-text">
+                        I've cross-referenced with the official registry. The
+                        serial number #11-192-011 matches. No re-scan needed.
+                        Moving to checklist verification now.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="vq-note-input">
+                  <input placeholder="Type a note or specific feedback for the coach..." />
+                  <button className="vq-btn vq-btn-icon">💬</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Sidebar */}
+            <aside className="vq-right-sidebar">
+              {/* Review Progress */}
+              <div className="vq-card vq-progress-card">
+                <h3 className="vq-card-title">Review Progress</h3>
+                <div className="vq-progress-bar">
+                  <div
+                    className="vq-progress-fill"
+                    style={{ width: "80%" }}
+                  ></div>
+                </div>
+                <p className="vq-progress-text">CHECKLIST COMPLETION: 80%</p>
+
+                <div className="vq-checklist">
+                  <div className="vq-checklist-note">
+                    Note: All automated checks passed. Manual verification
+                    required for the final step.
+                  </div>
+                  <p className="vq-checklist-protocol">
+                    BUTTERFLY PROTOCOL V2.4
+                  </p>
+                </div>
+
+                <div className="vq-verification-checklist">
+                  <h4>VERIFICATION CHECKLIST</h4>
+                  <div className="vq-check-item completed">
+                    <span className="vq-check-icon">✓</span>
+                    <span>Full Name matches ID</span>
+                  </div>
+                  <div className="vq-check-item completed">
+                    <span className="vq-check-icon">✓</span>
+                    <span>Degree Credential verified</span>
+                  </div>
+                  <div className="vq-check-item completed">
+                    <span className="vq-check-icon">✓</span>
+                    <span>University seal clearly visible</span>
+                  </div>
+                  <div className="vq-check-item completed">
+                    <span className="vq-check-icon">✓</span>
+                    <span>Profile photo matches ID</span>
+                  </div>
+                  <div className="vq-check-item">
+                    <span className="vq-check-icon">□</span>
+                    <span>ID is not expired</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Document Metadata */}
+              <div className="vq-card vq-metadata-card">
+                <h3 className="vq-card-title">DOCUMENT METADATA</h3>
+                <div className="vq-metadata">
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">EXTRACTED FULL NAME</span>
+                    <span className="vq-meta-value">ELENA VICTORIA VANCE</span>
+                  </div>
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">ID NUMBER</span>
+                    <span className="vq-meta-value">PA-9R2203321-X</span>
+                  </div>
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">EXPIRY DATE</span>
+                    <span className="vq-meta-value">Nov 12, 2028</span>
+                  </div>
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">FILE SECURITY TAGS</span>
+                    <span className="vq-meta-value">MILVERFILED</span>
+                  </div>
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">ENCRYPTED</span>
+                    <span className="vq-meta-value">ENCRYPTED</span>
+                  </div>
+                  <div className="vq-meta-item">
+                    <span className="vq-meta-label">COLLATABLE</span>
+                    <span className="vq-meta-value">COLLATABLE</span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          {/* Moderation Audit Trail */}
+          <div className="vq-audit-section">
+            <div className="vq-audit-header">
+              <h3>Moderation Audit Trail</h3>
+              <div className="vq-audit-controls">
+                <button className="vq-btn vq-btn-sm">Filters ›</button>
+                <button className="vq-btn vq-btn-sm">Export Logs</button>
+              </div>
+            </div>
+
+            <table className="vq-audit-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Actor</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {auditTrail.map((entry, idx) => (
+                  <tr key={idx}>
+                    <td className="vq-td-mono">{entry.timestamp}</td>
+                    <td>{entry.actor}</td>
+                    <td>{entry.role}</td>
+                    <td className="vq-td-action">{entry.action}</td>
+                    <td className="vq-td-details">{entry.details}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         {/* Footer */}
-        <footer className="butterfly-footer">
-          <div className="footer-links">
-            <a href="#privacy">PRIVACY POLICY</a>
-            <a href="#compliance">PLATFORM COMPLIANCE</a>
-            <a href="#help">HELP CENTER</a>
-          </div>
-          <div className="footer-version">
-            BUTTERFLY VERIFICATION PROTOCOL V2.4.3
-          </div>
+        <footer className="vq-footer">
+          <a href="#">PLATFORM COMPLIANCE</a>
+          <span>•</span>
+          <a href="#">PRIVACY POLICY</a>
+          <span>•</span>
+          <a href="#">HELP CENTER</a>
+          <span>BUTTERFLY VERIFICATION PROTOCOL V2.4.3</span>
         </footer>
       </main>
     </div>
   );
 };
 
-export default ButterflyVerification;
+export default VerificationQueue;
