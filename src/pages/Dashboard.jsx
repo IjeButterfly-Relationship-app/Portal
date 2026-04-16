@@ -50,7 +50,7 @@ const Dashboard = () => {
           <div className="nav-item">
             <span>Moderation</span>
           </div>
-          <div className="nav-item">
+          <div className="nav-item" onClick={() => navigate("/analytics")}>
             <span>Analytics</span>
           </div>
           <div className="nav-item">

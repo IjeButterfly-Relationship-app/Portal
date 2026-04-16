@@ -2,7 +2,7 @@
    SIDEBAR COMPONENT
 ════════════════════════════════════════════ */
 .sidebar {
-  width: 280px;
+  width: 220px;
   height: 100vh;
   background: linear-gradient(180deg, #4a1a6b 0%, #2d0f45 100%);
   display: flex;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 // import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
 import "../styles/Onboard.css";
 
 const BASE_URL = "http://208.68.36.144";
@@ -289,62 +290,7 @@ export default function Onboard() {
   return (
     <div className="ob-app">
       {/* ── Sidebar ── */}
-      <aside className="ob-sidebar">
-        <div className="ob-sidebar-logo">
-          <span className="ob-logo-mark">
-            <img src="/butterfly-logo.png" alt="Butterfly" />
-          </span>
-          <span className="ob-logo-text">Butterfly</span>
-        </div>
-
-        <div className="ob-sidebar-section">
-          <div className="ob-sidebar-label">CORE OPERATIONS</div>
-          <nav className="ob-sidebar-nav">
-            <ul className="ob-nav-list">
-              {[
-                { label: "Dashboard", path: "/dashboard" },
-                { label: "Members", path: "/members" },
-                { label: "Admins", path: "/admins" },
-                { label: "Onboard", path: "/onboard" },
-                { label: "Analytics", path: "/analytics" },
-                { label: "Settings", path: "/settings" },
-              ].map((item) => (
-                <li
-                  key={item.label}
-                  className={`ob-nav-item${activeNav === item.label ? " ob-nav-item--active" : ""}`}
-                  role="listitem"
-                  onClick={() => {
-                    setActiveNav(item.label);
-                    if (item.path) {
-                      navigate(item.path);
-                    }
-                  }}
-                >
-                  {item.label}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-
-        <div className="ob-sidebar-footer">
-          <button className="ob-logout-btn" onClick={() => navigate("/")}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
-            Logout
-          </button>
-        </div>
-      </aside>
+      <Sidebar />
 
       {/* ── Main ── */}
       <div className="ob-main">
