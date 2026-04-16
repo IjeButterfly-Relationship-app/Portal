@@ -368,7 +368,7 @@ body {
 }
 
 .ob-col-left  { display: flex; flex-direction: column; gap: 20px; margin-left: 160px; }
-.ob-col-right { display: flex; flex-direction: column; gap: 12px; }
+.ob-col-right { display: flex; flex-direction: column; gap: 20px; }
 
 /* ── Card ── */
 .ob-card {
@@ -569,8 +569,8 @@ body {
 .ob-perm-row {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 9px 0;
+  gap: 12px;
+  padding: 14px 0;
   border-bottom: 1px solid #f3f4f6;
 }
 
@@ -580,9 +580,9 @@ body {
 }
 
 .ob-perm-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   background: #f3f4f6;
   display: flex;
   align-items: center;
@@ -596,16 +596,16 @@ body {
 }
 
 .ob-perm-name {
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--ob-text);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .ob-perm-desc {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ob-muted);
-  margin-top: 1px;
+  margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
