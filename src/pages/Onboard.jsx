@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import "../styles/Onboard.css";
 
-const BASE_URL = "http://208.68.36.144";
+const BASE_URL = "http://208.68.36.144:3000";
 
 const MODULE_PERMISSIONS = [
   {
@@ -192,7 +192,7 @@ export default function Onboard() {
         return;
       }
 
-      const response = await fetch(`${BASE_URL}/api/admin-onboarding`, {
+      const response = await fetch(`${BASE_URL}/admin-onboarding`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
