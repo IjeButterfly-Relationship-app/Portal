@@ -367,7 +367,7 @@ body {
   width: 100%;
 }
 
-.ob-col-left  { display: flex; flex-direction: column; gap: 14px; margin-left: 120px; }
+.ob-col-left  { display: flex; flex-direction: column; gap: 14px; margin-left: 160px; }
 .ob-col-right { display: flex; flex-direction: column; gap: 12px; }
 
 /* ── Card ── */
