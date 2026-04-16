@@ -358,7 +358,7 @@ body {
 ──────────────────────────────────────────── */
 .ob-grid {
   display: grid;
-  grid-template-columns: 920px 360px;
+  grid-template-columns: 860px 420px;
   gap: 80px;
   align-items: start;
   justify-content: center;
