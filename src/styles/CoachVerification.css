@@ -87,6 +87,7 @@ body {
   flex-direction: column;
   overflow: hidden;
   background: var(--butterfly-bg);
+  margin-left: 220px;
 }
 
 /* ============================================
