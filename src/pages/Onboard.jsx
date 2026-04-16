@@ -238,31 +238,31 @@ export default function Onboard() {
 
       <div className="ob-main">
         <header className="ob-topbar">
-          <div className="ob-search">
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 13 13"
-              fill="none"
-              className="ob-search-svg"
-            >
-              <circle
-                cx="5.5"
-                cy="5.5"
-                r="4"
-                stroke="#9ca3af"
-                strokeWidth="1.4"
-              />
-              <path
-                d="M8.5 8.5L12 12"
-                stroke="#9ca3af"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-            </svg>
-            <input placeholder="Search dashboard..." />
-          </div>
           <div className="ob-topbar-right">
+            <div className="ob-search">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 13 13"
+                fill="none"
+                className="ob-search-svg"
+              >
+                <circle
+                  cx="5.5"
+                  cy="5.5"
+                  r="4"
+                  stroke="#9ca3af"
+                  strokeWidth="1.4"
+                />
+                <path
+                  d="M8.5 8.5L12 12"
+                  stroke="#9ca3af"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <input placeholder="Search users, coaches, or logs..." />
+            </div>
             <div className="ob-icon-btn ob-notification-btn">
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <circle
@@ -302,33 +302,6 @@ export default function Onboard() {
         </header>
 
         <main className="ob-content">
-          <div className="ob-page-header">
-            <div>
-              <h1 className="ob-page-title">Onboard New Admin</h1>
-              <p className="ob-page-sub">
-                Create account, assign role and set granular permissions.
-              </p>
-            </div>
-            <div className="ob-header-btns">
-              <button
-                className="ob-btn-cancel"
-                type="button"
-                onClick={() => navigate(-1)}
-                disabled={isLoading}
-              >
-                Cancel
-              </button>
-              <button
-                className="ob-btn-create"
-                type="button"
-                onClick={handleSubmit}
-                disabled={isLoading}
-              >
-                {isLoading ? "Creating..." : "Create Admin Account"}
-              </button>
-            </div>
-          </div>
-
           {apiError && (
             <div className="ob-alert ob-alert--error">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -373,6 +346,12 @@ export default function Onboard() {
 
           <div className="ob-grid">
             <div className="ob-col-left">
+              <div className="ob-col-header">
+                <h1 className="ob-page-title">Onboard New Admin</h1>
+                <p className="ob-page-sub">
+                  Create account, assign role and set granular permissions.
+                </p>
+              </div>
               <section className="ob-card">
                 <h2 className="ob-card-title">Personal Information</h2>
                 <div className="ob-row2">
@@ -650,6 +629,24 @@ export default function Onboard() {
             </div>
 
             <div className="ob-col-right">
+              <div className="ob-action-btns">
+                <button
+                  className="ob-btn-cancel"
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  disabled={isLoading}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="ob-btn-create"
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Creating..." : "Create Admin Account"}
+                </button>
+              </div>
               <section className="ob-card">
                 <div className="ob-perm-header">
                   <h2 className="ob-card-title ob-card-title--nm">
@@ -728,7 +725,14 @@ export default function Onboard() {
           </div>
         </main>
 
-        <footer className="ob-footer">© 2024 AdminCore Wireframe System</footer>
+        <footer className="ob-footer">
+          <div className="ob-footer-links">
+            <a href="#" className="ob-footer-link">Privacy</a>
+            <a href="#" className="ob-footer-link">Terms</a>
+            <a href="#" className="ob-footer-link">Support</a>
+          </div>
+          <div className="ob-footer-copyright">© 2024 Butterfly</div>
+        </footer>
       </div>
     </div>
   );
