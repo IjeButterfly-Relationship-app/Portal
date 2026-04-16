@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import "../styles/Onboard.css";
@@ -8,37 +7,109 @@ const BASE_URL = "http://208.68.36.144";
 
 const MODULE_PERMISSIONS = [
   {
-    label: "Moderation",
-    key: "moderationAccess",
-    description: "View flagged accounts",
+    label: "Concierge Module",
+    key: "conciergeModule",
+    description: "Match curation, member management",
     defaultOn: true,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="5.5" stroke="#9c27b0" strokeWidth="1.4" />
+        <circle cx="7" cy="7" r="5" fill="#d946ef" />
+      </svg>
+    ),
+  },
+  {
+    label: "View Member Profiles",
+    key: "viewMemberProfiles",
+    description: "Read-only access to all profiles",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="4.5" r="2" fill="#d946ef" />
+        <path d="M2 10c0-2.2 1.8-4 4-4s4 1.8 4 4v1H2v-1z" fill="#d946ef" />
+      </svg>
+    ),
+  },
+  {
+    label: "Send Messages",
+    key: "sendMessages",
+    description: "Contact members directly",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect
+          x="1"
+          y="2"
+          width="12"
+          height="10"
+          rx="1"
+          stroke="#d946ef"
+          strokeWidth="1.3"
+        />
         <path
-          d="M7 4.5V7.5M7 9.5V10"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
+          d="M1 2l6 5 6-5"
+          stroke="#d946ef"
+          strokeWidth="1.3"
           strokeLinecap="round"
         />
       </svg>
     ),
   },
   {
-    label: "Analytics",
-    key: "analyticsAccess",
-    description: "View own performance data",
-    defaultOn: false,
+    label: "Manage Coaching",
+    key: "manageCoaching",
+    description: "Book and track sessions",
+    defaultOn: true,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect x="1" y="8" width="3" height="5" rx="0.5" fill="#9c27b0" />
-        <rect x="5.5" y="5" width="3" height="8" rx="0.5" fill="#9c27b0" />
-        <rect x="10" y="2" width="3" height="11" rx="0.5" fill="#9c27b0" />
+        <rect
+          x="2"
+          y="3"
+          width="10"
+          height="8"
+          rx="1"
+          stroke="#d946ef"
+          strokeWidth="1.3"
+        />
+        <path
+          d="M5 6h4M5 9h4"
+          stroke="#d946ef"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
       </svg>
     ),
   },
   {
-    label: "Billing",
+    label: "Moderation Access",
+    key: "moderationAccess",
+    description: "View flagged accounts",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path
+          d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
+          stroke="#d946ef"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    label: "Analytics Access",
+    key: "analyticsAccess",
+    description: "View own performance data",
+    defaultOn: true,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="1" y="8" width="3" height="5" rx="0.5" fill="#d946ef" />
+        <rect x="5.5" y="5" width="3" height="8" rx="0.5" fill="#d946ef" />
+        <rect x="10" y="2" width="3" height="11" rx="0.5" fill="#d946ef" />
+      </svg>
+    ),
+  },
+  {
+    label: "Billing Access",
     key: "billingAccess",
     description: "View subscription info",
     defaultOn: false,
@@ -50,15 +121,15 @@ const MODULE_PERMISSIONS = [
           width="12"
           height="7.5"
           rx="1.5"
-          stroke="#9c27b0"
+          stroke="#d946ef"
           strokeWidth="1.4"
         />
-        <path d="M1 6.5h12" stroke="#9c27b0" strokeWidth="1.4" />
+        <path d="M1 6.5h12" stroke="#d946ef" strokeWidth="1.4" />
       </svg>
     ),
   },
   {
-    label: "Security & APIs",
+    label: "Security Access",
     key: "securityAccess",
     description: "View security alerts",
     defaultOn: false,
@@ -66,48 +137,7 @@ const MODULE_PERMISSIONS = [
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
         <path
           d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Policies",
-    key: "policiesAccess",
-    description: "Manage organization policies",
-    defaultOn: false,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect
-          x="2"
-          y="3"
-          width="10"
-          height="8"
-          rx="1.5"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-        />
-        <path
-          d="M4 6h6M4 9h6"
-          stroke="#9c27b0"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "System Health",
-    key: "systemHealth",
-    description: "View system health",
-    defaultOn: false,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <path
-          d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
-          stroke="#9c27b0"
+          stroke="#d946ef"
           strokeWidth="1.4"
           strokeLinejoin="round"
         />
@@ -129,11 +159,6 @@ function Toggle({ checked, onChange }) {
     </button>
   );
 }
-
-// Toggle.propTypes = {
-//   checked: PropTypes.bool.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
 
 export default function Onboard() {
   const navigate = useNavigate();
@@ -166,7 +191,6 @@ export default function Onboard() {
   const [sendWelcomeEmail, setSendWelcomeEmail] = useState(true);
   const [requireTwoFa, setRequireTwoFa] = useState(true);
 
-  // API state
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState("");
   const [apiSuccess, setApiSuccess] = useState("");
@@ -176,11 +200,9 @@ export default function Onboard() {
   };
 
   const handleSubmit = async () => {
-    // Reset feedback
     setApiError("");
     setApiSuccess("");
 
-    // Basic validation
     if (!firstName.trim() || !lastName.trim()) {
       setApiError("First name and last name are required.");
       return;
@@ -199,32 +221,25 @@ export default function Onboard() {
     }
 
     const payload = {
-      // Personal Information
       firstName: firstName.trim(),
       lastName: lastName.trim(),
       email: email.trim(),
       phoneNumber: phoneNumber.trim(),
       city: city.trim(),
       country: country,
-
-      // Role & Department
       role: role,
       jobTitle: jobTitle.trim(),
       reportingToId: reportingToId || null,
       accessLevel: accessLevel,
-
-      // Account Security
       temporaryPassword: temporaryPassword,
-
-      // Module Permissions
+      conciergeModule: permissions.conciergeModule,
+      viewMemberProfiles: permissions.viewMemberProfiles,
+      sendMessages: permissions.sendMessages,
+      manageCoaching: permissions.manageCoaching,
       moderationAccess: permissions.moderationAccess,
       analyticsAccess: permissions.analyticsAccess,
       billingAccess: permissions.billingAccess,
       securityAccess: permissions.securityAccess,
-      policiesAccess: permissions.policiesAccess,
-      systemHealth: permissions.systemHealth,
-
-      // Welcome Email Settings
       sendWelcomeEmail: sendWelcomeEmail,
       requireTwoFa: requireTwoFa,
     };
@@ -261,7 +276,6 @@ export default function Onboard() {
           data.message ||
             "Admin onboarded successfully! Email invitation sent.",
         );
-        // Stay on page, clear form
         setTimeout(() => {
           // Optional: reset form here if needed
         }, 3000);
@@ -269,7 +283,6 @@ export default function Onboard() {
         setApiError("Session expired. Please log in again.");
         setTimeout(() => navigate("/login"), 2000);
       } else {
-        // Handle validation errors array or single message
         if (data.errors && Array.isArray(data.errors)) {
           setApiError(data.errors.map((e) => e.message || e).join(" "));
         } else {
@@ -289,12 +302,9 @@ export default function Onboard() {
 
   return (
     <div className="ob-app">
-      {/* ── Sidebar ── */}
       <Sidebar />
 
-      {/* ── Main ── */}
       <div className="ob-main">
-        {/* Topbar */}
         <header className="ob-topbar">
           <div className="ob-search">
             <svg
@@ -347,10 +357,11 @@ export default function Onboard() {
               <div className="ob-avatar">
                 <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
                   <circle cx="15" cy="15" r="15" fill="#ede0f9" />
-                  <circle cx="15" cy="12" r="5" fill="#9c27b0" />
+                  <circle cx="15" cy="12" r="5" fill="#d946ef" />
                   <path
                     d="M5 27c0-5.523 4.477-10 10-10s10 4.477 10 10"
-                    fill="#ce93d8"
+                    fill="#d946ef"
+                    opacity="0.6"
                   />
                 </svg>
               </div>
@@ -358,9 +369,7 @@ export default function Onboard() {
           </div>
         </header>
 
-        {/* Page Content */}
         <main className="ob-content">
-          {/* Page Header Row */}
           <div className="ob-page-header">
             <div>
               <h1 className="ob-page-title">Onboard New Admin</h1>
@@ -388,22 +397,8 @@ export default function Onboard() {
             </div>
           </div>
 
-          {/* API Feedback Banners */}
           {apiError && (
-            <div
-              style={{
-                background: "#fef2f2",
-                border: "1px solid #fca5a5",
-                color: "#b91c1c",
-                borderRadius: "8px",
-                padding: "10px 16px",
-                marginBottom: "16px",
-                fontSize: "13px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
+            <div className="ob-alert ob-alert--error">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <circle
                   cx="7"
@@ -423,20 +418,7 @@ export default function Onboard() {
             </div>
           )}
           {apiSuccess && (
-            <div
-              style={{
-                background: "#f0fdf4",
-                border: "1px solid #86efac",
-                color: "#15803d",
-                borderRadius: "8px",
-                padding: "10px 16px",
-                marginBottom: "16px",
-                fontSize: "13px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
+            <div className="ob-alert ob-alert--success">
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <circle
                   cx="7"
@@ -457,11 +439,8 @@ export default function Onboard() {
             </div>
           )}
 
-          {/* Main Grid */}
           <div className="ob-grid">
-            {/* Left */}
             <div className="ob-col-left">
-              {/* Personal Information */}
               <section className="ob-card">
                 <h2 className="ob-card-title">Personal Information</h2>
                 <div className="ob-row2">
@@ -492,17 +471,6 @@ export default function Onboard() {
                 </div>
                 <div className="ob-row2">
                   <div className="ob-field">
-                    <label className="ob-label">USERNAME</label>
-                    <input
-                      className="ob-input"
-                      placeholder="e.g. sarah.jenkins"
-                      value={email.split("@")[0]}
-                      onChange={(e) =>
-                        setEmail(e.target.value + "@admincore.io")
-                      }
-                    />
-                  </div>
-                  <div className="ob-field">
                     <label className="ob-label">EMAIL ADDRESS</label>
                     <input
                       className="ob-input"
@@ -512,8 +480,6 @@ export default function Onboard() {
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
-                </div>
-                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">PHONE NUMBER</label>
                     <input
@@ -523,6 +489,8 @@ export default function Onboard() {
                       onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
+                </div>
+                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">CITY / REGION</label>
                     <input
@@ -531,8 +499,6 @@ export default function Onboard() {
                       onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
-                </div>
-                <div className="ob-row2">
                   <div className="ob-field">
                     <label className="ob-label">COUNTRY</label>
                     <select
@@ -548,11 +514,9 @@ export default function Onboard() {
                       <option>South Africa</option>
                     </select>
                   </div>
-                  <div className="ob-field" />
                 </div>
               </section>
 
-              {/* Role & Department */}
               <section className="ob-card">
                 <h2 className="ob-card-title">Role &amp; Department</h2>
                 <div className="ob-row2">
@@ -614,7 +578,6 @@ export default function Onboard() {
                 </div>
               </section>
 
-              {/* Account Security */}
               <section className="ob-card">
                 <h2 className="ob-card-title">Account Security</h2>
                 <div className="ob-row2">
@@ -735,12 +698,12 @@ export default function Onboard() {
                       cx="7"
                       cy="7"
                       r="5.5"
-                      stroke="#9c27b0"
+                      stroke="#d946ef"
                       strokeWidth="1.3"
                     />
                     <path
                       d="M7 5.5V8M7 9.5V10"
-                      stroke="#9c27b0"
+                      stroke="#d946ef"
                       strokeWidth="1.3"
                       strokeLinecap="round"
                     />
@@ -754,9 +717,7 @@ export default function Onboard() {
               </section>
             </div>
 
-            {/* Right */}
             <div className="ob-col-right">
-              {/* Module Permissions */}
               <section className="ob-card">
                 <div className="ob-perm-header">
                   <h2 className="ob-card-title ob-card-title--nm">
@@ -781,7 +742,6 @@ export default function Onboard() {
                 </div>
               </section>
 
-              {/* Send Welcome Email */}
               <section className="ob-card">
                 <h2 className="ob-card-title">Send Welcome Email</h2>
                 <div className="ob-perm-row">
@@ -807,7 +767,6 @@ export default function Onboard() {
                 </div>
               </section>
 
-              {/* Next Steps */}
               <div className="ob-next-steps">
                 <div className="ob-next-steps-hd">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
