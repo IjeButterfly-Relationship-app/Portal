@@ -328,7 +328,7 @@ body {
 ──────────────────────────────────────────── */
 .ob-grid {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 1fr 280px;
   gap: 16px;
   align-items: start;
 }
@@ -338,16 +338,18 @@ body {
 
 /* ── Card ── */
 .ob-card {
-  background: var(--ob-white);
-  border: 1px solid var(--ob-border);
+  background: rgba(120, 60, 160, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--ob-radius);
   padding: 18px 20px;
-  box-shadow: var(--ob-shadow);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 .ob-card-title {
   font-size: 14px;
   font-weight: 700;
-  color: var(--ob-text);
+  color: white;
   margin-bottom: 14px;
   letter-spacing: -0.2px;
 }
@@ -370,17 +372,17 @@ body {
 .ob-label {
   font-size: 10px;
   font-weight: 700;
-  color: var(--ob-label);
+  color: rgba(255, 255, 255, 0.8);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 .ob-input {
   padding: 8px 11px;
-  border: 1px solid var(--ob-border);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--ob-radius-sm);
   font-size: 13.5px;
-  color: var(--ob-text);
-  background: var(--ob-input-bg);
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
   outline: none;
   width: 100%;
   appearance: none;
