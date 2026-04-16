@@ -91,7 +91,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: rgba(22, 20, 31, 0.85);
+  background: transparent;
   margin-left: 220px;
 }
 
