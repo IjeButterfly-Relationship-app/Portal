@@ -212,6 +212,7 @@ body {
   border-radius: 10px;
   padding: 10px 16px;
   width: 280px;
+  margin-left: 60px;
 }
 .ob-search-svg { flex-shrink: 0; }
 .ob-search input {
@@ -228,7 +229,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: auto;
 }
 .ob-icon-btn {
   position: relative;

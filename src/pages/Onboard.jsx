@@ -238,31 +238,31 @@ export default function Onboard() {
 
       <div className="ob-main">
         <header className="ob-topbar">
+          <div className="ob-search">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 13 13"
+              fill="none"
+              className="ob-search-svg"
+            >
+              <circle
+                cx="5.5"
+                cy="5.5"
+                r="4"
+                stroke="#9ca3af"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M8.5 8.5L12 12"
+                stroke="#9ca3af"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+            <input placeholder="Search users, coaches, or logs..." />
+          </div>
           <div className="ob-topbar-right">
-            <div className="ob-search">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 13 13"
-                fill="none"
-                className="ob-search-svg"
-              >
-                <circle
-                  cx="5.5"
-                  cy="5.5"
-                  r="4"
-                  stroke="#9ca3af"
-                  strokeWidth="1.4"
-                />
-                <path
-                  d="M8.5 8.5L12 12"
-                  stroke="#9ca3af"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <input placeholder="Search users, coaches, or logs..." />
-            </div>
             <div className="ob-icon-btn ob-notification-btn">
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <circle
