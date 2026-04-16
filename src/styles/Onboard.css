@@ -367,7 +367,7 @@ body {
   width: 100%;
 }
 
-.ob-col-left  { display: flex; flex-direction: column; gap: 14px; margin-left: 160px; }
+.ob-col-left  { display: flex; flex-direction: column; gap: 20px; margin-left: 160px; }
 .ob-col-right { display: flex; flex-direction: column; gap: 12px; }
 
 /* ── Card ── */
@@ -375,8 +375,9 @@ body {
   background: var(--ob-card-bg);
   border: 1px solid var(--ob-card-border);
   border-radius: var(--ob-radius);
-  padding: 18px 20px;
+  padding: 24px 28px;
   box-shadow: var(--ob-card-shadow);
+  min-height: fit-content;
 }
 
 .ob-card-title {
@@ -392,8 +393,8 @@ body {
 .ob-row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 .ob-field {
   display: flex;
@@ -414,7 +415,7 @@ body {
 }
 
 .ob-input {
-  padding: 8px 11px;
+  padding: 12px 14px;
   border: 1px solid #d1d5db;
   border-radius: var(--ob-radius-sm);
   font-size: 13.5px;
