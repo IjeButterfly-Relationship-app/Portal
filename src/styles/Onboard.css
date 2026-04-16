@@ -447,11 +447,13 @@ body {
 
 .ob-input {
   padding: 12px 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--ob-radius-sm);
   font-size: 13.5px;
-  color: var(--ob-text);
-  background: #f9fafb;
+  color: #ffffff;
+  background: rgba(147, 51, 174, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   outline: none;
   width: 100%;
   appearance: none;
@@ -460,14 +462,14 @@ body {
   font-family: inherit;
 }
 
-.ob-input::placeholder { 
-  color: #d1d5db; 
+.ob-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .ob-input:focus {
-  border-color: var(--ob-purple);
-  box-shadow: 0 0 0 3px rgba(217,70,239,0.08);
-  background: var(--ob-white);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 3px rgba(147, 51, 174, 0.3);
+  background: rgba(147, 51, 174, 0.5);
 }
 
 /* Password field with eye icon */
@@ -602,7 +604,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 14px 0;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 1px solid rgba(217, 70, 239, 0.2);
 }
 
 .ob-perm-row:last-child,
@@ -614,7 +616,7 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background: #f3f4f6;
+  background: rgba(217, 70, 239, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
