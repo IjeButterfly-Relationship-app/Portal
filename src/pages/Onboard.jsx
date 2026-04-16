@@ -192,7 +192,7 @@ export default function Onboard() {
         return;
       }
 
-      const response = await fetch(`${BASE_URL}/admin-onboarding`, {
+      const response = await fetch(`${BASE_URL}/api/admin-onboarding`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
