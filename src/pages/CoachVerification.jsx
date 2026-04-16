@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./VerificationQueue.css";
+import "../styles/CoachVerification.css";
 
 const VerificationQueue = () => {
   const [activeVerification, setActiveVerification] = useState(0);
