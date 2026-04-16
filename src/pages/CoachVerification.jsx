@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
 import "../styles/CoachVerification.css";
 
-const VerificationQueue = () => {
+const CoachVerification = () => {
   const [activeVerification, setActiveVerification] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedRole, setSelectedRole] = useState(null);
 
   const verificationQueue = [
     {
@@ -105,291 +104,281 @@ const VerificationQueue = () => {
     }
   };
 
+  const activeCoach = verificationQueue[activeVerification];
+
   return (
-    <div className="vq-container">
-      {/* Sidebar Navigation */}
-      <aside className="vq-sidebar">
-        <div className="vq-sidebar-header">
-          <div className="vq-logo">
-            <span className="vq-logo-icon">🦋</span>
-            <span className="vq-logo-text">Butterfly</span>
-          </div>
-        </div>
-
-        <nav className="vq-sidebar-nav">
-          <div className="vq-nav-item">
-            <span className="vq-nav-icon">📊</span>
-            <span>Dashboard</span>
-          </div>
-          <div className="vq-nav-item">
-            <span className="vq-nav-icon">👥</span>
-            <span>Coaches</span>
-          </div>
-          <div className="vq-nav-item active">
-            <span className="vq-nav-icon">✓</span>
-            <span>Verifications</span>
-            <span className="vq-nav-more">⋮</span>
-          </div>
-          <div className="vq-nav-item">
-            <span className="vq-nav-icon">⚖️</span>
-            <span>Moderation</span>
-          </div>
-          <div className="vq-nav-item">
-            <span className="vq-nav-icon">📜</span>
-            <span>Activity Logs</span>
-          </div>
-          <div className="vq-nav-item">
-            <span className="vq-nav-icon">⚙️</span>
-            <span>Settings</span>
-          </div>
-        </nav>
-
-        {/* Verification Queue List */}
-        <div className="vq-queue-section">
-          <h3 className="vq-queue-title">Verification Queue</h3>
-          <p className="vq-queue-subtitle">6 coaches awaiting review</p>
-
-          <div className="vq-queue-list">
-            {verificationQueue.map((item, idx) => (
-              <div
-                key={item.id}
-                className={`vq-queue-item ${activeVerification === idx ? "active" : ""}`}
-                onClick={() => setActiveVerification(idx)}
-              >
-                <div className="vq-queue-avatar">{item.avatar}</div>
-                <div className="vq-queue-info">
-                  <h4>{item.name}</h4>
-                  <p>{item.email}</p>
-                  <span
-                    className={`vq-queue-status ${statusBadgeClass(item.status)}`}
-                  >
-                    {item.status}
-                  </span>
-                  <span className="vq-queue-date">{item.date}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="vq-sidebar-footer">
-          <div className="vq-review-status">
-            <h4>REVIEW STATUS</h4>
-            <p className="vq-review-count">12</p>
-            <span className="vq-review-label">Pending Today</span>
-          </div>
-        </div>
-      </aside>
-
+    <div className="cv-app">
+      <Sidebar />
       {/* Main Content */}
-      <main className="vq-main">
+      <main className="cv-main">
         {/* Top Bar */}
-        <div className="vq-topbar">
-          <div className="vq-search-box">
-            <span className="vq-search-icon">🔍</span>
+        <div className="cv-topbar">
+          <div className="cv-search-box">
+            <span className="cv-search-icon">🔍</span>
             <input placeholder="Search coaches, documents, or IDs..." />
           </div>
 
-          <div className="vq-topbar-right">
-            <button className="vq-topbar-icon">🔔</button>
-            <div className="vq-user-profile">
-              <span className="vq-user-avatar">SM</span>
-              <div className="vq-user-info">
-                <p className="vq-user-name">Sarah Miller</p>
-                <p className="vq-user-role">MODERATOR, ADMIN</p>
+          <div className="cv-topbar-right">
+            <button className="cv-topbar-icon">🔔</button>
+            <div className="cv-user-profile">
+              <span className="cv-user-avatar">SM</span>
+              <div className="cv-user-info">
+                <p className="cv-user-name">Sarah Miller</p>
+                <p className="cv-user-role">MODERATOR, ADMIN</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="vq-content">
-          {/* Coach Profile Card */}
-          <div className="vq-profile-card">
-            <div className="vq-profile-actions">
-              <button className="vq-btn vq-btn-outline">
-                <span>📋</span> Review Modal Manual
-              </button>
-              <button className="vq-btn vq-btn-reject">
-                <span>❌</span> Reject
-              </button>
-              <button className="vq-btn vq-btn-email">
-                <span>✉️</span> Send rejection email
-              </button>
-              <button className="vq-btn vq-btn-verify">
-                <span>✓</span> Verify Coach
-              </button>
-            </div>
-
-            <div className="vq-profile-header">
-              <div className="vq-profile-avatar-large">👩‍⚕️</div>
-              <div className="vq-profile-info">
-                <h2>Dr. Elena Vance</h2>
-                <p className="vq-profile-subtitle">Pending Verification</p>
-                <p className="vq-profile-contact">
-                  @vance_coach • evance.clinical@butterfly.com
-                </p>
-                <p className="vq-profile-meta">
-                  Submitted 2 hours ago • Trust Score: 93%
-                </p>
-              </div>
-              <button className="vq-btn vq-btn-secondary">
-                View Full Profile
-              </button>
-              <button className="vq-btn vq-btn-flag">🚩 Flag Account</button>
-            </div>
-          </div>
-
-          <div className="vq-content-grid">
-            {/* Document Viewer */}
-            <div className="vq-document-section">
-              <div className="vq-document-viewer">
-                <div className="vq-document-header">
-                  <span className="vq-doc-label">
-                    Master_Degree_Clinical_P.pdf (2.4 MB)
-                  </span>
-                  <div className="vq-doc-controls">
-                    <button>−</button>
-                    <span>Page 1 of 4 • 100% Zoom</span>
-                    <button>+</button>
-                  </div>
-                </div>
-
-                <div className="vq-document-content">
-                  <div className="vq-pdf-placeholder">
-                    <div className="vq-pdf-logo">📄</div>
-                  </div>
-                </div>
-
-                <div className="vq-document-footer">
-                  <button className="vq-btn vq-btn-outline">Previous</button>
-                  <span>Page 1 of 4</span>
-                  <button className="vq-btn vq-btn-outline">Next Page</button>
-                </div>
+        {/* Main Content Area */}
+        <div className="cv-main-scroll">
+          {/* Coach Profile Card - FULL WIDTH AT TOP */}
+          <div className="cv-profile-section">
+            <div className="vq-profile-card">
+              <div className="vq-profile-actions">
+                <button className="vq-btn vq-btn-outline">
+                  <span>📋</span> Review Modal Manual
+                </button>
+                <button className="vq-btn vq-btn-reject">
+                  <span>❌</span> Reject
+                </button>
+                <button className="vq-btn vq-btn-email">
+                  <span>✉️</span> Send rejection email
+                </button>
+                <button className="vq-btn vq-btn-verify">
+                  <span>✓</span> Verify Coach
+                </button>
               </div>
 
-              {/* Reviewer Notes */}
-              <div className="vq-notes-section">
-                <h3 className="vq-notes-title">Reviewer Notes & Feedback</h3>
-
-                <div className="vq-notes-list">
-                  <div className="vq-note">
-                    <div className="vq-note-avatar">JD</div>
-                    <div className="vq-note-content">
-                      <p className="vq-note-author">John Doe Compliance Lead</p>
-                      <p className="vq-note-time">Oct 23, 02:45 PM</p>
-                      <p className="vq-note-text">
-                        The Master's degree looks legitimate, but the seal is
-                        slightly blurry in this scan, Sarah, can you
-                        double-check the University database or request a
-                        high-res scan if you're unsure?
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="vq-note">
-                    <div className="vq-note-avatar sm">SM</div>
-                    <div className="vq-note-content">
-                      <p className="vq-note-author">Sarah Miller (You)</p>
-                      <p className="vq-note-time">Today, 09:12 AM</p>
-                      <p className="vq-note-text">
-                        I've cross-referenced with the official registry. The
-                        serial number #11-192-011 matches. No re-scan needed.
-                        Moving to checklist verification now.
-                      </p>
-                    </div>
-                  </div>
+              <div className="vq-profile-header">
+                <div className="vq-profile-avatar-large">
+                  {activeCoach.avatar}
                 </div>
-
-                <div className="vq-note-input">
-                  <input placeholder="Type a note or specific feedback for the coach..." />
-                  <button className="vq-btn vq-btn-icon">💬</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Sidebar */}
-            <aside className="vq-right-sidebar">
-              {/* Review Progress */}
-              <div className="vq-card vq-progress-card">
-                <h3 className="vq-card-title">Review Progress</h3>
-                <div className="vq-progress-bar">
-                  <div
-                    className="vq-progress-fill"
-                    style={{ width: "80%" }}
-                  ></div>
-                </div>
-                <p className="vq-progress-text">CHECKLIST COMPLETION: 80%</p>
-
-                <div className="vq-checklist">
-                  <div className="vq-checklist-note">
-                    Note: All automated checks passed. Manual verification
-                    required for the final step.
-                  </div>
-                  <p className="vq-checklist-protocol">
-                    BUTTERFLY PROTOCOL V2.4
+                <div className="vq-profile-info">
+                  <h2>{activeCoach.name}</h2>
+                  <p className="vq-profile-subtitle">Pending Verification</p>
+                  <p className="vq-profile-contact">{activeCoach.email}</p>
+                  <p className="vq-profile-meta">
+                    Submitted 2 hours ago • Trust Score:{" "}
+                    {activeCoach.trustScore}
                   </p>
                 </div>
-
-                <div className="vq-verification-checklist">
-                  <h4>VERIFICATION CHECKLIST</h4>
-                  <div className="vq-check-item completed">
-                    <span className="vq-check-icon">✓</span>
-                    <span>Full Name matches ID</span>
-                  </div>
-                  <div className="vq-check-item completed">
-                    <span className="vq-check-icon">✓</span>
-                    <span>Degree Credential verified</span>
-                  </div>
-                  <div className="vq-check-item completed">
-                    <span className="vq-check-icon">✓</span>
-                    <span>University seal clearly visible</span>
-                  </div>
-                  <div className="vq-check-item completed">
-                    <span className="vq-check-icon">✓</span>
-                    <span>Profile photo matches ID</span>
-                  </div>
-                  <div className="vq-check-item">
-                    <span className="vq-check-icon">□</span>
-                    <span>ID is not expired</span>
-                  </div>
-                </div>
+                <button className="vq-btn vq-btn-secondary">
+                  View Full Profile
+                </button>
+                <button className="vq-btn vq-btn-flag">🚩 Flag Account</button>
               </div>
-
-              {/* Document Metadata */}
-              <div className="vq-card vq-metadata-card">
-                <h3 className="vq-card-title">DOCUMENT METADATA</h3>
-                <div className="vq-metadata">
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">EXTRACTED FULL NAME</span>
-                    <span className="vq-meta-value">ELENA VICTORIA VANCE</span>
-                  </div>
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">ID NUMBER</span>
-                    <span className="vq-meta-value">PA-9R2203321-X</span>
-                  </div>
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">EXPIRY DATE</span>
-                    <span className="vq-meta-value">Nov 12, 2028</span>
-                  </div>
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">FILE SECURITY TAGS</span>
-                    <span className="vq-meta-value">MILVERFILED</span>
-                  </div>
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">ENCRYPTED</span>
-                    <span className="vq-meta-value">ENCRYPTED</span>
-                  </div>
-                  <div className="vq-meta-item">
-                    <span className="vq-meta-label">COLLATABLE</span>
-                    <span className="vq-meta-value">COLLATABLE</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
+            </div>
           </div>
 
-          {/* Moderation Audit Trail */}
+          {/* Content Grid - Queue sidebar on left, Main content on right */}
+          <div className="cv-content-grid">
+            {/* Left: Verification Queue Sidebar */}
+            <aside className="cv-queue-sidebar">
+              <div className="cv-queue-section">
+                <h3 className="cv-queue-title">Verification Queue</h3>
+                <p className="cv-queue-subtitle">6 coaches awaiting review</p>
+
+                <div className="cv-queue-list">
+                  {verificationQueue.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className={`cv-queue-item ${activeVerification === idx ? "active" : ""}`}
+                      onClick={() => setActiveVerification(idx)}
+                    >
+                      <div className="cv-queue-avatar">{item.avatar}</div>
+                      <div className="cv-queue-info">
+                        <h4>{item.name}</h4>
+                        <p>{item.email}</p>
+                        <span
+                          className={`cv-queue-status ${statusBadgeClass(item.status)}`}
+                        >
+                          {item.status}
+                        </span>
+                        <span className="cv-queue-date">{item.date}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="cv-review-status">
+                <h4>REVIEW STATUS</h4>
+                <p className="cv-review-count">12</p>
+                <span className="cv-review-label">Pending Today</span>
+              </div>
+            </aside>
+
+            {/* Right: Main Content */}
+            <div className="cv-main-content">
+              <div className="vq-content-grid">
+                {/* Document Viewer */}
+                <div className="vq-document-section">
+                  <div className="vq-document-viewer">
+                    <div className="vq-document-header">
+                      <span className="vq-doc-label">
+                        Master_Degree_Clinical_P.pdf (2.4 MB)
+                      </span>
+                      <div className="vq-doc-controls">
+                        <button>−</button>
+                        <span>Page 1 of 4 • 100% Zoom</span>
+                        <button>+</button>
+                      </div>
+                    </div>
+
+                    <div className="vq-document-content">
+                      <div className="vq-pdf-placeholder">
+                        <div className="vq-pdf-logo">📄</div>
+                      </div>
+                    </div>
+
+                    <div className="vq-document-footer">
+                      <button className="vq-btn vq-btn-outline">
+                        Previous
+                      </button>
+                      <span>Page 1 of 4</span>
+                      <button className="vq-btn vq-btn-outline">
+                        Next Page
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Reviewer Notes */}
+                  <div className="vq-notes-section">
+                    <h3 className="vq-notes-title">
+                      Reviewer Notes & Feedback
+                    </h3>
+
+                    <div className="vq-notes-list">
+                      <div className="vq-note">
+                        <div className="vq-note-avatar">JD</div>
+                        <div className="vq-note-content">
+                          <p className="vq-note-author">
+                            John Doe Compliance Lead
+                          </p>
+                          <p className="vq-note-time">Oct 23, 02:45 PM</p>
+                          <p className="vq-note-text">
+                            The Master's degree looks legitimate, but the seal
+                            is slightly blurry in this scan, Sarah, can you
+                            double-check the University database or request a
+                            high-res scan if you're unsure?
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="vq-note">
+                        <div className="vq-note-avatar sm">SM</div>
+                        <div className="vq-note-content">
+                          <p className="vq-note-author">Sarah Miller (You)</p>
+                          <p className="vq-note-time">Today, 09:12 AM</p>
+                          <p className="vq-note-text">
+                            I've cross-referenced with the official registry.
+                            The serial number #11-192-011 matches. No re-scan
+                            needed. Moving to checklist verification now.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="vq-note-input">
+                      <input placeholder="Type a note or specific feedback for the coach..." />
+                      <button className="vq-btn vq-btn-icon">💬</button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Sidebar */}
+                <aside className="vq-right-sidebar">
+                  {/* Review Progress */}
+                  <div className="vq-card vq-progress-card">
+                    <h3 className="vq-card-title">Review Progress</h3>
+                    <div className="vq-progress-bar">
+                      <div
+                        className="vq-progress-fill"
+                        style={{ width: "80%" }}
+                      ></div>
+                    </div>
+                    <p className="vq-progress-text">
+                      CHECKLIST COMPLETION: 80%
+                    </p>
+
+                    <div className="vq-checklist">
+                      <div className="vq-checklist-note">
+                        Note: All automated checks passed. Manual verification
+                        required for the final step.
+                      </div>
+                      <p className="vq-checklist-protocol">
+                        BUTTERFLY PROTOCOL V2.4
+                      </p>
+                    </div>
+
+                    <div className="vq-verification-checklist">
+                      <h4>VERIFICATION CHECKLIST</h4>
+                      <div className="vq-check-item completed">
+                        <span className="vq-check-icon">✓</span>
+                        <span>Full Name matches ID</span>
+                      </div>
+                      <div className="vq-check-item completed">
+                        <span className="vq-check-icon">✓</span>
+                        <span>Degree Credential verified</span>
+                      </div>
+                      <div className="vq-check-item completed">
+                        <span className="vq-check-icon">✓</span>
+                        <span>University seal clearly visible</span>
+                      </div>
+                      <div className="vq-check-item completed">
+                        <span className="vq-check-icon">✓</span>
+                        <span>Profile photo matches ID</span>
+                      </div>
+                      <div className="vq-check-item">
+                        <span className="vq-check-icon">□</span>
+                        <span>ID is not expired</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Document Metadata */}
+                  <div className="vq-card vq-metadata-card">
+                    <h3 className="vq-card-title">DOCUMENT METADATA</h3>
+                    <div className="vq-metadata">
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">
+                          EXTRACTED FULL NAME
+                        </span>
+                        <span className="vq-meta-value">
+                          ELENA VICTORIA VANCE
+                        </span>
+                      </div>
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">ID NUMBER</span>
+                        <span className="vq-meta-value">PA-9R2203321-X</span>
+                      </div>
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">EXPIRY DATE</span>
+                        <span className="vq-meta-value">Nov 12, 2028</span>
+                      </div>
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">
+                          FILE SECURITY TAGS
+                        </span>
+                        <span className="vq-meta-value">MILVERFILED</span>
+                      </div>
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">ENCRYPTED</span>
+                        <span className="vq-meta-value">ENCRYPTED</span>
+                      </div>
+                      <div className="vq-meta-item">
+                        <span className="vq-meta-label">COLLATABLE</span>
+                        <span className="vq-meta-value">COLLATABLE</span>
+                      </div>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+
+          {/* Moderation Audit Trail - Full Width Below */}
           <div className="vq-audit-section">
             <div className="vq-audit-header">
               <h3>Moderation Audit Trail</h3>
@@ -425,7 +414,7 @@ const VerificationQueue = () => {
         </div>
 
         {/* Footer */}
-        <footer className="vq-footer">
+        <footer className="cv-footer">
           <a href="#">PLATFORM COMPLIANCE</a>
           <span>•</span>
           <a href="#">PRIVACY POLICY</a>
@@ -438,4 +427,4 @@ const VerificationQueue = () => {
   );
 };
 
-export default VerificationQueue;
+export default CoachVerification;
