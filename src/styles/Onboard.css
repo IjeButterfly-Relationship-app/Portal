@@ -358,16 +358,16 @@ body {
 ──────────────────────────────────────────── */
 .ob-grid {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: 920px 360px;
   gap: 80px;
   align-items: start;
   justify-content: center;
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   width: 100%;
 }
 
-.ob-col-left  { display: flex; flex-direction: column; gap: 14px; margin-left: 80px; }
+.ob-col-left  { display: flex; flex-direction: column; gap: 14px; margin-left: 120px; }
 .ob-col-right { display: flex; flex-direction: column; gap: 12px; }
 
 /* ── Card ── */
