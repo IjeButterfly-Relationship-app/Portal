@@ -7,79 +7,6 @@ const BASE_URL = "http://208.68.36.144";
 
 const MODULE_PERMISSIONS = [
   {
-    label: "Concierge Module",
-    key: "conciergeModule",
-    description: "Match curation, member management",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="7" r="5" fill="#d946ef" />
-      </svg>
-    ),
-  },
-  {
-    label: "View Member Profiles",
-    key: "viewMemberProfiles",
-    description: "Read-only access to all profiles",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <circle cx="7" cy="4.5" r="2" fill="#d946ef" />
-        <path d="M2 10c0-2.2 1.8-4 4-4s4 1.8 4 4v1H2v-1z" fill="#d946ef" />
-      </svg>
-    ),
-  },
-  {
-    label: "Send Messages",
-    key: "sendMessages",
-    description: "Contact members directly",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect
-          x="1"
-          y="2"
-          width="12"
-          height="10"
-          rx="1"
-          stroke="#d946ef"
-          strokeWidth="1.3"
-        />
-        <path
-          d="M1 2l6 5 6-5"
-          stroke="#d946ef"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    label: "Manage Coaching",
-    key: "manageCoaching",
-    description: "Book and track sessions",
-    defaultOn: true,
-    icon: (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect
-          x="2"
-          y="3"
-          width="10"
-          height="8"
-          rx="1"
-          stroke="#d946ef"
-          strokeWidth="1.3"
-        />
-        <path
-          d="M5 6h4M5 9h4"
-          stroke="#d946ef"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-  {
     label: "Moderation Access",
     key: "moderationAccess",
     description: "View flagged accounts",
@@ -109,9 +36,9 @@ const MODULE_PERMISSIONS = [
     ),
   },
   {
-    label: "Billing Access",
+    label: "Billing Admin",
     key: "billingAccess",
-    description: "View subscription info",
+    description: "Manage subscription info",
     defaultOn: false,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -129,18 +56,26 @@ const MODULE_PERMISSIONS = [
     ),
   },
   {
-    label: "Security Access",
-    key: "securityAccess",
-    description: "View security alerts",
+    label: "Support Agent",
+    key: "supportAgent",
+    description: "Handle member support tickets",
     defaultOn: false,
     icon: (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <path
-          d="M7 1.5l5.5 2.2v4C12.5 10.5 10 12.5 7 13c-3-0.5-5.5-2.5-5.5-5.3v-4L7 1.5z"
-          stroke="#d946ef"
-          strokeWidth="1.4"
-          strokeLinejoin="round"
-        />
+        <circle cx="7" cy="7" r="5" fill="#d946ef" />
+        <path d="M7 5v2.5M7 9h.01" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    label: "Compliance Admin",
+    key: "complianceAdmin",
+    description: "Manage compliance and policies",
+    defaultOn: false,
+    icon: (
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <rect x="2" y="2" width="10" height="10" rx="1" stroke="#d946ef" strokeWidth="1.4" />
+        <path d="M4 7l2 2 4-4" stroke="#d946ef" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -232,14 +167,11 @@ export default function Onboard() {
       reportingToId: reportingToId || null,
       accessLevel: accessLevel,
       temporaryPassword: temporaryPassword,
-      conciergeModule: permissions.conciergeModule,
-      viewMemberProfiles: permissions.viewMemberProfiles,
-      sendMessages: permissions.sendMessages,
-      manageCoaching: permissions.manageCoaching,
       moderationAccess: permissions.moderationAccess,
       analyticsAccess: permissions.analyticsAccess,
       billingAccess: permissions.billingAccess,
-      securityAccess: permissions.securityAccess,
+      supportAgent: permissions.supportAgent,
+      complianceAdmin: permissions.complianceAdmin,
       sendWelcomeEmail: sendWelcomeEmail,
       requireTwoFa: requireTwoFa,
     };
