@@ -5,7 +5,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { path: "/flagged-accounts", label: "Moderation" },
+    { path: "/FlaggedAccount", label: "Moderation" },
     { path: "/analytics", label: "Analytics" },
     { path: "/billing", label: "Billing" },
     { path: "/security", label: "Security & APIs" },

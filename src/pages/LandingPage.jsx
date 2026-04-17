@@ -291,7 +291,7 @@ const faqs = [
     a: "Your data is end-to-end encrypted and stored on secure servers. We never sell or share your personal data with third parties. Your vault content is accessible only to you and your partner.",
   },
   {
-    q: "What&apos;s the difference between Free and Premium?",
+    q: "What's the difference between Free and Premium?",
     a: "Free gives you access to 3 daily prompts and basic check-ins. Premium unlocks unlimited prompts, the full vault, analytics dashboard, priority support, and our entire library of relationship courses.",
   },
   {
@@ -444,9 +444,9 @@ const Footer = () => (
 );
 
 /* ══════════════════════════════════════════
-   APP
+   LANDING PAGE
 ══════════════════════════════════════════ */
-export default function App() {
+export default function LandingPage() {
   return (
     <div>
       <Hero />
