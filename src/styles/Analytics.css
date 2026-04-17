@@ -44,14 +44,14 @@ body {
 .ag-main {
   flex: 1;
   margin-left: 220px;
-  background: rgba(243, 244, 246, 0.85);
+  background: #ffffff;
 }
 
 .ag-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 32px 24px;
-  background-color: transparent;
+  background-color: var(--ag-bg);
   min-height: 100vh;
 }
 
