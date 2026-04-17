@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import Sidebar from "../components/Sidebar";
 import "../styles/Analytics.css";
 
 const AnalyticsGrowth = () => {
@@ -80,7 +81,10 @@ const AnalyticsGrowth = () => {
   };
 
   return (
-    <div className="ag-container">
+    <div className="ag-app">
+      <Sidebar />
+      <main className="ag-main">
+        <div className="ag-container">
       {/* Header Section */}
       <div className="ag-header">
         <div className="ag-header-content">
@@ -343,6 +347,8 @@ const AnalyticsGrowth = () => {
           <a href="#support">Support Center</a>
         </div>
       </div>
+        </div>
+      </main>
     </div>
   );
 };
