@@ -33,19 +33,25 @@ body {
 .ag-app {
   display: flex;
   min-height: 100vh;
+  background: linear-gradient(
+    90deg,
+    #74266C 0%,
+    #8A377B 48%,
+    #542A53 100%
+  );
 }
 
 .ag-main {
   flex: 1;
   margin-left: 220px;
-  background: var(--ag-light);
+  background: rgba(243, 244, 246, 0.85);
 }
 
 .ag-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 32px 24px;
-  background-color: var(--ag-light);
+  background-color: transparent;
   min-height: 100vh;
 }
 
