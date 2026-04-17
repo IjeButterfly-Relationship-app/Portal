@@ -12,6 +12,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import Sidebar from "../components/Sidebar";
 import "../styles/Dashboard.css";
 
 const Dashboard = () => {
@@ -39,47 +40,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* SIDEBAR */}
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          <img src="/butterfly-logo.png" alt="Amoura" className="logo-image" />
-          <span className="logo-text">Amoura<sup>™</sup></span>
-        </div>
-
-        <nav className="nav-group">
-          <div className="nav-item">
-            <span>Moderation</span>
-          </div>
-          <div className="nav-item" onClick={() => navigate("/analytics")}>
-            <span>Analytics</span>
-          </div>
-          <div className="nav-item">
-            <span>Billing</span>
-          </div>
-          <div className="nav-item">
-            <span>Security & APIs</span>
-          </div>
-          <div className="nav-item">
-            <span>Policies</span>
-          </div>
-          <div className="nav-item">
-            <span>Activity Logs</span>
-          </div>
-        </nav>
-
-        <div className="sidebar-footer">
-          <button className="logout-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
-            </svg>
-            Logout
-          </button>
-        </div>
-      </aside>
-
-      {/* MAIN CONTENT */}
+      <Sidebar />
       <main className="main-content">
         {/* HEADER */}
         <header className="header">
