@@ -8,7 +8,7 @@ import AdminManagement from "./pages/AdminManagement";
 import Analytics from "./pages/Analytics";
 import DownloadApp from "./pages/DownloadApp";
 import CoachVerification from "./pages/CoachVerification";
-import PaymentGateway from "./pages/PaymentGateway";
+import PremiumManagement from "./pages/PremiumManagement";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <Route path="/flaggedAccount" element={<FlaggedAccount />} />
         <Route path="/adminManagement" element={<AdminManagement />} />
         <Route path="/analytics" element={<Analytics />} />
-        <Route path="/billing" element={<PaymentGateway />} />
+        <Route path="/billing" element={<PremiumManagement />} />
         <Route path="/download" element={<DownloadApp />} />
         <Route path="/coach-verification" element={<CoachVerification />} />
       </Routes>
