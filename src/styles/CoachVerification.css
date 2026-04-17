@@ -116,8 +116,10 @@ body {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  background: var(--butterfly-bg-tertiary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(147, 51, 174, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md) var(--spacing-lg);
   flex: 1;
@@ -140,7 +142,7 @@ body {
 }
 
 .cv-search-box input::placeholder {
-  color: var(--butterfly-gray-lighter);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .cv-topbar-right {
@@ -528,14 +530,16 @@ body {
 
 .vq-btn-icon {
   padding: var(--spacing-md);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--butterfly-gray-lighter);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(147, 51, 174, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: white;
 }
 
 .vq-btn-icon:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: rgba(147, 51, 174, 0.8);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .vq-profile-header {
