@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
 import "../styles/PremiumManagement.css";
 import {
   Bell,
@@ -167,34 +168,7 @@ export default function ButterflyAdminDashboard() {
       </header>
 
       <div className="dashboard-body">
-        {/* Sidebar */}
-        <aside className="dashboard-sidebar">
-          <nav className="sidebar-nav">
-            <a href="#" className="nav-item">
-              <span className="nav-icon">📊</span>
-              <span>Dashboard</span>
-            </a>
-            <a href="#" className="nav-item">
-              <span className="nav-icon">👥</span>
-              <span>Users</span>
-            </a>
-            <a href="#" className="nav-item">
-              <span className="nav-icon">🔐</span>
-              <span>Subscriptions</span>
-            </a>
-            <a href="#" className="nav-item active">
-              <span className="nav-icon">💳</span>
-              <span>Billing</span>
-            </a>
-            <a href="#" className="nav-item">
-              <span className="nav-icon">⚙️</span>
-              <span>Settings</span>
-            </a>
-          </nav>
-          <button className="sign-out-btn">
-            <span>← Sign Out</span>
-          </button>
-        </aside>
+        <Sidebar activeItem="billing" />
 
         {/* Main Content */}
         <main className="dashboard-main">
