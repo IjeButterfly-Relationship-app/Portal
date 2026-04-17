@@ -7,7 +7,7 @@ const Sidebar = () => {
   const menuItems = [
     { path: "/FlaggedAccount", label: "Moderation" },
     { path: "/analytics", label: "Analytics" },
-    { path: "/PaymentGateway", label: "Billing" },
+    { path: "/billing", label: "Billing" },
     { path: "/security", label: "Security & APIs" },
     { path: "/policies", label: "Policies" },
     { path: "/activity-logs", label: "Activity Logs" },
