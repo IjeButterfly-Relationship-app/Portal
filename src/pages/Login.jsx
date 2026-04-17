@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import authService from "../services/authService";
 import styles from "../styles/Login.module.css";
 
 export default function Login() {
@@ -15,28 +16,32 @@ export default function Login() {
     setError("");
     setLoading(true);
 
+    // Validate inputs
+    if (!email || !password) {
+      setError("Please enter both email and password");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch("http://208.68.36.144:3001/auth/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      // Call login from authService
+      const data = await authService.login(email, password);
 
-      const data = await response.json();
+      // Store authentication data
+      authService.storeAuthData(data);
 
-      if (response.ok) {
-        localStorage.setItem("authToken", data.token);
-        localStorage.setItem("admin_email", data.admin.email);
-        localStorage.setItem("admin_role", data.admin.role);
-        // All users go to unified dashboard - content changes based on role
-        navigate("/dashboard");
-      } else {
-        setError(data.message || "Invalid credentials");
-      }
+      // Redirect to dashboard
+      navigate("/dashboard");
     } catch (err) {
-      setError("Cannot connect to server. Please try again.");
+      // Handle different error types
+      if (err.message) {
+        setError(err.message);
+      } else if (err.error) {
+        setError(err.error);
+      } else {
+        setError("Failed to sign in. Please check your credentials.");
+      }
+      console.error("Login error:", err);
     } finally {
       setLoading(false);
     }
@@ -79,6 +84,7 @@ export default function Login() {
 
               {/* Login Form */}
               <form onSubmit={handleSignIn} className={styles.loginForm}>
+                {/* Email Input */}
                 <div className={styles.inputGroup}>
                   <label className={styles.inputLabel}>Email address</label>
                   <input
@@ -87,10 +93,12 @@ export default function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className={styles.input}
+                    disabled={loading}
                     required
                   />
                 </div>
 
+                {/* Password Input */}
                 <div className={styles.inputGroup}>
                   <label className={styles.inputLabel}>Password</label>
                   <div className={styles.passwordContainer}>
@@ -100,12 +108,14 @@ export default function Login() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className={styles.input}
+                      disabled={loading}
                       required
                     />
                     <button
                       type="button"
                       className={styles.eyeButton}
                       onClick={() => setShowPassword(!showPassword)}
+                      disabled={loading}
                       aria-label={
                         showPassword ? "Hide password" : "Show password"
                       }
@@ -139,22 +149,34 @@ export default function Login() {
                   </div>
                 </div>
 
+                {/* Form Options */}
                 <div className={styles.formOptions}>
                   <label className={styles.checkboxLabel}>
-                    <input type="checkbox" className={styles.checkbox} />
+                    <input
+                      type="checkbox"
+                      className={styles.checkbox}
+                      disabled={loading}
+                    />
                     Remember me
                   </label>
                   <button
                     type="button"
                     className={styles.forgotLink}
-                    onClick={() => {}}
+                    onClick={() => navigate("/forgot-password")}
+                    disabled={loading}
                   >
                     Forgot password?
                   </button>
                 </div>
 
-                {error && <div className={styles.errorMessage}>{error}</div>}
+                {/* Error Message */}
+                {error && (
+                  <div className={styles.errorMessage} role="alert">
+                    {error}
+                  </div>
+                )}
 
+                {/* Submit Button */}
                 <button
                   type="submit"
                   className={styles.loginButton}
@@ -163,7 +185,6 @@ export default function Login() {
                   {loading ? "Signing in..." : "Sign In"}
                 </button>
               </form>
-
             </div>
           </div>
         </div>
