@@ -10,6 +10,7 @@ import DownloadApp from "./pages/DownloadApp";
 import CoachVerification from "./pages/CoachVerification";
 import PremiumManagement from "./pages/PremiumManagement";
 import PaymentGateway from "./pages/PaymentGateway";
+import CustomerSupport from "./pages/CustomerSupport";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/download" element={<DownloadApp />} />
         <Route path="/coach-verification" element={<CoachVerification />} />
         <Route path="/payment-gateway" element={<PaymentGateway />} />
+        <Route path="/customer-support" element={<CustomerSupport />} />
       </Routes>
     </BrowserRouter>
   );

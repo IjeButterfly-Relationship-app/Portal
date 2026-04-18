@@ -8,7 +8,7 @@ const Sidebar = () => {
     { path: "/FlaggedAccount", label: "Moderation" },
     { path: "/analytics", label: "Analytics" },
     { path: "/billing", label: "Billing" },
-    { path: "/security", label: "Security & APIs" },
+    { path: "/customer-support", label: "Compliance" },
     { path: "/policies", label: "Policies" },
     { path: "/activity-logs", label: "Activity Logs" },
   ];

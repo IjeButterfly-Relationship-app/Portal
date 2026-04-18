@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./DatingConnectAdmin.css";
+import "../styles/CustomerSupport.css";
 import {
   Search,
   CheckCircle,
