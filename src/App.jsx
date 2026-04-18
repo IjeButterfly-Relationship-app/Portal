@@ -9,6 +9,7 @@ import Analytics from "./pages/Analytics";
 import DownloadApp from "./pages/DownloadApp";
 import CoachVerification from "./pages/CoachVerification";
 import PremiumManagement from "./pages/PremiumManagement";
+import PaymentGateway from "./pages/PaymentGateway";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/billing" element={<PremiumManagement />} />
         <Route path="/download" element={<DownloadApp />} />
         <Route path="/coach-verification" element={<CoachVerification />} />
+        <Route path="/payment-gateway" element={<PaymentGateway />} />
       </Routes>
     </BrowserRouter>
   );

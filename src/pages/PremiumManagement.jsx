@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import "../styles/PremiumManagement.css";
 import {
@@ -16,6 +17,7 @@ import {
 } from "lucide-react";
 
 export default function ButterflyAdminDashboard() {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
 
   const metrics = [
@@ -183,9 +185,9 @@ export default function ButterflyAdminDashboard() {
                 <Download size={16} />
                 Export CSV
               </button>
-              <button className="btn-primary">
+              <button className="btn-primary" onClick={() => navigate("/payment-gateway")}>
                 <TrendingUp size={16} />
-                Upgrade Campaign
+                Payment Gateway
               </button>
             </div>
           </div>
